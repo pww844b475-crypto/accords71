@@ -103,6 +103,7 @@ export function simulerPaie(e, T) {
     const ind = add('cp_ind', 'Indemnité de congés payés', e.cpJours, parJour, e.cpJours * parJour);
     cp = { jours: e.cpJours, maintienJour: maintien, dixiemeJour: dixieme, parJour, regle, retenue: -ret, indemnite: ind, solde: r2(ind + ret), referenceConnue: !!(e.cpRefBrute > 0 || e.cpIndemniteJour > 0) };
   }
+  if (e.primeAstreinte > 0) add('astreinte', "Prime d'astreinte", null, null, e.primeAstreinte);
   if (e.autresBrut) add('autres', 'Autres éléments de salaire (congés, primes…)', null, null, e.autresBrut);
 
   const brut = r2(lignes.reduce((s, l) => s + l.montant, 0));

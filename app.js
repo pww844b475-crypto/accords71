@@ -2,6 +2,7 @@ import { EMPREINTE_MDP } from './config.js';
 import { CALCULS } from './moteur/calculs.js';
 import { chercherFiches, chercherTexte } from './moteur/recherche.js';
 import { ouvrirSimulateur } from './simulateur.js';
+import { lancerAssistant, emojiPour } from './assistant.js';
 
 const $ = s => document.querySelector(s);
 const vue = $('#vue');
@@ -74,7 +75,11 @@ function vueCategorie(id) {
     h('div', { class: 'liste' }, FICHES.filter(f => f.categorie === id).map(carteFiche)));
 }
 
+// Questions sur « combien je vais toucher » : on ouvre directement l'estimation de la fiche de paie
+const VEUT_PAIE = /(combien.*(toucher|gagner|recevoir|percevoir)|fiche de pa(ie|y)e|bulletin de pa(ie|y)e|simul\w*.*(salaire|pa(ie|y)e)|estim\w*.*(salaire|pa(ie|y)e|net)|mon salaire|net a payer|mon net|ma pa(ie|y)e)/;
 function recherche(q) {
+  const qn = q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  if (VEUT_PAIE.test(qn)) { pageSimulateur(); return; }
   const r = chercherFiches(q, FICHES, SYN);
   const liste = fs => { precedent = () => { $('#q').value = q; recherche(q); }; onglets(null); return h('div', { class: 'liste' }, fs.map(carteFiche)); };
   if (r.mode === 'direct') { precedent = accueil; ouvrirFiche(r.fiches[0]); }
@@ -98,33 +103,13 @@ async function rechercheTexte(q) {
 const valeursParDefaut = f => Object.fromEntries((f.champs || []).map(c => [c.id, c.type === 'select' ? c.options[0][0] : c.type === 'checkbox' ? !!c.defaut : c.type === 'date' ? '' : (c.defaut ?? 0)]));
 const texteReponse = (c, v) => c.type === 'select' ? (c.options.find(o => o[0] === v) || [, v])[1] : c.type === 'checkbox' ? (v ? 'Oui' : 'Non') : c.type === 'date' ? (v ? v.split('-').reverse().join('/') : 'non renseignée') : fr(v);
 
-function assistant(f, valeurs, fini) {
-  const champs = (f.champs || []).filter(c => !(c.type === 'select' && c.options.length < 2)); if (!champs.length) { fini(); return; }
-  let i = 0; const v = { ...valeurs };
-  const fond = h('div', { class: 'assistant-fond', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Questions' });
-  const fermer = ok => { fond.remove(); document.removeEventListener('keydown', touche); document.body.classList.remove('modal-ouvert'); if (ok) fini(v); else fini(valeurs); };
-  const touche = e => { if (e.key === 'Escape') fermer(false); };
-  document.addEventListener('keydown', touche);
-  const suivant = () => { if (i < champs.length - 1) { i++; etape(); } else fermer(true); };
-  function etape() {
-    const c = champs[i]; let ctl, zone;
-    const bouton = (texte, on, cls = '') => h('button', { type: 'button', class: 'choix-btn ' + cls, onclick: on }, texte);
-    if (c.type === 'select') zone = h('div', { class: 'choix' }, c.options.map(([val, lab]) => bouton(lab, () => { v[c.id] = val; suivant(); }, v[c.id] === val ? 'choisi' : '')));
-    else if (c.type === 'checkbox') zone = h('div', { class: 'choix' }, bouton('Oui', () => { v[c.id] = true; suivant(); }, v[c.id] ? 'choisi' : ''), bouton('Non', () => { v[c.id] = false; suivant(); }, !v[c.id] ? 'choisi' : ''));
-    else {
-      ctl = h('input', { type: c.type === 'date' ? 'date' : 'text', inputmode: 'decimal', autocomplete: 'off', 'aria-label': c.question || c.label, value: c.type === 'date' ? v[c.id] : String(v[c.id] ?? '').replace('.', ',') });
-      const lire = () => { v[c.id] = c.type === 'date' ? ctl.value : (parseFloat(String(ctl.value).replace(',', '.')) || 0); };
-      ctl.addEventListener('input', lire); ctl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); lire(); suivant(); } });
-      zone = h('div', {}, ctl, h('button', { type: 'button', class: 'choix-btn suite', onclick: () => { lire(); suivant(); } }, i < champs.length - 1 ? 'Suivant →' : 'Voir ma réponse'));
-    }
-    remplir(fond, h('div', { class: 'assistant' },
-      h('div', { class: 'assistant-haut' }, h('span', {}, `Question ${i + 1} sur ${champs.length}`), h('button', { type: 'button', class: 'assistant-x', 'aria-label': 'Fermer', onclick: () => fermer(false) }, '✕')),
-      h('div', { class: 'progression' }, h('div', { style: `width:${Math.round((i + 1) / champs.length * 100)}%` })),
-      h('h3', { class: 'assistant-q' }, c.question || c.label), c.aide ? h('p', { class: 'assistant-aide' }, c.aide) : null, zone,
-      h('div', { class: 'assistant-bas' }, i > 0 ? h('button', { type: 'button', class: 'sec', onclick: () => { i--; etape(); } }, '← Précédent') : h('span'), h('button', { type: 'button', class: 'sec', onclick: () => fermer(false) }, 'Passer'))));
-    if (ctl) setTimeout(() => { ctl.focus(); try { ctl.select(); } catch {} }, 50);
-  }
-  document.body.classList.add('modal-ouvert'); document.body.append(fond); etape();
+function assistant(f, valeurs, fini, auRecap = false) {
+  const champs = (f.champs || []).filter(c => !(c.type === 'select' && c.options.length < 2));
+  if (!champs.length) { fini(valeurs); return; }
+  const etapes = champs.map(c => ({ id: c.id, type: c.type === 'select' ? 'choix' : c.type === 'checkbox' ? 'ouinon' : c.type === 'date' ? 'date' : 'nombre', options: c.options, question: c.question || c.label, aide: c.aide, emoji: emojiPour(c.label), unite: c.unite }));
+  lancerAssistant({ h, remplir, titre: f.question, emoji: catDe(f).icone, etapes, valeurs, commencerAuRecap: auRecap,
+    intro: champs.length > 1 ? `Je vous pose ${champs.length} petites questions, puis je calcule la réponse pour votre cas. Vous pourrez revenir en arrière si vous vous trompez.` : null,
+    onFini: fini, onAnnule: () => fini(valeurs) });
 }
 
 function ouvrirFiche(f, reprise) {
@@ -132,7 +117,7 @@ function ouvrirFiche(f, reprise) {
   const resume = h('div', { class: 'carte vos-reponses' });
   const majResume = () => remplir(resume, h('h3', {}, 'Vos réponses'),
     h('ul', {}, (f.champs || []).map(c => h('li', {}, h('span', {}, (c.question || c.label).replace(/\s*\?$/, '') + ' : '), h('strong', {}, texteReponse(c, valeurs[c.id]))))),
-    h('button', { type: 'button', class: 'sec', onclick: () => assistant(f, valeurs, nv => { valeurs = nv; majResume(); calculer(); resultat.scrollIntoView({ behavior: 'smooth', block: 'start' }); }) }, '✏️ Modifier mes réponses'));
+    h('button', { type: 'button', class: 'sec', onclick: () => assistant(f, valeurs, nv => { valeurs = nv; majResume(); calculer(); resultat.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, true) }, '✏️ Modifier mes réponses'));
   const resultat = h('div', { class: 'carte reponse-finale' });
   function calculer() {
     if (!f.calcul) return;
