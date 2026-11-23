@@ -8,6 +8,28 @@ const SEMAINES_PAR_MOIS = 4.35;   // relevé sur les fiches de paie : 36 h × 4,
 export const tauxParId = t => Object.fromEntries(t.taux.map(x => [x.id, x]));
 export const majParId = t => Object.fromEntries(t.majorations.map(x => [x.id, x.taux / 100]));
 
+
+/**
+ * Répartition automatique des heures en plus du contrat, semaine par semaine (heures de présence).
+ * Règle relevée sur une fiche de paie à 24 h : au-delà du contrat jusqu'à 35 h = heures complémentaires
+ * (le premier dixième du contrat à 10 %, le reste à 25 %) ; au-delà de 35 h = heures supplémentaires
+ * (25 % les 8 premières, 50 % ensuite). Contrat de 35 h ou plus : tout est supplémentaire.
+ */
+export function repartirHeures(heuresSemaine, semaines) {
+  const C = heuresSemaine || 0, plafondHC = Math.max(0, 35 - C);
+  const t = { total: 0, hc10: 0, hc25: 0, hs25: 0, hs50: 0 };
+  for (const x of semaines || []) {
+    const e = Math.max(0, +x || 0); if (!e) continue;
+    t.total += e;
+    const hc = Math.min(e, plafondHC), hs = e - hc;
+    const h10 = Math.min(hc, C / 10);
+    t.hc10 += h10; t.hc25 += hc - h10;
+    t.hs25 += Math.min(hs, 8); t.hs50 += Math.max(0, hs - 8);
+  }
+  for (const k of Object.keys(t)) t[k] = r2(t[k]);
+  return t;
+}
+
 /**
  * entrees : {
  *  tauxHoraire (€ de base, sans pauses), heuresSemaine (temps de présence du contrat), pausePct (5 ou 6.667, en % du travail effectif),
@@ -49,6 +71,8 @@ export function simulerPaie(e, T) {
   ligneMaj('ferie', 'Majoration jour férié', e.ferie, mj.ferie, false);
   ligneMaj('nuit30', 'Majoration nuit 22 h-5 h', e.nuit30, mj.nuit_22_5, false);
   ligneMaj('nuit10', 'Majoration nuit 21 h-22 h / 5 h-6 h', e.nuit10, mj.nuit_21_22, false);
+  // Heures en plus du contrat réparties semaine par semaine (entrée e.semainesEnPlus) : remplacent la saisie manuelle
+  if (Array.isArray(e.semainesEnPlus)) { const rep = repartirHeures(e.heuresSemaine, e.semainesEnPlus); e = { ...e, hcBase: rep.total, hc10: rep.hc10, hc25: rep.hc25, hs25: rep.hs25, hs50: rep.hs50 }; }
   // Heures au-delà du contrat : base à 100 % puis majorations
   const hcb = eff(e.hcBase);
   if (hcb > 0) { let m = add('hcbase', 'Heures au-delà du contrat (100 %)', hcb, th, hcb * th); if (pct > 0) m += add('hcbase_pause', 'Heures au-delà du contrat : pause', r2(hcb * pct), th, r2(hcb * pct) * th); brutHcHs += m; }

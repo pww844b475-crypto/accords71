@@ -1,5 +1,5 @@
 // Écran « Simulateur de fiche de paie ». Rien n'est enregistré ni envoyé : tout se calcule dans le navigateur.
-import { simulerPaie } from './moteur/paie.js';
+import { simulerPaie, repartirHeures } from './moteur/paie.js';
 import { entretienTenue, fraisTransport } from './moteur/calculs.js';
 
 const eur = x => (x < 0 ? '−' : '') + Math.abs(x).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €';
@@ -14,6 +14,17 @@ export function joursOuvres(annee, mois) {
   for (let j = 1, fin = new Date(annee, mois, 0).getDate(); j <= fin; j++) { const w = new Date(annee, mois - 1, j).getDay(); if (w !== 0 && w !== 6) n++; }
   return n;
 }
+
+// Semaines (lundi au dimanche) qui touchent le mois : la paie compte les heures semaine par semaine
+export function semainesDuMois(annee, mois) {
+  const premier = new Date(annee, mois - 1, 1), dernier = new Date(annee, mois, 0);
+  const debut = new Date(premier); debut.setDate(debut.getDate() - ((debut.getDay() + 6) % 7));
+  const res = [];
+  for (let d = new Date(debut); d <= dernier; d.setDate(d.getDate() + 7)) { const f = new Date(d); f.setDate(f.getDate() + 6); res.push({ debut: new Date(d), fin: f }); }
+  return res;
+}
+const MOIS_COURTS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
+const jm = d => `${d.getDate()} ${MOIS_COURTS[d.getMonth()]}`;
 
 export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
   let T;
@@ -51,7 +62,12 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
     const [a, m] = champMois.value.split('-').map(Number);
     if (a && m) { const j = joursOuvres(a, m); valeurs.joursOuvres = String(j); champOuvres.querySelector('input').value = String(j); }
   };
-  champMois.addEventListener('input', () => { valeurs.mois = champMois.value; majOuvres(); calculer(); });
+  const majSemaines = () => {
+    const [a, m] = champMois.value.split('-').map(Number); if (!a || !m) return;
+    const sem = semainesDuMois(a, m);
+    [0, 1, 2, 3, 4, 5].forEach(i => { const lab = vue.querySelector(`input[aria-label="Semaine ${i}"]`)?.closest('label'); if (!lab) return; lab.hidden = i >= sem.length; if (i < sem.length) lab.querySelector('.champ-label').textContent = `Semaine du ${jm(sem[i].debut)} au ${jm(sem[i].fin)} (h)`; if (i >= sem.length) valeurs['sem' + i] = ''; });
+  };
+  champMois.addEventListener('input', () => { valeurs.mois = champMois.value; majOuvres(); majSemaines(); calculer(); });
   majOuvres();
 
   const zoneResultat = h('div', { class: 'carte reponse-finale simu-res', 'aria-live': 'polite' });
@@ -75,12 +91,12 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
     const tenue = ouvres > 0 ? (entretienTenue({ joursTravailles: trav, joursOuvres: ouvres }).lignes[0]?.brut || 0) : 0;
     const km = num(valeurs.km);
     const transport = km > 0 ? (fraisTransport({ km, jours: Math.round(num(valeurs.joursTransport)) }).lignes[1]?.brut || 0) : 0;
-    const hd = !!valeurs.optDeleg, hs = !!valeurs.optHs, hc = !!valeurs.optHc, sp = !!valeurs.optSpec;
+    const plus = !!valeurs.optPlus, deleg = plus && !!valeurs.estDeleg, sp = !!valeurs.optSpec;
+    const semaines = plus ? [0, 1, 2, 3, 4, 5].map(i => num(valeurs['sem' + i])) : [];
+    const rep = repartirHeures(num(valeurs.heuresSemaine), semaines);
     const e = {
       salaireBase: num(valeurs.salaireBase), heuresSemaine: num(valeurs.heuresSemaine), pausePct: pct,
-      hcBase: hd ? num(valeurs.hd) : 0,
-      hs25: hs ? num(valeurs.hs25) : 0, hs50: hs ? num(valeurs.hs50) : 0,
-      hc10: hc ? num(valeurs.hc10) : 0, hc25: hc ? num(valeurs.hc25) : 0,
+      semainesEnPlus: plus ? semaines : undefined,
       dimanche: sp ? num(valeurs.dimanche) : 0, ferie: sp ? num(valeurs.ferie) : 0, nuit30: sp ? num(valeurs.nuit30) : 0, nuit10: sp ? num(valeurs.nuit10) : 0,
       cpJours: valeurs.optCp ? num(valeurs.cpJours) : 0, cpRefBrute: valeurs.optCp ? num(valeurs.cpRef) : 0, cpIndemniteJour: valeurs.optCp ? num(valeurs.cpInd) : 0,
       hsExoAuto: true, autresBrut: valeurs.optAutres ? num(valeurs.autresBrut) : 0,
@@ -97,9 +113,9 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
     remplir(zoneResultat,
       h('h3', {}, `Votre fiche estimée${periode ? ' · ' + periode : ''}`),
       h('div', { class: 'simu-resume' },
-        h('span', { class: 'tag' + (hd ? ' ok' : '') }, hd ? `Heures de délégation : OUI (${virg(e.hcBase)} h)` : 'Heures de délégation : non'),
-        h('span', { class: 'tag' + (hs ? ' ok' : '') }, hs ? `Heures supplémentaires : OUI (${virg(e.hs25 + e.hs50)} h)` : 'Heures supplémentaires : non'),
-        hc ? h('span', { class: 'tag ok' }, `Heures complémentaires : OUI (${virg(e.hc10 + e.hc25)} h)`) : null),
+        h('span', { class: 'tag' + (deleg ? ' ok' : '') }, deleg ? `Heures de délégation : OUI (${virg(rep.total)} h)` : 'Heures de délégation : non'),
+        h('span', { class: 'tag' + (plus && !deleg ? ' ok' : '') }, plus && !deleg ? `Heures en plus du contrat : OUI (${virg(rep.total)} h)` : 'Heures supplémentaires : non')),
+      plus ? h('p', { class: 'note' }, `Répartition automatique : ${virg(rep.hc10)} h à 10 %, ${virg(rep.hc25)} h à 25 % (heures complémentaires), ${virg(rep.hs25)} h à 25 % et ${virg(rep.hs50)} h à 50 % (heures supplémentaires).`) : null,
       ligne('Salaire brut', eur(r.brut), true),
       ligne('Cotisations salariales', eur(-r.totalCotisations)),
       ligne('Net social', eur(r.netSocial)),
@@ -136,9 +152,10 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
         champ('salaireBase', 'Salaire de base du mois (€)', { placeholder: 'ex. 1927,77', aide: 'La ligne « salaire de base » de l\'en-tête de la fiche (pauses comprises).' }),
         champ('heuresSemaine', 'Heures de présence par semaine', { placeholder: 'ex. 36', aide: 'Horaire du contrat (« horaire TPR » sur la fiche).' }), secteur, autrePct)),
     h('div', { class: 'carte' }, h('h3', {}, '2. Ce qui change ce mois-ci'), h('p', { class: 'note' }, 'Cochez ce qui vous concerne. Heures en temps de présence, comme sur la fiche.'),
-      option('optDeleg', 'J\'ai des heures de délégation hors temps de travail', champ('hd', 'Nombre d\'heures de délégation', { aide: 'Les « HD » du planning. Payées au taux de base, pause comprise.' })),
-      option('optHs', 'J\'ai des heures supplémentaires (temps plein)', champ('hs25', 'Heures supplémentaires à 25 %'), champ('hs50', 'Heures supplémentaires à 50 %')),
-      option('optHc', 'J\'ai des heures complémentaires (temps partiel)', champ('hc10', 'Heures complémentaires à 10 %'), champ('hc25', 'Heures complémentaires à 25 %')),
+      option('optPlus', 'J\'ai fait des heures en plus de mon contrat (délégation, compléments, heures supplémentaires)',
+        h('p', { class: 'note plein' }, 'Heures de présence, semaine par semaine (lundi au dimanche), comme sur le planning. Les 10 %, 25 % et 50 % sont calculés automatiquement selon votre contrat.'),
+        ...[0, 1, 2, 3, 4, 5].map(i => { const c = champ('sem' + i, 'Semaine ' + i, { placeholder: '0' }); c.classList.add('semaine'); return c; }),
+        h('label', { class: 'champ champ-case plein' }, (() => { const c = h('input', { type: 'checkbox', 'aria-label': 'Heures de délégation hors temps de travail' }); valeurs.estDeleg = false; c.addEventListener('change', () => { valeurs.estDeleg = c.checked; calculer(); }); return c; })(), h('span', {}, 'Ce sont des heures de délégation hors temps de travail'))),
       option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche (+60 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
       option('optCp', 'J\'ai pris des congés payés ce mois-ci', champ('cpJours', 'Jours de congés pris (jours pointés)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),
       option('optAutres', 'J\'ai d\'autres éléments de salaire (congés payés, primes…)', champ('autresBrut', 'Montant en € (+ ou −)', { signe: true, aide: 'Congés payés : écart entre l\'indemnité et l\'absence retirée.' }))),
@@ -155,5 +172,6 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
     h('details', { class: 'textes' }, h('summary', {}, `Taux utilisés (contrôlés le ${dateFr(T.controle.date)})`),
       h('p', { class: 'note' }, T.controle.resume), h('p', { class: 'note' }, `Plafond mensuel de la Sécurité sociale : ${eur(T.plafond_mensuel_securite_sociale)}. Prochain contrôle : ${T.controle.prochain}.`),
       h('table', { class: 'simu-table' }, h('tbody', {}, lignesTaux))));
+  majSemaines();
   calculer();
 }
