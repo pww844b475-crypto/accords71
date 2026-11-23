@@ -2,6 +2,7 @@
 import { simulerPaie, repartirHeures, repartirTotal, compterJoursHabituels } from './moteur/paie.js';
 import { entretienTenue, fraisTransport, primeAstreinte } from './moteur/calculs.js';
 import { lancerAssistant } from './assistant.js';
+import { pointerConges, feriesDans } from './moteur/calendrier.js';
 import { ouvrirImport } from './importPlanning.js';
 
 const eur = x => (x < 0 ? '−' : '') + Math.abs(x).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €';
@@ -46,6 +47,12 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     const input = h('input', { type: 'text', inputmode: signe ? 'text' : 'decimal', autocomplete: 'off', value: String(defautEff).replace('.', ','), placeholder: placeholder || '0', 'aria-label': label });
     input.addEventListener('input', () => { valeurs[id] = input.value; calculer(); });
     return h('label', { class: 'champ' }, h('span', { class: 'champ-label' }, label), input, aide ? h('small', { class: 'aide' }, aide) : null);
+  };
+  const champDate = (id, label) => {
+    valeurs[id] = valeurs[id] || '';
+    const input = h('input', { type: 'date', value: valeurs[id], 'aria-label': label });
+    input.addEventListener('input', () => { valeurs[id] = input.value; calculer(); });
+    return h('label', { class: 'champ' }, h('span', { class: 'champ-label' }, label), input);
   };
   const choix = (id, label, options, defaut) => {
     valeurs[id] = valeurs[id] ?? defaut;
@@ -101,10 +108,17 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     if (valeurs.memesJours && Array.isArray(valeurs.joursHab) && valeurs.joursHab.length && aa && mm) { prevus = compterJoursHabituels(aa, mm, valeurs.joursHab); origine = 'vos jours habituels'; }
     else if (num(valeurs.joursMois) > 0) { prevus = Math.round(num(valeurs.joursMois)); origine = 'votre planning'; }
     else if (num(valeurs.joursSemaine) > 0) { prevus = Math.round(num(valeurs.joursSemaine) * joursDuMois / 7); origine = 'vos jours par semaine'; }
-    const abs = Math.max(0, Math.round(num(valeurs.joursAbsence)));
+    // Congés payés : dates saisies -> jours de travail, jours fériés fermés, jours à pointer (calcul automatique), sauf si les jours pointés sont donnés à la main
+    let cpPointes = valeurs.optCp ? num(valeurs.cpJours) : 0, cpAbs = 0, cpInfo = null;
+    if (valeurs.optCp && valeurs.cpDebut && valeurs.cpFin && !(num(valeurs.cpJours) > 0)) {
+      cpInfo = pointerConges({ debut: valeurs.cpDebut, fin: valeurs.cpFin, joursHab: valeurs.memesJours ? valeurs.joursHab : null, joursSemaine: Math.min(6, num(valeurs.joursSemaine) || 5), joursTravaillesSaisis: num(valeurs.cpJoursTrav), feriesChomes: num(valeurs.cpFerie), annee: aa, mois: mm });
+      if (!cpInfo.erreur) { cpPointes = cpInfo.pointes; cpAbs = cpInfo.absTravail; } else cpInfo = null;
+    }
+    const abs = Math.max(0, Math.round(num(valeurs.joursAbsence))) + cpAbs;
     const enPlus = Math.max(0, Math.round(num(valeurs.joursEnPlus)));
     const trav = Math.max(0, prevus - abs + enPlus);
     const tenue = ouvres > 0 ? (entretienTenue({ joursTravailles: trav, joursOuvres: ouvres }).lignes[0]?.brut || 0) : 0;
+    const feriesMois = aa && mm ? feriesDans(`${aa}-${String(mm).padStart(2, '0')}-01`, `${aa}-${String(mm).padStart(2, '0')}-${String(joursDuMois).padStart(2, '0')}`).filter(f => f.jour >= 1 && f.jour <= 5) : [];
     const km = num(valeurs.km);
     const transport = km > 0 ? (fraisTransport({ km, jours: num(valeurs.joursTransport) > 0 ? Math.round(num(valeurs.joursTransport)) : trav }).lignes[1]?.brut || 0) : 0;
     const plus = !!valeurs.optPlus, deleg = plus && !!valeurs.estDeleg, sp = !!valeurs.optSpec;
@@ -120,7 +134,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       tauxHoraire: num(valeurs.tauxHoraire), primeAstreinte: primeAst,
       semainesEnPlus: (plus || astH > 0) && parSemaine ? semaines : undefined, totalEnPlus: !parSemaine ? total : 0,
       dimanche: sp ? num(valeurs.dimanche) : 0, dimanche100: sp ? num(valeurs.dimanche100) : 0, ferie: sp ? num(valeurs.ferie) : 0, nuit30: sp ? num(valeurs.nuit30) : 0, nuit10: sp ? num(valeurs.nuit10) : 0,
-      cpJours: valeurs.optCp ? num(valeurs.cpJours) : 0, cpRefBrute: valeurs.optCp ? num(valeurs.cpRef) : 0, cpIndemniteJour: valeurs.optCp ? num(valeurs.cpInd) : 0,
+      cpJours: valeurs.optCp ? cpPointes : 0, cpRefBrute: valeurs.optCp ? num(valeurs.cpRef) : 0, cpIndemniteJour: valeurs.optCp ? num(valeurs.cpInd) : 0,
       hsExoAuto: true, autresBrut: valeurs.optAutres ? num(valeurs.autresBrut) : 0,
       tenue, transport, tickets: Math.floor(num(valeurs.tickets)), partSalarieTicket: valeurs.region === 'idf' ? 4 : 3.7,
       autresRetenues: num(valeurs.autresRetenues), pas: { actif: !!valeurs.pasActif, taux: num(valeurs.pasTaux) },
@@ -150,6 +164,8 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       r.cp ? h('p', { class: r.cp.referenceConnue ? 'note' : 'erreur' }, r.cp.referenceConnue
         ? `Congés payés : ${virg(r.cp.jours)} jour(s) à ${eur(r.cp.parJour)} par jour (${r.cp.regle === 'dixieme' ? 'règle du dixième de la période de référence, plus favorable que le maintien' : r.cp.regle === 'maintien' ? 'maintien du salaire, plus favorable que le dixième' : 'indemnité par jour saisie'}) contre ${eur(r.cp.maintienJour)} retirés par jour : solde ${eur(r.cp.solde)}.`
         : 'Congés payés : sans votre rémunération de référence (1er juin au 31 mai) ni l\'indemnité par jour de votre fiche, le calcul retient le maintien du salaire et donne un net trop bas si le dixième est plus favorable.') : null,
+      cpInfo ? h('p', { class: 'note' }, `Congés du ${cpInfo.debut.split('-').reverse().join('/')} au ${cpInfo.fin.split('-').reverse().join('/')} : ${cpInfo.joursTravailles} jour(s) de travail${cpInfo.feries.length ? `, ${cpInfo.feries.length} jour(s) férié(s) dedans (${cpInfo.feries.map(f => f.libelle).join(', ')}), ${cpInfo.feriesChomes} fermé(s) par le magasin` : ''} : ${cpInfo.pointes} jour(s) pointés.`) : null,
+      feriesMois.length ? h('p', { class: 'note' }, `Ce mois compte ${feriesMois.length} jour(s) férié(s) du lundi au vendredi (${feriesMois.map(f => f.libelle).join(', ')}). Ils sont comptés dans les ${ouvres} jours ouvrés : modifiez ce nombre si votre paie les retire.`) : null,
       h('p', { class: 'note' }, `Taux horaire déduit de votre salaire de base : ${virg(r.details.tauxHoraire.toFixed(3))} €. Indemnité de tenue calculée : ${eur(tenue)} (${trav} jours de présence d'après ${origine}, sur ${ouvres} jours ouvrés du mois).`),
       h('p', { class: 'note' }, 'Estimation à quelques centimes près : la paie arrondit ligne par ligne. Elle ne remplace pas votre fiche de paie.'));
     remplir(zoneDetail,
@@ -188,11 +204,14 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'astSemaines', type: 'nombre', unite: 'semaine(s)', emoji: '📆', court: 'Semaines d\'astreinte', si: v => v.optAst, question: 'Combien de semaines d\'astreinte ce mois-ci ?', aide: 'Une semaine complète compte pour 1.' },
     { id: 'astHeures', type: 'nombre', unite: 'h', emoji: '🚗', court: 'Heures d\'intervention', si: v => v.optAst, question: 'Avez-vous dû intervenir ? Combien d\'heures en tout, trajet compris ?', aide: 'Tapez 0 si vous n\'avez pas eu à vous déplacer.' },
     { id: 'optCp', type: 'ouinon', emoji: '🏖️', court: 'Congés payés', question: 'Avez-vous pris des congés payés ce mois-ci ?' },
-    { id: 'cpJours', type: 'nombre', unite: 'jour(s)', emoji: '🏖️', court: 'Jours de congés', si: v => v.optCp, question: 'Combien de jours de congés avez-vous pris ?', aide: 'Les jours « ABS C.P. » de votre fiche de paie.' },
+    { id: 'cpDebut', type: 'date', emoji: '🏖️', court: 'Début des congés', si: v => v.optCp, question: 'Quel est le premier jour de vos congés payés ?', aide: 'La date du premier jour de congé, même si ce n\'est pas un jour où vous travailliez.' },
+    { id: 'cpFin', type: 'date', emoji: '🏖️', court: 'Fin des congés', si: v => v.optCp, question: 'Et le dernier jour de vos congés ?', aide: 'Si vos congés continuent le mois suivant, mettez quand même le dernier jour : je ne compte que le mois de la paie.' },
+    { id: 'cpJoursTrav', type: 'nombre', unite: 'jour(s)', emoji: '📅', optionnel: true, court: 'Jours de travail pendant les congés', si: v => v.optCp && !v.memesJours && v.cpDebut && v.cpFin, question: 'Combien de jours auriez-vous travaillé pendant ces congés ?', aide: v => { let est = ''; try { est = `D'après vos ${Number(v.joursSemaine) || 5} jours par semaine, j'estime ${pointerConges({ debut: v.cpDebut, fin: v.cpFin, joursSemaine: Math.min(6, Number(v.joursSemaine) || 5) }).joursTravailles} jour(s). `; } catch { /* pas d'estimation */ } return est + 'Corrigez si votre planning était différent, ou touchez « Je ne sais pas ».'; } },
+    { id: 'cpFerie', type: 'nombre', unite: 'jour(s) férié(s)', emoji: '🎉', court: 'Fériés fermés pendant les congés', si: v => v.optCp && v.cpDebut && v.cpFin && feriesDans(v.cpDebut, v.cpFin).length > 0, question: v => `Pendant vos congés, il y a ${feriesDans(v.cpDebut, v.cpFin).map(f => f.libelle).join(' et ')}. Combien de ces jours fériés le magasin était-il fermé ?`, aide: 'Un jour férié fermé par le magasin n\'est pas décompté de vos congés (il est payé). Tapez 0 si le magasin était ouvert. L\'accord prévoit au moins 6 jours fériés fermés par an, fixés pour chaque magasin : demandez la liste à la direction.' },
     { id: 'cpConnu', type: 'ouinon', emoji: '🧾', court: 'Indemnité par jour connue', si: v => v.optCp, question: 'Connaissez-vous le montant payé par jour de congé ?', aide: 'C\'est le taux de la ligne « IND C.P. ACQUIS » sur votre dernière fiche de paie. Sans lui, mon calcul sera moins juste.' },
     { id: 'cpInd', type: 'nombre', unite: '€ par jour', emoji: '🧾', court: 'Indemnité par jour', si: v => v.optCp && v.cpConnu, question: 'Quel est ce montant par jour ?', aide: 'Recopiez le taux de la ligne « IND C.P. ACQUIS ».' },
     { id: 'cpRef', type: 'nombre', unite: '€', emoji: '💶', optionnel: true, court: 'Brut du 1er juin au 31 mai', si: v => v.optCp && !v.cpConnu, question: 'Combien avez-vous gagné de salaire brut du 1er juin au 31 mai ?', aide: 'Additionnez vos salaires bruts de cette période. Si vous ne le savez pas, touchez « Je ne sais pas ».' },
-    { id: 'joursAbsence', type: 'nombre', unite: 'jour(s)', emoji: '🗓️', optionnel: true, court: 'Jours d\'absence', question: 'Parmi vos jours de travail du mois, combien avez-vous manqués ?', aide: v => (v.optCp && Number(v.cpJours) > 0 && Number(v.joursSemaine) > 0 ? `Vos ${Number(v.cpJours)} jours de congés pointés font environ ${Math.round(Number(v.cpJours) * Number(v.joursSemaine) / 6)} jour(s) de travail. ` : '') + 'Congés payés, maladie, formation : comptez seulement les jours où vous deviez travailler. Cela sert à calculer l\'indemnité de tenue. Tapez 0 si aucun.' },
+    { id: 'joursAbsence', type: 'nombre', unite: 'jour(s)', emoji: '🗓️', optionnel: true, court: 'Autres jours d\'absence', question: 'En dehors de vos congés payés, avez-vous manqué des jours de travail ce mois-ci ?', aide: 'Maladie, formation, absence autorisée… Combien de jours en tout ? Cela sert à calculer l\'indemnité de tenue. Tapez 0 si aucun.' },
     { id: 'joursEnPlus', type: 'nombre', unite: 'jour(s)', emoji: '➕', optionnel: true, court: 'Jours en plus de vos jours habituels', question: 'Avez-vous travaillé des jours qui ne sont pas vos jours habituels ?', aide: 'Un jour où vous avez travaillé alors que ce n\'est pas un de vos jours habituels (remplacement, jour échangé…). Combien de jours en tout ? Tapez 0 si aucun.' },
     { id: 'tickets', type: 'nombre', unite: 'titre(s)', emoji: '🍽️', court: 'Titres-restaurant', question: 'Combien de titres-restaurant avez-vous eus ce mois-ci ?', aide: 'Un titre par jour où votre horaire couvre 12 h - 13 h 30 ou 18 h 30 - 20 h. Tapez 0 si aucun.' },
     { id: 'region', type: 'choix', emoji: '🏬', court: 'Magasin (titres-restaurant)', si: v => Number(v.tickets) > 0, question: 'Dans quel magasin travaillez-vous ?', aide: 'La part que vous payez pour un titre n\'est pas la même.', options: [['autre', 'Hors Île-de-France', '🏬'], ['idf', 'En Île-de-France', '🗼']] },
@@ -244,11 +263,11 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
         h('label', { class: 'champ champ-case plein' }, (() => { const c = h('input', { type: 'checkbox', 'aria-label': 'Heures de délégation hors temps de travail' }); valeurs.estDeleg = !!valeurs.estDeleg; c.checked = valeurs.estDeleg; c.addEventListener('change', () => { valeurs.estDeleg = c.checked; calculer(); }); return c; })(), h('span', {}, 'Ce sont des heures de délégation hors temps de travail'))),
       option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche habituel (+60 %)'), champ('dimanche100', 'Heures de dimanche exceptionnel (+100 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
       option('optAst', 'J\'ai été d\'astreinte ce mois-ci', choix('astMagasin', 'Type de magasin', [['standard', 'Autre magasin'], ['dimanche', 'Ouvert le dimanche après-midi ou jusqu\'à minuit'], ['h24', 'Ouvert 24 h sur 24']], 'standard'), champ('astSemaines', 'Semaines d\'astreinte'), champ('astHeures', 'Heures d\'intervention, trajet compris')),
-      option('optCp', 'J\'ai pris des congés payés ce mois-ci', champ('cpJours', 'Jours de congés pris (jours pointés)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),
+      option('optCp', 'J\'ai pris des congés payés ce mois-ci', champDate('cpDebut', 'Premier jour des congés'), champDate('cpFin', 'Dernier jour des congés'), champ('cpJoursTrav', 'Jours de travail prévus pendant les congés (si vos jours varient)'), champ('cpFerie', 'Jours fériés fermés par le magasin pendant les congés'), champ('cpJours', 'Jours de congés pointés (si vous les connaissez : remplace le calcul par dates)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),
       option('optAutres', 'J\'ai d\'autres éléments de salaire (congés payés, primes…)', champ('autresBrut', 'Montant en € (+ ou −)', { signe: true, aide: 'Congés payés : écart entre l\'indemnité et l\'absence retirée.' }))),
     h('div', { class: 'carte' }, h('h3', {}, '3. Avantages et retenues'),
       h('div', { class: 'champs' },
-        champOuvres, champ('joursAbsence', 'Jours d\'absence dans le mois', { aide: 'Congés, maladie, formation : réduisent la tenue (6 € au prorata des jours ouvrés). Vide = mois complet.' }),
+        champOuvres, champ('joursAbsence', 'Autres jours d\'absence dans le mois (hors congés payés)', { aide: 'Congés, maladie, formation : réduisent la tenue (6 € au prorata des jours ouvrés). Vide = mois complet.' }),
         champ('tickets', 'Nombre de titres-restaurant', { aide: 'Un titre par jour où votre horaire couvre 12 h-13 h 30 ou 18 h 30-20 h.' }), region,
         champ('km', 'Distance domicile-travail (km)', { aide: 'Pour l\'indemnité de transport. Vide = pas d\'indemnité.' }),
         champ('joursTransport', 'Jours travaillés sur place (transport)', { aide: 'Nombre de jours du mois ouvrant droit à l\'indemnité de transport.' }),
