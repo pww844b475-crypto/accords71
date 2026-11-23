@@ -111,16 +111,17 @@ export function primeAnnuelle({ dateEmbauche, annee, brutAnnee = 0, moisPayes = 
   const net = netDePrime({ prime: montant, brutMensuel: moyenne, tauxPas }, T);
   const netPrime = tauxPas > 0 ? net.netApresImpot : net.netAvantImpot;
   lignes.push(L('accord', `Prime annuelle en net estimé (${tauxPas > 0 ? 'après' : 'avant'} prélèvement à la source)`, f(netPrime), { brut: netPrime, note: 'Estimation : le net exact dépend de la paie de décembre (cotisations, plafond de la Sécurité sociale).' }));
-  const n75 = r2(netPrime * 0.75), n25 = r2(netPrime - n75);
+  const brut75 = r2(montant * 0.75);
+  const note75 = 'L\'acompte de 75 % est calculé sur le BRUT de la prime et versé sans cotisations ; la fiche de décembre prélève les cotisations sur toute la prime et déduit les acomptes. Le solde net est donc faible (relevé sur une fiche de décembre 2025 : acomptes égaux à 75 % du brut).';
   if (acompte) {
-    const reste = Math.max(0, r2(netPrime - acompte)), debut = r2(reste * 0.75), fin = r2(reste - debut);
+    const debut = Math.max(0, r2(brut75 - acompte)), deduits = Math.max(brut75, acompte), reste = r2(netPrime - deduits);
     lignes.push(L('accord', 'Acompte déjà reçu sur demande (net, entre le 1er juin et le 30 novembre)', f(acompte), { brut: acompte }));
-    lignes.push(L('accord', 'Reste à percevoir en net', f(r2(netPrime - acompte)), { fort: true, brut: r2(netPrime - acompte), note: acompte > netPrime ? 'L\'acompte dépasse la prime estimée : à vérifier.' : 'Le texte dit que l\'acompte déjà versé vient « en déduction des montants à verser au mois de décembre » sans préciser comment. Le calcul partage ce reste : 75 % début décembre, 25 % avec la paie de décembre (lecture des élus, à confirmer sur une fiche de paie de décembre).' }));
-    lignes.push(L('accord', 'dont versé début décembre (75 % du reste)', f(debut), { fort: true, brut: debut }));
-    lignes.push(L('accord', 'dont versé avec la paie de décembre (25 % du reste)', f(fin), { fort: true, brut: fin }));
+    lignes.push(L('accord', 'Versé début décembre (75 % du brut de la prime moins l\'acompte déjà reçu)', f(debut), { fort: true, brut: debut, note: note75 }));
+    lignes.push(L('accord', 'Reste à percevoir avec la fiche de décembre (net)', f(reste), { fort: true, brut: reste, note: acompte > brut75 ? 'L\'acompte dépasse 75 % du brut de la prime : à vérifier.' : 'Net de la prime moins les acomptes déjà versés (acompte exceptionnel + acompte de début décembre).' }));
   } else {
-    lignes.push(L('accord', 'En net : versé début décembre (75 %)', f(n75), { fort: true, brut: n75 }));
-    lignes.push(L('accord', 'En net : versé avec la paie de décembre (25 %)', f(n25), { fort: true, brut: n25 }));
+    const reste = r2(netPrime - brut75);
+    lignes.push(L('accord', 'Versé début décembre (75 % du brut de la prime)', f(brut75), { fort: true, brut: brut75, note: note75 }));
+    lignes.push(L('accord', 'Reste à percevoir avec la fiche de décembre (net)', f(reste), { fort: true, brut: reste, note: 'Net de la prime moins l\'acompte de début décembre.' }));
   }
   return { lignes };
 }
