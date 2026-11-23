@@ -488,6 +488,7 @@ export function pauses({ heuresPresence = 36, poste = 'rayon', habillage = false
   const pauseH = pr * mn / 60, effectif = pr - pauseH;
   const l = [L('accord', `Pause payée (${mn} min par heure de présence)`, fmt(pauseH), { brut: pauseH, note: 'Le temps de pause est calculé sur 3 minutes par heure pour le temps de présence ; les durées plus longues (caisse 4, industriel 6, surgélation 12) ne changent pas le temps de présence.' }),
     L('accord', 'Temps de travail effectif', fmt(effectif), { brut: effectif, note: `Pour ${fmt(pr)} de présence.` })];
+  if (habillage) l.push(L('accord', `Pause totale avec habillage (${mn + 1} min par heure de présence)`, fmt(pauseH + pr / 60), { brut: pauseH + pr / 60, note: `${mn} min de pause + 1 min d'habillage par heure de présence.` }));
   if (habillage) l.push(L('accord', 'Contrepartie habillage / déshabillage (1 min par heure de présence)', fmt(pr / 60), { brut: pr / 60, note: 'Pause supplémentaire, sans augmenter le temps de présence, si la tenue est obligatoire et que l\'habillage se fait sur place.' }));
   l.push(L('code', 'Pause minimale légale', pr >= 6 ? '20 minutes consécutives' : 'Aucune si moins de 6 h de travail quotidien', { note: 'Dès que le temps de travail quotidien atteint 6 heures (L3121-16). S\'applique à la journée, pas à la semaine.' }));
   return { lignes: l };
