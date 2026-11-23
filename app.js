@@ -94,20 +94,45 @@ async function rechercheTexte(q) {
     ...res.map(r => h('div', { class: 'carte' }, h('b', {}, `${r.titre}, p.${r.page}`), r.scan ? tags(['Vérifier le chiffre sur l\'image']) : null, h('div', { class: 'cite' }, r.extrait))));
 }
 
-function ouvrirFiche(f) {
-  const valeurs = {};
-  const champsEl = (f.champs || []).map(c => {
-    let ctl;
-    if (c.type === 'select') { ctl = h('select', { id: 'c_' + c.id }, c.options.map(([v, l]) => h('option', { value: v }, l))); valeurs[c.id] = c.options[0][0]; }
-    else if (c.type === 'checkbox') { ctl = h('input', { id: 'c_' + c.id, type: 'checkbox' }); ctl.checked = !!c.defaut; valeurs[c.id] = !!c.defaut; }
-    else if (c.type === 'date') { ctl = h('input', { id: 'c_' + c.id, type: 'date' }); valeurs[c.id] = ''; }
-    else { ctl = h('input', { id: 'c_' + c.id, type: 'number', inputmode: 'decimal', step: c.step || '1', min: c.min, max: c.max, value: c.defaut }); valeurs[c.id] = c.defaut ?? 0; }
-    ctl.addEventListener('input', () => {
-      valeurs[c.id] = c.type === 'checkbox' ? ctl.checked : c.type === 'number' ? Number(ctl.value) || 0 : ctl.value;
-      calculer();
-    });
-    return h('label', { class: c.type === 'checkbox' ? 'case' : '' }, c.type === 'checkbox' ? [ctl, c.label] : [c.label, ctl]);
-  });
+// ---- Assistant : pose les questions une par une dans une fenêtre, puis affiche le résultat ----
+const valeursParDefaut = f => Object.fromEntries((f.champs || []).map(c => [c.id, c.type === 'select' ? c.options[0][0] : c.type === 'checkbox' ? !!c.defaut : c.type === 'date' ? '' : (c.defaut ?? 0)]));
+const texteReponse = (c, v) => c.type === 'select' ? (c.options.find(o => o[0] === v) || [, v])[1] : c.type === 'checkbox' ? (v ? 'Oui' : 'Non') : c.type === 'date' ? (v ? v.split('-').reverse().join('/') : 'non renseignée') : fr(v);
+
+function assistant(f, valeurs, fini) {
+  const champs = f.champs || []; if (!champs.length) { fini(); return; }
+  let i = 0; const v = { ...valeurs };
+  const fond = h('div', { class: 'assistant-fond', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Questions' });
+  const fermer = ok => { fond.remove(); document.removeEventListener('keydown', touche); document.body.classList.remove('modal-ouvert'); if (ok) fini(v); else fini(valeurs); };
+  const touche = e => { if (e.key === 'Escape') fermer(false); };
+  document.addEventListener('keydown', touche);
+  const suivant = () => { if (i < champs.length - 1) { i++; etape(); } else fermer(true); };
+  function etape() {
+    const c = champs[i]; let ctl, zone;
+    const bouton = (texte, on, cls = '') => h('button', { type: 'button', class: 'choix-btn ' + cls, onclick: on }, texte);
+    if (c.type === 'select') zone = h('div', { class: 'choix' }, c.options.map(([val, lab]) => bouton(lab, () => { v[c.id] = val; suivant(); }, v[c.id] === val ? 'choisi' : '')));
+    else if (c.type === 'checkbox') zone = h('div', { class: 'choix' }, bouton('Oui', () => { v[c.id] = true; suivant(); }, v[c.id] ? 'choisi' : ''), bouton('Non', () => { v[c.id] = false; suivant(); }, !v[c.id] ? 'choisi' : ''));
+    else {
+      ctl = h('input', { type: c.type === 'date' ? 'date' : 'text', inputmode: 'decimal', autocomplete: 'off', 'aria-label': c.label, value: c.type === 'date' ? v[c.id] : String(v[c.id] ?? '').replace('.', ',') });
+      const lire = () => { v[c.id] = c.type === 'date' ? ctl.value : (parseFloat(String(ctl.value).replace(',', '.')) || 0); };
+      ctl.addEventListener('input', lire); ctl.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); lire(); suivant(); } });
+      zone = h('div', {}, ctl, h('button', { type: 'button', class: 'choix-btn suite', onclick: () => { lire(); suivant(); } }, i < champs.length - 1 ? 'Suivant →' : 'Voir ma réponse'));
+    }
+    remplir(fond, h('div', { class: 'assistant' },
+      h('div', { class: 'assistant-haut' }, h('span', {}, `Question ${i + 1} sur ${champs.length}`), h('button', { type: 'button', class: 'assistant-x', 'aria-label': 'Fermer', onclick: () => fermer(false) }, '✕')),
+      h('div', { class: 'progression' }, h('div', { style: `width:${Math.round((i + 1) / champs.length * 100)}%` })),
+      h('h3', { class: 'assistant-q' }, c.label), zone,
+      h('div', { class: 'assistant-bas' }, i > 0 ? h('button', { type: 'button', class: 'sec', onclick: () => { i--; etape(); } }, '← Précédent') : h('span'), h('button', { type: 'button', class: 'sec', onclick: () => fermer(false) }, 'Passer'))));
+    if (ctl) setTimeout(() => { ctl.focus(); try { ctl.select(); } catch {} }, 50);
+  }
+  document.body.classList.add('modal-ouvert'); document.body.append(fond); etape();
+}
+
+function ouvrirFiche(f, reprise) {
+  let valeurs = reprise || valeursParDefaut(f);
+  const resume = h('div', { class: 'carte vos-reponses' });
+  const majResume = () => remplir(resume, h('h3', {}, 'Vos réponses'),
+    h('ul', {}, (f.champs || []).map(c => h('li', {}, h('span', {}, c.label + ' : '), h('strong', {}, texteReponse(c, valeurs[c.id]))))),
+    h('button', { type: 'button', class: 'sec', onclick: () => assistant(f, valeurs, nv => { valeurs = nv; majResume(); calculer(); resultat.scrollIntoView({ behavior: 'smooth', block: 'start' }); }) }, '✏️ Modifier mes réponses'));
   const resultat = h('div', { class: 'carte reponse-finale' });
   function calculer() {
     if (!f.calcul) return;
@@ -148,10 +173,11 @@ function ouvrirFiche(f) {
     tags(f.etiquettes),
     h('div', { class: 'carte ' + (f.calcul ? 'enbref' : 'reponse-finale') },
       h('div', { class: f.calcul ? 'eb-titre' : 'rf-titre' }, f.calcul ? 'En bref' : 'La réponse'), h('p', { class: f.calcul ? '' : 'rf-texte' }, f.reponse)),
-    f.calcul ? h('div', { class: 'carte' }, h('h3', {}, 'Cas du salarié : renseignez les champs'), h('div', { class: 'champs' }, champsEl)) : null,
+    f.calcul ? resume : null,
     f.calcul ? resultat : null,
     textes);
-  onglets(f.categorie); calculer(); window.scrollTo(0, 0);
+  onglets(f.categorie); majResume(); calculer(); window.scrollTo(0, 0);
+  if (f.calcul && f.champs?.length && !reprise) assistant(f, valeurs, nv => { valeurs = nv; majResume(); calculer(); resultat.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
 }
 
 $('#formRecherche').addEventListener('submit', e => { e.preventDefault(); const q = $('#q').value.trim(); q ? recherche(q) : accueil(); window.scrollTo(0, 0); });
@@ -167,6 +193,9 @@ $('#titre').addEventListener('click', accueil);
     avenant: { titre: 'Avenant intéressement 2026 (non signé)', scan: false }, interess: { titre: 'Accord d\'intéressement 2025', scan: true },
     pee: { titre: 'Règlement PEE', scan: true }, particip: { titre: 'Accord de participation (signé le 24/11/2025)', scan: true }, percol: { titre: 'Règlement PERCOL', scan: true }, livret: { titre: 'Livret CGT', scan: false }, ct: { titre: 'Code du travail (code.travail.gouv.fr, version du 10/08/2016)', scan: false },
   };
-  if (EMPREINTE_MDP) $('#porte').hidden = false; else { $('#appli').hidden = false; accueil(); if (location.hash === '#paie') pageSimulateur(); }
+  const ouvrirAppli = () => { $('#entree').hidden = true; $('#appli').hidden = false; accueil(); if (location.hash === '#paie') pageSimulateur(); };
+  if (EMPREINTE_MDP) $('#porte').hidden = false;
+  else if (location.hash === '#paie') ouvrirAppli();      // lien direct vers l'estimation de la fiche de paie : pas de page d'entrée
+  else { $('#entree').hidden = false; $('#btnEntree').addEventListener('click', () => { ouvrirAppli(); window.scrollTo(0, 0); }); }
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 })();

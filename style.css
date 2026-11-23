@@ -123,3 +123,26 @@ h3.section{margin:1.4rem 0 .5rem;font-size:1.05rem}
 .simu-resume{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
 .option{margin:10px 0;padding:8px 0;border-top:1px solid var(--bord)}
 .option-zone{margin:6px 0 4px 38px}
+
+.entree{position:fixed;inset:0;z-index:40;display:flex;align-items:center;justify-content:center;background:var(--rouge,#b00020);padding:24px}
+.entree-btn{display:flex;flex-direction:column;align-items:center;gap:14px;max-width:420px;width:100%;text-align:center;background:#fff;color:#1a1a1a;border:0;border-radius:22px;padding:34px 22px;box-shadow:0 10px 40px rgba(0,0,0,.35);min-height:0}
+.entree-logo{max-width:70%;max-height:180px;object-fit:contain}
+.entree-titre{font-size:2rem;font-weight:800;color:#b00020}
+.entree-sous{font-size:1rem;opacity:.8}
+.entree-entrer{margin-top:10px;background:#b00020;color:#fff;border-radius:999px;padding:.8rem 1.6rem;font-weight:700;font-size:1.05rem}
+body.modal-ouvert{overflow:hidden}
+.assistant-fond{position:fixed;inset:0;z-index:60;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:16px}
+.assistant{background:var(--carte,#fff);color:var(--fg,#111);border-radius:20px;max-width:480px;width:100%;max-height:92vh;overflow:auto;padding:18px;box-shadow:0 12px 40px rgba(0,0,0,.4)}
+.assistant-haut{display:flex;justify-content:space-between;align-items:center;font-weight:600;opacity:.8}
+.assistant-x{min-height:40px;width:40px;border-radius:50%;padding:0}
+.progression{height:8px;background:var(--bord,#ddd);border-radius:99px;margin:10px 0 14px;overflow:hidden}
+.progression div{height:100%;background:#0f8b6b;border-radius:99px;transition:width .2s}
+.assistant-q{font-size:1.25rem;margin:0 0 14px}
+.choix{display:flex;flex-direction:column;gap:10px}
+.choix-btn{min-height:54px;text-align:left;font-weight:600;border:2px solid var(--bord,#ccc);border-radius:14px;background:var(--carte,#fff);color:var(--fg,#111);padding:.6rem 1rem}
+.choix-btn.choisi{border-color:#0f8b6b;background:rgba(15,139,107,.12)}
+.choix-btn.suite{width:100%;margin-top:12px;background:#0f8b6b;border-color:#0f8b6b;color:#fff;text-align:center}
+.assistant input[type=text],.assistant input[type=date]{width:100%;font-size:1.3rem}
+.assistant-bas{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
+.vos-reponses ul{list-style:none;padding:0;margin:.4rem 0 .8rem}
+.vos-reponses li{display:flex;justify-content:space-between;gap:12px;padding:.3rem 0;border-bottom:1px solid var(--bord,#ddd)}
