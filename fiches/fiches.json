@@ -515,13 +515,39 @@
      "question": "Pour quelle année voulez-vous calculer la prime ?"
     },
     {
+     "id": "moisPayes",
+     "label": "Fiches de paie déjà reçues cette année",
+     "type": "number",
+     "min": 1,
+     "max": 12,
+     "step": "1",
+     "defaut": 12,
+     "question": "Combien de fiches de paie avez-vous déjà reçues cette année ?",
+     "aide": "Mettez 11 si vous avez la fiche de novembre, 12 si vous avez déjà celle de décembre. Le calcul estime les mois qui restent."
+    },
+    {
      "id": "brutAnnee",
-     "label": "Rémunération brute de l'assiette sur l'année (€)",
+     "label": "Total du salaire brut depuis le 1er janvier (€)",
      "type": "number",
      "min": 0,
      "defaut": 0,
-     "question": "Combien avez-vous gagné de salaire brut sur l'année (en €) ?",
-     "aide": "Le total du brut de l'année pris en compte pour la prime : voir le cumul sur votre fiche de paie."
+     "question": "Quel est le total de votre salaire brut depuis le 1er janvier (en €) ?",
+     "aide": "Lisez le cumul du brut sur votre dernière fiche de paie, ou additionnez vos fiches. Le brut est le montant avant retenues."
+    },
+    {
+     "id": "brutRestant",
+     "label": "Brut prévu pour les mois restants (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "si": [
+      "moisPayes",
+      "<",
+      12
+     ],
+     "question": "Connaissez-vous le brut prévu pour les mois qui restent à payer (en €) ?",
+     "aide": "Facultatif. Tapez 0 et je prends la moyenne de vos mois déjà payés."
     },
     {
      "id": "joursMaladie",
@@ -550,7 +576,7 @@
     },
     {
      "id": "montantAcompte",
-     "label": "Montant de l'acompte déjà perçu (€)",
+     "label": "Montant net de l'acompte déjà reçu (€)",
      "type": "number",
      "min": 0,
      "step": "0.01",
@@ -559,8 +585,18 @@
       "acompteDemande",
       true
      ],
-     "question": "Quel montant avez-vous déjà perçu en acompte (en €) ?",
-     "aide": "Ce montant sera déduit des versements de décembre. Il se lit sur votre fiche de paie, ligne « acompte prime annuelle »."
+     "question": "Quel montant net avez-vous reçu en acompte (en €) ?",
+     "aide": "Le montant arrivé sur votre compte, pas le brut. Il se lit sur votre fiche de paie ou votre relevé."
+    },
+    {
+     "id": "tauxPas",
+     "label": "Taux de prélèvement à la source (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.1",
+     "defaut": 0,
+     "question": "Quel est votre taux de prélèvement à la source (en %) ?",
+     "aide": "Sur votre fiche de paie, ligne « taux personnalisé ». Tapez 0 pour voir le net avant impôt."
     }
    ],
    "calcul": "primeAnnuelle",
@@ -630,7 +666,7 @@
    "notes": [
     "La prime de vacances (NAO 2026) fait l'objet d'une fiche distincte à venir."
    ],
-   "reponse": "Oui si le salarié a au moins 6 mois d'ancienneté à fin novembre. Montant : 1/12 de la rémunération brute de l'année ; 75 % en acompte début décembre, le solde avec la paie de décembre (accord, art. 3.2). Sur demande, vous pouvez aussi toucher un acompte entre le 1er juin et le 30 novembre (6 mois d'ancienneté nécessaires) : il est déduit de ce que vous recevez en décembre.",
+   "reponse": "Oui si vous avez au moins 6 mois d'ancienneté à fin novembre. Montant : 1/12 de la rémunération brute de l'année ; 75 % en acompte début décembre, le solde avec la paie de décembre (accord, art. 3.2). Vous pouvez la calculer à date, avant la fiche de décembre : les mois restants sont estimés. Le résultat donne aussi l'équivalent en net et ce qu'il vous reste à percevoir si vous avez déjà eu un acompte (net). Sur demande, vous pouvez toucher un acompte entre le 1er juin et le 30 novembre (6 mois d'ancienneté nécessaires) : il est déduit de ce que vous recevez en décembre.",
    "categorie": "remuneration"
   },
   {

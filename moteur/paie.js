@@ -161,3 +161,10 @@ export function compterJoursHabituels(annee, mois, joursSemaine = []) {
   for (let j = 1; j <= fin; j++) if (set.has(new Date(annee, mois - 1, j).getDay())) n++;
   return n;
 }
+
+/** Net estimé d'une prime ajoutée à un mois de paie : écart de net entre la paie avec et sans la prime (cotisations, CSG/CRDS, plafond de la Sécurité sociale). */
+export function netDePrime({ prime, brutMensuel, tauxPas = 0 }, T) {
+  const base = { salaireBase: Math.max(0, brutMensuel || 0), heuresSemaine: 35, pausePct: 0, pas: tauxPas > 0 ? { actif: true, taux: tauxPas } : undefined };
+  const a = simulerPaie(base, T), b = simulerPaie({ ...base, autresBrut: prime }, T);
+  return { netAvantImpot: r2(b.netAvantImpot - a.netAvantImpot), netApresImpot: r2(b.netAPayer - a.netAPayer), cotisations: r2(b.totalCotisations - a.totalCotisations) };
+}

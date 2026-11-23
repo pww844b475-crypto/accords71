@@ -6,7 +6,7 @@ import { lancerAssistant, emojiPour } from './assistant.js';
 
 const $ = s => document.querySelector(s);
 const vue = $('#vue');
-let FICHES = [], SYN = {}, CORPUS = null, DOCS_TITRES = {}, CATS = [], FREQ = [];
+let FICHES = [], SYN = {}, TAUX = null, CORPUS = null, DOCS_TITRES = {}, CATS = [], FREQ = [];
 let precedent = () => accueil(); // page à laquelle « Retour » ramène
 const catDe = f => CATS.find(c => c.id === f.categorie) || { nom: '', icone: '📄', couleur: '#777' };
 const NIVEAU = { accord: 'Accord', convention: 'Convention', nao: 'NAO 2026', code: 'Code du travail', pratique: 'Pratique RH' };
@@ -104,7 +104,7 @@ const texteReponse = (c, v) => c.type === 'select' ? (c.options.find(o => o[0] =
 function assistant(f, valeurs, fini, auRecap = false) {
   const champs = (f.champs || []).filter(c => !(c.type === 'select' && c.options.length < 2));
   if (!champs.length) { fini(valeurs); return; }
-  const etapes = champs.map(c => ({ id: c.id, type: c.type === 'select' ? 'choix' : c.type === 'checkbox' ? 'ouinon' : c.type === 'date' ? 'date' : 'nombre', options: c.options, question: c.question || c.label, aide: c.aide, emoji: emojiPour(c.label), unite: c.unite, si: c.si ? (v => v[c.si[0]] === c.si[1]) : undefined }));
+  const etapes = champs.map(c => ({ id: c.id, type: c.type === 'select' ? 'choix' : c.type === 'checkbox' ? 'ouinon' : c.type === 'date' ? 'date' : 'nombre', options: c.options, question: c.question || c.label, aide: c.aide, emoji: emojiPour(c.label), unite: c.unite, si: c.si ? (v => c.si.length === 3 ? (c.si[1] === '<' ? Number(v[c.si[0]]) < c.si[2] : c.si[1] === '>' ? Number(v[c.si[0]]) > c.si[2] : v[c.si[0]] === c.si[2]) : v[c.si[0]] === c.si[1]) : undefined }));
   lancerAssistant({ h, remplir, titre: f.question, emoji: catDe(f).icone, etapes, valeurs, commencerAuRecap: auRecap,
     intro: champs.length > 1 ? `Je vous pose ${champs.length} petites questions, puis je calcule la réponse pour votre cas. Vous pourrez revenir en arrière si vous vous trompez.` : null,
     onFini: fini, onAnnule: () => fini(valeurs) });
@@ -119,7 +119,7 @@ function ouvrirFiche(f, reprise) {
   const resultat = h('div', { class: 'carte reponse-finale' });
   function calculer() {
     if (!f.calcul) return;
-    const r = CALCULS[f.calcul](valeurs);
+    const r = CALCULS[f.calcul](valeurs, { taux: TAUX });
     const lignes = r.lignes || [];
     // comparaison accord / convention : l'étoile marque le résultat le plus favorable quand les deux sont comparables
     const groupes = {};
@@ -134,7 +134,7 @@ function ouvrirFiche(f, reprise) {
       legende ? h('div', { class: 'legende' }, h('span', { class: 'pastille p-accord' }, 'Accord d\'entreprise'), h('span', { class: 'pastille p-convention' }, 'Convention collective'), h('span', { class: 'pastille p-etoile' }, '★ plus favorable')) : null,
       r.erreur ? h('p', { class: 'note' }, r.erreur) : null,
       r.info ? h('p', { class: 'alerte' }, r.info) : null,
-      ...lignes.map(l => h('div', { class: 'rf-ligne n-' + l.niveau + (l.favorable ? ' favorable' : '') },
+      ...lignes.map(l => h('div', { class: 'rf-ligne n-' + l.niveau + (l.favorable ? ' favorable' : '') + (l.fort ? ' fort' : '') },
         h('div', { class: 'rf-label' }, h('span', { class: 'badge b-' + l.niveau }, NIVEAU[l.niveau] || l.niveau), l.favorable ? h('span', { class: 'etoile' }, '★ Plus favorable') : null, l.label),
         h('div', { class: 'rf-valeur' }, fr(l.valeur)),
         l.note ? h('div', { class: 'note' }, l.note) : null)));
@@ -169,6 +169,7 @@ $('#titre').addEventListener('click', accueil);
 // ---- Démarrage ----
 (async () => {
   const [f, s] = await Promise.all([fetch('fiches/fiches.json').then(r => r.json()), fetch('fiches/synonymes.json').then(r => r.json())]);
+  try { TAUX = await fetch('data/taux-paie.json').then(r => r.json()); } catch { TAUX = null; }
   FICHES = f.fiches; SYN = s; CATS = f.categories || []; FREQ = f.frequentes || [];
   DOCS_TITRES = {
     subst: { titre: 'Accord de substitution', scan: true }, nao: { titre: 'NAO 2026', scan: true },

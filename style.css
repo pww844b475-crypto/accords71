@@ -197,3 +197,6 @@ body.modal-ouvert{overflow:hidden}
 
 .as-puces{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .as-puce{min-height:52px;justify-content:center;text-align:center}
+
+.reponse-finale .rf-ligne.fort{border-left-width:12px;outline:2px solid currentColor}
+.reponse-finale .rf-ligne.fort .rf-valeur{font-size:1.6rem;font-weight:800}
