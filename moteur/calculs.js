@@ -480,4 +480,23 @@ export function ferieTravaille({ heures = 0, tauxHoraire = 0, premierMai = false
   return { lignes: l };
 }
 
-export const CALCULS = { travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
+// ---- 41. Pauses et temps de travail effectif (accord art. 5.3 p.52-53 ; Code du travail L3121-16)
+export function pauses({ heuresPresence = 36, poste = 'rayon', habillage = false }) {
+  const mn = { rayon: 3, caisse: 4, industriel: 6, surgelation: 12 }[poste] || 3;
+  const pr = Math.max(0, heuresPresence);
+  const fmt = h => { const t = Math.round(h * 60); return `${Math.floor(t / 60)} h ${String(t % 60).padStart(2, '0')} min`; };
+  const pauseH = pr * mn / 60, effectif = pr - pauseH;
+  const l = [L('accord', `Pause payée (${mn} min par heure de présence)`, fmt(pauseH), { brut: pauseH, note: 'Le temps de pause est calculé sur 3 minutes par heure pour le temps de présence ; les durées plus longues (caisse 4, industriel 6, surgélation 12) ne changent pas le temps de présence.' }),
+    L('accord', 'Temps de travail effectif', fmt(effectif), { brut: effectif, note: `Pour ${fmt(pr)} de présence.` })];
+  if (habillage) l.push(L('accord', 'Contrepartie habillage / déshabillage (1 min par heure de présence)', fmt(pr / 60), { brut: pr / 60, note: 'Pause supplémentaire, sans augmenter le temps de présence, si la tenue est obligatoire et que l\'habillage se fait sur place.' }));
+  l.push(L('code', 'Pause minimale légale', pr >= 6 ? '20 minutes consécutives' : 'Aucune si moins de 6 h de travail quotidien', { note: 'Dès que le temps de travail quotidien atteint 6 heures (L3121-16). S\'applique à la journée, pas à la semaine.' }));
+  return { lignes: l };
+}
+
+// ---- 42. Prime de fermeture EC4 (accord art. 5.2 p.51)
+export function primeFermeture({ fermetures = 0 }) {
+  const n = Math.max(0, Math.floor(fermetures)), paliers = Math.floor(n / 5);
+  return { lignes: [L('accord', 'Prime de fermeture du mois', `${paliers * 35} € bruts`, { brut: paliers * 35, note: `${n} fermeture(s) : ${paliers} palier(s) de 5. Lecture du texte (« prime de 35 € bruts, acquise par palier de 5 fermetures ») : 35 € par palier de 5 - Pratique à confirmer avec la paie.` })] };
+}
+
+export const CALCULS = { pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };

@@ -8377,6 +8377,1271 @@
     }
    ],
    "calcul": "ferieTravaille"
+  },
+  {
+   "id": "duree-temps-complet",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Quelle est la durée du travail d'un temps complet ?",
+   "reponse": "Un temps complet est à 36 heures de temps de présence par semaine (accord, art. 5.1.2). Avec les pauses payées, cela fait 34 h 12 de travail effectif pour 3 minutes de pause par heure (33 h 36 à 4 minutes en caisse). Une semaine de moins de 30 heures de présence se fait sur 4 jours, au-delà sur 5 jours, sauf cas examinés avec le CSE d'établissement.",
+   "synonymes": [
+    "durée du travail temps complet",
+    "36 heures",
+    "36h",
+    "temps plein",
+    "35 heures",
+    "durée hebdomadaire",
+    "temps de présence",
+    "semaine de 36 heures"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.1.2, p.64)",
+     "regles": [
+      "L'horaire hebdomadaire est fixé à 36 heures de temps de présence dans le cadre de la semaine.",
+      "Une semaine de moins de 30 heures de présence s'effectue sur 4 jours, au-delà sur 5 jours, sauf cas particuliers examinés lors d'une consultation du CSE d'établissement."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.2",
+       "page": 64,
+       "extrait": "L'horaire hebdomadaire de travail est fixé à 36 heures de temps de présence dans le cadre de la semaine."
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.2",
+       "page": 64,
+       "extrait": "Une semaine de moins de 30 heures de temps de présence s'effectuera sur 4 jours"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : durée hebdomadaire de la convention non reprise dans cette fiche."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Durée maximale de travail effectif : 48 heures sur une même semaine (L3121-20)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3121-20",
+       "page": 60,
+       "extrait": "la durée maximale hebdomadaire de travail est de quarante-huit heures"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "La durée légale est de 35 heures ; les 36 heures de présence sont un temps de présence, pauses comprises. Voir les fiches sur les heures supplémentaires pour le seuil de déclenchement."
+   ]
+  },
+  {
+   "id": "pause-duree",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Combien de temps de pause ai-je ?",
+   "reponse": "3 minutes par heure de présence pour les employés commerciaux, 4 minutes pour les postes caisse et îlots de vente, 6 minutes si le rythme est imposé par des systèmes automatiques (industriel), 12 minutes en chambre de surgélation (accord, art. 5.3 et 5.4 p.52-53). Exemple à 36 h de présence : 1 h 48 de pause à 3 minutes, 2 h 24 à 4 minutes. Le Code du travail impose au moins 20 minutes consécutives dès 6 heures de travail par jour.",
+   "synonymes": [
+    "pause",
+    "temps de pause",
+    "3 minutes par heure",
+    "4 minutes caisse",
+    "pause caisse",
+    "pause surgélation",
+    "12 minutes",
+    "combien de pause",
+    "minutes de pause",
+    "pause 20 minutes",
+    "6 heures de travail"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.3, p.52-53, p.53)",
+     "regles": [
+      "Temps de pause : 3 minutes par heure de présence ; 4 minutes poste caisse et îlots de vente ; 6 minutes pour les activités à rythme imposé ; 12 minutes en chambre de surgélation.",
+      "Pour un poste continu de 8 heures dans la journée : 30 minutes de pause journalière (en cas de désaccord, fixation par le responsable).",
+      "Le rallongement du temps de pause n'a pas d'incidence sur le temps de présence (calculé sur la base de 3 minutes)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 53,
+       "extrait": "Le temps de pause est fixé à 3 minutes par heures de présence",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 53,
+       "extrait": "Poste caisse et îlots de vente (4 minutes)",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 52,
+       "extrait": "30 minutes de pause journalière pour un poste continu de 8 heures dans la journée"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : article de la convention sur la durée de la pause non repris dans cette fiche."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Dès que le temps de travail quotidien atteint 6 heures, pause d'au moins 20 minutes consécutives (L3121-16)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3121-16",
+       "page": 58,
+       "extrait": "Dès que le temps de travail quotidien atteint six heures, le salarié bénéficie d'un temps de pause d'une durée minimale de vingt minutes consécutives"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.16)",
+     "regles": [
+      "Le livret ne détaille pas les minutes de pause (voir livret p.17 pour l'habillage)."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Pour les salariés comptés en heures, le temps de pause est rémunéré forfaitairement sur la base de 5 % du temps de travail effectif (art. 5.3, p.52)."
+   ],
+   "champs": [
+    {
+     "id": "heuresPresence",
+     "label": "Heures de présence sur la semaine",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 36,
+     "max": 60
+    },
+    {
+     "id": "poste",
+     "label": "Poste",
+     "type": "select",
+     "options": [
+      [
+       "rayon",
+       "Employé commercial / rayon (3 min)"
+      ],
+      [
+       "caisse",
+       "Caisse ou îlot de vente (4 min)"
+      ],
+      [
+       "industriel",
+       "Rythme imposé, industriel (6 min)"
+      ],
+      [
+       "surgelation",
+       "Chambre de surgélation (12 min)"
+      ]
+     ],
+     "defaut": "rayon"
+    },
+    {
+     "id": "habillage",
+     "label": "Tenue obligatoire, habillage sur place (+1 min/h)",
+     "type": "checkbox",
+     "defaut": false
+    }
+   ],
+   "calcul": "pauses"
+  },
+  {
+   "id": "pause-payee",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Ma pause est-elle payée ?",
+   "reponse": "Oui : l'accord prévoit que les pauses sont rémunérées au taux normal et entrent dans le calcul du salaire brut mensuel (art. 5.3, p.53). Elles ne sont pas du temps de travail effectif (art. 5.1). Pour les salariés comptés en heures, la pause est payée forfaitairement à 5 % du temps de travail effectif. Pour les cadres au forfait jours, elle est incluse dans la rémunération forfaitaire.",
+   "synonymes": [
+    "pause payée",
+    "pause rémunérée",
+    "est-ce que la pause est payée",
+    "pause non payée",
+    "temps de pause payé",
+    "pause comptée",
+    "rémunération des pauses"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.3, p.52-53, p.53)",
+     "regles": [
+      "Les pauses sont rémunérées au taux normal et entrent en compte pour la détermination du salaire brut mensuel.",
+      "Pour les salariés comptés en heures, pauses rémunérées forfaitairement sur la base de 5 % du temps de travail effectif.",
+      "Cadres autonomes au forfait jours : pause incluse dans la rémunération forfaitaire."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 53,
+       "extrait": "Les pauses sont rémunérées au taux normal et entrent en compte pour la détermination du salaire",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 52,
+       "extrait": "les temps de pause sont rémunérés forfaitairement sur la base de 5% du temps de travail effectif"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1",
+       "page": 50,
+       "extrait": "l'ensemble des pauses (ou coupures), qu'elles soient ou non rémunérées, sont exclues du temps de travail effectif"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : article de la convention sur la rémunération des pauses non repris."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : le Code du travail (L3121-16) fixe la durée minimale de la pause ; sa rémunération n'a pas été vérifiée dans les articles consultés."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "La pause n'est pas du temps de travail effectif mais reste payée par l'accord : elle ne compte donc pas dans le seuil des heures supplémentaires."
+   ]
+  },
+  {
+   "id": "pause-moment",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "À quel moment de ma journée la pause doit-elle être prise ?",
+   "reponse": "Les modalités sont fixées dans chaque établissement avec les intéressés. En cas de désaccord, la pause se prend dans le deuxième tiers de la séquence continue de travail, dans la plage médiane : pas au début ni en fin de poste. Pour les séquences de 4 heures ou moins, l'établissement doit étudier la possibilité de la prendre en fin de séquence. Le salarié ne peut pas être contraint de la prendre à son poste ni d'intervenir pendant la pause.",
+   "synonymes": [
+    "moment de la pause",
+    "pause deuxième tiers",
+    "quand prendre ma pause",
+    "pause en début de poste",
+    "pause en fin de poste",
+    "pause au poste de travail",
+    "salle de repos",
+    "pause plage médiane"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.3, p.52)",
+     "regles": [
+      "Modalités définies par établissement avec les intéressés ; en cas de désaccord, pause dans le deuxième tiers de la séquence de travail.",
+      "La pause se situe dans la plage médiane de la période de travail, pas en début ni en fin de poste.",
+      "Les salariés ne doivent pas être contraints de prendre la pause sur leur poste ni d'intervenir pendant la pause ; salles de repos à disposition.",
+      "Séquences inférieures ou égales à 4 h : possibilité d'étudier une pause en fin de séquence."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 52,
+       "extrait": "la pause doit être prise dans le deuxième tiers de la séquence de travail"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 52,
+       "extrait": "elle ne peut pas être positionnée en début ou en fin de poste"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.3",
+       "page": 52,
+       "extrait": "les salariés ne doivent pas être contraints de prendre leur temps de pause sur leur poste de travail"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Le Code fixe seulement la durée minimale de 20 minutes consécutives dès 6 heures de travail (L3121-16)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3121-16",
+       "page": 58,
+       "extrait": "un temps de pause d'une durée minimale de vingt minutes consécutives"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Si la pause est placée en début ou en fin de poste, citer l'art. 5.3 de l'accord (p.52)."
+   ]
+  },
+  {
+   "id": "habillage-contrepartie",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Quelle contrepartie pour le temps d'habillage et de déshabillage ?",
+   "reponse": "Le temps d'habillage et de déshabillage n'est pas du temps de travail effectif. En contrepartie, l'accord donne 1 minute de pause supplémentaire par heure de présence, sans augmenter le temps de présence. Deux conditions cumulatives : le port d'une tenue de travail est obligatoire (loi, convention, contrat ou règlement intérieur) et l'habillage doit se faire dans l'entreprise, avant la prise de poste et après la fin de poste.",
+   "synonymes": [
+    "habillage",
+    "déshabillage",
+    "temps d'habillage",
+    "tenue de travail",
+    "blouse",
+    "contrepartie habillage",
+    "1 minute par heure",
+    "uniforme",
+    "vestiaire"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.5, p.54, p.54)",
+     "regles": [
+      "Principe : le temps d'habillage et de déshabillage s'effectue hors temps de travail, avant la prise de poste et après la fin de poste, et n'entre pas dans le décompte du temps de travail ni des heures supplémentaires.",
+      "Éligibilité (conditions cumulatives) : tenue obligatoire ; opérations réalisées obligatoirement dans l'entreprise ou sur le lieu de travail.",
+      "Contrepartie : une minute de pause supplémentaire par heure de travail, sans augmenter le temps de présence."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.5.1",
+       "page": 54,
+       "extrait": "ne constitue pas du temps de travail effectif"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.5.3",
+       "page": 54,
+       "extrait": "une minute de pause supplémentaire par heure de travail sans pour autant augmenter le temps de présence"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur l'habillage."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : le Code du travail (L3121-3) prévoit une contrepartie financière ou en repos quand l'habillage est imposé et se fait sur le lieu de travail ; article non repris ici."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "La question de savoir si l'habillage se fait sur place relève des faits : Pratique à confirmer avec la direction du magasin."
+   ],
+   "champs": [
+    {
+     "id": "heuresPresence",
+     "label": "Heures de présence sur la semaine",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 36,
+     "max": 60
+    },
+    {
+     "id": "poste",
+     "label": "Poste",
+     "type": "select",
+     "options": [
+      [
+       "rayon",
+       "Employé commercial / rayon"
+      ],
+      [
+       "caisse",
+       "Caisse ou îlot de vente"
+      ],
+      [
+       "industriel",
+       "Industriel"
+      ],
+      [
+       "surgelation",
+       "Surgélation"
+      ]
+     ],
+     "defaut": "rayon"
+    },
+    {
+     "id": "habillage",
+     "label": "Tenue obligatoire, habillage sur place",
+     "type": "checkbox",
+     "defaut": true
+    }
+   ],
+   "calcul": "pauses"
+  },
+  {
+   "id": "planning-affichage",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Combien de temps à l'avance mon planning doit-il être affiché ?",
+   "reponse": "Les horaires sont affichés en permanence ; la programmation est faite au moins 3 semaines « pleines » à l'avance : la semaine en cours plus les semaines 1, 2 et 3 (accord, art. 5.2 p.50 ; temps partiel art. 5.1.3 p.81). Le livret CGT l'indique aussi (p.16).",
+   "synonymes": [
+    "affichage planning",
+    "planning 3 semaines",
+    "délai de prévenance",
+    "horaires affichés",
+    "programmation des horaires",
+    "planning à l'avance",
+    "3 semaines pleines",
+    "affichage des horaires"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.2, p.50)",
+     "regles": [
+      "Les horaires donnent lieu à une information permanente par affichage ; programmation au moins 3 semaines « pleines » à l'avance (semaine en cours + semaines 1, 2 et 3)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 50,
+       "extrait": "La programmation des horaires est réalisée au moins 3 semaines “pleines” à l'avance"
+      }
+     ]
+    },
+    {
+     "titre": "Accord, temps partiel (art. 5.1.3, p.81)",
+     "regles": [
+      "Même règle : programmation au moins 3 semaines pleines à l'avance."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.3",
+       "page": 81,
+       "extrait": "La programmation des horaires sera effectuée au moins 3 semaines “pleines” à l'avance"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : délai de la convention non repris dans cette fiche."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.16)",
+     "regles": [
+      "Les horaires de travail sont affichés 3 semaines à l'avance + la semaine en cours."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Temps de travail",
+       "page": 16,
+       "extrait": "Les horaires de travail sont affichés 3 semaines à l'avance + la semaine en cours."
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "planning-modification",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Mon employeur peut-il modifier mon planning ?",
+   "reponse": "Une fois affichés, les horaires ne peuvent pas être modifiés, sauf circonstances exceptionnelles ou accord du salarié (accord, art. 5.1.4, p.81, pour le temps partiel). Le jour même, on ne peut pas proposer de mettre fin à la journée avant l'horaire prévu, sauf accord ou demande du salarié.",
+   "synonymes": [
+    "modifier planning",
+    "changement d'horaire",
+    "modification des horaires",
+    "changer mon planning",
+    "horaire modifié",
+    "refuser un changement",
+    "terminer plus tôt",
+    "fin de journée avant l'heure"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord, temps partiel (art. 5.1.4, p.81)",
+     "regles": [
+      "L'affichage des horaires rend impossible leur modification, sauf circonstances exceptionnelles ou accord des salariés.",
+      "Il ne peut être proposé le jour même, sauf accord ou demande du salarié, de mettre fin à la journée de travail avant le terme de l'horaire prévu."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.4",
+       "page": 81,
+       "extrait": "L'affichage des horaires rend impossible leur modification, sauf dans l'éventualité de circonstances exceptionnelles ou avec l'accord des salariés."
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.4",
+       "page": 81,
+       "extrait": "Il ne pourra être proposé aux salariés le jour même"
+      }
+     ]
+    },
+    {
+     "titre": "Accord, temps complet",
+     "regles": [
+      "Information à compléter : la règle de modification n'a été trouvée que dans le chapitre temps partiel (p.81) ; vérifier si elle s'applique au temps complet."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Pratique à confirmer : pour un temps complet, demander à la direction la base écrite de la modification."
+   ]
+  },
+  {
+   "id": "duree-max-journee",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Quelle est la durée maximum de ma journée de travail ?",
+   "reponse": "L'accord fixe la durée maximum de la journée à 8 heures de temps de présence, sauf contrats spécifiques de fin de semaine (par exemple étudiants) et situations organisationnelles exceptionnelles après information et consultation du CSE d'établissement (art. 5.2, p.51). Le Code du travail plafonne le travail effectif à 10 heures par jour (12 heures par accord).",
+   "synonymes": [
+    "durée maximum journée",
+    "8 heures de présence",
+    "journée de 8 heures",
+    "10 heures par jour",
+    "journée trop longue",
+    "amplitude maximale",
+    "durée maximale quotidienne",
+    "12 heures"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.2, p.51, p.51)",
+     "regles": [
+      "Durée maximum de la journée de travail : 8 heures de temps de présence, sauf contrats spécifiques de fin de semaine et situations organisationnelles exceptionnelles après information et consultation du CSE d'établissement."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "La durée maximum de la journée de travail est fixée à 8h de temps de présence",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Durée quotidienne de travail effectif : 10 heures maximum (L3121-18), avec dérogations ; un accord peut aller jusqu'à 12 heures en cas d'activité accrue (L3121-19)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3121-18",
+       "page": 57,
+       "extrait": "La durée quotidienne de travail effectif par salarié ne peut excéder dix heures"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.16)",
+     "regles": [
+      "Durée maximum de la journée de travail : 8 h."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Temps de travail",
+       "page": 16,
+       "extrait": "Durée maximum de la journée de travail : 8h."
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "L'accord (8 h de présence) est plus protecteur que la loi (10 h de travail effectif)."
+   ]
+  },
+  {
+   "id": "repos-quotidien",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Quel repos entre deux journées de travail ?",
+   "reponse": "Le Code du travail impose au moins 11 heures consécutives de repos entre deux journées de travail (L3131-1). Le livret CGT indique 12 heures entre deux journées, auxquelles s'ajoutent les 24 heures du repos hebdomadaire : la règle de 12 heures n'a pas été retrouvée dans les articles de l'accord lus ; à vérifier.",
+   "synonymes": [
+    "repos quotidien",
+    "11 heures de repos",
+    "12 heures de repos",
+    "repos entre deux journées",
+    "fermeture ouverture",
+    "enchaîner fermeture et ouverture",
+    "temps de repos entre deux postes",
+    "reprise du travail"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution",
+     "regles": [
+      "Information à compléter : article de l'accord fixant 12 heures non retrouvé dans les pages lues (art. 5.2 p.50-51)."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : repos quotidien non trouvé dans les passages lus (le repos hebdomadaire est à l'art. 5.12, p.37)."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Repos quotidien d'au moins 11 heures consécutives, sauf dérogations (L3131-1).",
+      "Le repos hebdomadaire de 24 heures consécutives s'ajoute aux heures de repos quotidien (L3132-2)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3131-1",
+       "page": 56,
+       "extrait": "repos quotidien d'une durée minimale de onze heures consécutives"
+      },
+      {
+       "doc": "ct",
+       "article": "L3132-2",
+       "page": 59,
+       "extrait": "vingt-quatre heures consécutives auxquelles s'ajoutent les heures consécutives de repos quotidien"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.16)",
+     "regles": [
+      "12 h de repos entre 2 journées de travail, auxquelles s'ajoutent les 24 h du repos hebdomadaire."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Temps de travail",
+       "page": 16,
+       "extrait": "12h de repos entre 2 journées de travail"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Écart à vérifier : 11 h (loi) contre 12 h (livret CGT). Ne pas citer 12 h comme règle d'entreprise sans l'avoir retrouvée dans l'accord."
+   ]
+  },
+  {
+   "id": "repos-hebdo-dimanche",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Combien de jours de repos par semaine, et le dimanche ?",
+   "reponse": "En plus du repos hebdomadaire, une journée ou deux demi-journées de repos supplémentaires (accord art. 5.2 p.50). Un repos de 2 jours consécutifs avec le dimanche au moins toutes les 8 semaines (toutes les 5 semaines si on travaille habituellement le dimanche). La convention (art. 5.12) fixe 48 heures avec le dimanche toutes les 12 semaines (8 semaines si travail habituel du dimanche).",
+   "synonymes": [
+    "repos hebdomadaire",
+    "jours de repos par semaine",
+    "deux jours de repos consécutifs",
+    "dimanche toutes les 8 semaines",
+    "5 semaines",
+    "48 heures de repos",
+    "demi-journée de repos",
+    "jour de repos supplémentaire",
+    "roulement"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.2, p.50, p.50)",
+     "regles": [
+      "En plus du repos hebdomadaire : une journée ou deux demi-journées de repos supplémentaires (demi-journée : amplitude max. 6 h, travail effectif max. 5 h, avant ou après la pause du déjeuner de 13 h).",
+      "Roulement permettant au moins une fois toutes les 8 semaines un repos consécutif de 2 jours comprenant le dimanche (toutes les 5 semaines pour qui travaille habituellement le dimanche), sauf salariés recrutés pour les fins de journée et week-ends."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 50,
+       "extrait": "Chaque salarié bénéficie, en sus de son repos hebdomadaire, d'une journée ou de deux demi-journées de repos supplémentaires."
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 50,
+       "extrait": "au moins une fois toutes les 8 semaines, d'un repos consécutif de 2 jours comprenant le dimanche"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.12, p.37 ; version du 28 août 2025)",
+     "regles": [
+      "En plus du repos hebdomadaire : 1 journée ou 2 demi-journées supplémentaires par roulement.",
+      "Repos de 48 heures consécutives comprenant le dimanche au moins toutes les 12 semaines ; toutes les 8 semaines pour les salariés qui travaillent le dimanche (commerce de détail).",
+      "L'accord de substitution fixe des délais plus courts (8 et 5 semaines)."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.12.1",
+       "page": 37,
+       "extrait": "En tout état de cause ils doivent bénéficier d'un repos de 48 heures consécutives comprenant le dimanche au moins toutes les 12 semaines."
+      },
+      {
+       "doc": "cc",
+       "article": "art. 5.12.2",
+       "page": 37,
+       "extrait": "Ils doivent bénéficier d'un repos de 48 heures consécutives comprenant le dimanche au moins toutes les 8 semaines."
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Dans l'intérêt des salariés, le repos hebdomadaire est donné le dimanche (L3132-3).",
+      "Repos hebdomadaire d'au moins 24 heures consécutives (L3132-2)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3132-3",
+       "page": 55,
+       "extrait": "le repos hebdomadaire est donné le dimanche"
+      },
+      {
+       "doc": "ct",
+       "article": "L3132-2",
+       "page": 59,
+       "extrait": "Le repos hebdomadaire a une durée minimale de vingt-quatre heures consécutives"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.16)",
+     "regles": [
+      "2 jours de repos consécutifs comprenant le dimanche toutes les 8 semaines (toutes les 5 semaines pour ceux qui travaillent le dimanche)."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Temps de travail",
+       "page": 16,
+       "extrait": "2 jours de repos consécutifs comprenant le dimanche toutes les 8 semaines"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Accord et convention sont comparables : l'accord est plus favorable (8 semaines contre 12 ; 5 semaines contre 8 si travail habituel le dimanche)."
+   ]
+  },
+  {
+   "id": "coupures",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Combien de coupures peut-on m'imposer ?",
+   "reponse": "Temps complet : aucune coupure (hors pauses) si la journée se termine avant 13 h ou commence à partir de 13 h ; sinon une seule coupure par jour, de 3 heures maximum en cas de fermeture à la mi-journée et de 2 heures maximum en ouverture continue ; 3 coupures par semaine au maximum (accord art. 5.4 p.53-54). Temps partiel : pas de coupure sous 7 h de travail effectif ; au-delà, une seule coupure de 2 h (3 h si fermeture à mi-journée) ; 3 par semaine au maximum (art. 5.1.2 p.81).",
+   "synonymes": [
+    "coupure",
+    "coupures",
+    "nombre de coupures",
+    "coupure de 2 heures",
+    "coupure de 3 heures",
+    "journée coupée",
+    "horaires coupés",
+    "coupure temps partiel",
+    "3 coupures par semaine",
+    "fermeture mi-journée"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.4, p.53-54, p.53)",
+     "regles": [
+      "Temps complet : pas de coupure, outre les pauses, si la journée se termine avant 13 h ou commence à partir de 13 h.",
+      "Autres cas : une coupure maximum par journée, amplitude de 3 h en cas de fermeture à la mi-journée, 2 h en ouverture continue.",
+      "Nombre de coupures hebdomadaires : 3 au maximum.",
+      "Applicable sauf demande contraire des intéressés ou circonstances ou contraintes commerciales exceptionnelles."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.4",
+       "page": 53,
+       "extrait": "aura pas de coupure outre les temps de pause",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.4",
+       "page": 54,
+       "extrait": "Le nombre de coupures hebdomadaires pour un salarié à temps complet sera au maximum de 3."
+      }
+     ]
+    },
+    {
+     "titre": "Accord, temps partiel (art. 5.1.2, p.81)",
+     "regles": [
+      "Journées sous 7 h de travail effectif : aucune coupure sauf demande expresse.",
+      "À partir de 7 h : une seule coupure de 2 h maximum (3 h si fermeture à mi-journée).",
+      "Journée finissant avant 13 h ou commençant à partir de 13 h : pas de coupure.",
+      "3 coupures par semaine au maximum."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.2",
+       "page": 81,
+       "extrait": "Les journées de travail inférieures à 7h de temps de travail effectif ne comporteront"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.2",
+       "page": 81,
+       "extrait": "Le nombre de coupures hebdomadaires pour un salarié à temps partiel sera au maximum de trois."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur les coupures."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Les deux régimes (temps complet p.53-54, temps partiel p.81) sont affichés : repérer le vôtre."
+   ]
+  },
+  {
+   "id": "sequence-minimum",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Quelle est la durée minimum d'une séquence de travail ?",
+   "reponse": "Pour les temps partiels, l'accord interdit d'imposer, sauf accord exprès du salarié, un travail effectif en continu inférieur à 3 heures (art. 5.1.2, p.81). Le livret CGT indique 3 h 15 : écart à vérifier, la durée de 3 h 15 n'est pas dans le texte de l'accord lu.",
+   "synonymes": [
+    "séquence de travail",
+    "durée minimum d'une séquence",
+    "3 heures minimum",
+    "3h15",
+    "séquence minimale",
+    "travail en continu",
+    "temps partiel séquence",
+    "moins de 3 heures"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord, temps partiel (art. 5.1.2, p.81)",
+     "regles": [
+      "Il ne peut être imposé, sauf accord exprès des intéressés, aucun travail effectif en continu d'une durée inférieure à 3 heures."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.2",
+       "page": 81,
+       "extrait": "Il ne pourra être imposé, sauf accord exprès des intéressés, aucun travail effectif en continu d'une durée inférieure à 3 heures."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.16)",
+     "regles": [
+      "Une séquence de travail ne peut être inférieure à 3h15."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Temps de travail",
+       "page": 16,
+       "extrait": "Une séquence de travail ne peut être inférieure à 3h15."
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Écart à vérifier : 3 h (accord, p.81) contre 3 h 15 (livret). Citer l'accord."
+   ]
+  },
+  {
+   "id": "fermetures-soir",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Combien de fermetures du soir peut-on me faire faire ?",
+   "reponse": "Un salarié fait la fermeture quand son horaire se termine après 19 h 30. Un employé ne peut pas faire plus de 3 fermetures en soirée par semaine, sauf accord express du salarié (accord, art. 5.2, p.51).",
+   "synonymes": [
+    "fermeture",
+    "fermetures du soir",
+    "fermeture en soirée",
+    "19h30",
+    "3 fermetures par semaine",
+    "combien de fermetures",
+    "fermer le magasin",
+    "horaire de fin après 19h30"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.2, p.51, p.51)",
+     "regles": [
+      "Un salarié est considéré comme faisant la fermeture quand son horaire se termine après 19 h 30.",
+      "Un employé ne peut pas faire plus de 3 fermetures en soirée par semaine, sauf accord express du salarié.",
+      "Le planning intègre le temps nécessaire aux fermetures, assimilé à du temps de travail effectif."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "un salarié est considéré comme faisant la fermeture lorsque son horaire de travail se termine après 19h30",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "un employé ne peut pas faire plus de 3 fermetures en soirée par semaine",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "fermeture-prime-ec4",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Y a-t-il une prime de fermeture pour les EC4 ?",
+   "reponse": "Oui, depuis le 1er mai 2025, les salariés EC4 habilités aux fermetures reçoivent une prime de 35 € bruts, acquise par palier de 5 fermetures réalisées sur le mois (accord, art. 5.2, p.51). La responsabilité de fermeture doit être acceptée clairement, sur la base du volontariat, avec formation incendie et secourisme du travail.",
+   "synonymes": [
+    "prime de fermeture",
+    "35 euros",
+    "prime EC4",
+    "EC4 fermeture",
+    "habilitation fermeture",
+    "5 fermetures",
+    "employé commercial niveau 4",
+    "prime 35 €"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.2, p.51, p.51)",
+     "regles": [
+      "Les employés commerciaux de niveau 4 peuvent se voir proposer la responsabilité de fermer le magasin en l'absence de l'encadrement, sur la base du volontariat, acceptée de façon claire et non équivoque.",
+      "Les salariés EC4 habilités aux fermetures bénéficient, à compter du 1er mai 2025, d'une prime de 35 € bruts, acquise par palier de 5 fermetures réalisées sur le mois.",
+      "Formation incendie et secourisme du travail avant l'habilitation ou au plus tard dans les trois mois."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "d'une prime de 35€ bruts. Cette prime sera acquise par palier de 5 fermetures réalisées sur le mois",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "sur la base du volontariat",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Pratique à confirmer : le texte peut se lire « 35 € par palier de 5 fermetures » ou « 35 € une fois dès 5 fermetures ». Le calcul affiché retient 35 € par palier de 5 ; demander la lecture appliquée par la paie."
+   ],
+   "champs": [
+    {
+     "id": "fermetures",
+     "label": "Fermetures réalisées dans le mois",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 5,
+     "max": 31
+    }
+   ],
+   "calcul": "primeFermeture"
+  },
+  {
+   "id": "sco-limite",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Combien d'heures de suite en caisses libre-service (SCO) ?",
+   "reponse": "Le temps de travail effectif en totalité sur une journée, pendant les heures d'ouverture aux clients, sur les caisses SCO est limité à 3 heures, sauf cas particuliers liés à des dispositions individuelles spécifiques (accord, art. 5.2, p.51).",
+   "synonymes": [
+    "SCO",
+    "caisses libre-service",
+    "caisse libre service",
+    "self-scan",
+    "caisse automatique",
+    "3 heures SCO",
+    "limite SCO",
+    "caisses automatiques"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.2, p.51, p.51)",
+     "regles": [
+      "Le temps de travail effectif, en totalité, sur une journée pendant les heures d'ouverture aux clients sur les caisses SCO est limité à 3 heures, sauf cas particuliers liés à des dispositions individuelles spécifiques."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "est limité à 3 heures, sauf cas particuliers lié à des dispositions individuelles",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le texte vise le temps de travail effectif « en totalité, sur une journée » sur les caisses SCO."
+   ]
+  },
+  {
+   "id": "repas-domicile",
+   "theme": "Horaires, pauses, repos, coupures",
+   "categorie": "temps",
+   "question": "Mon horaire permet-il de déjeuner ou dîner chez moi ?",
+   "reponse": "Les horaires doivent permettre, si le salarié le souhaite, de prendre un des deux repas principaux chez lui, sauf recours à des heures supplémentaires. On est réputé ne pas pouvoir rentrer chez soi si l'horaire prévoit la présence pendant la totalité des deux plages 12 h-14 h et 18 h 30-20 h 30 (accord, art. 5.2, p.51).",
+   "synonymes": [
+    "déjeuner chez moi",
+    "dîner chez moi",
+    "repas à domicile",
+    "12h à 14h",
+    "18h30 à 20h30",
+    "repas principal",
+    "prendre mon repas chez moi",
+    "manger chez soi"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.2, p.51, p.51)",
+     "regles": [
+      "Les horaires doivent permettre de prendre un des deux repas principaux chez soi, sauf cas particuliers de recours à des heures supplémentaires.",
+      "Sont réputés ne pas pouvoir prendre leur repas à domicile ceux dont l'horaire prévoit la présence pendant la totalité des deux plages 12 h-14 h et 18 h 30-20 h 30."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "prendre un des deux repas principaux chez eux",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 51,
+       "extrait": "12h à 14h et 18h30 à 20h30",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.16)",
+     "regles": [
+      "Mêmes plages : 12 h à 14 h et 18 h 30 à 20 h 30."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Temps de travail",
+       "page": 16,
+       "extrait": "prendre un des deux repas principaux chez eux (12h à 14h et 18h30 à 20h30)"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
   }
  ],
  "categories": [
