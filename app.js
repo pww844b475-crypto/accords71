@@ -1,6 +1,7 @@
 import { EMPREINTE_MDP } from './config.js';
 import { CALCULS } from './moteur/calculs.js';
 import { chercherFiches, chercherTexte } from './moteur/recherche.js';
+import { ouvrirSimulateur } from './simulateur.js';
 
 const $ = s => document.querySelector(s);
 const vue = $('#vue');
@@ -38,14 +39,19 @@ $('#formPorte').addEventListener('submit', async e => {
 // ---- Écrans ----
 function onglets(actif) {
   const nav = $('#onglets');
-  nav.replaceChildren(...[{ id: 'accueil', nom: 'Accueil', icone: '🏠' }, ...CATS].map(c => h('button', {
+  nav.replaceChildren(...[{ id: 'accueil', nom: 'Accueil', icone: '🏠' }, { id: 'simu', nom: 'Simulateur de paie', icone: '💶', couleur: '#0f8b6b' }, ...CATS].map(c => h('button', {
     type: 'button', class: 'onglet' + (c.id === actif ? ' actif' : ''), style: c.couleur ? `--c:${c.couleur}` : '',
-    onclick: () => { $('#q').value = ''; c.id === 'accueil' ? accueil() : vueCategorie(c.id); window.scrollTo(0, 0); }
+    onclick: () => { $('#q').value = ''; c.id === 'accueil' ? accueil() : c.id === 'simu' ? pageSimulateur() : vueCategorie(c.id); window.scrollTo(0, 0); }
   }, `${c.icone} ${c.nom}`)));
   const el = nav.querySelector('.actif'); if (el) el.scrollIntoView({ inline: 'center', block: 'nearest' });
 }
 const carteFiche = f => { const c = catDe(f); return h('button', { class: 'fiche-btn', type: 'button', style: `--c:${c.couleur}`, onclick: () => ouvrirFiche(f) },
   h('span', { class: 'fb-icone' }, c.icone), h('span', { class: 'fb-texte' }, f.question), h('span', { class: 'fb-fleche' }, '›')); };
+
+function pageSimulateur() {
+  $('#q').value = ''; precedent = accueil; onglets('simu');
+  ouvrirSimulateur({ vue, h, remplir, retour: () => { accueil(); window.scrollTo(0, 0); } });
+}
 
 function accueil() {
   $('#q').value = ''; precedent = accueil; onglets('accueil');
@@ -53,6 +59,7 @@ function accueil() {
   remplir(vue,
     h('h2', { class: 'accueil-titre' }, 'Que voulez-vous savoir ?'),
     h('p', { class: 'accueil-sous' }, 'Tapez votre question en haut, ou choisissez un sujet.'),
+    h('button', { class: 'simu-banniere', type: 'button', onclick: () => { pageSimulateur(); window.scrollTo(0, 0); } }, h('span', { class: 'tuile-icone' }, '💶'), h('span', {}, h('strong', {}, 'Simulateur de fiche de paie'), h('small', {}, 'Brut, net, avec ou sans prélèvement à la source'))),
     h('div', { class: 'tuiles' }, CATS.map(c => h('button', { class: 'tuile', type: 'button', style: `--c:${c.couleur}`, onclick: () => { vueCategorie(c.id); window.scrollTo(0, 0); } },
       h('span', { class: 'tuile-icone' }, c.icone), h('span', { class: 'tuile-nom' }, c.nom), h('span', { class: 'tuile-desc' }, c.description),
       h('span', { class: 'tuile-nb' }, `${FICHES.filter(f => f.categorie === c.id).length} réponses`)))),

@@ -1,0 +1,156 @@
+{
+ "annee": 2026,
+ "plafond_mensuel_securite_sociale": 4005,
+ "plafond_source": "Urssaf : plafond annuel 2026 de 48 060 € (÷ 12)",
+ "controle": {
+  "date": "2026-11-23",
+  "resume": "Taux relevés sur deux fiches de paie (août et octobre 2026) et recalculés au centime. CSG/CRDS confirmées par l'Urssaf. Le tableau complet de l'Urssaf n'a pas pu être lu : taux « à contrôler sur urssaf.fr ». À revoir à chaque changement (en principe le 1er janvier) et à chaque modification du contrat de prévoyance ou de la mutuelle.",
+  "prochain": "janvier 2027"
+ },
+ "taux": [
+  {
+   "id": "prevoyance_sal",
+   "libelle": "Prévoyance incapacité invalidité décès (part salarié)",
+   "taux": 0.814,
+   "assiette": "brut",
+   "statut": "constate",
+   "source": "fiches de paie 2026"
+  },
+  {
+   "id": "prevoyance_emp",
+   "libelle": "Prévoyance (part employeur, entre dans la base CSG)",
+   "taux": 1.222,
+   "assiette": "brut",
+   "statut": "constate",
+   "source": "fiches de paie 2026"
+  },
+  {
+   "id": "sante_forfait_sal",
+   "libelle": "Complémentaire santé obligatoire, forfait (part salarié, €/mois)",
+   "montant": 15.15,
+   "statut": "constate",
+   "source": "fiches de paie 2026"
+  },
+  {
+   "id": "sante_forfait_emp",
+   "libelle": "Complémentaire santé obligatoire, forfait (part employeur, €/mois)",
+   "montant": 15.15,
+   "statut": "constate",
+   "source": "fiches de paie 2026"
+  },
+  {
+   "id": "vieillesse_plaf",
+   "libelle": "Sécurité sociale plafonnée (vieillesse)",
+   "taux": 6.9,
+   "assiette": "brut limité au plafond",
+   "statut": "constate",
+   "source": "fiches de paie 2026 ; à contrôler sur urssaf.fr"
+  },
+  {
+   "id": "vieillesse_deplaf",
+   "libelle": "Sécurité sociale déplafonnée (vieillesse)",
+   "taux": 0.4,
+   "assiette": "brut",
+   "statut": "constate",
+   "source": "fiches de paie 2026 ; à contrôler sur urssaf.fr"
+  },
+  {
+   "id": "retraite_compl_t1",
+   "libelle": "Retraite complémentaire tranche 1",
+   "taux": 3.15,
+   "assiette": "brut limité au plafond",
+   "statut": "constate",
+   "source": "fiches de paie 2026 (affichée avec la CEG : 4,01 %) ; à contrôler sur urssaf.fr"
+  },
+  {
+   "id": "ceg_t1",
+   "libelle": "Contribution d'équilibre général (CEG) tranche 1",
+   "taux": 0.86,
+   "assiette": "brut limité au plafond",
+   "statut": "constate",
+   "source": "fiches de paie 2026 (3,15 % + 0,86 % = 4,01 % affiché) ; à contrôler sur urssaf.fr"
+  },
+  {
+   "id": "csg_deductible",
+   "libelle": "CSG déductible de l'impôt",
+   "taux": 6.8,
+   "assiette": "98,25 % du brut + part employeur prévoyance et santé",
+   "statut": "verifie",
+   "source": "Urssaf, secteur privé (CSG non imposable 6,80 %)"
+  },
+  {
+   "id": "csg_crds_non_deductible",
+   "libelle": "CSG/CRDS non déductibles",
+   "taux": 2.9,
+   "assiette": "idem",
+   "statut": "verifie",
+   "source": "Urssaf : CSG imposable 2,40 % + CRDS 0,50 %"
+  },
+  {
+   "id": "csg_crds_hs",
+   "libelle": "CSG/CRDS sur la part exonérée des heures supplémentaires",
+   "taux": 9.7,
+   "assiette": "98,25 % de la part exonérée",
+   "statut": "constate",
+   "source": "fiche de paie 2026"
+  },
+  {
+   "id": "abattement_csg",
+   "libelle": "Abattement d'assiette CSG/CRDS",
+   "taux": 98.25,
+   "statut": "verifie",
+   "source": "Urssaf, secteur privé"
+  },
+  {
+   "id": "reduction_hs",
+   "libelle": "Réduction des cotisations salariales sur heures supplémentaires et complémentaires",
+   "taux": 11.31,
+   "statut": "constate",
+   "source": "fiche de paie 2026 : réduction relevée et recalculée ; à contrôler"
+  }
+ ],
+ "majorations": [
+  {
+   "id": "dimanche",
+   "libelle": "Dimanche (ouvertures habituelles)",
+   "taux": 60,
+   "source": "Accord de substitution art. 5.7 ; livret CGT p.17"
+  },
+  {
+   "id": "ferie",
+   "libelle": "Jour férié travaillé (indemnité 100 % + majoration 100 %)",
+   "taux": 200,
+   "source": "Accord de substitution art. 5.8, p.58"
+  },
+  {
+   "id": "nuit_22_5",
+   "libelle": "Nuit 22 h-5 h",
+   "taux": 30,
+   "source": "Accord de substitution art. 5.6 ; livret CGT p.17"
+  },
+  {
+   "id": "nuit_21_22",
+   "libelle": "Nuit 21 h-22 h et 5 h-6 h",
+   "taux": 10,
+   "source": "Accord de substitution art. 5.6 ; livret CGT p.17"
+  },
+  {
+   "id": "hc_10",
+   "libelle": "Heures complémentaires (premier dixième)",
+   "taux": 10,
+   "source": "fiche de paie 2026"
+  },
+  {
+   "id": "hc_25",
+   "libelle": "Heures complémentaires (au-delà)",
+   "taux": 25,
+   "source": "fiche de paie 2026"
+  },
+  {
+   "id": "hs_25",
+   "libelle": "Heures supplémentaires (premières)",
+   "taux": 25,
+   "source": "fiche de paie 2026"
+  }
+ ]
+}
