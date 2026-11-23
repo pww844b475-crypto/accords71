@@ -1,4 +1,5 @@
 // Écran « Simulateur de fiche de paie ». Rien n'est enregistré ni envoyé : tout se calcule dans le navigateur.
+const r2 = x => Math.round(x * 100) / 100;
 import { simulerPaie, simulerDecembre, repartirHeures, repartirTotal, compterJoursHabituels } from './moteur/paie.js';
 import { entretienTenue, fraisTransport, primeAstreinte } from './moteur/calculs.js';
 import { lancerAssistant } from './assistant.js';
@@ -166,6 +167,11 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
         h('span', { class: 'tag' + (hDeleg > 0 ? ' ok' : '') }, hDeleg > 0 ? `Heures de délégation hors temps de travail : OUI (${virg(hDeleg)} h)` : 'Heures de délégation hors temps de travail : non'),
         h('span', { class: 'tag' + (hAutres > 0 ? ' ok' : '') }, natureInconnue ? `Heures en plus du contrat : OUI (${virg(rep.total)} h), nature non précisée` : hAutres > 0 ? `Heures supplémentaires ou complémentaires : OUI (${virg(hAutres)} h)` : 'Heures supplémentaires ou complémentaires : non')),
       plus ? h('p', { class: 'note' }, `${parSemaine ? 'Répartition semaine par semaine' : 'Répartition automatique du total (heures étalées sur le mois, approximation : donnez le détail par semaine pour plus de précision)'} : ${virg(rep.hc10)} h à 10 %, ${virg(rep.hc25)} h à 25 % (heures complémentaires), ${virg(rep.hs25)} h à 25 % et ${virg(rep.hs50)} h à 50 % (heures supplémentaires).`) : null,
+      dec ? h('div', { class: 'carte', style: 'margin:10px 0;border-color:var(--ok,#4caf50)' }, h('h3', {}, 'En net, ce que vous touchez pour décembre'),
+        ligne(dec.acompte75 ? 'Acompte du 13ᵉ mois reçu début décembre (net, avant la fiche)' : 'Acompte du 13ᵉ mois à recevoir début décembre (net, avant la fiche)', eur(dec.acompte75 || dec.a75Prevu)),
+        ligne('Virement de la fiche de paie de décembre (net)' + (valeurs.pasActif ? ' après impôt' : ''), eur(r.netAPayer)),
+        ligne('Total touché en décembre (net)', eur(r2(((dec.acompte75 || dec.a75Prevu)) + r.netAPayer)), true),
+        h('p', { class: 'note' }, `Comment lire : sans le 13ᵉ mois, votre paie de décembre serait d'environ ${eur(dec.r0.netAPayer)} net. Le 13ᵉ mois représente environ ${eur(dec.netPrime)} net en tout${dec.acompteExc ? `, dont ${eur(dec.acompteExc)} déjà touchés plus tôt (acompte demandé)` : ''}. Il vous arrive en deux fois : l'acompte début décembre (le plus gros morceau, 75 % du brut) puis le reste avec la fiche, d'où un virement de fiche plus petit : ce n'est pas une perte, c'est déjà une partie du 13ᵉ mois que vous avez reçue avant.`)) : null,
       ligne('Salaire brut', eur(r.brut), true),
       ligne('Cotisations salariales', eur(-r.totalCotisations)),
       ligne('Net social', eur(r.netSocial)),
@@ -174,7 +180,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       r.autresRetenues ? ligne(dec ? '− Autres retenues et acomptes déjà reçus' : '− Autres retenues', eur(-r.autresRetenues)) : null,
       ligne('Net à payer avant impôt', eur(r.netAvantImpot), true),
       valeurs.pasActif ? ligne(`− Prélèvement à la source (${virg(num(valeurs.pasTaux))} % de ${eur(r.baseImposable)})`, eur(-r.pas)) : null,
-      ligne(valeurs.pasActif ? 'Net à payer après impôt' : 'Net à payer (sans prélèvement à la source)', eur(r.netAPayer), true),
+      ligne((dec ? 'Virement de la fiche (acomptes déjà déduits)' : valeurs.pasActif ? 'Net à payer après impôt' : 'Net à payer (sans prélèvement à la source)') + (dec && !valeurs.pasActif ? ', sans prélèvement à la source' : ''), eur(r.netAPayer), true),
       dec ? h('div', { class: 'carte', style: 'margin:10px 0' }, h('h3', {}, '13ᵉ mois dans cette paie'),
         ligne('Prime annuelle (1/12 du brut de l\'année, ' + eur(dec.brutAnnee) + ')', eur(dec.primeBrute)),
         ligne('Net estimé de la prime', eur(dec.netPrime)),
