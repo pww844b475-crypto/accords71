@@ -93,9 +93,10 @@ export function primeAnnuelle({ dateEmbauche, annee, brutAnnee = 0, moisPayes = 
     lignes.push(L('accord', 'Mode de calcul alternatif (maladie ≤ 30 jours) : 1/12 des salaires forfaitaires mensuels', `${alt} €`, { brut: alt, note: 'Applicable « lorsque le mode de calcul lui est plus favorable, sur une période de maladie inférieure ou égale à 30 jours »' }));
     montant = Math.max(montant, alt);
   }
-  lignes.push(L('accord', 'Acompte début décembre (75 %)', `${r2(montant * 0.75)} €`, { brut: r2(montant * 0.75) }));
-  lignes.push(L('accord', 'Solde avec la paie de décembre (25 %)', `${r2(montant * 0.25)} €`, { brut: r2(montant * 0.25) }));
   const acompte = acompteDemande && montantAcompte > 0 ? r2(montantAcompte) : 0;
+  const avant = acompte ? ', en brut, avant déduction de l\'acompte déjà reçu' : ', en brut';
+  lignes.push(L('accord', 'Acompte début décembre (75 %)' + avant, `${r2(montant * 0.75)} €`, { brut: r2(montant * 0.75) }));
+  lignes.push(L('accord', 'Solde avec la paie de décembre (25 %)' + avant, `${r2(montant * 0.25)} €`, { brut: r2(montant * 0.25) }));
   const T = ctx && ctx.taux;
   if (!T) {                                  // sans les taux de cotisation : on ne convertit pas en net
     if (acompte) lignes.push(L('accord', 'Reste à percevoir en décembre (prime brute moins acompte, sans conversion en net)', `${r2(montant - acompte)} €`, { brut: r2(montant - acompte), note: 'Les taux de cotisation ne sont pas chargés : ce reste mélange brut et acompte.' }));
@@ -112,11 +113,11 @@ export function primeAnnuelle({ dateEmbauche, annee, brutAnnee = 0, moisPayes = 
   lignes.push(L('accord', `Prime annuelle en net estimé (${tauxPas > 0 ? 'après' : 'avant'} prélèvement à la source)`, f(netPrime), { brut: netPrime, note: 'Estimation : le net exact dépend de la paie de décembre (cotisations, plafond de la Sécurité sociale).' }));
   const n75 = r2(netPrime * 0.75), n25 = r2(netPrime - n75);
   if (acompte) {
-    const surAcompteDec = Math.max(0, r2(n75 - acompte)), surSolde = r2(n25 - Math.max(0, r2(acompte - n75)));
+    const reste = Math.max(0, r2(netPrime - acompte)), debut = r2(reste * 0.75), fin = r2(reste - debut);
     lignes.push(L('accord', 'Acompte déjà reçu sur demande (net, entre le 1er juin et le 30 novembre)', f(acompte), { brut: acompte }));
-    lignes.push(L('accord', 'Reste à percevoir en net', f(r2(netPrime - acompte)), { fort: true, brut: r2(netPrime - acompte), note: acompte > netPrime ? 'L\'acompte dépasse la prime estimée : à vérifier.' : 'Le texte dit que l\'acompte déjà versé vient « en déduction des montants à verser au mois de décembre » sans préciser sur quel versement : le calcul le déduit d\'abord de l\'acompte de début décembre.' }));
-    lignes.push(L('accord', 'dont versé début décembre (75 % moins l\'acompte déjà reçu)', f(surAcompteDec), { fort: true, brut: surAcompteDec }));
-    lignes.push(L('accord', 'dont versé avec la paie de décembre (solde de 25 %)', f(surSolde), { fort: true, brut: surSolde }));
+    lignes.push(L('accord', 'Reste à percevoir en net', f(r2(netPrime - acompte)), { fort: true, brut: r2(netPrime - acompte), note: acompte > netPrime ? 'L\'acompte dépasse la prime estimée : à vérifier.' : 'Le texte dit que l\'acompte déjà versé vient « en déduction des montants à verser au mois de décembre » sans préciser comment. Le calcul partage ce reste : 75 % début décembre, 25 % avec la paie de décembre (lecture des élus, à confirmer sur une fiche de paie de décembre).' }));
+    lignes.push(L('accord', 'dont versé début décembre (75 % du reste)', f(debut), { fort: true, brut: debut }));
+    lignes.push(L('accord', 'dont versé avec la paie de décembre (25 % du reste)', f(fin), { fort: true, brut: fin }));
   } else {
     lignes.push(L('accord', 'En net : versé début décembre (75 %)', f(n75), { fort: true, brut: n75 }));
     lignes.push(L('accord', 'En net : versé avec la paie de décembre (25 %)', f(n25), { fort: true, brut: n25 }));
