@@ -178,16 +178,20 @@ export function netDePrime({ prime, brutMensuel, tauxPas = 0 }, T) {
  * (C'est aussi « 75 % de ce qui reste » : reste de droits = estimation - acompte exceptionnel ÷ 0,75.)
  * La fiche de décembre prélève les cotisations sur toute la prime finale et déduit les acomptes au net.
  */
-export function simulerDecembre(e, { brutCumulNov = 0, acompteExc = 0, acompte75Recu = false, acompte75Montant = 0 }, T) {
+export function simulerDecembre(e, { brutCumulNov = 0, moisPayes = 11, acompteExc = 0, acompte75Recu = false, acompte75Montant = 0 }, T) {
   const r0 = simulerPaie(e, T);
-  const brutAnnee = r2((brutCumulNov || 0) + r0.brut), primeBrute = r2(brutAnnee / 12);
+  // Le cumul donné s'arrête à la dernière fiche reçue (n mois : 11 = fiche de novembre reçue, 10 = octobre seulement…).
+  // Les mois manquants jusqu'à novembre sont estimés à la moyenne mensuelle des mois payés.
+  const n = Math.min(11, Math.max(1, Math.round(moisPayes) || 11));
+  const cumulNov = n < 11 ? r2((brutCumulNov || 0) * 11 / n) : (brutCumulNov || 0);
+  const brutAnnee = r2(cumulNov + r0.brut), primeBrute = r2(brutAnnee / 12);
   const r1 = simulerPaie({ ...e, primeAnnuelle: primeBrute }, T);
   const netPrime = r2(r1.netAPayer - r0.netAPayer);
-  const primeEstimee = brutCumulNov > 0 ? r2(brutCumulNov / 11) : primeBrute;          // estimation faite début décembre
+  const primeEstimee = cumulNov > 0 ? r2(cumulNov / 11) : primeBrute;          // estimation faite début décembre
   const exc = Math.max(0, acompteExc || 0), acompteTotal = r2(primeEstimee * 0.75);
   const a75Prevu = Math.max(0, r2(acompteTotal - exc));
   const a75 = acompte75Recu ? (acompte75Montant > 0 ? r2(acompte75Montant) : a75Prevu) : 0;
   const deduits = r2(exc + a75);
   const r = simulerPaie({ ...e, primeAnnuelle: primeBrute, autresRetenues: r2((e.autresRetenues || 0) + deduits) }, T);
-  return { r, r0, brutAnnee, primeBrute, primeEstimee, netPrime, acompteTotal, acompteExc: exc, acompte75: a75, a75Prevu, acompte75Estime: acompte75Recu && !(acompte75Montant > 0), deduits, resteNet: r2(netPrime - deduits) };
+  return { r, r0, brutAnnee, cumulNov, moisPayes: n, primeBrute, primeEstimee, netPrime, acompteTotal, acompteExc: exc, acompte75: a75, a75Prevu, acompte75Estime: acompte75Recu && !(acompte75Montant > 0), deduits, resteNet: r2(netPrime - deduits) };
 }
