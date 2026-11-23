@@ -9644,6 +9644,462 @@
     }
    ],
    "notes": []
+  },
+  {
+   "id": "titres-restaurant-droit",
+   "theme": "Avantages, remises, primes diverses",
+   "categorie": "remuneration",
+   "question": "Ai-je droit à des titres-restaurant ?",
+   "reponse": "Oui si vous travaillez en magasin et que votre horaire du jour comprend la totalité de la plage 12 h-13 h 30 et/ou de la plage 18 h 30-20 h : vous avez un titre par plage comprise dans votre horaire. Pas de titre les jours d'absence (congés payés, JRTT, formation, maladie), ni pour ceux qui ont une participation de l'employeur aux frais de repas (cantine) ou des notes de frais (accord, art. 3.1, p.27-28).",
+   "synonymes": [
+    "titre restaurant",
+    "titres restaurant",
+    "ticket restaurant",
+    "tickets restaurant",
+    "ticket resto",
+    "tickets resto",
+    "titre resto",
+    "plage 12h 13h30",
+    "18h30 20h",
+    "droit aux tickets",
+    "carte resto",
+    "combien de tickets"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 3.1.1, p.27)",
+     "regles": [
+      "Tout salarié en magasin dont l'horaire journalier comprend la totalité de la plage 12 h 00-13 h 30 et/ou 18 h 30-20 h 00 reçoit un titre restaurant par plage comprise dans son horaire.",
+      "Exclus : salariés avec participation de l'employeur aux frais de restauration (cantine) ; salariés qui se font rembourser leurs repas par notes de frais.",
+      "Les salariés absents de leur poste, quel qu'en soit le motif, n'ont pas de titre pour les jours concernés (art. 3.1.1, p.28)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 3.1.1",
+       "page": 27,
+       "extrait": "bénéficiera d'un titre restaurant par plage horaire comprise dans l'horaire de travail"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.1.1",
+       "page": 28,
+       "extrait": "ne peuvent bénéficier de l'octroi de titres restaurant pour les jours concernés"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.7)",
+     "regles": [
+      "Même règle : un titre pour chaque plage 12 h-13 h 30 et 18 h 30-20 h travaillée en totalité."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Titres restaurant",
+       "page": 7,
+       "extrait": "bénéficie d'un titre restaurant pour chacune de ces plages horaires"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Vérification : sur une fiche de paie constatée, 16 titres hors Île-de-France donnent 16 × 3,70 € retenus et 16 × 3,70 € à la charge de l'employeur."
+   ],
+   "champs": [
+    {
+     "id": "tickets",
+     "label": "Nombre de titres dans le mois",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "max": 62
+    },
+    {
+     "id": "region",
+     "label": "Magasin",
+     "type": "select",
+     "options": [
+      [
+       "autre",
+       "Hors Île-de-France"
+      ],
+      [
+       "idf",
+       "Île-de-France"
+      ]
+     ],
+     "defaut": "autre"
+    }
+   ],
+   "calcul": "ticketsRestaurant"
+  },
+  {
+   "id": "titre-restaurant-valeur",
+   "theme": "Avantages, remises, primes diverses",
+   "categorie": "remuneration",
+   "question": "Quelle est la valeur d'un titre-restaurant ?",
+   "reponse": "Hors Île-de-France : 7,40 € dont 3,70 € à la charge de l'employeur, donc 3,70 € retenus sur votre paie. En Île-de-France : 8 € dont 4 € à la charge de l'employeur (accord, art. 3.1.2, p.28).",
+   "synonymes": [
+    "valeur titre restaurant",
+    "valeur ticket restaurant",
+    "7,40",
+    "3,70",
+    "8 euros",
+    "4 euros",
+    "part employeur ticket",
+    "prix du ticket resto",
+    "montant du titre restaurant"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 3.1.2, p.28)",
+     "regles": [
+      "Île-de-France : 8 € dont 4 € à la charge de l'employeur.",
+      "Reste de la France : 7,40 € dont 3,70 € à la charge de l'employeur."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 3.1.2",
+       "page": 28,
+       "extrait": "7,40€, dont 3,70€ à la charge de l'employeur"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.7)",
+     "regles": [
+      "Île-de-France : 8 € dont 4 € employeur ; reste de la France : 7,40 € dont 3,70 € employeur."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Titres restaurant",
+       "page": 7,
+       "extrait": "Dans le reste de la France : 7,40€ dont 3,70€ à la charge de l'employeur."
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "tickets",
+     "label": "Nombre de titres dans le mois",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 1,
+     "max": 62
+    },
+    {
+     "id": "region",
+     "label": "Magasin",
+     "type": "select",
+     "options": [
+      [
+       "autre",
+       "Hors Île-de-France"
+      ],
+      [
+       "idf",
+       "Île-de-France"
+      ]
+     ],
+     "defaut": "autre"
+    }
+   ],
+   "calcul": "ticketsRestaurant"
+  },
+  {
+   "id": "titres-restaurant-delegation",
+   "theme": "Avantages, remises, primes diverses",
+   "categorie": "remuneration",
+   "question": "Les heures de délégation donnent-elles droit aux titres-restaurant ?",
+   "reponse": "Oui : les heures passées en délégation sont prises en compte pour l'attribution d'un titre restaurant (accord, art. 3.1.1, p.27). Une plage 12 h-13 h 30 ou 18 h 30-20 h passée en délégation compte donc comme du travail pour le titre.",
+   "synonymes": [
+    "délégation ticket restaurant",
+    "heures de délégation titre restaurant",
+    "délégué ticket resto",
+    "élu titre restaurant",
+    "délégation plage repas",
+    "titre restaurant représentant"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 3.1.1, p.27)",
+     "regles": [
+      "Les heures passées en délégation sont prises en compte pour l'attribution d'un titre restaurant."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 3.1.1",
+       "page": 27,
+       "extrait": "Les heures passées en délégation seront prises en compte pour l'attribution d'un titre restaurant."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "tenue-entretien",
+   "theme": "Avantages, remises, primes diverses",
+   "categorie": "remuneration",
+   "question": "Quelle indemnité pour l'entretien de ma tenue de travail ?",
+   "reponse": "6 € par mois de travail, versés au prorata des jours effectivement travaillés par rapport aux jours ouvrés du mois (accord, art. 3.3.3, p.33). Conditions cumulatives : tenue fournie par la société, obligation de la porter, obligation de l'entretenir ; une attestation sur l'honneur est demandée. L'indemnité n'entre pas dans le calcul des congés payés, des compléments maladie ni des primes non mensuelles.",
+   "synonymes": [
+    "indemnité tenue",
+    "entretien de la tenue",
+    "tenue de travail",
+    "lessive",
+    "indemnité d'entretien",
+    "6 euros par mois",
+    "blouse entretien",
+    "vêtement de travail",
+    "attestation sur l'honneur tenue",
+    "IND ENT TENUE"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 3.3, p.32-33, p.33)",
+     "regles": [
+      "Bénéficiaires : salariés en magasin avec tenue fournie par la société (qui reste sa propriété), obligation de la porter et obligation de l'entretenir ; exclus : ceux dont l'employeur assure déjà l'entretien de toute la tenue.",
+      "Montant : 6 € par mois de travail, versée au prorata des jours effectivement travaillés par rapport aux jours ouvrés du mois.",
+      "Attestation sur l'honneur demandée ; pas de versement si le salarié n'est plus astreint au port de la tenue.",
+      "Non prise en compte pour les congés payés, les compléments de salaire en cas d'arrêt et les primes non mensuelles (prime annuelle, 13e mois, etc.)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 3.3.1",
+       "page": 32,
+       "extrait": "Avoir l'obligation de porter la tenue ou le vêtement de travail"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.3.3",
+       "page": 33,
+       "extrait": "Le montant de l'indemnité est fixé à 6 euros par mois de travail"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.8)",
+     "regles": [
+      "6 € par mois de travail, au prorata des jours effectivement travaillés par rapport aux jours ouvrés du mois."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Indemnité tenue de travail",
+       "page": 8,
+       "extrait": "Le montant de l'indemnité est fixé à 6€/mois de travail"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Vérification : sur des fiches de paie constatées, la ligne « indemnité d'entretien tenue » est de 6,00 € pour un mois complet et plus faible avec des jours de congés ou de formation, ce qui correspond à la règle du prorata.",
+    "Ne pas confondre avec la minute d'habillage (art. 5.5), qui est une pause en temps."
+   ],
+   "champs": [
+    {
+     "id": "joursTravailles",
+     "label": "Jours travaillés dans le mois",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 22,
+     "max": 31
+    },
+    {
+     "id": "joursOuvres",
+     "label": "Jours ouvrés du mois",
+     "type": "number",
+     "min": 1,
+     "step": "1",
+     "defaut": 22,
+     "max": 31
+    }
+   ],
+   "calcul": "entretienTenue"
+  },
+  {
+   "id": "transport-frais",
+   "theme": "Avantages, remises, primes diverses",
+   "categorie": "remuneration",
+   "question": "Participation aux frais de transport personnels : barème et démarches ?",
+   "reponse": "Si vous ne pouvez pas utiliser les transports en commun : 0,80 € par jour travaillé au-delà de 15 km, 0,68 € de 10 à 15 km, 0,56 € de 5 à 10 km, 0,44 € sous 5 km (accord, art. 3.10, p.35). Conditions : plus de 3 mois d'ancienneté, véhicule personnel indispensable, demande avec attestation sur l'honneur, carte grise et itinéraire Michelin le plus court. Versée avec la paie du mois suivant.",
+   "synonymes": [
+    "frais de transport",
+    "indemnité kilométrique",
+    "0,44",
+    "0,56",
+    "0,68",
+    "0,80",
+    "indemnité transport",
+    "ind transp",
+    "participation transport",
+    "trajet domicile travail",
+    "carte grise",
+    "itinéraire Michelin",
+    "transport en commun"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 3.10, p.35-36, p.35)",
+     "regles": [
+      "Barème par jour travaillé : plus de 15 km 0,80 € ; 10 à 15 km 0,68 € ; 5 à 10 km 0,56 € ; moins de 5 km 0,44 €.",
+      "Conditions : plus de 3 mois d'ancienneté, résidence ou lieu de travail hors Île-de-France et hors périmètre de transports urbains, véhicule personnel indispensable (pas de transport collectif adapté ou horaires particuliers).",
+      "Exclus : véhicule de service avec carburant payé, navette gratuite, remboursement partiel d'abonnement de transport, indemnités kilométriques, voiture de location financée par l'employeur.",
+      "Demande au responsable avec attestation sur l'honneur, carte grise (au nom du salarié, du conjoint ou d'un parent) et itinéraire Michelin le plus court ; paiement avec la paie du mois N+1, ou regroupé en mai et novembre à la demande.",
+      "Versée à temps plein comme à temps partiel pour chaque journée de travail effective ou de formation."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 3.10",
+       "page": 35,
+       "extrait": "Distance domicile/travail < 5 km = 0,44€ / jour travaillé"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.10",
+       "page": 35,
+       "extrait": "Distance domicile/travail > 15 km = 0,80€ / jour travaillé"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.10",
+       "page": 36,
+       "extrait": "Le paiement de cette indemnité sera réalisé chaque mois avec le versement de la paie du mois N+1."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.9)",
+     "regles": [
+      "Le livret reprend le barème (≤ 5 km : 0,44 € par jour travaillé)."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Frais de transport",
+       "page": 9,
+       "extrait": "Distance domicile/travail ≤ 5 km = 0,44€/jour travaillé"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Vérification : sur une fiche de paie constatée, l'indemnité est de 0,44 € par jour travaillé pour un trajet de moins de 5 km.",
+    "Les limites exactes (5, 10 et 15 km) ne sont pas tranchées par le texte (« supérieur à » / « inférieur à ») : écart à vérifier."
+   ],
+   "champs": [
+    {
+     "id": "km",
+     "label": "Distance domicile-travail (km)",
+     "type": "number",
+     "min": 0,
+     "step": "0.1",
+     "defaut": 3,
+     "max": 300
+    },
+    {
+     "id": "jours",
+     "label": "Jours travaillés ou de formation dans le mois",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 20,
+     "max": 31
+    }
+   ],
+   "calcul": "fraisTransport"
   }
  ],
  "categories": [

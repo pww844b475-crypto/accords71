@@ -500,4 +500,34 @@ export function primeFermeture({ fermetures = 0 }) {
   return { lignes: [L('accord', 'Prime de fermeture du mois', `${paliers * 35} € bruts`, { brut: paliers * 35, note: `${n} fermeture(s) : ${paliers} palier(s) de 5. Lecture du texte (« prime de 35 € bruts, acquise par palier de 5 fermetures ») : 35 € par palier de 5 - Pratique à confirmer avec la paie.` })] };
 }
 
-export const CALCULS = { pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
+// ---- 43. Titres restaurant (accord art. 3.1.2 p.28)
+export function ticketsRestaurant({ tickets = 0, region = 'autre' }) {
+  const n = Math.max(0, Math.floor(tickets)), idf = region === 'idf';
+  const face = idf ? 8 : 7.4, emp = idf ? 4 : 3.7;
+  return { lignes: [
+    L('accord', `Valeur d'un titre (${idf ? 'Île-de-France' : 'hors Île-de-France'})`, `${fr2(face)} € dont ${fr2(emp)} € à la charge de l'employeur`, { brut: face }),
+    L('accord', `Votre part sur ${n} titre(s)`, `${fr2(r2(n * (face - emp)))} € retenus sur la paie`, { brut: r2(n * (face - emp)) }),
+    L('accord', `Part de l'employeur sur ${n} titre(s)`, `${fr2(r2(n * emp))} €`, { brut: r2(n * emp) }),
+    L('accord', 'Valeur totale des titres reçus', `${fr2(r2(n * face))} €`, { brut: r2(n * face) }),
+  ] };
+}
+const fr2 = x => x.toFixed(2).replace('.', ',');
+
+// ---- 44. Indemnité d'entretien de la tenue (accord art. 3.3.3 p.33) : 6 euros par mois, au prorata des jours travaillés
+export function entretienTenue({ joursTravailles = 0, joursOuvres = 22 }) {
+  if (!(joursOuvres > 0)) return { lignes: [], erreur: 'Indiquer le nombre de jours ouvrés du mois.' };
+  const j = Math.min(Math.max(0, joursTravailles), joursOuvres), v = r2(6 * j / joursOuvres);
+  return { lignes: [L('accord', 'Indemnité d\'entretien de la tenue', `${fr2(v)} €`, { brut: v, note: `6 € × ${j} jours travaillés ÷ ${joursOuvres} jours ouvrés. Non soumise à cotisations sur la fiche constatée ; non prise en compte pour les congés payés ni les primes non mensuelles.` })] };
+}
+
+// ---- 45. Participation aux frais de transport personnels (accord art. 3.10 p.35-36)
+export function fraisTransport({ km = 0, jours = 0 }) {
+  if (!(km > 0)) return { lignes: [], erreur: 'Indiquer la distance domicile-travail en km.' };
+  const bar = km > 15 ? 0.8 : km > 10 ? 0.68 : km > 5 ? 0.56 : 0.44;
+  const limite = [5, 10, 15].includes(km);
+  const j = Math.max(0, jours);
+  return { lignes: [L('accord', `Indemnité journalière (${km} km)`, `${fr2(bar)} € par jour travaillé`, { brut: bar, note: limite ? 'Le texte écrit « supérieur à » et « inférieur à » : pour exactement ' + km + ' km, la tranche n\'est pas précisée ; le barème le plus bas est affiché, à vérifier.' : 'Barème : plus de 15 km 0,80 € ; 10 à 15 km 0,68 € ; 5 à 10 km 0,56 € ; moins de 5 km 0,44 €.' }),
+    L('accord', `Total du mois (${j} jour(s) travaillé(s) ou de formation)`, `${fr2(r2(bar * j))} €`, { brut: r2(bar * j), note: 'Sur demande, pour les salariés de plus de 3 mois d\'ancienneté sans transport en commun possible, hors exclusions de l\'art. 3.10.' })] };
+}
+
+export const CALCULS = { ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
