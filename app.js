@@ -39,7 +39,7 @@ $('#formPorte').addEventListener('submit', async e => {
 // ---- Écrans ----
 function onglets(actif) {
   const nav = $('#onglets');
-  nav.replaceChildren(...[{ id: 'accueil', nom: 'Accueil', icone: '🏠' }, { id: 'simu', nom: 'Simulateur de paie', icone: '💶', couleur: '#0f8b6b' }, ...CATS].map(c => h('button', {
+  nav.replaceChildren(...[{ id: 'accueil', nom: 'Accueil', icone: '🏠' }, { id: 'simu', nom: 'Estimation de ma fiche de paie', icone: '💶', couleur: '#0f8b6b' }, ...CATS].map(c => h('button', {
     type: 'button', class: 'onglet' + (c.id === actif ? ' actif' : ''), style: c.couleur ? `--c:${c.couleur}` : '',
     onclick: () => { $('#q').value = ''; c.id === 'accueil' ? accueil() : c.id === 'simu' ? pageSimulateur() : vueCategorie(c.id); window.scrollTo(0, 0); }
   }, `${c.icone} ${c.nom}`)));
@@ -59,7 +59,7 @@ function accueil() {
   remplir(vue,
     h('h2', { class: 'accueil-titre' }, 'Que voulez-vous savoir ?'),
     h('p', { class: 'accueil-sous' }, 'Tapez votre question en haut, ou choisissez un sujet.'),
-    h('button', { class: 'simu-banniere', type: 'button', onclick: () => { pageSimulateur(); window.scrollTo(0, 0); } }, h('span', { class: 'tuile-icone' }, '💶'), h('span', {}, h('strong', {}, 'Simulateur de fiche de paie'), h('small', {}, 'Brut, net, avec ou sans prélèvement à la source'))),
+    h('button', { class: 'simu-banniere', type: 'button', onclick: () => { pageSimulateur(); window.scrollTo(0, 0); } }, h('span', { class: 'tuile-icone' }, '💶'), h('span', {}, h('strong', {}, 'Estimation de ma fiche de paie'), h('small', {}, 'Touchez ici, entrez vos données : brut, net, avec ou sans prélèvement à la source'))),
     h('div', { class: 'tuiles' }, CATS.map(c => h('button', { class: 'tuile', type: 'button', style: `--c:${c.couleur}`, onclick: () => { vueCategorie(c.id); window.scrollTo(0, 0); } },
       h('span', { class: 'tuile-icone' }, c.icone), h('span', { class: 'tuile-nom' }, c.nom), h('span', { class: 'tuile-desc' }, c.description),
       h('span', { class: 'tuile-nb' }, `${FICHES.filter(f => f.categorie === c.id).length} réponses`)))),
@@ -167,6 +167,6 @@ $('#titre').addEventListener('click', accueil);
     avenant: { titre: 'Avenant intéressement 2026 (non signé)', scan: false }, interess: { titre: 'Accord d\'intéressement 2025', scan: true },
     pee: { titre: 'Règlement PEE', scan: true }, particip: { titre: 'Accord de participation (signé le 24/11/2025)', scan: true }, percol: { titre: 'Règlement PERCOL', scan: true }, livret: { titre: 'Livret CGT', scan: false }, ct: { titre: 'Code du travail (code.travail.gouv.fr, version du 10/08/2016)', scan: false },
   };
-  if (EMPREINTE_MDP) $('#porte').hidden = false; else { $('#appli').hidden = false; accueil(); }
+  if (EMPREINTE_MDP) $('#porte').hidden = false; else { $('#appli').hidden = false; accueil(); if (location.hash === '#paie') pageSimulateur(); }
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 })();

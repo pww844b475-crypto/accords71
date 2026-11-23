@@ -107,7 +107,7 @@ h3.section{margin:1.4rem 0 .5rem;font-size:1.05rem}
 .alerte{background:#fff3cd;color:#5c4400;border:2px solid #e0a800;border-radius:10px;padding:.5rem .7rem;font-weight:600;margin:.4rem 0}
 @media (prefers-color-scheme:dark){.alerte{background:#4a3b10;color:#ffe9a8}}
 
-.simu-banniere{display:flex;align-items:center;gap:12px;width:100%;text-align:left;margin:0 0 14px;padding:12px 14px;border-radius:14px;border:2px solid #0f8b6b;background:var(--carte);color:var(--fg)}
+.simu-banniere{display:flex;align-items:center;gap:12px;width:100%;text-align:left;margin:0 0 14px;padding:16px 14px;border-radius:14px;border:0;background:#0f8b6b;color:#fff;font-size:1.05rem;box-shadow:0 2px 8px rgba(0,0,0,.2)}
 .simu-banniere small{display:block;font-weight:400;opacity:.8}
 .champ{display:flex;flex-direction:column;gap:4px}
 .champ-label{font-weight:600}

@@ -123,7 +123,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
 
   remplir(vue,
     h('button', { class: 'sec', type: 'button', onclick: retour }, '← Retour'),
-    h('h2', { class: 'accueil-titre' }, '💶 Simulateur de fiche de paie'),
+    h('h2', { class: 'accueil-titre' }, '💶 Estimation de ma fiche de paie'),
     h('p', { class: 'accueil-sous' }, 'Rien n\'est enregistré : tout se calcule sur votre téléphone.'),
     perime ? h('p', { class: 'erreur' }, `Attention : les taux sont ceux de ${T.annee}. Ils ont peut-être changé : vérifiez-les avant de vous fier au résultat.`) : null,
     h('div', { class: 'carte' }, h('h3', {}, '1. Votre fiche'),
