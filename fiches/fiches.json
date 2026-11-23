@@ -13259,6 +13259,1263 @@
    "notes": [
     "Du 1er juin 2025 au 31 décembre 2027, il y a 2 ans et 7 mois : la mention « 2 ans » ne colle pas aux dates. Les dates écrites expressément font foi pour la fin de l'accord."
    ]
+  },
+  {
+   "id": "periode-accueil",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Combien de temps dure la période d'accueil quand on arrive sur un poste ?",
+   "reponse": "Au maximum 3 mois au niveau 1, 6 mois au niveau 2, 12 mois au niveau 3 et 18 mois au niveau 4, période d'essai éventuelle comprise. Après une promotion interne, c'est 6 mois (niveau 3) ou 9 mois (niveau 4). C'est une durée maximale, sans automatisme (accord, art. 2.1.1, p.19).",
+   "synonymes": [
+    "période d'accueil",
+    "periode d'adaptation",
+    "période d'adaptation",
+    "grille premiers mois",
+    "période d'essai",
+    "3 mois",
+    "6 mois 12 mois 18 mois",
+    "niveau 1 3 mois",
+    "échelon A",
+    "premiers mois salaire",
+    "embauche période"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 2.1.1, p.19)",
+     "regles": [
+      "La période d'accueil ne peut pas dépasser, période d'essai comprise : 3 mois (niveau 1), 6 mois (niveau 2), 12 mois (niveau 3), 18 mois (niveau 4).",
+      "Promotion interne à un niveau 3 ou 4 : 6 mois et 9 mois.",
+      "C'est une durée maximale qui peut être réduite : pas d'automatisme."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 2.1.1",
+       "page": 19,
+       "extrait": "12 mois pour les fonctions classées au niveau 3",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 2.1.1",
+       "page": 19,
+       "extrait": "La période d'accueil constitue une durée maximale.",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "niveau",
+     "label": "Niveau",
+     "type": "select",
+     "options": [
+      [
+       "1",
+       "Niveau 1"
+      ],
+      [
+       "2",
+       "Niveau 2"
+      ],
+      [
+       "3",
+       "Niveau 3"
+      ],
+      [
+       "4",
+       "Niveau 4"
+      ]
+     ],
+     "question": "Quel est le niveau du poste ?",
+     "aide": "Il est écrit sur votre contrat ou votre fiche de paie (ex. 3B = niveau 3)."
+    },
+    {
+     "id": "promotion",
+     "label": "Promotion interne",
+     "type": "checkbox",
+     "defaut": false,
+     "question": "Est-ce une promotion interne ?",
+     "aide": "Vous étiez déjà dans l'entreprise et vous changez de poste."
+    }
+   ],
+   "calcul": "periodeAccueil"
+  },
+  {
+   "id": "promotion-augmentation",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "De combien doit augmenter mon salaire si je change de niveau ou de statut ?",
+   "reponse": "Au moins 2,5 % de plus pour un changement de niveau et au moins 3 % pour un changement de statut (par exemple employé vers agent de maîtrise) (accord, art. 2.1.5, p.22).",
+   "synonymes": [
+    "promotion augmentation",
+    "changement de niveau",
+    "changement de statut",
+    "2,5 %",
+    "3 %",
+    "passer maîtrise",
+    "passage de niveau",
+    "monter de niveau",
+    "augmentation promotion",
+    "devenir agent de maîtrise"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 2.1.5, p.22)",
+     "regles": [
+      "Tout changement de niveau s'accompagne d'une augmentation d'au moins 2,5 %.",
+      "Tout changement de statut s'accompagne d'une augmentation d'au moins 3 %."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 2.1.5",
+       "page": 22,
+       "extrait": "augmentation de salaire d'au moins 2,5%",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 2.1.5",
+       "page": 22,
+       "extrait": "augmentation de salaire d'au moins 3%",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "type",
+     "label": "Type de changement",
+     "type": "select",
+     "options": [
+      [
+       "niveau",
+       "De niveau"
+      ],
+      [
+       "statut",
+       "De statut"
+      ]
+     ],
+     "question": "Quel changement ?",
+     "aide": "Statut = employé, agent de maîtrise ou cadre."
+    },
+    {
+     "id": "salaire",
+     "label": "Salaire de base mensuel brut (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "Quel est votre salaire de base mensuel brut actuel (en €) ?",
+     "aide": "Tapez 0 pour voir seulement le pourcentage."
+    }
+   ],
+   "calcul": "augmentationPromotion"
+  },
+  {
+   "id": "echelon-c",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Comment passer à l'échelon C (employé) et que gagne-t-on ?",
+   "reponse": "Il faut réunir trois conditions : 8 ans d'ancienneté dans le niveau, une compétence validée en entretien et la capacité à transmettre ses savoirs. Pour les niveaux 3 et 4, un CQP, un titre équivalent (VAE) ou la fonction de tuteur peut remplacer la validation. Le passage donne au moins 2 % de plus, en plus des augmentations générales (accord, art. 2.1.3, p.20).",
+   "synonymes": [
+    "échelon C",
+    "echelon c",
+    "passage échelon C",
+    "3C",
+    "2C",
+    "8 ans dans le niveau",
+    "CQP",
+    "tuteur",
+    "VAE",
+    "2 % revalorisation",
+    "monter échelon",
+    "passer échelon"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 2.1.3, p.20)",
+     "regles": [
+      "Trois conditions cumulatives : 8 ans minimum dans le niveau ; compétence validée en entretien managérial et RH ; capacité démontrée à transmettre ses savoirs.",
+      "Niveaux 3 et 4 : la validation peut résulter d'un CQP, d'un titre équivalent (VAE) ou de la fonction de tuteur.",
+      "Revalorisation d'au moins 2 %, distincte des augmentations générales ou individuelles de la NAO."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 2.1.3",
+       "page": 20,
+       "extrait": "ancienneté minimum de 8 ans dans le niveau",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 2.1.3",
+       "page": 20,
+       "extrait": "capacité démontrée à transmettre ses savoirs",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 2.1.3",
+       "page": 20,
+       "extrait": "même si le salaire de base du salarié est supérieur ou égal au minimum du nouvel échelon",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Point à vérifier : l'accord ne dit pas clairement si le CQP ou la fonction de tuteur remplace aussi la condition de transmission des savoirs.",
+    "Ne pas confondre avec le passage automatique à 20 ans (fiche suivante)."
+   ],
+   "champs": [
+    {
+     "id": "niveau",
+     "label": "Niveau",
+     "type": "select",
+     "options": [
+      [
+       "1",
+       "Niveau 1"
+      ],
+      [
+       "2",
+       "Niveau 2"
+      ],
+      [
+       "3",
+       "Niveau 3"
+      ],
+      [
+       "4",
+       "Niveau 4"
+      ]
+     ],
+     "question": "Dans quel niveau êtes-vous ?"
+    },
+    {
+     "id": "anciennete",
+     "label": "Années dans le niveau",
+     "type": "number",
+     "min": 0,
+     "step": "0.5",
+     "defaut": 0,
+     "question": "Depuis combien d'années êtes-vous dans ce niveau ?"
+    },
+    {
+     "id": "validation",
+     "label": "Compétence validée",
+     "type": "checkbox",
+     "defaut": false,
+     "question": "Votre compétence a-t-elle été validée en entretien avec le manager et les RH ?"
+    },
+    {
+     "id": "cqp",
+     "label": "CQP, VAE ou tuteur",
+     "type": "checkbox",
+     "defaut": false,
+     "question": "Avez-vous un CQP, un titre équivalent (VAE) ou êtes-vous tuteur ?",
+     "aide": "Cela ne compte que pour les niveaux 3 et 4."
+    },
+    {
+     "id": "transmission",
+     "label": "Transmission des savoirs",
+     "type": "checkbox",
+     "defaut": false,
+     "question": "Accompagnez-vous les nouveaux embauchés, ou êtes-vous référent formation ?"
+    },
+    {
+     "id": "salaire",
+     "label": "Salaire de base mensuel brut (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "Quel est votre salaire de base mensuel brut (en €) ?",
+     "aide": "Facultatif : tapez 0 pour ne pas calculer les 2 %."
+    }
+   ],
+   "calcul": "echelonC"
+  },
+  {
+   "id": "echelon-20-ans",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Passage automatique à l'échelon C après 20 ans dans le Groupe ?",
+   "reponse": "À partir du 1er juillet 2026, les employés commerciaux 3B passent automatiquement en 3C, et ceux de 4B en 4C, le mois suivant leurs 20 ans d'ancienneté dans le Groupe Carrefour (date d'entrée dans le Groupe). Dans ce cas, pas de revalorisation de 2 % en plus (NAO 2026, partie 3, art. 2 et 3, p.11-12).",
+   "synonymes": [
+    "20 ans d'ancienneté",
+    "passage automatique",
+    "3B 3C",
+    "4B 4C",
+    "20 ans carrefour",
+    "échelon automatique",
+    "ancienneté groupe",
+    "fidélité 20 ans"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "NAO 2026 (partie 3, art. 2 et 3, p.11-12)",
+     "regles": [
+      "Niveau 3B : passage automatique à 3C le mois suivant la date anniversaire des 20 ans d'ancienneté ; niveau 4B vers 4C aux mêmes conditions.",
+      "Ancienneté retenue : celle du Groupe Carrefour, soit la date d'entrée dans le Groupe.",
+      "Pas de revalorisation de 2 % prévue par l'accord de substitution dans ce cas."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "partie 3, art. 2",
+       "page": 11,
+       "extrait": "anniversaire de leurs 20 ans d'ancienneté",
+       "verifie_image": true
+      },
+      {
+       "doc": "nao",
+       "article": "partie 3, art. 2",
+       "page": 11,
+       "extrait": "ne bénéficieront pas de la revalorisation salariale de 2%",
+       "verifie_image": true
+      },
+      {
+       "doc": "nao",
+       "article": "partie 3, art. 3",
+       "page": 12,
+       "extrait": "à partir de 20 ans d'ancienneté est à dissocier"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Point à vérifier : le texte ne dit pas ce qui se passe pour ceux qui avaient déjà 20 ans avant le 1er juillet 2026."
+   ],
+   "champs": [
+    {
+     "id": "echelon",
+     "label": "Échelon",
+     "type": "select",
+     "options": [
+      [
+       "3B",
+       "3B → 3C"
+      ],
+      [
+       "4B",
+       "4B → 4C"
+      ]
+     ],
+     "question": "Quel est votre échelon actuel ?"
+    },
+    {
+     "id": "dateEntree",
+     "label": "Date d'entrée dans le Groupe",
+     "type": "date",
+     "question": "Quelle est votre date d'entrée dans le Groupe Carrefour ?",
+     "aide": "Pas forcément dans ce magasin : la date d'entrée dans le Groupe."
+    }
+   ],
+   "calcul": "echelon20ans"
+  },
+  {
+   "id": "grille-employes",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Quel est le salaire minimum de mon niveau (employés) ?",
+   "reponse": "La grille Covicar 71 donne un taux horaire minimum par niveau et échelon, sans condition d'ancienneté. Exemple depuis juillet 2026 : 3C = 12,779 € de l'heure. Le salaire de base se calcule en multipliant ce taux par vos heures de présence par semaine et par 4,35 (NAO 2026, art. 1-1 et 1-2, p.3).",
+   "synonymes": [
+    "grille de salaires",
+    "salaire minimum",
+    "taux horaire minimum",
+    "SMMG",
+    "salaire minimum niveau 3",
+    "grille covicar",
+    "minimum conventionnel",
+    "combien je dois toucher",
+    "1B",
+    "2B",
+    "3C",
+    "4C",
+    "taux horaire juillet 2026"
+   ],
+   "etiquettes": [
+    "Vérifier le chiffre sur l'image"
+   ],
+   "niveaux": [
+    {
+     "titre": "NAO 2026 (partie 1, art. 1-1 et 1-2, p.3)",
+     "regles": [
+      "Grilles employés au 1er mars puis au 1er juillet 2026, par niveau et échelon, sans condition d'ancienneté : taux horaire, mensuel et SMMG.",
+      "Les premiers mois d'un niveau (échelon A) correspondent à la période d'accueil."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "art. 1-1",
+       "page": 3,
+       "extrait": "Grille de salaire COVICAR 71",
+       "verifie_image": true
+      },
+      {
+       "doc": "nao",
+       "article": "art. 1-2",
+       "page": 3,
+       "extrait": "au 1er Juillet 2026",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Les taux ont été relevés sur l'image de la page 3 et contrôlés contre le « SMMG 36 h » de chaque ligne.",
+    "Les 4 premiers mois (2A, 3A, 4A) suivent la période d'accueil."
+   ],
+   "champs": [
+    {
+     "id": "echelon",
+     "label": "Niveau et échelon",
+     "type": "select",
+     "options": [
+      [
+       "1B",
+       "1B"
+      ],
+      [
+       "2A",
+       "2A"
+      ],
+      [
+       "2B",
+       "2B"
+      ],
+      [
+       "2C",
+       "2C"
+      ],
+      [
+       "3A",
+       "3A"
+      ],
+      [
+       "3B",
+       "3B"
+      ],
+      [
+       "3C",
+       "3C"
+      ],
+      [
+       "4A",
+       "4A"
+      ],
+      [
+       "4B",
+       "4B"
+      ],
+      [
+       "4C",
+       "4C"
+      ]
+     ],
+     "question": "Quel est votre niveau et échelon ?",
+     "aide": "Écrit sur votre fiche de paie ou votre contrat, par exemple 3B."
+    },
+    {
+     "id": "grille",
+     "label": "Période",
+     "type": "select",
+     "options": [
+      [
+       "juillet",
+       "Depuis juillet 2026"
+      ],
+      [
+       "mars",
+       "De mars à juin 2026"
+      ]
+     ],
+     "question": "Quelle période ?"
+    },
+    {
+     "id": "heures",
+     "label": "Heures de présence par semaine",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 36,
+     "question": "Combien d'heures par semaine êtes-vous présent (pauses comprises) ?",
+     "aide": "Exemple : 24 pour un contrat de 3 jours de 8 heures."
+    }
+   ],
+   "calcul": "salaireMinimumEmploye"
+  },
+  {
+   "id": "minimum-encadrement",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Quel est le salaire minimum d'un agent de maîtrise ou d'un cadre ?",
+   "reponse": "Minima bruts mensuels de mai 2026 : niveau 5 = 2 531 €, niveau 6 = 2 633 €, niveau 7 = 3 235 €, niveau 8 = 4 159 €, avec un montant plus élevé après 3 ans dans le niveau. Forfait de 43 h 25 par semaine pour la maîtrise, 216 ou 211 jours par an pour les cadres (NAO 2026, art. 1-3, p.4).",
+   "synonymes": [
+    "minimum maîtrise",
+    "minimum cadre",
+    "niveau 5",
+    "niveau 6",
+    "niveau 7",
+    "niveau 8",
+    "forfait jours",
+    "43h25",
+    "salaire minimum agent de maîtrise",
+    "salaire minimum cadre",
+    "après 3 ans dans le niveau"
+   ],
+   "etiquettes": [
+    "Vérifier le chiffre sur l'image"
+   ],
+   "niveaux": [
+    {
+     "titre": "NAO 2026 (partie 1, art. 1-3, p.4)",
+     "regles": [
+      "Salaires mensuels bruts minimaux : rétroactifs au 1er janvier 2026 (paie de mars), puis revalorisés au 1er mai 2026.",
+      "Maîtrise : forfait 43 h 25 par semaine. Cadres : 216 ou 211 jours par an.",
+      "Les minima Covicar 71 sont plus favorables que ceux de la branche (cadres)."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "art. 1-3",
+       "page": 4,
+       "extrait": "les salaires bruts minimaux de la Société Covicar 71",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "echelon",
+     "label": "Niveau",
+     "type": "select",
+     "options": [
+      [
+       "5",
+       "Niveau 5"
+      ],
+      [
+       "5+",
+       "Niveau 5, après 3 ans"
+      ],
+      [
+       "6",
+       "Niveau 6"
+      ],
+      [
+       "6+",
+       "Niveau 6, après 3 ans"
+      ],
+      [
+       "7",
+       "Niveau 7"
+      ],
+      [
+       "7+",
+       "Niveau 7, après 3 ans"
+      ],
+      [
+       "8",
+       "Niveau 8"
+      ],
+      [
+       "8+",
+       "Niveau 8, après 3 ans"
+      ]
+     ],
+     "question": "Quel est votre niveau ?"
+    },
+    {
+     "id": "grille",
+     "label": "Période",
+     "type": "select",
+     "options": [
+      [
+       "mai",
+       "Depuis mai 2026"
+      ],
+      [
+       "mars",
+       "Janvier à avril 2026"
+      ]
+     ],
+     "question": "Quelle période ?"
+    }
+   ],
+   "calcul": "minimumEncadrement"
+  },
+  {
+   "id": "garantie-04",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Ai-je droit à l'augmentation garantie de 0,4 % (employés) ?",
+   "reponse": "Oui, sauf pour les niveaux 1A, 2A et 3A : si la revalorisation de la grille ne vous donne rien, ou moins de 0,4 %, votre salaire de base augmente de 0,4 %, grille comprise. C'est valable au 1er mars (paie de mars, base février 2026) et au 1er juillet 2026 (base juin) (NAO 2026, art. 2-1 et 2-2, p.5).",
+   "synonymes": [
+    "0,4 %",
+    "0,4%",
+    "augmentation garantie",
+    "augmentation mars 2026",
+    "augmentation juillet 2026",
+    "NAO employés",
+    "augmentation générale",
+    "garantie d'augmentation",
+    "revalorisation salaire 2026"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "NAO 2026 (partie 1, art. 2-1 et 2-2, p.5)",
+     "regles": [
+      "Employés hors 1A, 2A, 3A : augmentation du salaire de base à hauteur de 0,4 % si la grille donne moins (grille incluse), au 1er mars et au 1er juillet 2026.",
+      "Mars : base des salaires de février 2026 ; juillet : base juin 2026."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "art. 2-1",
+       "page": 5,
+       "extrait": "à hauteur de 0,4%",
+       "verifie_image": true
+      },
+      {
+       "doc": "nao",
+       "article": "art. 2-2",
+       "page": 5,
+       "extrait": "Cette augmentation sera appliquée sur la paie du mois de juillet 2026",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Calcul simplifié : il suppose un salaire de base calculé en taux horaire × heures × 4,35 ; comparez toujours avec votre fiche de paie."
+   ],
+   "champs": [
+    {
+     "id": "echelon",
+     "label": "Niveau et échelon",
+     "type": "select",
+     "options": [
+      [
+       "1B",
+       "1B"
+      ],
+      [
+       "2A",
+       "2A"
+      ],
+      [
+       "2B",
+       "2B"
+      ],
+      [
+       "2C",
+       "2C"
+      ],
+      [
+       "3A",
+       "3A"
+      ],
+      [
+       "3B",
+       "3B"
+      ],
+      [
+       "3C",
+       "3C"
+      ],
+      [
+       "4A",
+       "4A"
+      ],
+      [
+       "4B",
+       "4B"
+      ],
+      [
+       "4C",
+       "4C"
+      ]
+     ],
+     "question": "Quel est votre niveau et échelon ?"
+    },
+    {
+     "id": "grille",
+     "label": "Date",
+     "type": "select",
+     "options": [
+      [
+       "mars",
+       "1er mars 2026"
+      ],
+      [
+       "juillet",
+       "1er juillet 2026"
+      ]
+     ],
+     "question": "Quelle augmentation voulez-vous vérifier ?"
+    },
+    {
+     "id": "salaire",
+     "label": "Salaire de base mensuel brut avant (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "Quel était votre salaire de base mensuel brut avant l'augmentation (en €) ?"
+    },
+    {
+     "id": "heures",
+     "label": "Heures de présence par semaine",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 36,
+     "question": "Combien d'heures par semaine êtes-vous présent (pauses comprises) ?"
+    }
+   ],
+   "calcul": "augmentationGarantie04"
+  },
+  {
+   "id": "garantie-1pct",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Augmentation garantie de 1 % pour la maîtrise et les cadres ?",
+   "reponse": "La direction garantit en 2026 une augmentation du salaire de base de 1 % aux agents de maîtrise et aux cadres de niveaux 7, 8 et 9 : 0,8 % rétroactif au 1er janvier (paie de mars) puis 0,2 % au 1er mai. Elle ne se cumule pas avec l'augmentation due aux minima (NAO 2026, partie 1, art. 3, p.5-6).",
+   "synonymes": [
+    "1 %",
+    "1%",
+    "0,8 %",
+    "0,2 %",
+    "augmentation maîtrise",
+    "augmentation cadre",
+    "augmentation garantie cadres",
+    "rétroactif janvier",
+    "agent de maîtrise augmentation"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "NAO 2026 (partie 1, art. 3, p.5-6)",
+     "regles": [
+      "Engagement 2026 : augmentation de 1 % du salaire de base des agents de maîtrise et cadres de niveaux 7, 8 et 9 (hors cadres dirigeants).",
+      "0,8 % rétroactif au 1er janvier 2026 (paie de mars) et 0,2 % au 1er mai 2026.",
+      "Non cumulable avec l'augmentation due à la revalorisation des minima."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "art. 3",
+       "page": 5,
+       "extrait": "une augmentation de leur salaire de base de 1%",
+       "verifie_image": true
+      },
+      {
+       "doc": "nao",
+       "article": "art. 3",
+       "page": 6,
+       "extrait": "n'est pas cumulable avec"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le texte parle des agents de maîtrise et des cadres de niveaux 7, 8 et 9 : le périmètre exact pour les niveaux 5 et 6 est à vérifier auprès de la direction."
+   ],
+   "champs": [
+    {
+     "id": "salaire",
+     "label": "Salaire de base mensuel brut (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "Quel est votre salaire de base mensuel brut avant augmentation (en €) ?"
+    }
+   ],
+   "calcul": "augmentationGarantie1pct"
+  },
+  {
+   "id": "bonus-remplacement",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Je remplace un cadre absent : ai-je droit à un bonus ?",
+   "reponse": "Oui si vous le remplacez plus de 2 mois consécutifs et que votre niveau de bonus est inférieur ou que vous n'y avez pas droit : un bonus exceptionnel par mois occupé. Son pourcentage cible est la différence entre le bonus cible de l'absent et le vôtre, calculée sur votre salaire (accord, art. 3.7, p.34).",
+   "synonymes": [
+    "remplacement cadre",
+    "remplacer un cadre",
+    "remplacement provisoire",
+    "bonus exceptionnel",
+    "remplacement encadrement",
+    "remplacer un responsable",
+    "bonus remplacement",
+    "intérim cadre",
+    "faire fonction de"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 3.7, p.34)",
+     "regles": [
+      "Salarié (quel que soit son statut) à bonus inférieur ou non éligible qui remplace un membre de l'encadrement absent plus de 2 mois consécutifs : bonus exceptionnel par mois occupé.",
+      "Calcul : feuille de route pondérée à 100 % de l'enjeu de bonus cible de l'absent, proratisée à la période.",
+      "Pourcentage cible = bonus cible de l'absent moins celui du remplaçant, sur le salaire du remplaçant."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 3.7",
+       "page": 34,
+       "extrait": "assure son remplacement plus de 2 mois"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.7",
+       "page": 34,
+       "extrait": "un bonus exceptionnel"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le montant calculé est un montant cible : le bonus réel dépend des résultats par rapport aux objectifs."
+   ],
+   "champs": [
+    {
+     "id": "cibleAbsent",
+     "label": "Bonus cible de l'absent (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.5",
+     "defaut": 0,
+     "question": "Quel est le bonus cible de la personne absente (en % du salaire) ?"
+    },
+    {
+     "id": "cibleRemplacant",
+     "label": "Votre bonus cible (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.5",
+     "defaut": 0,
+     "question": "Quel est votre propre bonus cible (en %, 0 si vous n'en avez pas) ?"
+    },
+    {
+     "id": "salaireAnnuel",
+     "label": "Salaire annuel brut (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "Quel est votre salaire annuel brut (en €) ?",
+     "aide": "Facultatif : tapez 0 pour voir seulement le pourcentage."
+    },
+    {
+     "id": "mois",
+     "label": "Mois de remplacement",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "question": "Combien de mois dure le remplacement ?"
+    }
+   ],
+   "calcul": "bonusRemplacement"
+  },
+  {
+   "id": "egalite-enveloppe",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Y a-t-il une enveloppe pour réduire les écarts de salaire femmes-hommes ?",
+   "reponse": "Oui : 3 000 euros bruts pour 2026, répartis par la direction des ressources humaines pour réduire les inégalités les plus marquées. Les écarts sont comparés à famille métier, niveau et expérience comparables, sur la base d'un temps complet. Un bilan est présenté au CSE central (NAO 2026, partie 3, art. 1, p.11).",
+   "synonymes": [
+    "égalité professionnelle",
+    "enveloppe égalité",
+    "3 000 euros",
+    "femmes hommes salaire",
+    "inégalités de rémunération",
+    "écart de salaire homme femme",
+    "rattrapage salarial"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "NAO 2026 (partie 3, art. 1, p.11)",
+     "regles": [
+      "Enveloppe spécifique de 3 000 euros bruts pour 2026, répartie par la DRH.",
+      "Écarts identifiés à famille métier, niveau et expérience comparables, sur la base d'un temps complet.",
+      "Bilan sur l'utilisation de l'enveloppe en CSE central."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "partie 3, art. 1",
+       "page": 11,
+       "extrait": "montant de 3 000 euros bruts",
+       "verifie_image": true
+      },
+      {
+       "doc": "nao",
+       "article": "partie 3, art. 1",
+       "page": 11,
+       "extrait": "Un bilan sur l'utilisation de cette enveloppe",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "niveau-5-6",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Comment passer agent de maîtrise confirmé (niveau 5 vers 6) ?",
+   "reponse": "Il faut soit parfaitement maîtriser sa fonction, soit être dans un parcours professionnel « évolutif partagé ». Un agent de maîtrise de niveau 5 dont le niveau n'a pas changé depuis 3 ans est reçu par sa hiérarchie pour faire le point (accord, art. 2.1.2, p.19).",
+   "synonymes": [
+    "niveau 5 niveau 6",
+    "agent de maîtrise confirmé",
+    "passage niveau 6",
+    "parcours évolutif partagé",
+    "3 ans niveau 5",
+    "évolution maîtrise",
+    "point sur la maîtrise de sa fonction"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 2.1.2, p.19)",
+     "regles": [
+      "Passage du niveau 5 au niveau 6 : soit parfaite maîtrise de la fonction, soit parcours professionnel « évolutif partagé ».",
+      "Agent de maîtrise de niveau 5 sans changement depuis 3 ans : point avec la hiérarchie sur sa fonction et ses possibilités d'évolution."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 2.1.2",
+       "page": 19,
+       "extrait": "Soit parfaitement maîtriser leur fonction",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "vendeur-bas",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Comment est payé un vendeur Multimédia ou Maison (« Vendeur BAS ») ?",
+   "reponse": "Sa rémunération se compose d'une partie collective (selon les objectifs de chiffre d'affaires et de marge), d'une partie individuelle (commission sur les articles vendus) et d'un bonus de vente de 15 % de cette partie individuelle, payé chaque trimestre. Le minimum conventionnel reste garanti (accord, art. 2.1.4, p.20-21).",
+   "synonymes": [
+    "vendeur BAS",
+    "vendeur multimédia",
+    "vendeur maison",
+    "commission",
+    "bonus de vente",
+    "15 %",
+    "partie collective",
+    "partie individuelle",
+    "vendeur électroménager",
+    "2V1",
+    "3V1",
+    "rémunération vendeur"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 2.1.4, p.20)",
+     "regles": [
+      "Classification spécifique en 5 niveaux (2V1, 2V2, 3V1, 3V2, 4V1). Passage de débutant à confirmé après un an de pratique continue.",
+      "Rémunération : partie collective (objectifs mensuels de chiffre d'affaires et de marge) + partie individuelle (commission par article) + bonus de vente.",
+      "Bonus de vente : 15 % de la partie individuelle dès le 1er euro, payé chaque trimestre.",
+      "Si le total est inférieur au minimum conventionnel, celui-ci est versé.",
+      "Heures hors vente payées au taux horaire moyen des 12 derniers mois."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 2.1.4",
+       "page": 20,
+       "extrait": "Vendeur BAS débutant au niveau vendeur BAS confirmé"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 2.1.4",
+       "page": 21,
+       "extrait": "Dès le 1er euro de vente, le vendeur perçoit 15% du montant total",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 2.1.4",
+       "page": 21,
+       "extrait": "La prime est payée trimestriellement."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "prime-vacances",
+   "theme": "Embauche, classification, salaires",
+   "categorie": "remuneration",
+   "question": "Ai-je droit à la prime de vacances et de combien ?",
+   "reponse": "Oui si vous avez au moins 12 mois d'ancienneté au 30 juin : 50 € bruts pour les employés et 75 € bruts pour les agents de maîtrise et cadres, à temps complet. Au prorata pour le temps partiel. Elle est payée avec la paie de juin (NAO 2026, partie 1, art. 4, p.6).",
+   "synonymes": [
+    "prime de vacances",
+    "prime vacances 50 euros",
+    "75 euros",
+    "prime de juin",
+    "ancienneté 12 mois 30 juin",
+    "prime annuelle de vacances"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "NAO 2026 (partie 1, art. 4, p.6)",
+     "regles": [
+      "Bénéficiaires : salariés avec au moins 12 mois d'ancienneté au 30 juin de l'année.",
+      "Montant à temps complet : 50 € bruts (employés), 75 € bruts (agents de maîtrise et cadres), sous réserve des déductions liées aux absences.",
+      "Temps partiel : prorata sur l'horaire annuel moyen du 1er juin N-1 au 31 mai N. Versée avec la paie de juin."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "art. 4-2",
+       "page": 6,
+       "extrait": "50 € bruts pour les employés"
+      },
+      {
+       "doc": "nao",
+       "article": "art. 4-2",
+       "page": 6,
+       "extrait": "La prime de vacances est réglée avec la paie du mois de juin."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
   }
  ],
  "categories": [

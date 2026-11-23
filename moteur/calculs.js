@@ -621,4 +621,103 @@ export function creditHeuresOS({ organisation = 'CGT', heuresPrises = 0 }) {
     L('accord', 'Heures restantes cette année', `${reste} heures`, { brut: reste, note: reste < 0 ? 'Le crédit ne peut pas être dépassé.' : 'Les heures passées aux réunions de négociation à l\'initiative de la direction ne sont pas imputées sur ce crédit.' })] };
 }
 
-export const CALCULS = { heuresDelegation, tempsReunionNationale, creditHeuresOS, primeAstreinte, interventionAstreinte, alimentationCET, ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
+// ---- 52. Classification, grilles de salaires 2026 (accord de substitution art. 2.1 ; NAO 2026 partie 1 et 3). Valeurs relevées sur les images des pages.
+export const GRILLE_EMPLOYES = {   // taux horaire de base (sans pauses), identique pour les pauses à 5 % et à 6,67 %
+  mars:    { '1B': 12.104, '2A': 12.020, '2B': 12.239, '2C': 12.239, '3A': 12.020, '3B': 12.343, '3C': 12.716, '4A': 12.701, '4B': 13.881, '4C': 14.169 },
+  juillet: { '1B': 12.165, '2A': 12.020, '2B': 12.300, '2C': 12.300, '3A': 12.020, '3B': 12.405, '3C': 12.779, '4A': 12.701, '4B': 13.951, '4C': 14.240 },
+};
+export const SMMG_36H = {          // « SMMG » de la NAO (36 h, pause à 6,67 %) : sert à contrôler la transcription des taux
+  mars:    { '1B': 1895.54, '2A': 1882.36, '2B': 1916.67, '2C': 1916.67, '3A': 1882.36, '3B': 1932.92, '3C': 1991.30, '4A': 1989.00, '4B': 2173.92, '4C': 2218.97 },
+  juillet: { '1B': 1905.01, '2A': 1882.36, '2B': 1926.25, '2C': 1926.25, '3A': 1882.36, '3B': 1942.62, '3C': 2001.26, '4A': 1989.00, '4B': 2184.73, '4C': 2230.06 },
+};
+export const MINIMA_ENCADREMENT = {  // forfaits mensuels bruts (maîtrise : 43 h 25 par semaine ; cadres : 216 ou 211 jours par an)
+  mars: { '5': 2525, '5+': 2566, '6': 2627, '6+': 2679, '7': 3228, '7+': 3280, '8': 4150, '8+': 4309 },
+  mai:  { '5': 2531, '5+': 2572, '6': 2633, '6+': 2685, '7': 3235, '7+': 3287, '8': 4159, '8+': 4318 },
+};
+const eur2 = x => (Math.round(x * 100) / 100).toFixed(2).replace('.', ',') + ' €';
+
+export function periodeAccueil({ niveau = 1, promotion = false }) {
+  const n = Math.min(4, Math.max(1, Math.round(niveau))), max = { 1: 3, 2: 6, 3: 12, 4: 18 }[n];
+  const promo = promotion && n >= 3 ? { 3: 6, 4: 9 }[n] : null;
+  const l = [L('accord', `Période d'accueil maximale, niveau ${n}`, `${max} mois`, { brut: max, note: 'Période d\'essai éventuelle comprise. C\'est une durée maximale : elle peut être réduite selon la situation, sans automatisme.' })];
+  if (promotion) l.push(promo ? L('accord', 'En cas de promotion interne', `${promo} mois`, { brut: promo }) : L('accord', 'En cas de promotion interne', 'Pas de durée réduite écrite pour ce niveau', { brut: null, note: 'L\'accord ne fixe une durée réduite que pour les niveaux 3 et 4 (6 et 9 mois).' }));
+  return { lignes: l };
+}
+
+export function augmentationPromotion({ salaire = 0, type = 'niveau' }) {
+  const taux = type === 'statut' ? 3 : 2.5, mini = r2(salaire * taux / 100);
+  const l = [L('accord', `Augmentation minimale (changement de ${type === 'statut' ? 'statut' : 'niveau'})`, `au moins ${String(taux).replace('.', ',')} %`, { brut: taux })];
+  if (salaire > 0) l.push(L('accord', 'Soit au minimum', `${eur2(mini)} de plus par mois, pour un salaire de base de ${eur2(salaire)} : ${eur2(r2(salaire + mini))} au moins`, { brut: mini, note: 'Le salaire doit aussi atteindre le minimum de la grille du nouveau niveau.' }));
+  return { lignes: l };
+}
+
+export function echelonC({ niveau = 3, anciennete = 0, validation = false, transmission = false, cqp = false, salaire = 0 }) {
+  const n34 = niveau === 3 || niveau === 4, validee = validation || (n34 && cqp);
+  const c = [['Ancienneté d\'au moins 8 ans dans le niveau', anciennete >= 8], ['Compétence validée (entretien managérial et RH)' + (n34 ? ', ou CQP, titre équivalent (VAE) ou fonction de tuteur' : ''), validee], ['Capacité à transmettre ses savoirs (accompagnement de nouveaux embauchés, référent formation)', transmission]];
+  const ok = c.every(x => x[1]);
+  const l = c.map(([t, v]) => L('accord', t, v ? 'Oui' : 'Non', { brut: v }));
+  l.push(L('accord', 'Accès à l\'échelon C', ok ? 'Oui, les trois conditions sont réunies' : 'Pas encore', { brut: ok, note: n34 && cqp && !transmission ? 'Pour les niveaux 3 et 4, l\'accord dit que la validation peut résulter d\'un CQP ou de la fonction de tuteur ; il ne dit pas clairement si cela remplace aussi la condition de transmission : à vérifier.' : undefined }));
+  if (ok && salaire > 0) l.push(L('accord', 'Revalorisation d\'au moins 2 %', `au moins ${eur2(r2(salaire * 0.02))} de plus par mois`, { brut: r2(salaire * 0.02), note: 'Même si le salaire est déjà égal ou supérieur au minimum du nouvel échelon ; distincte des augmentations générales.' }));
+  return { lignes: l };
+}
+
+export function echelon20ans({ echelon = '3B', dateEntree = '' }) {
+  if (!dateEntree) return { lignes: [], erreur: 'Renseigner la date d\'entrée dans le Groupe Carrefour.' };
+  const [y, m, d] = dateEntree.split('-').map(Number);
+  const anniv = new Date(Date.UTC(y + 20, m - 1, d)), passage = new Date(Date.UTC(y + 20, m, 1));          // le mois suivant la date anniversaire
+  const debut = new Date(Date.UTC(2026, 6, 1)), effectif = passage < debut ? debut : passage;
+  const f = dt => `${String(dt.getUTCDate()).padStart(2, '0')}/${String(dt.getUTCMonth() + 1).padStart(2, '0')}/${dt.getUTCFullYear()}`;
+  const cible = echelon === '4B' ? '4C' : '3C';
+  const l = [L('nao', `Vos 20 ans d'ancienneté dans le Groupe`, f(anniv), { brut: anniv.getTime() }),
+    L('nao', `Passage automatique à l'échelon ${cible}`, `le mois suivant, soit le ${f(effectif)}`, { brut: effectif.getTime(), note: passage < debut ? 'Le dispositif s\'applique à partir du 1er juillet 2026. Le texte ne dit pas ce qui se passe pour ceux qui avaient déjà 20 ans avant cette date : à vérifier auprès de la direction.' : undefined }),
+    L('nao', 'Revalorisation de 2 % de l\'échelon C', 'Non cumulée avec ce passage automatique', { brut: 0 })];
+  return { lignes: l };
+}
+
+export function salaireMinimumEmploye({ echelon = '3B', grille = 'juillet', heures = 36 }) {
+  const t = GRILLE_EMPLOYES[grille]?.[echelon];
+  if (!t) return { lignes: [], erreur: 'Choisir un niveau et un échelon.' };
+  const mensuel = r2(t * heures * 4.35);
+  const l = [L('nao', `Taux horaire minimum (sans pauses), ${echelon}, grille de ${grille === 'mars' ? 'mars' : 'juillet'} 2026`, `${String(t.toFixed(3)).replace('.', ',')} €`, { brut: t }),
+    L('nao', `Salaire de base mensuel minimum pour ${String(heures).replace('.', ',')} h par semaine`, eur2(mensuel), { brut: mensuel, note: 'Calcul : taux horaire × heures de présence par semaine × 4,35, comme sur les fiches de paie (pauses comprises). Les premiers mois d\'un niveau (A) correspondent à la période d\'accueil.' })];
+  if (heures === 36 && SMMG_36H[grille]?.[echelon]) l.push(L('nao', 'Pour 36 h : minimum garanti de la grille (« SMMG »)', eur2(SMMG_36H[grille][echelon]), { brut: SMMG_36H[grille][echelon] }));
+  return { lignes: l };
+}
+
+export function minimumEncadrement({ echelon = '5', grille = 'mai' }) {
+  const v = MINIMA_ENCADREMENT[grille]?.[echelon];
+  if (!v) return { lignes: [], erreur: 'Choisir un niveau.' };
+  const maitrise = echelon.startsWith('5') || echelon.startsWith('6');
+  return { lignes: [L('nao', `Minimum mensuel brut, niveau ${echelon.replace('+', '')}${echelon.endsWith('+') ? ' (après 3 ans dans le niveau)' : ''}, grille ${grille === 'mars' ? 'de mars (rétroactive au 1er janvier 2026)' : 'de mai 2026'}`, `${v.toLocaleString('fr-FR')} €`, { brut: v, note: maitrise ? 'Forfait pour 43 h 25 par semaine.' : 'Forfait pour 216 jours ou 211 jours par an.' })] };
+}
+
+export function augmentationGarantie04({ echelon = '3B', grille = 'mars', salaire = 0, heures = 36 }) {
+  const t = GRILLE_EMPLOYES[grille]?.[echelon];
+  if (['1A', '2A', '3A'].includes(echelon) || !t) return { lignes: [L('nao', 'Garantie de 0,4 %', 'Pas pour les niveaux 1A, 2A et 3A', { brut: 0 })] };
+  if (!(salaire > 0)) return { lignes: [], erreur: 'Renseigner le salaire de base mensuel brut avant l\'augmentation.' };
+  const minimum = r2(t * heures * 4.35), grilleHausse = Math.max(0, r2(minimum - salaire)), garantie = r2(salaire * 0.004), retenue = Math.max(grilleHausse, garantie);
+  return { lignes: [
+    L('nao', `Minimum de la grille (${grille === 'mars' ? 'mars' : 'juillet'} 2026, ${echelon}, ${String(heures).replace('.', ',')} h)`, eur2(minimum), { brut: minimum }),
+    L('nao', 'Augmentation due à la grille (rattrapage du minimum)', eur2(grilleHausse), { brut: grilleHausse }),
+    L('nao', 'Garantie de 0,4 % du salaire de base', eur2(garantie), { brut: garantie, note: 'La garantie inclut l\'augmentation de la grille : on ne cumule pas les deux, on retient la plus élevée.' }),
+    L('nao', 'Augmentation retenue', `${eur2(retenue)} : nouveau salaire de base ${eur2(r2(salaire + retenue))}`, { fort: true, brut: retenue }),
+  ] };
+}
+
+export function augmentationGarantie1pct({ salaire = 0 }) {
+  const a = r2(salaire * 0.008), b = r2(salaire * 0.002);
+  return { lignes: [
+    L('nao', 'Mars 2026 (rétroactif au 1er janvier) : 0,8 %', salaire > 0 ? `+ ${eur2(a)} par mois` : '0,8 % du salaire de base', { brut: a }),
+    L('nao', 'Mai 2026 : 0,2 %', salaire > 0 ? `+ ${eur2(b)} par mois` : '0,2 % du salaire de base', { brut: b }),
+    L('nao', 'Total garanti : 1 %', salaire > 0 ? `${eur2(r2(a + b))} par mois, soit un salaire de base de ${eur2(r2(salaire + a + b))} environ` : '1 %', { brut: r2(a + b), note: 'Non cumulable avec l\'augmentation due à la revalorisation des minima (art. 1-3 de la NAO). Les deux pourcentages sont additionnés ici.' }),
+  ] };
+}
+
+export function bonusRemplacement({ cibleAbsent = 0, cibleRemplacant = 0, salaireAnnuel = 0, mois = 0 }) {
+  const pct = Math.max(0, cibleAbsent - cibleRemplacant), bonus = r2(salaireAnnuel * pct / 100 * Math.max(0, mois) / 12);
+  const l = [L('accord', 'Pourcentage de bonus cible du remplacement', `${String(pct).replace('.', ',')} % (${cibleAbsent} % de l'absent moins ${cibleRemplacant} % du remplaçant)`, { brut: pct })];
+  if (salaireAnnuel > 0 && mois > 0) l.push(L('accord', `Bonus exceptionnel pour ${mois} mois, si les objectifs sont atteints à 100 %`, eur2(bonus), { fort: true, brut: bonus, note: mois <= 2 ? 'Le bonus n\'est dû que pour un remplacement de plus de 2 mois consécutifs.' : 'Montant cible : le bonus réel dépend des résultats par rapport aux objectifs, et est proratisé selon la période.' }));
+  return { lignes: l };
+}
+
+export const CALCULS = { periodeAccueil, augmentationPromotion, echelonC, echelon20ans, salaireMinimumEmploye, minimumEncadrement, augmentationGarantie04, augmentationGarantie1pct, bonusRemplacement, heuresDelegation, tempsReunionNationale, creditHeuresOS, primeAstreinte, interventionAstreinte, alimentationCET, ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
