@@ -146,3 +146,9 @@ body.modal-ouvert{overflow:hidden}
 .assistant-bas{display:flex;justify-content:space-between;gap:10px;margin-top:16px}
 .vos-reponses ul{list-style:none;padding:0;margin:.4rem 0 .8rem}
 .vos-reponses li{display:flex;justify-content:space-between;gap:12px;padding:.3rem 0;border-bottom:1px solid var(--bord,#ddd)}
+
+.entree-btn.avec-logo .entree-titre{display:none}
+.entree-btn.avec-logo{padding:18px 18px 26px}
+.entree-btn.avec-logo .entree-logo{max-width:100%;width:280px;max-height:none;border-radius:12px}
+.logo-petit{height:34px;width:34px;border-radius:6px;vertical-align:middle;margin-right:6px}
+.assistant-aide{margin:-6px 0 14px;opacity:.75;font-size:.95rem}

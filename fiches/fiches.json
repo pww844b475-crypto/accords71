@@ -39,7 +39,9 @@
        "cadre",
        "Cadre"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "motif",
@@ -58,14 +60,17 @@
        "faute",
        "Faute grave ou lourde"
       ]
-     ]
+     ],
+     "question": "Pourquoi le contrat prend-il fin ?"
     },
     {
      "id": "ancienneteMois",
      "label": "Ancienneté (en mois)",
      "type": "number",
      "min": 0,
-     "defaut": 24
+     "defaut": 24,
+     "question": "Depuis combien de mois êtes-vous dans l'entreprise ?",
+     "aide": "Exemple : 2 ans = 24 mois."
     }
    ],
    "calcul": "preavis",
@@ -182,28 +187,35 @@
        "cadre",
        "Cadre"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "ancienneteMois",
      "label": "Ancienneté (en mois)",
      "type": "number",
      "min": 0,
-     "defaut": 60
+     "defaut": 60,
+     "question": "Depuis combien de mois êtes-vous dans l'entreprise ?",
+     "aide": "Exemple : 2 ans = 24 mois."
     },
     {
      "id": "age",
      "label": "Âge",
      "type": "number",
      "min": 16,
-     "defaut": 40
+     "defaut": 40,
+     "question": "Quel âge a le salarié ?"
     },
     {
      "id": "enfants",
      "label": "Enfants à charge (règles Sécurité sociale)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Avez-vous des enfants à charge ?",
+     "aide": "À charge au sens de la Sécurité sociale (le détail est dans la fiche)."
     },
     {
      "id": "motif",
@@ -222,42 +234,52 @@
        "faute",
        "Faute grave ou lourde"
       ]
-     ]
+     ],
+     "question": "Pourquoi le contrat prend-il fin ?"
     },
     {
      "id": "salaireMensuel",
      "label": "Rémunération mensuelle brute (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Quel est votre salaire brut par mois (en €) ?",
+     "aide": "Le brut est le montant avant retenues, en haut de la fiche de paie."
     },
     {
      "id": "primeAnnuelle",
      "label": "Prime annuelle (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Quel est le montant de la prime annuelle (en €) ?"
     },
     {
      "id": "indemnitesFonction",
      "label": "Indemnités de fonction mensuelles (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Touchez-vous une indemnité de fonction chaque mois (en €) ?",
+     "aide": "C'est une somme versée pour une responsabilité particulière. Tapez 0 si vous n'en avez pas."
     },
     {
      "id": "brut12",
      "label": "Convention : rémunération brute des 12 derniers mois (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien avez-vous gagné de salaire brut sur les 12 derniers mois (en €) ?",
+     "aide": "Le brut est le montant avant retenues, en haut de la fiche de paie. Additionnez les 12 dernières fiches."
     },
     {
      "id": "brut3",
      "label": "Convention : rémunération brute des 3 derniers mois (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien avez-vous gagné de salaire brut sur les 3 derniers mois (en €) ?",
+     "aide": "Additionnez le montant brut des 3 dernières fiches de paie."
     }
    ],
    "calcul": "indemniteLicenciement",
@@ -461,35 +483,42 @@
     {
      "id": "dateEmbauche",
      "label": "Date d'embauche",
-     "type": "date"
+     "type": "date",
+     "question": "Quelle est votre date d'entrée dans l'entreprise ?"
     },
     {
      "id": "annee",
      "label": "Année de la prime",
      "type": "number",
      "min": 2000,
-     "defaut": 2026
+     "defaut": 2026,
+     "question": "Pour quelle année voulez-vous calculer la prime ?"
     },
     {
      "id": "brutAnnee",
      "label": "Rémunération brute de l'assiette sur l'année (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien avez-vous gagné de salaire brut sur l'année (en €) ?",
+     "aide": "Le total du brut de l'année pris en compte pour la prime : voir le cumul sur votre fiche de paie."
     },
     {
      "id": "joursMaladie",
      "label": "Jours d'absence maladie dans l'année",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours d'arrêt maladie avez-vous eus dans l'année ?"
     },
     {
      "id": "sommeForfaitaires",
      "label": "Option : somme des 12 salaires forfaitaires mensuels (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Connaissez-vous le total de vos 12 salaires de base mensuels (en €) ?",
+     "aide": "Facultatif. Si vous ne le savez pas, tapez 0."
     }
    ],
    "calcul": "primeAnnuelle",
@@ -575,28 +604,36 @@
      "label": "CA HT HE Drive inclus : réalisé ÷ budget (%)",
      "type": "number",
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Le magasin a fait combien de % de son objectif de chiffre d'affaires (drive compris) ?",
+     "aide": "Exemple : tapez 102 si le magasin a fait 102 % de son objectif. Ce chiffre est donné par la direction du magasin."
     },
     {
      "id": "mdcX",
      "label": "Poids CA MDC ÷ CA TTC PGC (%)",
      "type": "number",
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Quel est le poids du CA MDC par rapport au CA TTC PGC (en %) ?",
+     "aide": "Chiffre indiqué par la direction du magasin (voir l'avenant d'intéressement)."
     },
     {
      "id": "demarqueEcart",
      "label": "Démarque : réalisé − prévisionnel (points de %)",
      "type": "number",
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "De combien la démarque est-elle meilleure ou moins bonne que prévu (en points) ?",
+     "aide": "La démarque, ce sont les pertes du magasin (vols, casse…). Mettez un nombre négatif (ex. -0,2) si les pertes sont plus faibles que prévu, positif si elles sont plus fortes."
     },
     {
      "id": "nps",
      "label": "Net Promoter Score",
      "type": "number",
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Quel est le score de recommandation des clients du magasin (NPS) ?",
+     "aide": "Chiffre donné par la direction du magasin."
     },
     {
      "id": "presenceMois",
@@ -604,14 +641,17 @@
      "type": "number",
      "min": 0,
      "max": 12,
-     "defaut": 12
+     "defaut": 12,
+     "question": "Combien de mois avez-vous été présent dans l'année (0 à 12) ?"
     },
     {
      "id": "ratioTempsPartiel",
      "label": "Temps partiel : heures effectuées ÷ durée conventionnelle (1 = temps plein)",
      "type": "number",
      "step": "0.01",
-     "defaut": 1
+     "defaut": 1,
+     "question": "Par rapport à un temps plein, quelle part du temps faites-vous ?",
+     "aide": "Exemple : tapez 0,5 pour un mi-temps, 1 pour un temps plein."
     }
    ],
    "calcul": "interessement2026",
@@ -710,7 +750,8 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 300
+     "defaut": 300,
+     "question": "Combien avez-vous versé sur le PEE et le PERCOL cette année (en €) ?"
     }
    ],
    "calcul": "abondement",
@@ -799,34 +840,41 @@
      "type": "number",
      "step": "0.01",
      "min": 0,
-     "defaut": 12
+     "defaut": 12,
+     "question": "Quel est votre salaire par heure (en €) ?",
+     "aide": "C'est le « taux horaire » de votre fiche de paie, avant pauses."
     },
     {
      "id": "h2122",
      "label": "Heures entre 21 h et 22 h",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien d'heures avez-vous travaillé entre 21 h et 22 h ce mois-ci ?"
     },
     {
      "id": "h225",
      "label": "Heures entre 22 h et 5 h",
      "type": "number",
      "min": 0,
-     "defaut": 8
+     "defaut": 8,
+     "question": "Combien d'heures avez-vous travaillé entre 22 h et 5 h du matin ce mois-ci ?"
     },
     {
      "id": "h56",
      "label": "Heures entre 5 h et 6 h",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien d'heures avez-vous travaillé entre 5 h et 6 h du matin ce mois-ci ?"
     },
     {
      "id": "forfaitJours",
      "label": "Cadre au forfait annuel en jours",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Êtes-vous cadre au forfait en jours ?",
+     "aide": "Votre contrat dit « forfait jours » : vous comptez en jours, pas en heures."
     }
    ],
    "calcul": "majorationNuit",
@@ -938,7 +986,9 @@
        "cadre",
        "Cadre"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "ancienneteAns",
@@ -946,31 +996,38 @@
      "type": "number",
      "step": "0.5",
      "min": 0,
-     "defaut": 3
+     "defaut": 3,
+     "question": "Depuis combien d'années êtes-vous dans l'entreprise ?",
+     "aide": "Comptez depuis votre date d'entrée. Sur la fiche de paie : « date ancienneté »."
     },
     {
      "id": "hospitalisation",
      "label": "Hospitalisation",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Y a-t-il eu une hospitalisation ?"
     },
     {
      "id": "plus23j",
      "label": "Arrêt de plus de 23 jours",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "L'arrêt dure-t-il plus de 23 jours ?"
     },
     {
      "id": "plus2mois",
      "label": "Arrêt de plus de 2 mois",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "L'arrêt dure-t-il plus de 2 mois ?"
     },
     {
      "id": "accidentTravail",
      "label": "Accident du travail / maladie professionnelle",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Est-ce un accident du travail ou une maladie professionnelle ?",
+     "aide": "Reconnu comme tel par la Sécurité sociale."
     }
    ],
    "calcul": "arretMaladie",
@@ -1126,13 +1183,16 @@
        "bapteme",
        "Baptême ou communion d'un enfant"
       ]
-     ]
+     ],
+     "question": "Quel événement de famille vous concerne ?"
     },
     {
      "id": "distance300",
      "label": "Décès : déplacement de plus de 300 km (accord) / 500 km (convention)",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Faut-il faire plus de 300 km pour se rendre aux obsèques ?",
+     "aide": "L'accord compte à partir de 300 km, la convention à partir de 500 km."
     }
    ],
    "calcul": "evenementFamilial",
@@ -1245,14 +1305,18 @@
      "label": "Achats annuels concernés (€)",
      "type": "number",
      "min": 0,
-     "defaut": 5000
+     "defaut": 5000,
+     "question": "Combien avez-vous acheté dans l'année avec la remise (en €) ?",
+     "aide": "Le total de vos achats faits avec votre carte PASS."
     },
     {
      "id": "ancienneteMois",
      "label": "Ancienneté (mois)",
      "type": "number",
      "min": 0,
-     "defaut": 12
+     "defaut": 12,
+     "question": "Depuis combien de mois êtes-vous dans l'entreprise ?",
+     "aide": "Exemple : 2 ans = 24 mois."
     }
    ],
    "calcul": "remiseAchats",
@@ -1349,7 +1413,9 @@
        "encadrement",
        "Encadrement (agent de maîtrise, cadre)"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "horaireSalarie",
@@ -1357,7 +1423,9 @@
      "type": "number",
      "step": "0.25",
      "min": 0,
-     "defaut": 24
+     "defaut": 24,
+     "question": "Combien d'heures par semaine prévoit le contrat ?",
+     "aide": "Exemple : 24, 30 ou 36."
     },
     {
      "id": "horaireConv",
@@ -1372,13 +1440,17 @@
        "36",
        "36 h de temps de présence (accord, art. 5.1.2)"
       ]
-     ]
+     ],
+     "question": "Quel est l'horaire d'un temps plein à prendre comme référence ?",
+     "aide": "Les deux lectures du texte sont proposées : choisissez-en une, la fiche explique la différence."
     },
     {
      "id": "arriveeEnCours",
      "label": "Nouveau contrat commençant après le 1er janvier (pas dans les effectifs au 1er janvier)",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Êtes-vous arrivé dans l'entreprise après le 1er janvier ?",
+     "aide": "Si oui, vous n'étiez pas dans les effectifs au 1er janvier."
     }
    ],
    "calcul": "journeeSolidarite",
@@ -1525,7 +1597,9 @@
        "cadre",
        "Cadre"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "ancienneteAns",
@@ -1533,25 +1607,31 @@
      "type": "number",
      "step": "0.5",
      "min": 0,
-     "defaut": 3
+     "defaut": 3,
+     "question": "Depuis combien d'années êtes-vous dans l'entreprise ?",
+     "aide": "Comptez depuis votre date d'entrée. Sur la fiche de paie : « date ancienneté »."
     },
     {
      "id": "accidentTravail",
      "label": "Accident du travail / maladie professionnelle",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Est-ce un accident du travail ou une maladie professionnelle ?",
+     "aide": "Reconnu comme tel par la Sécurité sociale."
     },
     {
      "id": "dateDebut",
      "label": "Date de début de l'arrêt",
-     "type": "date"
+     "type": "date",
+     "question": "Quel est le premier jour de l'arrêt de travail ?"
     },
     {
      "id": "annee",
      "label": "Année de la prime",
      "type": "number",
      "min": 2000,
-     "defaut": 2026
+     "defaut": 2026,
+     "question": "Pour quelle année voulez-vous calculer la prime ?"
     }
    ],
    "calcul": "primeEtArret",
@@ -1669,21 +1749,25 @@
      "label": "Âge du salarié (années)",
      "type": "number",
      "min": 0,
-     "defaut": 60
+     "defaut": 60,
+     "question": "Quel âge a le salarié ?"
     },
     {
      "id": "moisAvantAgeLegal",
      "label": "Mois restant avant l'âge minimum légal de départ",
      "type": "number",
      "min": 0,
-     "defaut": 12
+     "defaut": 12,
+     "question": "Combien de mois vous restent-ils avant l'âge minimum pour partir à la retraite ?"
     },
     {
      "id": "trimestres",
      "label": "Trimestres validés (tous régimes)",
      "type": "number",
      "min": 0,
-     "defaut": 150
+     "defaut": 150,
+     "question": "Combien de trimestres de retraite avez-vous validés (tous régimes) ?",
+     "aide": "Le chiffre se lit sur votre relevé de carrière."
     },
     {
      "id": "horaire",
@@ -1691,7 +1775,9 @@
      "type": "number",
      "step": "0.5",
      "min": 0,
-     "defaut": 36
+     "defaut": 36,
+     "question": "Combien d'heures par semaine travaillez-vous actuellement ?",
+     "aide": "C'est l'horaire écrit dans votre contrat."
     }
    ],
    "calcul": "retraiteProgressive",
@@ -1812,7 +1898,8 @@
        "malade",
        "Malade, non hospitalisé"
       ]
-     ]
+     ],
+     "question": "Quelle est la situation de l'enfant ?"
     },
     {
      "id": "ageEnfant",
@@ -1820,14 +1907,16 @@
      "type": "number",
      "step": "0.5",
      "min": 0,
-     "defaut": 8
+     "defaut": 8,
+     "question": "Quel âge a l'enfant (en années) ?"
     },
     {
      "id": "nbEnfantsMoins16",
      "label": "Nombre d'enfants de moins de 16 ans à charge",
      "type": "number",
      "min": 0,
-     "defaut": 1
+     "defaut": 1,
+     "question": "Combien d'enfants de moins de 16 ans avez-vous à charge ?"
     }
    ],
    "calcul": "enfantMalade",
@@ -2086,14 +2175,17 @@
        "mariage",
        "Mariage ou PACS"
       ]
-     ]
+     ],
+     "question": "Quel événement de famille vous concerne ?"
     },
     {
      "id": "moisEcart",
      "label": "Mois entre l'événement et le déménagement (négatif = déménagement avant l'événement)",
      "type": "number",
      "step": "1",
-     "defaut": 3
+     "defaut": 3,
+     "question": "Combien de mois y a-t-il entre l'événement et le déménagement ?",
+     "aide": "Mettez un nombre négatif (ex. -2) si vous avez déménagé avant l'événement."
     }
    ],
    "calcul": "demenagement",
@@ -2925,7 +3017,9 @@
        "cadre",
        "Cadre"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "ancienneteAns",
@@ -2933,13 +3027,17 @@
      "type": "number",
      "step": "0.5",
      "min": 0,
-     "defaut": 3
+     "defaut": 3,
+     "question": "Depuis combien d'années êtes-vous dans l'entreprise ?",
+     "aide": "Comptez depuis votre date d'entrée. Sur la fiche de paie : « date ancienneté »."
     },
     {
      "id": "accidentTrajet",
      "label": "Accident de trajet",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Est-ce un accident de trajet ?",
+     "aide": "C'est un accident arrivé sur le chemin entre votre domicile et votre travail."
     }
    ],
    "calcul": "delaiProtection",
@@ -3112,21 +3210,25 @@
        "couple",
        "Marié, pacsé ou en concubinage sans enfant à charge"
       ]
-     ]
+     ],
+     "question": "Quelle est votre situation de famille ?"
     },
     {
      "id": "nbEnfants",
      "label": "Nombre d'enfants à charge",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien d'enfants avez-vous à charge ?"
     },
     {
      "id": "salaireReference",
      "label": "Salaire de référence annuel (tranches 1 et 2), si connu (€)",
      "type": "number",
      "min": 0,
-     "defaut": 0
+     "defaut": 0,
+     "question": "Connaissez-vous votre salaire de référence sur l'année (en €) ?",
+     "aide": "Si vous ne le connaissez pas, tapez 0 : la fiche le calcule autrement."
     }
    ],
    "calcul": "capitalDeces",
@@ -3493,7 +3595,9 @@
      "min": 1,
      "max": 6,
      "step": "1",
-     "defaut": 3
+     "defaut": 3,
+     "question": "Combien de jours travaillez-vous par semaine ?",
+     "aide": "Exemple : 5 si vous travaillez du lundi au vendredi."
     },
     {
      "id": "semaines",
@@ -3501,7 +3605,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 1
+     "defaut": 1,
+     "question": "Combien de semaines entières de congés ?",
+     "aide": "Une semaine complète compte pour 1."
     },
     {
      "id": "joursAbsence",
@@ -3509,7 +3615,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours isolés étiez-vous absent, en plus des semaines entières ?",
+     "aide": "Comptez seulement les jours où vous auriez dû travailler."
     },
     {
      "id": "joursFeriesChomes",
@@ -3517,7 +3625,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours fériés fermés par l'entreprise tombent pendant vos congés ?",
+     "aide": "Un jour férié fermé, c'est un jour où le magasin ne travaille pas."
     }
    ],
    "calcul": "congesPointage",
@@ -3629,7 +3739,9 @@
      "min": 0,
      "step": "0.5",
      "defaut": 12,
-     "max": 12
+     "max": 12,
+     "question": "Combien de mois avez-vous travaillé sur la période ?",
+     "aide": "Les congés payés, la maternité, la paternité et les accidents du travail comptent comme du travail."
     },
     {
      "id": "moisMaladieNonPro",
@@ -3638,7 +3750,8 @@
      "min": 0,
      "step": "0.5",
      "defaut": 0,
-     "max": 12
+     "max": 12,
+     "question": "Combien de mois d'arrêt maladie (hors accident du travail) avez-vous eus sur la période ?"
     }
    ],
    "calcul": "congesAcquis",
@@ -3877,7 +3990,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 6
+     "defaut": 6,
+     "question": "Combien de jours de congés avez-vous pris en dehors de mai à octobre ?",
+     "aide": "Ne comptez pas la 5ᵉ semaine."
     }
    ],
    "calcul": "fractionnement",
@@ -3985,7 +4100,9 @@
      "type": "number",
      "min": 0,
      "step": "0.5",
-     "defaut": 12
+     "defaut": 12,
+     "question": "Combien d'années d'ancienneté aviez-vous au 1er juin ?",
+     "aide": "Comptez depuis votre date d'entrée dans l'entreprise."
     }
    ],
    "calcul": "congeAnciennete",
@@ -4207,7 +4324,9 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien avez-vous gagné de salaire brut du 1er juin au 31 mai (en €) ?",
+     "aide": "Additionnez vos salaires bruts de cette période. Cela sert au calcul de l'indemnité de congés payés."
     },
     {
      "id": "maintienSalaire",
@@ -4215,7 +4334,9 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien auriez-vous gagné si vous aviez travaillé pendant votre congé (en €) ?",
+     "aide": "C'est votre salaire normal pour cette période."
     }
    ],
    "calcul": "indemniteConges",
@@ -4340,7 +4461,8 @@
        "9",
        "9e mois"
       ]
-     ]
+     ],
+     "question": "À quel mois de grossesse en êtes-vous ?"
     }
    ],
    "calcul": "grossesse",
@@ -4539,7 +4661,8 @@
        "3",
        "3e enfant ou plus"
       ]
-     ]
+     ],
+     "question": "C'est le combientième enfant de la famille ?"
     },
     {
      "id": "multiples",
@@ -4558,7 +4681,8 @@
        "triples",
        "Triplés ou plus"
       ]
-     ]
+     ],
+     "question": "Y a-t-il une seule naissance, des jumeaux ou plus ?"
     },
     {
      "id": "ancienneteAns",
@@ -4566,7 +4690,8 @@
      "type": "number",
      "min": 0,
      "step": "0.5",
-     "defaut": 3
+     "defaut": 3,
+     "question": "Combien d'années d'ancienneté aviez-vous quand la grossesse a été déclarée ?"
     }
    ],
    "calcul": "maternite",
@@ -4667,7 +4792,8 @@
        "jumeaux",
        "Multiple (jumeaux ou plus)"
       ]
-     ]
+     ],
+     "question": "Y a-t-il une seule naissance ou des jumeaux (ou plus) ?"
     }
    ],
    "calcul": "paternite",
@@ -4757,7 +4883,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 18
+     "defaut": 18,
+     "question": "Combien de mois de congé parental à temps plein ?"
     }
    ],
    "calcul": "congeParentalAnciennete",
@@ -5099,7 +5226,9 @@
        "cadre",
        "Cadre"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "ancienneteAns",
@@ -5107,7 +5236,9 @@
      "type": "number",
      "min": 0,
      "step": "0.5",
-     "defaut": 14
+     "defaut": 14,
+     "question": "Depuis combien d'années êtes-vous dans l'entreprise ?",
+     "aide": "Comptez depuis votre date d'entrée. Sur la fiche de paie : « date ancienneté »."
     },
     {
      "id": "salaireReference",
@@ -5115,7 +5246,9 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Connaissez-vous votre salaire de référence par mois (en €) ?",
+     "aide": "Si vous ne le connaissez pas, tapez 0."
     },
     {
      "id": "plafondSecu",
@@ -5123,7 +5256,9 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 4005
+     "defaut": 4005,
+     "question": "Quel est le plafond mensuel de la Sécurité sociale (en €) ?",
+     "aide": "C'est un montant fixé chaque année par l'État : 4 005 € en 2026 (source Urssaf)."
     }
    ],
    "calcul": "allocationRetraite",
@@ -5344,7 +5479,9 @@
        "cadre",
        "Cadre"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "joursPresence",
@@ -5352,7 +5489,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 20
+     "defaut": 20,
+     "question": "Combien de jours avez-vous été présent ?"
     }
    ],
    "calcul": "periodeEssai",
@@ -5505,7 +5643,8 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 40
+     "defaut": 40,
+     "question": "Combien d'heures avez-vous vraiment travaillé cette semaine, sans compter les pauses ?"
     },
     {
      "id": "heuresPresence",
@@ -5513,7 +5652,9 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 41
+     "defaut": 41,
+     "question": "Combien d'heures êtes-vous présent au magasin sur la semaine, pauses comprises ?",
+     "aide": "C'est votre horaire de la semaine, de l'arrivée au départ."
     },
     {
      "id": "tauxHoraire",
@@ -5521,7 +5662,9 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Connaissez-vous votre salaire par heure (en €) ?",
+     "aide": "C'est le « taux horaire » de votre fiche de paie. Sinon tapez 0."
     }
    ],
    "calcul": "heuresSup"
@@ -5817,7 +5960,9 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 38
+     "defaut": 38,
+     "question": "Combien d'heures êtes-vous présent au magasin sur la semaine, pauses comprises ?",
+     "aide": "C'est votre horaire de la semaine, de l'arrivée au départ."
     }
    ],
    "calcul": "annualisation"
@@ -6116,7 +6261,9 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 24
+     "defaut": 24,
+     "question": "Combien d'heures par semaine prévoit votre contrat ?",
+     "aide": "Exemple : 24, 30 ou 36."
     },
     {
      "id": "heuresCompl",
@@ -6124,7 +6271,9 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 5
+     "defaut": 5,
+     "question": "Combien d'heures en plus de votre contrat avez-vous faites cette semaine ?",
+     "aide": "On les appelle les heures complémentaires (temps partiel)."
     }
    ],
    "calcul": "heuresComplementaires"
@@ -6360,7 +6509,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 28
+     "defaut": 28,
+     "question": "Combien d'heures par semaine prévoit votre contrat ?",
+     "aide": "Exemple : 24, 30 ou 36."
     }
    ],
    "calcul": "modulationTempsPartiel"
@@ -6757,7 +6908,9 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 30000
+     "defaut": 30000,
+     "question": "Combien avez-vous gagné de salaire brut sur l'année (en €) ?",
+     "aide": "Le brut est le montant avant retenues, en haut de la fiche de paie."
     },
     {
      "id": "plafondSecu",
@@ -6765,7 +6918,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 48060
+     "defaut": 48060,
+     "question": "Quel est le plafond annuel de la Sécurité sociale (en €) ?",
+     "aide": "C'est un montant fixé chaque année par l'État : 48 060 € en 2026 (source Urssaf)."
     },
     {
      "id": "moisPresence",
@@ -6774,7 +6929,8 @@
      "min": 0,
      "step": "0.5",
      "defaut": 12,
-     "max": 12
+     "max": 12,
+     "question": "Combien de mois avez-vous été présent dans l'année (0 à 12) ?"
     }
    ],
    "calcul": "participationRepartition"
@@ -7433,7 +7589,8 @@
      "min": 0,
      "step": "1",
      "defaut": 0,
-     "max": 7
+     "max": 7,
+     "question": "Combien de jours par semaine faites-vous au moins 3 heures de travail entre 21 h et 6 h ?"
     },
     {
      "id": "heuresNuit",
@@ -7441,7 +7598,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien d'heures de nuit (entre 21 h et 6 h) avez-vous faites du 1er juin au 31 mai ?"
     },
     {
      "id": "nuits",
@@ -7449,7 +7607,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de nuits avez-vous travaillé du 1er juin au 31 mai ?"
     }
    ],
    "calcul": "travailleurDeNuit"
@@ -7563,7 +7722,9 @@
        "cadre",
        "Cadre au forfait jours"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "heuresNuit",
@@ -7571,7 +7732,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 300
+     "defaut": 300,
+     "question": "Combien d'heures de nuit (entre 21 h et 6 h) avez-vous faites du 1er juin au 31 mai ?"
     },
     {
      "id": "nuits",
@@ -7579,7 +7741,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 40
+     "defaut": 40,
+     "question": "Combien de nuits avez-vous travaillé sur l'année ?"
     }
    ],
    "calcul": "reposNuit"
@@ -7647,7 +7810,9 @@
        "cadre",
        "Cadre au forfait jours"
       ]
-     ]
+     ],
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "nuits",
@@ -7655,7 +7820,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 40
+     "defaut": 40,
+     "question": "Combien de nuits avez-vous travaillé du 1er juin au 31 mai ?"
     }
    ],
    "calcul": "reposNuit"
@@ -7765,7 +7931,8 @@
        "habituel",
        "Dimanche habituel (ouvertures habituelles)"
       ]
-     ]
+     ],
+     "question": "Quel type de dimanche ?"
     },
     {
      "id": "heures",
@@ -7773,7 +7940,8 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 4
+     "defaut": 4,
+     "question": "Combien d'heures avez-vous travaillé le dimanche ?"
     },
     {
      "id": "tauxHoraire",
@@ -7781,13 +7949,17 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Connaissez-vous votre salaire par heure (en €) ?",
+     "aide": "C'est le « taux horaire » de votre fiche de paie. Sinon tapez 0."
     },
     {
      "id": "grandeSurface",
      "label": "Commerce de plus de 400 m² (pour la convention)",
      "type": "checkbox",
-     "defaut": true
+     "defaut": true,
+     "question": "Le magasin fait-il plus de 400 m² ?",
+     "aide": "Il s'agit de la surface de vente."
     }
    ],
    "calcul": "dimanche"
@@ -7914,7 +8086,8 @@
        "exceptionnel",
        "Dimanche exceptionnel"
       ]
-     ]
+     ],
+     "question": "Quel type de dimanche ?"
     },
     {
      "id": "heures",
@@ -7922,7 +8095,8 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 6
+     "defaut": 6,
+     "question": "Combien d'heures avez-vous travaillé le dimanche ?"
     },
     {
      "id": "tauxHoraire",
@@ -7930,7 +8104,9 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Connaissez-vous votre salaire par heure (en €) ?",
+     "aide": "C'est le « taux horaire » de votre fiche de paie. Sinon tapez 0."
     }
    ],
    "calcul": "dimanche"
@@ -8359,7 +8535,8 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 7
+     "defaut": 7,
+     "question": "Combien d'heures avez-vous travaillé ce jour férié ?"
     },
     {
      "id": "tauxHoraire",
@@ -8367,13 +8544,16 @@
      "type": "number",
      "min": 0,
      "step": "0.01",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Connaissez-vous votre salaire par heure (en €) ?",
+     "aide": "C'est le « taux horaire » de votre fiche de paie. Sinon tapez 0."
     },
     {
      "id": "premierMai",
      "label": "Il s'agit du 1er mai",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "Est-ce le 1er mai ?"
     }
    ],
    "calcul": "ferieTravaille"
@@ -8542,7 +8722,9 @@
      "min": 0,
      "step": "0.25",
      "defaut": 36,
-     "max": 60
+     "max": 60,
+     "question": "Combien d'heures êtes-vous présent au magasin sur la semaine, pauses comprises ?",
+     "aide": "C'est votre horaire de la semaine, de l'arrivée au départ."
     },
     {
      "id": "poste",
@@ -8566,13 +8748,16 @@
        "Chambre de surgélation (12 min)"
       ]
      ],
-     "defaut": "rayon"
+     "defaut": "rayon",
+     "question": "Quel est votre poste ?"
     },
     {
      "id": "habillage",
      "label": "Tenue obligatoire, habillage sur place (+1 min/h)",
      "type": "checkbox",
-     "defaut": false
+     "defaut": false,
+     "question": "La tenue est-elle obligatoire et vous changez-vous sur place ?",
+     "aide": "Si oui, vous avez 1 minute de pause en plus par heure."
     }
    ],
    "calcul": "pauses"
@@ -8789,7 +8974,9 @@
      "min": 0,
      "step": "0.25",
      "defaut": 36,
-     "max": 60
+     "max": 60,
+     "question": "Combien d'heures êtes-vous présent au magasin sur la semaine, pauses comprises ?",
+     "aide": "C'est votre horaire de la semaine, de l'arrivée au départ."
     },
     {
      "id": "poste",
@@ -8813,13 +9000,16 @@
        "Surgélation"
       ]
      ],
-     "defaut": "rayon"
+     "defaut": "rayon",
+     "question": "Quel est votre poste ?"
     },
     {
      "id": "habillage",
      "label": "Tenue obligatoire, habillage sur place",
      "type": "checkbox",
-     "defaut": true
+     "defaut": true,
+     "question": "La tenue est-elle obligatoire et vous changez-vous sur place ?",
+     "aide": "Si oui, vous avez 1 minute de pause en plus par heure."
     }
    ],
    "calcul": "pauses"
@@ -9514,7 +9704,9 @@
      "min": 0,
      "step": "1",
      "defaut": 5,
-     "max": 31
+     "max": 31,
+     "question": "Combien de fois avez-vous fermé le magasin ce mois-ci ?",
+     "aide": "Une fermeture, c'est quand votre journée se termine après 19 h 30."
     }
    ],
    "calcul": "primeFermeture"
@@ -9730,7 +9922,9 @@
      "min": 0,
      "step": "1",
      "defaut": 0,
-     "max": 62
+     "max": 62,
+     "question": "Combien de titres-restaurant avez-vous eus dans le mois ?",
+     "aide": "Un titre par jour où votre horaire couvre 12 h-13 h 30 ou 18 h 30-20 h."
     },
     {
      "id": "region",
@@ -9746,7 +9940,8 @@
        "Île-de-France"
       ]
      ],
-     "defaut": "autre"
+     "defaut": "autre",
+     "question": "Dans quel magasin travaillez-vous ?"
     }
    ],
    "calcul": "ticketsRestaurant"
@@ -9824,7 +10019,9 @@
      "min": 0,
      "step": "1",
      "defaut": 1,
-     "max": 62
+     "max": 62,
+     "question": "Combien de titres-restaurant avez-vous eus dans le mois ?",
+     "aide": "Un titre par jour où votre horaire couvre 12 h-13 h 30 ou 18 h 30-20 h."
     },
     {
      "id": "region",
@@ -9840,7 +10037,8 @@
        "Île-de-France"
       ]
      ],
-     "defaut": "autre"
+     "defaut": "autre",
+     "question": "Dans quel magasin travaillez-vous ?"
     }
    ],
    "calcul": "ticketsRestaurant"
@@ -9978,7 +10176,8 @@
      "min": 0,
      "step": "1",
      "defaut": 22,
-     "max": 31
+     "max": 31,
+     "question": "Combien de jours avez-vous travaillé ce mois-ci ?"
     },
     {
      "id": "joursOuvres",
@@ -9987,7 +10186,9 @@
      "min": 1,
      "step": "1",
      "defaut": 22,
-     "max": 31
+     "max": 31,
+     "question": "Combien y a-t-il de jours du lundi au vendredi dans ce mois ?",
+     "aide": "On les appelle les jours ouvrés."
     }
    ],
    "calcul": "entretienTenue"
@@ -10087,7 +10288,9 @@
      "min": 0,
      "step": "0.1",
      "defaut": 3,
-     "max": 300
+     "max": 300,
+     "question": "Quelle distance faites-vous entre chez vous et le travail (en km) ?",
+     "aide": "Distance aller simple, par l'itinéraire le plus court."
     },
     {
      "id": "jours",
@@ -10096,7 +10299,8 @@
      "min": 0,
      "step": "1",
      "defaut": 20,
-     "max": 31
+     "max": 31,
+     "question": "Combien de jours avez-vous travaillé ou été en formation ce mois-ci ?"
     }
    ],
    "calcul": "fraisTransport"
@@ -10231,7 +10435,8 @@
        "Ouvert 24 h/24"
       ]
      ],
-     "defaut": "standard"
+     "defaut": "standard",
+     "question": "Dans quel type de magasin travaillez-vous ?"
     },
     {
      "id": "semaines",
@@ -10240,7 +10445,8 @@
      "min": 0,
      "step": "1",
      "defaut": 1,
-     "max": 52
+     "max": 52,
+     "question": "Combien de semaines d'astreinte ?"
     }
    ],
    "calcul": "primeAstreinte"
@@ -10352,7 +10558,9 @@
        "Encadrement (maîtrise, cadre)"
       ]
      ],
-     "defaut": "employe"
+     "defaut": "employe",
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "heures",
@@ -10360,7 +10568,9 @@
      "type": "number",
      "min": 0,
      "step": "0.25",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien d'heures ont duré vos interventions en tout, trajet compris ?",
+     "aide": "Additionnez le temps passé à vous déplacer et à intervenir."
     }
    ],
    "calcul": "interventionAstreinte"
@@ -10784,7 +10994,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours avez-vous déjà sur votre CET ?"
     },
     {
      "id": "age",
@@ -10793,7 +11004,8 @@
      "min": 16,
      "step": "1",
      "defaut": 40,
-     "max": 70
+     "max": 70,
+     "question": "Quel âge avez-vous ?"
     },
     {
      "id": "statut",
@@ -10809,7 +11021,9 @@
        "Maîtrise ou cadre"
       ]
      ],
-     "defaut": "employe"
+     "defaut": "employe",
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "cp5e",
@@ -10818,7 +11032,9 @@
      "min": 0,
      "step": "1",
      "defaut": 0,
-     "max": 6
+     "max": 6,
+     "question": "Combien de jours de la 5ᵉ semaine de congés n'avez-vous pas pris au 31 mai ?",
+     "aide": "6 jours au maximum."
     },
     {
      "id": "anciennete",
@@ -10826,7 +11042,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours de congés d'ancienneté voulez-vous mettre sur le CET ?",
+     "aide": "Ce sont les jours de congé en plus que vous avez grâce à vos années dans l'entreprise."
     },
     {
      "id": "fractionnement",
@@ -10834,7 +11052,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours de fractionnement voulez-vous mettre sur le CET ?",
+     "aide": "Ce sont des jours de congé en plus quand les congés sont pris en plusieurs fois."
     },
     {
      "id": "rtt",
@@ -10843,7 +11063,9 @@
      "min": 0,
      "step": "1",
      "defaut": 0,
-     "max": 10
+     "max": 10,
+     "question": "Combien de jours de RTT voulez-vous mettre sur le CET ?",
+     "aide": "Réservé à la maîtrise et aux cadres, 10 jours au maximum."
     }
    ],
    "calcul": "alimentationCET"
@@ -10943,7 +11165,9 @@
        "Maîtrise ou cadre"
       ]
      ],
-     "defaut": "employe"
+     "defaut": "employe",
+     "question": "Êtes-vous employé, agent de maîtrise ou cadre ?",
+     "aide": "C'est votre catégorie sur la fiche de paie."
     },
     {
      "id": "cp5e",
@@ -10952,7 +11176,9 @@
      "min": 0,
      "step": "1",
      "defaut": 0,
-     "max": 6
+     "max": 6,
+     "question": "Combien de jours de la 5ᵉ semaine de congés n'avez-vous pas pris au 31 mai ?",
+     "aide": "6 jours au maximum."
     },
     {
      "id": "anciennete",
@@ -10960,7 +11186,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours de congés d'ancienneté voulez-vous mettre sur le CET ?",
+     "aide": "Ce sont les jours de congé en plus que vous avez grâce à vos années dans l'entreprise."
     },
     {
      "id": "fractionnement",
@@ -10968,7 +11196,9 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours de fractionnement voulez-vous mettre sur le CET ?",
+     "aide": "Ce sont des jours de congé en plus quand les congés sont pris en plusieurs fois."
     },
     {
      "id": "rtt",
@@ -10977,7 +11207,9 @@
      "min": 0,
      "step": "1",
      "defaut": 0,
-     "max": 10
+     "max": 10,
+     "question": "Combien de jours de RTT voulez-vous mettre sur le CET ?",
+     "aide": "Réservé à la maîtrise et aux cadres, 10 jours au maximum."
     },
     {
      "id": "age",
@@ -10986,7 +11218,8 @@
      "min": 16,
      "step": "1",
      "defaut": 40,
-     "max": 70
+     "max": 70,
+     "question": "Quel âge avez-vous ?"
     },
     {
      "id": "solde",
@@ -10994,7 +11227,8 @@
      "type": "number",
      "min": 0,
      "step": "1",
-     "defaut": 0
+     "defaut": 0,
+     "question": "Combien de jours avez-vous déjà sur votre CET ?"
     }
    ],
    "calcul": "alimentationCET"
