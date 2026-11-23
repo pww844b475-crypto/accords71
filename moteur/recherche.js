@@ -94,3 +94,7 @@ export function chercherTexte(requete, corpus, max = 30) {
   }
   return resultats;
 }
+
+// Question sur « combien je vais toucher » : on ouvre directement l'estimation de la fiche de paie
+const VEUT_PAIE = /(combien.*(toucher|gagner|recevoir|percevoir)|(vais|vas|va|allez|aller)\s+(toucher|gagner|recevoir|percevoir)|fiche de pa(i|y)e|bulletin de pa(i|y)e|simul\w*.*(salaire|pa(i|y)e)|estim\w*.*(salaire|pa(i|y)e|net)|mon salaire|net a payer|mon net|ma pa(i|y)e|ma remuneration)/;
+export const veutLaPaie = q => VEUT_PAIE.test(String(q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));

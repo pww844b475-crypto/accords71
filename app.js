@@ -1,6 +1,6 @@
-import { EMPREINTE_MDP } from './config.js';
+import { EMPREINTE_MDP, VERSION } from './config.js';
 import { CALCULS } from './moteur/calculs.js';
-import { chercherFiches, chercherTexte } from './moteur/recherche.js';
+import { chercherFiches, chercherTexte, veutLaPaie } from './moteur/recherche.js';
 import { ouvrirSimulateur } from './simulateur.js';
 import { lancerAssistant, emojiPour } from './assistant.js';
 
@@ -65,7 +65,8 @@ function accueil() {
       h('span', { class: 'tuile-icone' }, c.icone), h('span', { class: 'tuile-nom' }, c.nom), h('span', { class: 'tuile-desc' }, c.description),
       h('span', { class: 'tuile-nb' }, `${FICHES.filter(f => f.categorie === c.id).length} réponses`)))),
     h('h3', { class: 'section' }, '⭐ Questions fréquentes'),
-    h('div', { class: 'liste' }, freq.map(carteFiche)));
+    h('div', { class: 'liste' }, freq.map(carteFiche)),
+    h('p', { class: 'version' }, `Version ${VERSION}`));
 }
 
 function vueCategorie(id) {
@@ -75,11 +76,8 @@ function vueCategorie(id) {
     h('div', { class: 'liste' }, FICHES.filter(f => f.categorie === id).map(carteFiche)));
 }
 
-// Questions sur « combien je vais toucher » : on ouvre directement l'estimation de la fiche de paie
-const VEUT_PAIE = /(combien.*(toucher|gagner|recevoir|percevoir)|fiche de pa(ie|y)e|bulletin de pa(ie|y)e|simul\w*.*(salaire|pa(ie|y)e)|estim\w*.*(salaire|pa(ie|y)e|net)|mon salaire|net a payer|mon net|ma pa(ie|y)e)/;
 function recherche(q) {
-  const qn = q.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-  if (VEUT_PAIE.test(qn)) { pageSimulateur(); return; }
+  if (veutLaPaie(q)) { pageSimulateur(); return; }
   const r = chercherFiches(q, FICHES, SYN);
   const liste = fs => { precedent = () => { $('#q').value = q; recherche(q); }; onglets(null); return h('div', { class: 'liste' }, fs.map(carteFiche)); };
   if (r.mode === 'direct') { precedent = accueil; ouvrirFiche(r.fiches[0]); }

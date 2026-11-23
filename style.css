@@ -192,3 +192,5 @@ body.modal-ouvert{overflow:hidden}
 .as-recap li button:active{background:rgba(15,139,107,.1)}
 .as-recap-q{opacity:.8}
 .as-recap li strong{color:#0f8b6b;text-align:right}
+
+.version{text-align:center;opacity:.5;font-size:.8rem;margin:24px 0 8px}
