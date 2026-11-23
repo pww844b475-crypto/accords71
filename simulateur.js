@@ -123,7 +123,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     const feriesMois = aa && mm ? feriesDans(`${aa}-${String(mm).padStart(2, '0')}-01`, `${aa}-${String(mm).padStart(2, '0')}-${String(joursDuMois).padStart(2, '0')}`).filter(f => f.jour >= 1 && f.jour <= 5) : [];
     const km = num(valeurs.km);
     const transport = km > 0 ? (fraisTransport({ km, jours: num(valeurs.joursTransport) > 0 ? Math.round(num(valeurs.joursTransport)) : trav }).lignes[1]?.brut || 0) : 0;
-    const plus = !!valeurs.optPlus, deleg = plus && !!valeurs.estDeleg, sp = !!valeurs.optSpec;
+    const plus = !!valeurs.optPlus, sp = !!valeurs.optSpec;
     const semaines = plus ? [0, 1, 2, 3, 4, 5].map(i => num(valeurs['sem' + i])) : [];
     const parSemaine = plus && semaines.some(x => x > 0);
     const ast = !!valeurs.optAst, astH = ast ? num(valeurs.astHeures) : 0;
@@ -155,11 +155,16 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     const ligne = (t, v, fort) => h('div', { class: 'simu-ligne' + (fort ? ' fort' : '') }, h('span', {}, t), h('strong', {}, v));
     const [a, m] = (valeurs.mois || '').split('-').map(Number);
     const periode = a && m ? `${MOIS[m - 1]} ${a}` : '';
+    // Nature des heures en plus : délégation hors temps de travail, heures supplémentaires ou complémentaires demandées par le magasin, ou les deux
+    const nature = valeurs.natureHeures || (valeurs.estDeleg ? 'deleg' : '');
+    const hDeleg = !plus ? 0 : nature === 'deleg' ? rep.total : nature === 'les2' ? Math.min(rep.total, num(valeurs.hDelegPart)) : 0;
+    const hAutres = plus ? Math.round((rep.total - hDeleg) * 100) / 100 : 0;
+    const natureInconnue = plus && !nature;
     remplir(zoneResultat,
       h('h3', {}, `Votre fiche estimée${periode ? ' · ' + periode : ''}`),
       h('div', { class: 'simu-resume' },
-        h('span', { class: 'tag' + (deleg ? ' ok' : '') }, deleg ? `Heures de délégation : OUI (${virg(rep.total)} h)` : 'Heures de délégation : non'),
-        h('span', { class: 'tag' + (plus && !deleg ? ' ok' : '') }, plus && !deleg ? `Heures en plus du contrat : OUI (${virg(rep.total)} h)` : 'Heures supplémentaires : non')),
+        h('span', { class: 'tag' + (hDeleg > 0 ? ' ok' : '') }, hDeleg > 0 ? `Heures de délégation hors temps de travail : OUI (${virg(hDeleg)} h)` : 'Heures de délégation hors temps de travail : non'),
+        h('span', { class: 'tag' + (hAutres > 0 ? ' ok' : '') }, natureInconnue ? `Heures en plus du contrat : OUI (${virg(rep.total)} h), nature non précisée` : hAutres > 0 ? `Heures supplémentaires ou complémentaires : OUI (${virg(hAutres)} h)` : 'Heures supplémentaires ou complémentaires : non')),
       plus ? h('p', { class: 'note' }, `${parSemaine ? 'Répartition semaine par semaine' : 'Répartition automatique du total (heures étalées sur le mois, approximation : donnez le détail par semaine pour plus de précision)'} : ${virg(rep.hc10)} h à 10 %, ${virg(rep.hc25)} h à 25 % (heures complémentaires), ${virg(rep.hs25)} h à 25 % et ${virg(rep.hs50)} h à 50 % (heures supplémentaires).`) : null,
       ligne('Salaire brut', eur(r.brut), true),
       ligne('Cotisations salariales', eur(-r.totalCotisations)),
@@ -207,8 +212,9 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'salaireBase', type: 'nombre', unite: '€', emoji: '💶', optionnel: true, court: 'Salaire de base', question: 'Quel est le « salaire de base » de votre fiche de paie ?', aide: 'C\'est le montant en haut de votre fiche, dans l\'encadré de gauche. Si vous ne l\'avez pas sous la main, touchez « Je ne sais pas ».' },
     { id: 'tauxHoraire', type: 'nombre', unite: '€ par heure', emoji: '💶', court: 'Salaire par heure', si: v => !(Number(v.salaireBase) > 0), question: 'Quel est votre salaire par heure ?', aide: 'C\'est le « taux horaire » de votre fiche de paie, sans les pauses.' },
     { id: 'optPlus', type: 'ouinon', emoji: '➕', court: 'Heures en plus du contrat', question: 'Avez-vous fait des heures en plus de votre contrat ce mois-ci ?', aide: 'Heures de délégation hors temps de travail, heures complémentaires ou heures supplémentaires.' },
-    { id: 'estDeleg', type: 'ouinon', emoji: '🤝', court: 'Heures de délégation', si: v => v.optPlus, question: 'Ce sont des heures de délégation, faites en dehors de votre temps de travail ?', aide: 'Répondez Non si ce sont des heures demandées par le magasin.' },
+    { id: 'natureHeures', type: 'choix', emoji: '🔎', court: 'Nature des heures en plus', si: v => v.optPlus, question: 'Ces heures en plus, c\'est quoi ?', aide: 'La paie les range de la même façon, mais elles ne sont pas la même chose.', options: [['deleg', 'Des heures de délégation, faites en dehors de mon temps de travail', '🤝'], ['hs', 'Des heures supplémentaires ou complémentaires, demandées par le magasin', '🕐'], ['les2', 'Un peu des deux', '🔀']] },
     { id: 'hPlus', type: 'nombre', unite: 'h', emoji: '⏱️', court: 'Total des heures en plus', si: v => v.optPlus, question: 'Combien d\'heures en tout, sur le mois ?', aide: 'Comme sur le planning : 6,50 veut dire 6 h 30. Vous pourrez détailler semaine par semaine à la question suivante.' },
+    { id: 'hDelegPart', type: 'nombre', unite: 'h', emoji: '🤝', court: 'Dont heures de délégation', si: v => v.optPlus && v.natureHeures === 'les2' && Number(v.hPlus) > 0, question: 'Sur ce total, combien d\'heures de délégation ?', aide: 'Le reste compte comme heures supplémentaires ou complémentaires.' },
     { id: 'precis', type: 'ouinon', emoji: '🔎', court: 'Détail par semaine', si: v => v.optPlus && Number(v.hPlus) > 0, question: 'Voulez-vous détailler semaine par semaine ?', aide: 'C\'est plus précis : la paie calcule les majorations semaine par semaine. Sinon je répartis vos heures sur tout le mois.' },
     ...[0, 1, 2, 3, 4, 5].map(i => ({ id: 'sem' + i, type: 'nombre', unite: 'h', emoji: '📆', court: v => 'Semaine ' + libSemaine(v, i), si: v => v.optPlus && v.precis && Number(v.hPlus) > 0 && i < nbSemaines(v), question: v => `Combien d'heures en plus la semaine ${libSemaine(v, i)} ?`, aide: 'La paie met les heures en plus sur le dimanche de la semaine : cette semaine compte pour le mois où elle se termine. Tapez 0 s\'il n\'y en a pas eu.' })),
     { id: 'optSpec', type: 'ouinon', emoji: '🌙', court: 'Dimanche, férié ou nuit', question: 'Avez-vous travaillé un dimanche, un jour férié ou de nuit ?' },
@@ -286,7 +292,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
         champ('hPlus', 'Total d\'heures en plus du contrat sur le mois', { placeholder: 'ex. 31,5', aide: 'Comme sur la fiche et le planning, en heures décimales : 6,50 = 6 h 30. Les 10 %, 25 % et 50 % sont calculés automatiquement.' }),
         h('details', { class: 'plein' }, h('summary', {}, 'Plus précis : semaine par semaine (lundi au dimanche, rattachée au mois où elle se termine)'),
           h('div', { class: 'champs' }, ...[0, 1, 2, 3, 4, 5].map(i => { const c = champ('sem' + i, 'Semaine ' + i, { placeholder: '0' }); c.classList.add('semaine'); return c; }))),
-        h('label', { class: 'champ champ-case plein' }, (() => { const c = h('input', { type: 'checkbox', 'aria-label': 'Heures de délégation hors temps de travail' }); valeurs.estDeleg = !!valeurs.estDeleg; c.checked = valeurs.estDeleg; c.addEventListener('change', () => { valeurs.estDeleg = c.checked; calculer(); }); return c; })(), h('span', {}, 'Ce sont des heures de délégation hors temps de travail'))),
+        choix('natureHeures', 'Nature de ces heures', [['', 'À préciser'], ['deleg', 'Heures de délégation hors temps de travail'], ['hs', 'Heures supplémentaires ou complémentaires'], ['les2', 'Un peu des deux']], ''), champ('hDelegPart', 'Si « un peu des deux » : dont heures de délégation', {})),
       option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche habituel (+60 %)'), champ('dimanche100', 'Heures de dimanche exceptionnel (+100 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
       option('optAst', 'J\'ai été d\'astreinte ce mois-ci', choix('astMagasin', 'Type de magasin', [['standard', 'Autre magasin'], ['dimanche', 'Ouvert le dimanche après-midi ou jusqu\'à minuit'], ['h24', 'Ouvert 24 h sur 24']], 'standard'), champ('astSemaines', 'Semaines d\'astreinte'), champ('astHeures', 'Heures d\'intervention, trajet compris')),
       option('optCp', 'J\'ai pris des congés payés ce mois-ci', champDate('cpDebut', 'Premier jour des congés'), champDate('cpFin', 'Dernier jour des congés'), champ('cpJoursTrav', 'Jours de travail prévus pendant les congés (si vos jours varient)'), champ('cpFerie', 'Jours fériés fermés par le magasin pendant les congés'), champ('cpJours', 'Jours de congés pointés (si vous les connaissez : remplace le calcul par dates)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),
