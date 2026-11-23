@@ -78,6 +78,7 @@ export function simulerPaie(e, T) {
     if (estHcHs) brutHcHs += m;
   };
   ligneMaj('dim', 'Majoration dimanche', e.dimanche, mj.dimanche, false);
+  ligneMaj('dim100', 'Majoration dimanche exceptionnel 100 %', e.dimanche100, mj.dimanche_100, false);
   ligneMaj('ferie', 'Majoration jour férié', e.ferie, mj.ferie, false);
   ligneMaj('nuit30', 'Majoration nuit 22 h-5 h', e.nuit30, mj.nuit_22_5, false);
   ligneMaj('nuit10', 'Majoration nuit 21 h-22 h / 5 h-6 h', e.nuit10, mj.nuit_21_22, false);

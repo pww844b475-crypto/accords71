@@ -2,6 +2,7 @@
 import { simulerPaie, repartirHeures, repartirTotal, compterJoursHabituels } from './moteur/paie.js';
 import { entretienTenue, fraisTransport, primeAstreinte } from './moteur/calculs.js';
 import { lancerAssistant } from './assistant.js';
+import { ouvrirImport } from './importPlanning.js';
 
 const eur = x => (x < 0 ? '−' : '') + Math.abs(x).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €';
 const virg = x => String(x).replace('.', ',');
@@ -118,7 +119,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       salaireBase: num(valeurs.salaireBase), heuresSemaine: num(valeurs.heuresSemaine), pausePct: pct,
       tauxHoraire: num(valeurs.tauxHoraire), primeAstreinte: primeAst,
       semainesEnPlus: (plus || astH > 0) && parSemaine ? semaines : undefined, totalEnPlus: !parSemaine ? total : 0,
-      dimanche: sp ? num(valeurs.dimanche) : 0, ferie: sp ? num(valeurs.ferie) : 0, nuit30: sp ? num(valeurs.nuit30) : 0, nuit10: sp ? num(valeurs.nuit10) : 0,
+      dimanche: sp ? num(valeurs.dimanche) : 0, dimanche100: sp ? num(valeurs.dimanche100) : 0, ferie: sp ? num(valeurs.ferie) : 0, nuit30: sp ? num(valeurs.nuit30) : 0, nuit10: sp ? num(valeurs.nuit10) : 0,
       cpJours: valeurs.optCp ? num(valeurs.cpJours) : 0, cpRefBrute: valeurs.optCp ? num(valeurs.cpRef) : 0, cpIndemniteJour: valeurs.optCp ? num(valeurs.cpInd) : 0,
       hsExoAuto: true, autresBrut: valeurs.optAutres ? num(valeurs.autresBrut) : 0,
       tenue, transport, tickets: Math.floor(num(valeurs.tickets)), partSalarieTicket: valeurs.region === 'idf' ? 4 : 3.7,
@@ -177,7 +178,8 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'precis', type: 'ouinon', emoji: '🔎', court: 'Détail par semaine', si: v => v.optPlus && Number(v.hPlus) > 0, question: 'Voulez-vous détailler semaine par semaine ?', aide: 'C\'est plus précis : la paie calcule les majorations semaine par semaine. Sinon je répartis vos heures sur tout le mois.' },
     ...[0, 1, 2, 3, 4, 5].map(i => ({ id: 'sem' + i, type: 'nombre', unite: 'h', emoji: '📆', court: v => 'Semaine ' + libSemaine(v, i), si: v => v.optPlus && v.precis && Number(v.hPlus) > 0 && i < nbSemaines(v), question: v => `Combien d'heures en plus la semaine ${libSemaine(v, i)} ?`, aide: 'La paie met les heures en plus sur le dimanche de la semaine : cette semaine compte pour le mois où elle se termine. Tapez 0 s\'il n\'y en a pas eu.' })),
     { id: 'optSpec', type: 'ouinon', emoji: '🌙', court: 'Dimanche, férié ou nuit', question: 'Avez-vous travaillé un dimanche, un jour férié ou de nuit ?' },
-    { id: 'dimanche', type: 'nombre', unite: 'h', emoji: '📆', court: 'Heures le dimanche', si: v => v.optSpec, question: 'Combien d\'heures avez-vous travaillé le dimanche ?', aide: 'Tapez 0 s\'il n\'y en a pas eu.' },
+    { id: 'dimanche', type: 'nombre', unite: 'h', emoji: '📆', court: 'Heures le dimanche', si: v => v.optSpec, question: 'Combien d\'heures avez-vous travaillé un dimanche habituel (majoré de 60 %) ?', aide: 'Les ouvertures habituelles du dimanche matin. Tapez 0 s\'il n\'y en a pas eu.' },
+    { id: 'dimanche100', type: 'nombre', unite: 'h', emoji: '📆', court: 'Dimanche exceptionnel (+100 %)', si: v => v.optSpec, question: 'Combien d\'heures avez-vous travaillé un dimanche exceptionnel (majoré de 100 %) ?', aide: 'Un dimanche où le magasin ouvre toute la journée, hors ouvertures habituelles. Sur le planning : code D100. Tapez 0 s\'il n\'y en a pas eu.' },
     { id: 'ferie', type: 'nombre', unite: 'h', emoji: '🎉', court: 'Heures un jour férié', si: v => v.optSpec, question: 'Combien d\'heures avez-vous travaillé un jour férié ?', aide: 'Tapez 0 s\'il n\'y en a pas eu.' },
     { id: 'nuit30', type: 'nombre', unite: 'h', emoji: '🌙', court: 'Heures de nuit (22 h - 5 h)', si: v => v.optSpec, question: 'Combien d\'heures de nuit entre 22 h et 5 h du matin ?', aide: 'Tapez 0 s\'il n\'y en a pas eu.' },
     { id: 'nuit10', type: 'nombre', unite: 'h', emoji: '🌙', court: 'Heures de nuit (21-22 h, 5-6 h)', si: v => v.optSpec, question: 'Combien d\'heures entre 21 h et 22 h, ou entre 5 h et 6 h du matin ?', aide: 'Tapez 0 s\'il n\'y en a pas eu.' },
@@ -203,12 +205,16 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'pasActif', type: 'ouinon', emoji: '🧾', court: 'Prélèvement à la source', question: 'Voulez-vous voir aussi le net après l\'impôt (prélèvement à la source) ?', aide: 'Si vous répondez Non, je donne le net avant impôt.' },
     { id: 'pasTaux', type: 'nombre', unite: '%', emoji: '🧾', court: 'Taux de prélèvement', si: v => v.pasActif, question: 'Quel est votre taux de prélèvement à la source ?', aide: 'Il est écrit sur votre fiche de paie, ligne « taux personnalisé » (exemple : 1,5). Vous pouvez aussi le lire sur impots.gouv.fr.' },
   ];
-  const lancerQuestions = (auRecap = false) => lancerAssistant({
-    h, remplir, titre: 'Estimation de ma fiche de paie', emoji: '💶',
-    intro: 'Je vous pose quelques questions simples pour estimer combien vous allez toucher ce mois-ci. Comptez 2 à 3 minutes. Vous pouvez revenir en arrière à tout moment.',
-    etapes: etapesPaie(), valeurs: { ...valeurs }, commencerAuRecap: auRecap,
-    onFini: v => ouvrirSimulateur({ vue, h, remplir, retour }, v), onAnnule: () => {},
+  // Les réponses lues dans un planning importé ne sont pas redemandées (liste « importe »).
+  const dejaLu = (v, id) => Array.isArray(v.importe) && v.importe.includes(id);
+  const lancerQuestions = (auRecap = false, apresImport = false) => lancerAssistant({
+    h, remplir, titre: apresImport ? 'J\'ai lu votre planning' : 'Estimation de ma fiche de paie', emoji: apresImport ? '📄' : '💶',
+    intro: apresImport ? 'Vos horaires sont lus : heures, jours de présence, dimanche, titres-restaurant. Il reste ce qu\'un planning ne donne pas : votre salaire, vos congés, l\'astreinte, les retenues et l\'impôt. Vous pourrez revenir en arrière à tout moment.'
+      : 'Je vous pose quelques questions simples pour estimer combien vous allez toucher ce mois-ci. Comptez 2 à 3 minutes. Vous pouvez revenir en arrière à tout moment.',
+    etapes: etapesPaie().map(e => ({ ...e, si: v => !dejaLu(v, e.id) && (!e.si || e.si(v)) })), valeurs: { ...valeurs, lancerApres: undefined }, commencerAuRecap: auRecap,
+    onFini: v => ouvrirSimulateur({ vue, h, remplir, retour }, { ...v, importe: [], lancerApres: undefined }), onAnnule: () => {},
   });
+  const importer = () => ouvrirImport({ h, remplir, semainesDuMois, onFini: v => ouvrirSimulateur({ vue, h, remplir, retour }, { ...valeurs, ...v, lancerApres: true }) });
 
   const lignesTaux = T.taux.map(x => h('tr', {}, h('td', {}, x.libelle), h('td', { class: 'd' }, x.taux != null ? virg(x.taux) + ' %' : eur(x.montant)),
     h('td', { class: 'd' }, x.statut === 'verifie' ? '✓ vérifié' : 'à contrôler')));
@@ -220,6 +226,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     h('p', { class: 'accueil-sous' }, 'Rien n\'est enregistré : tout se calcule sur votre téléphone.'),
     perime ? h('p', { class: 'erreur' }, `Attention : les taux sont ceux de ${T.annee}. Ils ont peut-être changé : vérifiez-les avant de vous fier au résultat.`) : null,
     h('button', { type: 'button', class: 'as-prim as-bandeau', onclick: () => lancerQuestions(!!init) }, init ? '✏️ Corriger mes réponses pas à pas' : '🧭 Me poser les questions pas à pas'),
+    h('button', { type: 'button', class: 'as-sec as-large', onclick: importer }, '📄 Importer mes plannings (PDF)'),
     zoneResultat, zoneDetail,
     h('details', { class: 'textes', open: !init }, h('summary', {}, '⚙️ Tout modifier sur une seule page'),
     h('div', { class: 'carte' }, h('h3', {}, '1. Votre fiche'),
@@ -235,7 +242,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
         h('details', { class: 'plein' }, h('summary', {}, 'Plus précis : semaine par semaine (lundi au dimanche, rattachée au mois où elle se termine)'),
           h('div', { class: 'champs' }, ...[0, 1, 2, 3, 4, 5].map(i => { const c = champ('sem' + i, 'Semaine ' + i, { placeholder: '0' }); c.classList.add('semaine'); return c; }))),
         h('label', { class: 'champ champ-case plein' }, (() => { const c = h('input', { type: 'checkbox', 'aria-label': 'Heures de délégation hors temps de travail' }); valeurs.estDeleg = !!valeurs.estDeleg; c.checked = valeurs.estDeleg; c.addEventListener('change', () => { valeurs.estDeleg = c.checked; calculer(); }); return c; })(), h('span', {}, 'Ce sont des heures de délégation hors temps de travail'))),
-      option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche (+60 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
+      option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche habituel (+60 %)'), champ('dimanche100', 'Heures de dimanche exceptionnel (+100 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
       option('optAst', 'J\'ai été d\'astreinte ce mois-ci', choix('astMagasin', 'Type de magasin', [['standard', 'Autre magasin'], ['dimanche', 'Ouvert le dimanche après-midi ou jusqu\'à minuit'], ['h24', 'Ouvert 24 h sur 24']], 'standard'), champ('astSemaines', 'Semaines d\'astreinte'), champ('astHeures', 'Heures d\'intervention, trajet compris')),
       option('optCp', 'J\'ai pris des congés payés ce mois-ci', champ('cpJours', 'Jours de congés pris (jours pointés)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),
       option('optAutres', 'J\'ai d\'autres éléments de salaire (congés payés, primes…)', champ('autresBrut', 'Montant en € (+ ou −)', { signe: true, aide: 'Congés payés : écart entre l\'indemnité et l\'absence retirée.' }))),
@@ -253,5 +260,5 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       h('table', { class: 'simu-table' }, h('tbody', {}, lignesTaux))));
   majSemaines();
   calculer();
-  if (!init) lancerQuestions(); else setTimeout(() => zoneResultat.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
+  if (!init) lancerQuestions(); else if (init.lancerApres) lancerQuestions(false, true); else setTimeout(() => zoneResultat.scrollIntoView({ behavior: 'smooth', block: 'start' }), 60);
 }

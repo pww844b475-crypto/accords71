@@ -117,6 +117,12 @@
    "source": "Accord de substitution art. 5.7 ; livret CGT p.17"
   },
   {
+   "id": "dimanche_100",
+   "libelle": "Dimanche exceptionnel (journée complète)",
+   "taux": 100,
+   "source": "Accord de substitution art. 5.7, p.57 ; code D100 des plannings"
+  },
+  {
    "id": "ferie",
    "libelle": "Jour férié travaillé (indemnité 100 % + majoration 100 %)",
    "taux": 200,
