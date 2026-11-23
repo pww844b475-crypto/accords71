@@ -21,12 +21,14 @@ export function joursOuvres(annee, mois) {
   return n;
 }
 
-// Semaines (lundi au dimanche) qui touchent le mois : la paie compte les heures semaine par semaine
+// Semaines (lundi au dimanche) rattachées au mois : le logiciel de paie met les heures en plus sur le dimanche de la semaine,
+// donc une semaine appartient au mois où elle se termine (son dimanche).
 export function semainesDuMois(annee, mois) {
-  const premier = new Date(annee, mois - 1, 1), dernier = new Date(annee, mois, 0);
-  const debut = new Date(premier); debut.setDate(debut.getDate() - ((debut.getDay() + 6) % 7));
-  const res = [];
-  for (let d = new Date(debut); d <= dernier; d.setDate(d.getDate() + 7)) { const f = new Date(d); f.setDate(f.getDate() + 6); res.push({ debut: new Date(d), fin: f }); }
+  const res = [], fin = new Date(annee, mois, 0).getDate();
+  for (let j = 1; j <= fin; j++) {
+    const d = new Date(annee, mois - 1, j);
+    if (d.getDay() === 0) { const debut = new Date(d); debut.setDate(debut.getDate() - 6); res.push({ debut, fin: new Date(d) }); }
+  }
   return res;
 }
 const MOIS_COURTS = ['janv.', 'févr.', 'mars', 'avr.', 'mai', 'juin', 'juil.', 'août', 'sept.', 'oct.', 'nov.', 'déc.'];
@@ -173,7 +175,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'estDeleg', type: 'ouinon', emoji: '🤝', court: 'Heures de délégation', si: v => v.optPlus, question: 'Ce sont des heures de délégation, faites en dehors de votre temps de travail ?', aide: 'Répondez Non si ce sont des heures demandées par le magasin.' },
     { id: 'hPlus', type: 'nombre', unite: 'h', emoji: '⏱️', court: 'Total des heures en plus', si: v => v.optPlus, question: 'Combien d\'heures en tout, sur le mois ?', aide: 'Comme sur le planning : 6,50 veut dire 6 h 30. Vous pourrez détailler semaine par semaine à la question suivante.' },
     { id: 'precis', type: 'ouinon', emoji: '🔎', court: 'Détail par semaine', si: v => v.optPlus && Number(v.hPlus) > 0, question: 'Voulez-vous détailler semaine par semaine ?', aide: 'C\'est plus précis : la paie calcule les majorations semaine par semaine. Sinon je répartis vos heures sur tout le mois.' },
-    ...[0, 1, 2, 3, 4, 5].map(i => ({ id: 'sem' + i, type: 'nombre', unite: 'h', emoji: '📆', court: v => 'Semaine ' + libSemaine(v, i), si: v => v.optPlus && v.precis && Number(v.hPlus) > 0 && i < nbSemaines(v), question: v => `Combien d'heures en plus la semaine ${libSemaine(v, i)} ?`, aide: 'Tapez 0 s\'il n\'y en a pas eu cette semaine.' })),
+    ...[0, 1, 2, 3, 4, 5].map(i => ({ id: 'sem' + i, type: 'nombre', unite: 'h', emoji: '📆', court: v => 'Semaine ' + libSemaine(v, i), si: v => v.optPlus && v.precis && Number(v.hPlus) > 0 && i < nbSemaines(v), question: v => `Combien d'heures en plus la semaine ${libSemaine(v, i)} ?`, aide: 'La paie met les heures en plus sur le dimanche de la semaine : cette semaine compte pour le mois où elle se termine. Tapez 0 s\'il n\'y en a pas eu.' })),
     { id: 'optSpec', type: 'ouinon', emoji: '🌙', court: 'Dimanche, férié ou nuit', question: 'Avez-vous travaillé un dimanche, un jour férié ou de nuit ?' },
     { id: 'dimanche', type: 'nombre', unite: 'h', emoji: '📆', court: 'Heures le dimanche', si: v => v.optSpec, question: 'Combien d\'heures avez-vous travaillé le dimanche ?', aide: 'Tapez 0 s\'il n\'y en a pas eu.' },
     { id: 'ferie', type: 'nombre', unite: 'h', emoji: '🎉', court: 'Heures un jour férié', si: v => v.optSpec, question: 'Combien d\'heures avez-vous travaillé un jour férié ?', aide: 'Tapez 0 s\'il n\'y en a pas eu.' },
@@ -189,7 +191,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'cpInd', type: 'nombre', unite: '€ par jour', emoji: '🧾', court: 'Indemnité par jour', si: v => v.optCp && v.cpConnu, question: 'Quel est ce montant par jour ?', aide: 'Recopiez le taux de la ligne « IND C.P. ACQUIS ».' },
     { id: 'cpRef', type: 'nombre', unite: '€', emoji: '💶', optionnel: true, court: 'Brut du 1er juin au 31 mai', si: v => v.optCp && !v.cpConnu, question: 'Combien avez-vous gagné de salaire brut du 1er juin au 31 mai ?', aide: 'Additionnez vos salaires bruts de cette période. Si vous ne le savez pas, touchez « Je ne sais pas ».' },
     { id: 'joursAbsence', type: 'nombre', unite: 'jour(s)', emoji: '🗓️', optionnel: true, court: 'Jours d\'absence', question: 'Parmi vos jours de travail du mois, combien avez-vous manqués ?', aide: v => (v.optCp && Number(v.cpJours) > 0 && Number(v.joursSemaine) > 0 ? `Vos ${Number(v.cpJours)} jours de congés pointés font environ ${Math.round(Number(v.cpJours) * Number(v.joursSemaine) / 6)} jour(s) de travail. ` : '') + 'Congés payés, maladie, formation : comptez seulement les jours où vous deviez travailler. Cela sert à calculer l\'indemnité de tenue. Tapez 0 si aucun.' },
-    { id: 'joursEnPlus', type: 'nombre', unite: 'jour(s)', emoji: '➕', optionnel: true, court: 'Jours en plus de vos jours habituels', question: 'Avez-vous travaillé des jours qui ne sont pas vos jours habituels ?', aide: 'Délégation, dimanche, remplacement… Combien de jours en tout ? Tapez 0 si aucun. Ils comptent comme jours de présence.' },
+    { id: 'joursEnPlus', type: 'nombre', unite: 'jour(s)', emoji: '➕', optionnel: true, court: 'Jours en plus de vos jours habituels', question: 'Avez-vous travaillé des jours qui ne sont pas vos jours habituels ?', aide: 'Un jour où vous avez travaillé alors que ce n\'est pas un de vos jours habituels (remplacement, jour échangé…). Combien de jours en tout ? Tapez 0 si aucun.' },
     { id: 'tickets', type: 'nombre', unite: 'titre(s)', emoji: '🍽️', court: 'Titres-restaurant', question: 'Combien de titres-restaurant avez-vous eus ce mois-ci ?', aide: 'Un titre par jour où votre horaire couvre 12 h - 13 h 30 ou 18 h 30 - 20 h. Tapez 0 si aucun.' },
     { id: 'region', type: 'choix', emoji: '🏬', court: 'Magasin (titres-restaurant)', si: v => Number(v.tickets) > 0, question: 'Dans quel magasin travaillez-vous ?', aide: 'La part que vous payez pour un titre n\'est pas la même.', options: [['autre', 'Hors Île-de-France', '🏬'], ['idf', 'En Île-de-France', '🗼']] },
     { id: 'optTransport', type: 'ouinon', emoji: '🚗', court: 'Indemnité de transport', question: 'Touchez-vous l\'indemnité de transport ?', aide: 'Elle concerne ceux qui viennent en voiture parce qu\'il n\'y a pas de transport en commun.' },
@@ -226,11 +228,11 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
         champ('salaireBase', 'Salaire de base du mois (€)', { placeholder: 'ex. 1927,77', aide: 'La ligne « salaire de base » de l\'en-tête de la fiche (pauses comprises).' }),
         champ('tauxHoraire', 'Salaire par heure (si vous ne connaissez pas le salaire de base) (€)', { placeholder: 'ex. 12,31' }),
         champ('heuresSemaine', 'Heures de présence par semaine', { placeholder: 'ex. 36', aide: 'Horaire du contrat (« horaire TPR » sur la fiche).' }),
-        champ('joursSemaine', 'Jours travaillés par semaine', { placeholder: 'ex. 3', aide: 'Sert à compter vos jours de présence. Pour choisir vos jours exacts (lundi, mardi…), utilisez les questions pas à pas.' }), champ('joursMois', 'Jours de présence prévus ce mois-ci (si vous le connaissez)', { aide: 'Remplace le calcul automatique.' }), champ('joursEnPlus', 'Jours travaillés en plus de vos jours habituels', { aide: 'Délégation, dimanche, remplacement.' }), secteur, autrePct)),
+        champ('joursSemaine', 'Jours travaillés par semaine', { placeholder: 'ex. 3', aide: 'Sert à compter vos jours de présence. Pour choisir vos jours exacts (lundi, mardi…), utilisez les questions pas à pas.' }), champ('joursMois', 'Jours de présence prévus ce mois-ci (si vous le connaissez)', { aide: 'Remplace le calcul automatique.' }), champ('joursEnPlus', 'Jours travaillés en plus de vos jours habituels', { aide: 'Remplacement, jour échangé…' }), secteur, autrePct)),
     h('div', { class: 'carte' }, h('h3', {}, '2. Ce qui change ce mois-ci'), h('p', { class: 'note' }, 'Cochez ce qui vous concerne. Heures en temps de présence, comme sur la fiche.'),
       option('optPlus', 'J\'ai fait des heures en plus de mon contrat (délégation, compléments, heures supplémentaires)',
         champ('hPlus', 'Total d\'heures en plus du contrat sur le mois', { placeholder: 'ex. 31,5', aide: 'Comme sur la fiche et le planning, en heures décimales : 6,50 = 6 h 30. Les 10 %, 25 % et 50 % sont calculés automatiquement.' }),
-        h('details', { class: 'plein' }, h('summary', {}, 'Plus précis : semaine par semaine (lundi au dimanche)'),
+        h('details', { class: 'plein' }, h('summary', {}, 'Plus précis : semaine par semaine (lundi au dimanche, rattachée au mois où elle se termine)'),
           h('div', { class: 'champs' }, ...[0, 1, 2, 3, 4, 5].map(i => { const c = champ('sem' + i, 'Semaine ' + i, { placeholder: '0' }); c.classList.add('semaine'); return c; }))),
         h('label', { class: 'champ champ-case plein' }, (() => { const c = h('input', { type: 'checkbox', 'aria-label': 'Heures de délégation hors temps de travail' }); valeurs.estDeleg = !!valeurs.estDeleg; c.checked = valeurs.estDeleg; c.addEventListener('change', () => { valeurs.estDeleg = c.checked; calculer(); }); return c; })(), h('span', {}, 'Ce sont des heures de délégation hors temps de travail'))),
       option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche (+60 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
