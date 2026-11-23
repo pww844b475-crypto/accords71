@@ -56,6 +56,19 @@ export function simulerPaie(e, T) {
   ligneMaj('hc25', 'Majoration heures complémentaires 25 %', e.hc25, mj.hc_25, true);
   ligneMaj('hs25', 'Majoration heures supplémentaires 25 %', e.hs25, mj.hs_25, true);
   ligneMaj('hs50', 'Majoration heures supplémentaires 50 %', e.hs50, mj.hs_50, true);
+  // Congés payés pris : retenue de l'absence (salaire de base ÷ 26 par jour) puis indemnité = la plus favorable des deux règles
+  // (maintien du salaire, ou 1/10 de la rémunération brute de la période de référence du 1er juin au 31 mai, soit référence ÷ 300 par jour)
+  let cp = null;
+  if (e.cpJours > 0) {
+    const base = e.salaireBase > 0 ? e.salaireBase : salaireBase;
+    const maintien = r3(base / 26);
+    const dixieme = e.cpRefBrute > 0 ? r3(e.cpRefBrute / 300) : 0;
+    const parJour = e.cpIndemniteJour > 0 ? e.cpIndemniteJour : Math.max(maintien, dixieme);
+    const regle = e.cpIndemniteJour > 0 ? 'saisie' : dixieme > maintien ? 'dixieme' : 'maintien';
+    const ret = add('cp_abs', 'Absence congés payés', e.cpJours, maintien, -e.cpJours * maintien);
+    const ind = add('cp_ind', 'Indemnité de congés payés', e.cpJours, parJour, e.cpJours * parJour);
+    cp = { jours: e.cpJours, maintienJour: maintien, dixiemeJour: dixieme, parJour, regle, retenue: -ret, indemnite: ind, solde: r2(ind + ret), referenceConnue: !!(e.cpRefBrute > 0 || e.cpIndemniteJour > 0) };
+  }
   if (e.autresBrut) add('autres', 'Autres éléments de salaire (congés, primes…)', null, null, e.autresBrut);
 
   const brut = r2(lignes.reduce((s, l) => s + l.montant, 0));
@@ -100,6 +113,7 @@ export function simulerPaie(e, T) {
   return {
     lignes, brut, cotisations: cot, totalCotisations: totalCot, netSocial, indemnitesNonSoumises: indemnites,
     ticketsPartSalarie: ticketsSal, autresRetenues: autresRet, netAvantImpot, baseImposable, pas, netAPayer,
+    cp,
     details: { hEff, tauxHoraire: th, tauxAvecPauses, salaireBase, hsExo, baseCsg, plafond },
   };
 }

@@ -82,6 +82,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
       hs25: hs ? num(valeurs.hs25) : 0, hs50: hs ? num(valeurs.hs50) : 0,
       hc10: hc ? num(valeurs.hc10) : 0, hc25: hc ? num(valeurs.hc25) : 0,
       dimanche: sp ? num(valeurs.dimanche) : 0, ferie: sp ? num(valeurs.ferie) : 0, nuit30: sp ? num(valeurs.nuit30) : 0, nuit10: sp ? num(valeurs.nuit10) : 0,
+      cpJours: valeurs.optCp ? num(valeurs.cpJours) : 0, cpRefBrute: valeurs.optCp ? num(valeurs.cpRef) : 0, cpIndemniteJour: valeurs.optCp ? num(valeurs.cpInd) : 0,
       hsExoAuto: true, autresBrut: valeurs.optAutres ? num(valeurs.autresBrut) : 0,
       tenue, transport, tickets: Math.floor(num(valeurs.tickets)), partSalarieTicket: valeurs.region === 'idf' ? 4 : 3.7,
       autresRetenues: num(valeurs.autresRetenues), pas: { actif: !!valeurs.pasActif, taux: num(valeurs.pasTaux) },
@@ -108,6 +109,9 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
       ligne('Net à payer avant impôt', eur(r.netAvantImpot), true),
       valeurs.pasActif ? ligne(`− Prélèvement à la source (${virg(num(valeurs.pasTaux))} % de ${eur(r.baseImposable)})`, eur(-r.pas)) : null,
       ligne(valeurs.pasActif ? 'Net à payer après impôt' : 'Net à payer (sans prélèvement à la source)', eur(r.netAPayer), true),
+      r.cp ? h('p', { class: r.cp.referenceConnue ? 'note' : 'erreur' }, r.cp.referenceConnue
+        ? `Congés payés : ${virg(r.cp.jours)} jour(s) à ${eur(r.cp.parJour)} par jour (${r.cp.regle === 'dixieme' ? 'règle du dixième de la période de référence, plus favorable que le maintien' : r.cp.regle === 'maintien' ? 'maintien du salaire, plus favorable que le dixième' : 'indemnité par jour saisie'}) contre ${eur(r.cp.maintienJour)} retirés par jour : solde ${eur(r.cp.solde)}.`
+        : 'Congés payés : sans votre rémunération de référence (1er juin au 31 mai) ni l\'indemnité par jour de votre fiche, le calcul retient le maintien du salaire et donne un net trop bas si le dixième est plus favorable.') : null,
       h('p', { class: 'note' }, `Taux horaire déduit de votre salaire de base : ${virg(r.details.tauxHoraire.toFixed(3))} €. Indemnité de tenue calculée : ${eur(tenue)} (${trav} jours sur ${ouvres} ouvrés).`),
       h('p', { class: 'note' }, 'Estimation à quelques centimes près : la paie arrondit ligne par ligne. Elle ne remplace pas votre fiche de paie.'));
     remplir(zoneDetail,
@@ -136,6 +140,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
       option('optHs', 'J\'ai des heures supplémentaires (temps plein)', champ('hs25', 'Heures supplémentaires à 25 %'), champ('hs50', 'Heures supplémentaires à 50 %')),
       option('optHc', 'J\'ai des heures complémentaires (temps partiel)', champ('hc10', 'Heures complémentaires à 10 %'), champ('hc25', 'Heures complémentaires à 25 %')),
       option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche (+60 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
+      option('optCp', 'J\'ai pris des congés payés ce mois-ci', champ('cpJours', 'Jours de congés pris (jours pointés)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),
       option('optAutres', 'J\'ai d\'autres éléments de salaire (congés payés, primes…)', champ('autresBrut', 'Montant en € (+ ou −)', { signe: true, aide: 'Congés payés : écart entre l\'indemnité et l\'absence retirée.' }))),
     h('div', { class: 'carte' }, h('h3', {}, '3. Avantages et retenues'),
       h('div', { class: 'champs' },
