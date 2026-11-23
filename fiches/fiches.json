@@ -164,7 +164,11 @@
     "indemnité conventionnelle",
     "indemnité légale",
     "8 mois d'ancienneté",
-    "licenciement économique 50 ans"
+    "licenciement économique 50 ans",
+    "si je suis licencié",
+    "je suis licencié",
+    "licenciement combien",
+    "combien je vais toucher si je suis licencié"
    ],
    "etiquettes": [
     "Écart à vérifier"
@@ -474,7 +478,18 @@
     "treizième mois",
     "gratification",
     "prime de fin d'année",
-    "acompte décembre"
+    "acompte décembre",
+    "13eme mois",
+    "13ème mois",
+    "combien de 13e mois",
+    "mon 13e mois",
+    "gratification annuelle",
+    "prime de décembre",
+    "combien je vais toucher de 13e mois",
+    "toucher le 13e mois",
+    "combien de 13e mois je touche",
+    "montant du 13e mois",
+    "calcul du 13e mois"
    ],
    "etiquettes": [
     "Information à compléter"
@@ -1571,14 +1586,16 @@
    "question": "Un salarié en arrêt maladie de longue durée a-t-il droit à la prime annuelle (13e mois) ?",
    "reponse": "La prime annuelle est calculée sur ce qui est payé par l'entreprise. Le complément de salaire de l'employeur compte dans la base ; les indemnités de la Sécurité sociale et de la prévoyance ne comptent pas (accord, art. 3.2). Quand le complément de l'employeur est épuisé et qu'il n'est plus rien versé, la base est nulle et la prime est de 0. La convention exige aussi un contrat en vigueur ou suspendu depuis moins de 1 an au moment du versement (art. 3.6.2).",
    "synonymes": [
-    "13e mois",
-    "treizième mois",
-    "gratification",
     "prime annuelle arrêt maladie",
     "arrêt maladie prime",
     "prime de fin d'année arrêt",
     "maladie longue durée",
-    "prévoyance"
+    "prévoyance",
+    "13e mois arrêt maladie",
+    "13e mois maladie",
+    "13e mois pendant un arrêt maladie",
+    "gratification arrêt maladie",
+    "treizième mois arrêt maladie"
    ],
    "etiquettes": [
     "À confirmer : condition de la convention"
@@ -5096,7 +5113,10 @@
     "64 ans",
     "plafond sécurité sociale retraite",
     "mise à la retraite",
-    "partir à la retraite"
+    "partir à la retraite",
+    "combien je vais toucher à la retraite",
+    "partir à la retraite combien",
+    "départ en retraite prime"
    ],
    "etiquettes": [
     "Écart à vérifier"
@@ -8643,7 +8663,9 @@
     "combien de pause",
     "minutes de pause",
     "pause 20 minutes",
-    "6 heures de travail"
+    "6 heures de travail",
+    "combien de pause j'ai",
+    "minutes de pause par heure"
    ],
    "etiquettes": [
     "Écart à vérifier"
@@ -11459,6 +11481,105 @@
    ],
    "notes": [
     "Pour l'épargne salariale, voir aussi les fiches PEE et PERCOL du thème « Intéressement, participation, épargne »."
+   ]
+  },
+  {
+   "id": "conge-sans-solde",
+   "theme": "Absences autorisées (famille, santé, engagements)",
+   "categorie": "conges",
+   "question": "Ai-je le droit de prendre un congé sans solde ?",
+   "reponse": "Il n'y a pas de droit général à un « congé sans solde » : sauf congé prévu par la loi, il faut l'accord de l'employeur. Sont des congés de droit, qui ne peuvent pas être refusés : le congé parental d'éducation, le congé de solidarité familiale, le congé de soutien familial. Le congé sabbatique et le congé pour création d'entreprise sont ouverts sous conditions d'ancienneté, avec l'autorisation de l'employeur : sa réponse doit venir sous 30 jours, le silence vaut accord. Votre contrat est alors suspendu. L'accord permet de payer ces congés, et un congé pour convenance personnelle, avec votre CET.",
+   "synonymes": [
+    "congé sans solde",
+    "sans solde",
+    "congé non payé",
+    "congé non rémunéré",
+    "congé sabbatique",
+    "création d'entreprise congé",
+    "congé pour convenance personnelle",
+    "prendre un congé sans être payé",
+    "congé sans salaire",
+    "mise en disponibilité"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.4.1.1 et 5.4.1.2, p.85)",
+     "regles": [
+      "Le CET peut payer des congés de droit (parental d'éducation, solidarité familiale, soutien familial, formation de cadres et d'animateurs de jeunesse), des congés soumis à l'autorisation de l'employeur (création d'entreprise, sabbatique), un congé de solidarité internationale et un congé pour convenance personnelle.",
+      "Demande écrite 2 mois avant le premier jour du congé ; pour un congé soumis à autorisation, réponse écrite de la direction sous 30 jours, silence valant acceptation, refus motivé par écrit.",
+      "Pour la partie du congé non payée par le CET, le contrat de travail est suspendu (sauf convenance personnelle et départ anticipé à la retraite) ; le salarié reste dans les effectifs et électeur et éligible (p.87)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.4.1.1",
+       "page": 85,
+       "extrait": "Congé sabbatique prévu par les articles"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.4.1.2",
+       "page": 86,
+       "extrait": "Si elle ne répond pas, son silence vaut acceptation de la demande"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.4.1.2",
+       "page": 86,
+       "extrait": "Ce délai et ce formalisme ne s'appliquent pas aux congés non rémunérés pour convenance personnelle"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 13.9, p.109 ; version du 28 août 2025)",
+     "regles": [
+      "Les garanties de prévoyance sont suspendues pendant les périodes non rémunérées, sauf arrêt maladie ou accident reconnu par la Sécurité sociale.",
+      "À la demande du salarié, l'ensemble des garanties peut être maintenu, moyennant cotisation individuelle et facultative, pour toute la durée du congé sans solde."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 13.9",
+       "page": 109,
+       "extrait": "au personnel sans solde et ce, pour toute la durée du congé sans solde"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Congé sabbatique : droit ouvert au salarié justifiant d'une ancienneté minimale dans l'entreprise et de six années d'activité professionnelle ; le contrat est suspendu (L3142-28). Le texte renvoie à un décret pour la durée d'ancienneté : information à compléter.",
+      "L'employeur informe de son accord, du report ou du refus ; l'accord est acquis à défaut de réponse sous 30 jours (L3142-30).",
+      "Création ou reprise d'entreprise : droit à un congé ou à un temps partiel, sous condition d'ancienneté (L3142-105)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3142-28",
+       "page": 61,
+       "extrait": "Le salarié a droit à un congé sabbatique pendant lequel son contrat de travail est suspendu"
+      },
+      {
+       "doc": "ct",
+       "article": "L3142-30",
+       "page": 62,
+       "extrait": "L'accord de l'employeur est réputé acquis à défaut de réponse dans un délai de trente jours"
+      },
+      {
+       "doc": "ct",
+       "article": "L3142-105",
+       "page": 63,
+       "extrait": "Le salarié qui crée ou reprend une entreprise a droit"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Pour un autre type de congé sans solde (convenance personnelle sans CET, par exemple), aucun texte lu ne donne un droit : demander l'accord écrit de la direction. Information à compléter : durée minimale d'ancienneté et durée du congé sabbatique (fixées par décret, non lues)."
    ]
   }
  ],

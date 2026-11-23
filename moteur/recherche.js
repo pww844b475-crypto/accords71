@@ -1,6 +1,6 @@
 import { norm, distance } from './normalise.js';
 
-const STOP = new Set(['de','du','des','la','le','les','un','une','et','en','a','au','aux','ma','mon','mes','je','ai','est','que','quel','quelle','quels','quelles','combien','pour','sur','dans','par','il','y']);
+const STOP = new Set(['de','du','des','la','le','les','un','une','et','en','a','au','aux','ma','mon','mes','je','ai','est','que','quel','quelle','quels','quelles','combien','pour','sur','dans','par','il','y','j','l','d','c','s','n','m','t','qu']);
 
 function tokens(s) { return norm(s).split(' ').filter(t => t && !STOP.has(t)); }
 
@@ -95,6 +95,8 @@ export function chercherTexte(requete, corpus, max = 30) {
   return resultats;
 }
 
-// Question sur « combien je vais toucher » : on ouvre directement l'estimation de la fiche de paie
+// Question sur « combien je vais toucher ce mois-ci » : on ouvre directement l'estimation de la fiche de paie,
+// sauf si la phrase parle d'un autre sujet précis (13e mois, prime, indemnité, retraite, congé…) : dans ce cas on cherche la bonne fiche.
 const VEUT_PAIE = /(combien.*(toucher|gagner|recevoir|percevoir)|(vais|vas|va|allez|aller)\s+(toucher|gagner|recevoir|percevoir)|fiche de pa(i|y)e|bulletin de pa(i|y)e|simul\w*.*(salaire|pa(i|y)e)|estim\w*.*(salaire|pa(i|y)e|net)|mon salaire|net a payer|mon net|ma pa(i|y)e|ma remuneration)/;
-export const veutLaPaie = q => VEUT_PAIE.test(String(q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''));
+const AUTRE_SUJET = /(13|treiz|gratif|prime|interess|particip|indemn|licenci|preavis|retraite|conge|maladie|arret|astreinte|ticket|titre|tenue|transport|mutuelle|prevoyance|epargne|\bpee\b|percol|abondement|demission|rupture|naissance|mariage|deces|chomage|nuit|dimanche|ferie|supplementaire|complementaire|\bcet\b|remise|solidarite|modulation|annualisation|temps partiel|paternite|maternite|parental|deleg|syndic)/;
+export const veutLaPaie = q => { const n = String(q || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); return VEUT_PAIE.test(n) && !AUTRE_SUJET.test(n); };
