@@ -171,20 +171,23 @@ export function netDePrime({ prime, brutMensuel, tauxPas = 0 }, T) {
 }
 
 /**
- * Paie de décembre avec le 13e mois. La prime = 1/12 du brut de l'année (cumul de janvier à novembre + brut de décembre hors prime).
- * Relevé sur une fiche de décembre 2025 : l'acompte total (acompte exceptionnel + acompte de début décembre) vaut 75 % du BRUT de la prime,
- * versé sans cotisations ; la fiche de décembre prélève les cotisations sur toute la prime et déduit ces acomptes au net.
- * Acompte de début décembre = 75 % du brut de la prime moins l'acompte exceptionnel déjà reçu (montant saisi, sinon estimé).
+ * Paie de décembre avec le 13e mois. La prime finale = 1/12 du brut de l'année (cumul de janvier à novembre + brut de décembre hors prime).
+ * Acompte de début décembre (relevé sur une fiche de décembre 2025, retrouvé à l'euro près) : début décembre la paie ne connaît pas encore
+ * le brut de décembre ; elle estime la prime à cumul de janvier à novembre ÷ 11 (moyenne mensuelle), l'acompte total = 75 % du BRUT de cette
+ * estimation, versé sans cotisations ; l'acompte de début décembre = cet acompte total moins l'acompte exceptionnel déjà reçu.
+ * (C'est aussi « 75 % de ce qui reste » : reste de droits = estimation - acompte exceptionnel ÷ 0,75.)
+ * La fiche de décembre prélève les cotisations sur toute la prime finale et déduit les acomptes au net.
  */
 export function simulerDecembre(e, { brutCumulNov = 0, acompteExc = 0, acompte75Recu = false, acompte75Montant = 0 }, T) {
   const r0 = simulerPaie(e, T);
   const brutAnnee = r2((brutCumulNov || 0) + r0.brut), primeBrute = r2(brutAnnee / 12);
   const r1 = simulerPaie({ ...e, primeAnnuelle: primeBrute }, T);
   const netPrime = r2(r1.netAPayer - r0.netAPayer);
-  const exc = Math.max(0, acompteExc || 0), acompteTotal = r2(primeBrute * 0.75);
+  const primeEstimee = brutCumulNov > 0 ? r2(brutCumulNov / 11) : primeBrute;          // estimation faite début décembre
+  const exc = Math.max(0, acompteExc || 0), acompteTotal = r2(primeEstimee * 0.75);
   const a75Prevu = Math.max(0, r2(acompteTotal - exc));
   const a75 = acompte75Recu ? (acompte75Montant > 0 ? r2(acompte75Montant) : a75Prevu) : 0;
   const deduits = r2(exc + a75);
   const r = simulerPaie({ ...e, primeAnnuelle: primeBrute, autresRetenues: r2((e.autresRetenues || 0) + deduits) }, T);
-  return { r, r0, brutAnnee, primeBrute, netPrime, acompteTotal, acompteExc: exc, acompte75: a75, a75Prevu, acompte75Estime: acompte75Recu && !(acompte75Montant > 0), deduits, resteNet: r2(netPrime - deduits) };
+  return { r, r0, brutAnnee, primeBrute, primeEstimee, netPrime, acompteTotal, acompteExc: exc, acompte75: a75, a75Prevu, acompte75Estime: acompte75Recu && !(acompte75Montant > 0), deduits, resteNet: r2(netPrime - deduits) };
 }
