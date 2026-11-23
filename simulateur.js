@@ -1,10 +1,15 @@
 // Écran « Simulateur de fiche de paie ». Rien n'est enregistré ni envoyé : tout se calcule dans le navigateur.
-import { simulerPaie, repartirHeures } from './moteur/paie.js';
+import { simulerPaie, repartirHeures, repartirTotal } from './moteur/paie.js';
 import { entretienTenue, fraisTransport } from './moteur/calculs.js';
 
 const eur = x => (x < 0 ? '−' : '') + Math.abs(x).toFixed(2).replace('.', ',').replace(/\B(?=(\d{3})+(?!\d))/g, ' ') + ' €';
 const virg = x => String(x).replace('.', ',');
-const num = v => { const n = parseFloat(String(v ?? '').replace(',', '.').replace('−', '-')); return Number.isFinite(n) ? n : 0; };
+const num = v => {
+  const t = String(v ?? '').trim().toLowerCase().replace('−', '-');
+  const hm = t.match(/^(\d+)\s*h\s*(\d{1,2})?$/);               // « 6h30 » = 6 h 30 min = 6,5 h
+  if (hm) return +hm[1] + (hm[2] ? +hm[2] / 60 : 0);
+  const n = parseFloat(t.replace(',', '.')); return Number.isFinite(n) ? n : 0;
+};
 const dateFr = iso => iso.split('-').reverse().join('/');
 const MOIS = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 
@@ -93,10 +98,12 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
     const transport = km > 0 ? (fraisTransport({ km, jours: Math.round(num(valeurs.joursTransport)) }).lignes[1]?.brut || 0) : 0;
     const plus = !!valeurs.optPlus, deleg = plus && !!valeurs.estDeleg, sp = !!valeurs.optSpec;
     const semaines = plus ? [0, 1, 2, 3, 4, 5].map(i => num(valeurs['sem' + i])) : [];
-    const rep = repartirHeures(num(valeurs.heuresSemaine), semaines);
+    const parSemaine = semaines.some(x => x > 0);
+    const total = plus ? num(valeurs.hPlus) : 0;
+    const rep = !plus ? repartirHeures(0, []) : parSemaine ? repartirHeures(num(valeurs.heuresSemaine), semaines) : repartirTotal(num(valeurs.heuresSemaine), total);
     const e = {
       salaireBase: num(valeurs.salaireBase), heuresSemaine: num(valeurs.heuresSemaine), pausePct: pct,
-      semainesEnPlus: plus ? semaines : undefined,
+      semainesEnPlus: plus && parSemaine ? semaines : undefined, totalEnPlus: plus && !parSemaine ? total : 0,
       dimanche: sp ? num(valeurs.dimanche) : 0, ferie: sp ? num(valeurs.ferie) : 0, nuit30: sp ? num(valeurs.nuit30) : 0, nuit10: sp ? num(valeurs.nuit10) : 0,
       cpJours: valeurs.optCp ? num(valeurs.cpJours) : 0, cpRefBrute: valeurs.optCp ? num(valeurs.cpRef) : 0, cpIndemniteJour: valeurs.optCp ? num(valeurs.cpInd) : 0,
       hsExoAuto: true, autresBrut: valeurs.optAutres ? num(valeurs.autresBrut) : 0,
@@ -115,7 +122,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
       h('div', { class: 'simu-resume' },
         h('span', { class: 'tag' + (deleg ? ' ok' : '') }, deleg ? `Heures de délégation : OUI (${virg(rep.total)} h)` : 'Heures de délégation : non'),
         h('span', { class: 'tag' + (plus && !deleg ? ' ok' : '') }, plus && !deleg ? `Heures en plus du contrat : OUI (${virg(rep.total)} h)` : 'Heures supplémentaires : non')),
-      plus ? h('p', { class: 'note' }, `Répartition automatique : ${virg(rep.hc10)} h à 10 %, ${virg(rep.hc25)} h à 25 % (heures complémentaires), ${virg(rep.hs25)} h à 25 % et ${virg(rep.hs50)} h à 50 % (heures supplémentaires).`) : null,
+      plus ? h('p', { class: 'note' }, `${parSemaine ? 'Répartition semaine par semaine' : 'Répartition automatique du total (heures étalées sur le mois, approximation : donnez le détail par semaine pour plus de précision)'} : ${virg(rep.hc10)} h à 10 %, ${virg(rep.hc25)} h à 25 % (heures complémentaires), ${virg(rep.hs25)} h à 25 % et ${virg(rep.hs50)} h à 50 % (heures supplémentaires).`) : null,
       ligne('Salaire brut', eur(r.brut), true),
       ligne('Cotisations salariales', eur(-r.totalCotisations)),
       ligne('Net social', eur(r.netSocial)),
@@ -153,8 +160,9 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }) {
         champ('heuresSemaine', 'Heures de présence par semaine', { placeholder: 'ex. 36', aide: 'Horaire du contrat (« horaire TPR » sur la fiche).' }), secteur, autrePct)),
     h('div', { class: 'carte' }, h('h3', {}, '2. Ce qui change ce mois-ci'), h('p', { class: 'note' }, 'Cochez ce qui vous concerne. Heures en temps de présence, comme sur la fiche.'),
       option('optPlus', 'J\'ai fait des heures en plus de mon contrat (délégation, compléments, heures supplémentaires)',
-        h('p', { class: 'note plein' }, 'Heures de présence, semaine par semaine (lundi au dimanche), comme sur le planning. Les 10 %, 25 % et 50 % sont calculés automatiquement selon votre contrat.'),
-        ...[0, 1, 2, 3, 4, 5].map(i => { const c = champ('sem' + i, 'Semaine ' + i, { placeholder: '0' }); c.classList.add('semaine'); return c; }),
+        champ('hPlus', 'Total d\'heures en plus du contrat sur le mois', { placeholder: 'ex. 31,5', aide: 'Comme sur la fiche et le planning, en heures décimales : 6,50 = 6 h 30. Les 10 %, 25 % et 50 % sont calculés automatiquement.' }),
+        h('details', { class: 'plein' }, h('summary', {}, 'Plus précis : semaine par semaine (lundi au dimanche)'),
+          h('div', { class: 'champs' }, ...[0, 1, 2, 3, 4, 5].map(i => { const c = champ('sem' + i, 'Semaine ' + i, { placeholder: '0' }); c.classList.add('semaine'); return c; }))),
         h('label', { class: 'champ champ-case plein' }, (() => { const c = h('input', { type: 'checkbox', 'aria-label': 'Heures de délégation hors temps de travail' }); valeurs.estDeleg = false; c.addEventListener('change', () => { valeurs.estDeleg = c.checked; calculer(); }); return c; })(), h('span', {}, 'Ce sont des heures de délégation hors temps de travail'))),
       option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche (+60 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
       option('optCp', 'J\'ai pris des congés payés ce mois-ci', champ('cpJours', 'Jours de congés pris (jours pointés)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),

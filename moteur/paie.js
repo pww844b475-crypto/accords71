@@ -30,6 +30,16 @@ export function repartirHeures(heuresSemaine, semaines) {
   return t;
 }
 
+/** Total mensuel seul : on suppose les heures étalées à égalité sur les 4,35 semaines du mois (approximation, moins précise que le détail par semaine). */
+export function repartirTotal(heuresSemaine, total) {
+  const un = repartirHeures(heuresSemaine, [Math.max(0, +total || 0) / SEMAINES_PAR_MOIS]);
+  const t = {}; for (const k of Object.keys(un)) t[k] = r2(un[k] * SEMAINES_PAR_MOIS);
+  t.total = r2(Math.max(0, +total || 0));
+  const reste = r2(t.total - t.hc10 - t.hc25 - t.hs25 - t.hs50);       // absorbe l'arrondi
+  if (reste) { const k = t.hc25 > 0 ? 'hc25' : t.hs25 > 0 ? 'hs25' : 'hc10'; t[k] = r2(t[k] + reste); }
+  return t;
+}
+
 /**
  * entrees : {
  *  tauxHoraire (€ de base, sans pauses), heuresSemaine (temps de présence du contrat), pausePct (5 ou 6.667, en % du travail effectif),
@@ -72,7 +82,7 @@ export function simulerPaie(e, T) {
   ligneMaj('nuit30', 'Majoration nuit 22 h-5 h', e.nuit30, mj.nuit_22_5, false);
   ligneMaj('nuit10', 'Majoration nuit 21 h-22 h / 5 h-6 h', e.nuit10, mj.nuit_21_22, false);
   // Heures en plus du contrat réparties semaine par semaine (entrée e.semainesEnPlus) : remplacent la saisie manuelle
-  if (Array.isArray(e.semainesEnPlus)) { const rep = repartirHeures(e.heuresSemaine, e.semainesEnPlus); e = { ...e, hcBase: rep.total, hc10: rep.hc10, hc25: rep.hc25, hs25: rep.hs25, hs50: rep.hs50 }; }
+  if (Array.isArray(e.semainesEnPlus) || e.totalEnPlus > 0) { const rep = Array.isArray(e.semainesEnPlus) && e.semainesEnPlus.some(x => x > 0) ? repartirHeures(e.heuresSemaine, e.semainesEnPlus) : repartirTotal(e.heuresSemaine, e.totalEnPlus); e = { ...e, hcBase: rep.total, hc10: rep.hc10, hc25: rep.hc25, hs25: rep.hs25, hs50: rep.hs50 }; }
   // Heures au-delà du contrat : base à 100 % puis majorations
   const hcb = eff(e.hcBase);
   if (hcb > 0) { let m = add('hcbase', 'Heures au-delà du contrat (100 %)', hcb, th, hcb * th); if (pct > 0) m += add('hcbase_pause', 'Heures au-delà du contrat : pause', r2(hcb * pct), th, r2(hcb * pct) * th); brutHcHs += m; }
