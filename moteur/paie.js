@@ -152,3 +152,11 @@ export function simulerPaie(e, T) {
     details: { hEff, tauxHoraire: th, tauxAvecPauses, salaireBase, hsExo, baseCsg, plafond },
   };
 }
+
+/** Nombre de jours de présence prévus dans un mois, pour des jours de semaine fixes (0 = dimanche … 6 = samedi). */
+export function compterJoursHabituels(annee, mois, joursSemaine = []) {
+  const fin = new Date(annee, mois, 0).getDate(), set = new Set(joursSemaine.map(Number));
+  let n = 0;
+  for (let j = 1; j <= fin; j++) if (set.has(new Date(annee, mois - 1, j).getDay())) n++;
+  return n;
+}

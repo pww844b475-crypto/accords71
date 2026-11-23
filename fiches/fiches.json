@@ -489,7 +489,12 @@
     "toucher le 13e mois",
     "combien de 13e mois je touche",
     "montant du 13e mois",
-    "calcul du 13e mois"
+    "calcul du 13e mois",
+    "acompte 13e mois",
+    "acompte sur mon 13e mois",
+    "acompte prime annuelle",
+    "demander un acompte",
+    "acompte juin à novembre"
    ],
    "etiquettes": [
     "Information à compléter"
@@ -534,6 +539,28 @@
      "defaut": 0,
      "question": "Connaissez-vous le total de vos 12 salaires de base mensuels (en €) ?",
      "aide": "Facultatif. Si vous ne le savez pas, tapez 0."
+    },
+    {
+     "id": "acompteDemande",
+     "label": "Acompte déjà demandé",
+     "type": "checkbox",
+     "defaut": false,
+     "question": "Avez-vous déjà demandé et reçu un acompte sur votre prime annuelle ?",
+     "aide": "Sur demande, un acompte peut être versé entre le 1er juin et le 30 novembre, si vous avez au moins 6 mois d'ancienneté à la date de la demande."
+    },
+    {
+     "id": "montantAcompte",
+     "label": "Montant de l'acompte déjà perçu (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "si": [
+      "acompteDemande",
+      true
+     ],
+     "question": "Quel montant avez-vous déjà perçu en acompte (en €) ?",
+     "aide": "Ce montant sera déduit des versements de décembre. Il se lit sur votre fiche de paie, ligne « acompte prime annuelle »."
     }
    ],
    "calcul": "primeAnnuelle",
@@ -544,7 +571,8 @@
       "Bénéficiaires : au moins 6 mois d'ancienneté à fin novembre.",
       "Acompte début décembre : 75 % ; solde avec la paie de décembre.",
       "Montant : 1/12 de la rémunération brute du temps de travail effectué du 1er janvier au 31 décembre.",
-      "Encadrement : calcul sur la rémunération de novembre ; abattement de 1/365e par jour au-delà de 180 jours d'absence (non codé ici)."
+      "Encadrement : calcul sur la rémunération de novembre ; abattement de 1/365e par jour au-delà de 180 jours d'absence (non codé ici).",
+      "Acompte exceptionnel : sur demande expresse du salarié, avec 6 mois d'ancienneté à la date de la demande, un acompte peut être versé entre le 1er juin et le 30 novembre, au prorata des droits déjà acquis ; il vient en déduction des montants à verser en décembre."
      ],
      "sources": [
       {
@@ -572,6 +600,13 @@
        "article": "art. 3.2",
        "page": 25,
        "extrait": "peut bénéficier d'une prime annuelle qui est égale à 1/12 de la somme des salaires forfaitaires mensuels"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.2",
+       "page": 24,
+       "extrait": "Un acompte pourra être versé entre le 1er juin et le 30 novembre de chaque année",
+       "verifie_image": true
       }
      ],
      "verifie_image": true
@@ -595,7 +630,7 @@
    "notes": [
     "La prime de vacances (NAO 2026) fait l'objet d'une fiche distincte à venir."
    ],
-   "reponse": "Oui si le salarié a au moins 6 mois d'ancienneté à fin novembre. Montant : 1/12 de la rémunération brute de l'année ; 75 % en acompte début décembre, le solde avec la paie de décembre (accord, art. 3.2).",
+   "reponse": "Oui si le salarié a au moins 6 mois d'ancienneté à fin novembre. Montant : 1/12 de la rémunération brute de l'année ; 75 % en acompte début décembre, le solde avec la paie de décembre (accord, art. 3.2). Sur demande, vous pouvez aussi toucher un acompte entre le 1er juin et le 30 novembre (6 mois d'ancienneté nécessaires) : il est déduit de ce que vous recevez en décembre.",
    "categorie": "remuneration"
   },
   {

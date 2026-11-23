@@ -1,5 +1,5 @@
 // Écran « Simulateur de fiche de paie ». Rien n'est enregistré ni envoyé : tout se calcule dans le navigateur.
-import { simulerPaie, repartirHeures, repartirTotal } from './moteur/paie.js';
+import { simulerPaie, repartirHeures, repartirTotal, compterJoursHabituels } from './moteur/paie.js';
 import { entretienTenue, fraisTransport, primeAstreinte } from './moteur/calculs.js';
 import { lancerAssistant } from './assistant.js';
 
@@ -91,11 +91,19 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
   function calculer() {
     const pct = valeurs.secteur === 'autre' ? num(valeurs.autrePct) : num(valeurs.secteur);
     const ouvres = Math.max(0, Math.round(num(valeurs.joursOuvres)));
+    // Jours de présence du mois : jours habituels de la semaine comptés dans le calendrier, sinon planning saisi, sinon jours par semaine, sinon mois complet
+    const [aa, mm] = String(valeurs.mois || '').split('-').map(Number);
+    const joursDuMois = aa && mm ? new Date(aa, mm, 0).getDate() : 30;
+    let prevus = ouvres, origine = 'mois complet';
+    if (valeurs.memesJours && Array.isArray(valeurs.joursHab) && valeurs.joursHab.length && aa && mm) { prevus = compterJoursHabituels(aa, mm, valeurs.joursHab); origine = 'vos jours habituels'; }
+    else if (num(valeurs.joursMois) > 0) { prevus = Math.round(num(valeurs.joursMois)); origine = 'votre planning'; }
+    else if (num(valeurs.joursSemaine) > 0) { prevus = Math.round(num(valeurs.joursSemaine) * joursDuMois / 7); origine = 'vos jours par semaine'; }
     const abs = Math.max(0, Math.round(num(valeurs.joursAbsence)));
-    const trav = Math.max(0, ouvres - abs);
+    const enPlus = Math.max(0, Math.round(num(valeurs.joursEnPlus)));
+    const trav = Math.max(0, prevus - abs + enPlus);
     const tenue = ouvres > 0 ? (entretienTenue({ joursTravailles: trav, joursOuvres: ouvres }).lignes[0]?.brut || 0) : 0;
     const km = num(valeurs.km);
-    const transport = km > 0 ? (fraisTransport({ km, jours: Math.round(num(valeurs.joursTransport)) }).lignes[1]?.brut || 0) : 0;
+    const transport = km > 0 ? (fraisTransport({ km, jours: num(valeurs.joursTransport) > 0 ? Math.round(num(valeurs.joursTransport)) : trav }).lignes[1]?.brut || 0) : 0;
     const plus = !!valeurs.optPlus, deleg = plus && !!valeurs.estDeleg, sp = !!valeurs.optSpec;
     const semaines = plus ? [0, 1, 2, 3, 4, 5].map(i => num(valeurs['sem' + i])) : [];
     const parSemaine = plus && semaines.some(x => x > 0);
@@ -139,7 +147,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       r.cp ? h('p', { class: r.cp.referenceConnue ? 'note' : 'erreur' }, r.cp.referenceConnue
         ? `Congés payés : ${virg(r.cp.jours)} jour(s) à ${eur(r.cp.parJour)} par jour (${r.cp.regle === 'dixieme' ? 'règle du dixième de la période de référence, plus favorable que le maintien' : r.cp.regle === 'maintien' ? 'maintien du salaire, plus favorable que le dixième' : 'indemnité par jour saisie'}) contre ${eur(r.cp.maintienJour)} retirés par jour : solde ${eur(r.cp.solde)}.`
         : 'Congés payés : sans votre rémunération de référence (1er juin au 31 mai) ni l\'indemnité par jour de votre fiche, le calcul retient le maintien du salaire et donne un net trop bas si le dixième est plus favorable.') : null,
-      h('p', { class: 'note' }, `Taux horaire déduit de votre salaire de base : ${virg(r.details.tauxHoraire.toFixed(3))} €. Indemnité de tenue calculée : ${eur(tenue)} (${trav} jours sur ${ouvres} ouvrés).`),
+      h('p', { class: 'note' }, `Taux horaire déduit de votre salaire de base : ${virg(r.details.tauxHoraire.toFixed(3))} €. Indemnité de tenue calculée : ${eur(tenue)} (${trav} jours de présence d'après ${origine}, sur ${ouvres} jours ouvrés du mois).`),
       h('p', { class: 'note' }, 'Estimation à quelques centimes près : la paie arrondit ligne par ligne. Elle ne remplace pas votre fiche de paie.'));
     remplir(zoneDetail,
       h('details', { class: 'textes' }, h('summary', {}, 'Voir le détail des lignes de salaire'),
@@ -155,6 +163,10 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'mois', type: 'mois', emoji: '📅', court: 'Mois', question: 'Pour quel mois voulez-vous estimer votre paie ?', aide: 'Par défaut, le mois en cours. Vous pouvez choisir un mois passé pour comparer avec une fiche de paie reçue.' },
     { id: 'secteur', type: 'choix', emoji: '🏬', court: 'Secteur', question: 'Dans quel secteur travaillez-vous ?', aide: 'Cela change la durée de pause payée.', options: [['5', 'Bureaux, rayons, mise en rayon, autres', '🧑‍💼'], ['6.67', 'Caisses, drive ou îlots de vente', '🛒']] },
     { id: 'heuresSemaine', type: 'nombre', unite: 'h par semaine', emoji: '⏱️', court: 'Heures par semaine', question: 'Combien d\'heures par semaine prévoit votre contrat ?', aide: 'Exemple : 24, 30 ou 36. C\'est l\'horaire écrit sur votre fiche de paie (« horaire »).' },
+    { id: 'joursSemaine', type: 'nombre', unite: 'jours par semaine', emoji: '📅', court: 'Jours par semaine', question: 'Combien de jours par semaine travaillez-vous ?', aide: 'Par exemple 3 si vous faites 3 jours par semaine, qu\'ils se suivent ou non. Cela sert à compter vos jours de présence du mois.' },
+    { id: 'memesJours', type: 'ouinon', emoji: '🔁', court: 'Toujours les mêmes jours', question: 'Travaillez-vous toujours les mêmes jours de la semaine ?', aide: 'Répondez Non si votre planning change d\'une semaine à l\'autre.' },
+    { id: 'joursHab', type: 'multi', emoji: '🗓️', court: 'Jours habituels', si: v => v.memesJours, question: v => `Quels sont vos jours de travail ? (${v.joursSemaine || '…'} jour(s) par semaine)`, aide: 'Touchez les jours concernés, puis « Continuer ».', options: [[1, 'Lundi'], [2, 'Mardi'], [3, 'Mercredi'], [4, 'Jeudi'], [5, 'Vendredi'], [6, 'Samedi'], [0, 'Dimanche']] },
+    { id: 'joursMois', type: 'nombre', unite: 'jour(s)', emoji: '📅', optionnel: true, court: 'Jours de présence du mois', si: v => !v.memesJours, question: 'Combien de jours allez-vous travailler (ou avez-vous travaillé) ce mois-ci ?', aide: 'Comptez les jours où vous êtes au magasin d\'après votre planning. Si vous ne savez pas, touchez « Je ne sais pas » : je calculerai avec vos jours par semaine.' },
     { id: 'salaireBase', type: 'nombre', unite: '€', emoji: '💶', optionnel: true, court: 'Salaire de base', question: 'Quel est le « salaire de base » de votre fiche de paie ?', aide: 'C\'est le montant en haut de votre fiche, dans l\'encadré de gauche. Si vous ne l\'avez pas sous la main, touchez « Je ne sais pas ».' },
     { id: 'tauxHoraire', type: 'nombre', unite: '€ par heure', emoji: '💶', court: 'Salaire par heure', si: v => !(Number(v.salaireBase) > 0), question: 'Quel est votre salaire par heure ?', aide: 'C\'est le « taux horaire » de votre fiche de paie, sans les pauses.' },
     { id: 'optPlus', type: 'ouinon', emoji: '➕', court: 'Heures en plus du contrat', question: 'Avez-vous fait des heures en plus de votre contrat ce mois-ci ?', aide: 'Heures de délégation hors temps de travail, heures complémentaires ou heures supplémentaires.' },
@@ -176,12 +188,12 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'cpConnu', type: 'ouinon', emoji: '🧾', court: 'Indemnité par jour connue', si: v => v.optCp, question: 'Connaissez-vous le montant payé par jour de congé ?', aide: 'C\'est le taux de la ligne « IND C.P. ACQUIS » sur votre dernière fiche de paie. Sans lui, mon calcul sera moins juste.' },
     { id: 'cpInd', type: 'nombre', unite: '€ par jour', emoji: '🧾', court: 'Indemnité par jour', si: v => v.optCp && v.cpConnu, question: 'Quel est ce montant par jour ?', aide: 'Recopiez le taux de la ligne « IND C.P. ACQUIS ».' },
     { id: 'cpRef', type: 'nombre', unite: '€', emoji: '💶', optionnel: true, court: 'Brut du 1er juin au 31 mai', si: v => v.optCp && !v.cpConnu, question: 'Combien avez-vous gagné de salaire brut du 1er juin au 31 mai ?', aide: 'Additionnez vos salaires bruts de cette période. Si vous ne le savez pas, touchez « Je ne sais pas ».' },
-    { id: 'joursAbsence', type: 'nombre', unite: 'jour(s)', emoji: '🗓️', optionnel: true, court: 'Jours d\'absence', question: 'Combien de jours étiez-vous absent ce mois-ci, congés payés compris ?', aide: 'Congés, maladie, formation… Cela sert à calculer l\'indemnité de tenue. Tapez 0 si vous n\'avez pas été absent.' },
+    { id: 'joursAbsence', type: 'nombre', unite: 'jour(s)', emoji: '🗓️', optionnel: true, court: 'Jours d\'absence', question: 'Parmi vos jours de travail du mois, combien avez-vous manqués ?', aide: v => (v.optCp && Number(v.cpJours) > 0 && Number(v.joursSemaine) > 0 ? `Vos ${Number(v.cpJours)} jours de congés pointés font environ ${Math.round(Number(v.cpJours) * Number(v.joursSemaine) / 6)} jour(s) de travail. ` : '') + 'Congés payés, maladie, formation : comptez seulement les jours où vous deviez travailler. Cela sert à calculer l\'indemnité de tenue. Tapez 0 si aucun.' },
+    { id: 'joursEnPlus', type: 'nombre', unite: 'jour(s)', emoji: '➕', optionnel: true, court: 'Jours en plus de vos jours habituels', question: 'Avez-vous travaillé des jours qui ne sont pas vos jours habituels ?', aide: 'Délégation, dimanche, remplacement… Combien de jours en tout ? Tapez 0 si aucun. Ils comptent comme jours de présence.' },
     { id: 'tickets', type: 'nombre', unite: 'titre(s)', emoji: '🍽️', court: 'Titres-restaurant', question: 'Combien de titres-restaurant avez-vous eus ce mois-ci ?', aide: 'Un titre par jour où votre horaire couvre 12 h - 13 h 30 ou 18 h 30 - 20 h. Tapez 0 si aucun.' },
     { id: 'region', type: 'choix', emoji: '🏬', court: 'Magasin (titres-restaurant)', si: v => Number(v.tickets) > 0, question: 'Dans quel magasin travaillez-vous ?', aide: 'La part que vous payez pour un titre n\'est pas la même.', options: [['autre', 'Hors Île-de-France', '🏬'], ['idf', 'En Île-de-France', '🗼']] },
     { id: 'optTransport', type: 'ouinon', emoji: '🚗', court: 'Indemnité de transport', question: 'Touchez-vous l\'indemnité de transport ?', aide: 'Elle concerne ceux qui viennent en voiture parce qu\'il n\'y a pas de transport en commun.' },
     { id: 'km', type: 'nombre', unite: 'km', emoji: '🚗', court: 'Distance domicile-travail', si: v => v.optTransport, question: 'Quelle distance faites-vous entre chez vous et le travail ?', aide: 'Distance aller simple, par le chemin le plus court.' },
-    { id: 'joursTransport', type: 'nombre', unite: 'jour(s)', emoji: '📅', court: 'Jours de transport', si: v => v.optTransport, question: 'Combien de jours avez-vous travaillé sur place ce mois-ci ?', aide: 'Chaque jour travaillé donne droit à l\'indemnité.' },
     { id: 'optAutres', type: 'ouinon', emoji: '🎁', court: 'Autres éléments de salaire', question: 'Avez-vous une autre prime ou une régularisation sur cette paie ?', aide: 'Une prime exceptionnelle, un rappel de salaire… Sinon répondez Non.' },
     { id: 'autresBrut', type: 'nombre', signe: true, unite: '€', emoji: '🎁', court: 'Montant de cette prime', si: v => v.optAutres, question: 'De quel montant (en €) ?', aide: 'Tapez un signe moins devant si c\'est une retenue (exemple : -50).' },
     { id: 'optRet', type: 'ouinon', emoji: '✂️', court: 'Autres retenues sur le net', question: 'Y a-t-il d\'autres retenues sur votre paie ?', aide: 'Un acompte déjà versé, une opposition… Sinon répondez Non.' },
@@ -213,7 +225,8 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
         h('label', { class: 'champ' }, h('span', { class: 'champ-label' }, 'Mois de la fiche'), champMois),
         champ('salaireBase', 'Salaire de base du mois (€)', { placeholder: 'ex. 1927,77', aide: 'La ligne « salaire de base » de l\'en-tête de la fiche (pauses comprises).' }),
         champ('tauxHoraire', 'Salaire par heure (si vous ne connaissez pas le salaire de base) (€)', { placeholder: 'ex. 12,31' }),
-        champ('heuresSemaine', 'Heures de présence par semaine', { placeholder: 'ex. 36', aide: 'Horaire du contrat (« horaire TPR » sur la fiche).' }), secteur, autrePct)),
+        champ('heuresSemaine', 'Heures de présence par semaine', { placeholder: 'ex. 36', aide: 'Horaire du contrat (« horaire TPR » sur la fiche).' }),
+        champ('joursSemaine', 'Jours travaillés par semaine', { placeholder: 'ex. 3', aide: 'Sert à compter vos jours de présence. Pour choisir vos jours exacts (lundi, mardi…), utilisez les questions pas à pas.' }), champ('joursMois', 'Jours de présence prévus ce mois-ci (si vous le connaissez)', { aide: 'Remplace le calcul automatique.' }), champ('joursEnPlus', 'Jours travaillés en plus de vos jours habituels', { aide: 'Délégation, dimanche, remplacement.' }), secteur, autrePct)),
     h('div', { class: 'carte' }, h('h3', {}, '2. Ce qui change ce mois-ci'), h('p', { class: 'note' }, 'Cochez ce qui vous concerne. Heures en temps de présence, comme sur la fiche.'),
       option('optPlus', 'J\'ai fait des heures en plus de mon contrat (délégation, compléments, heures supplémentaires)',
         champ('hPlus', 'Total d\'heures en plus du contrat sur le mois', { placeholder: 'ex. 31,5', aide: 'Comme sur la fiche et le planning, en heures décimales : 6,50 = 6 h 30. Les 10 %, 25 % et 50 % sont calculés automatiquement.' }),

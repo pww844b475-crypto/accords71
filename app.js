@@ -104,7 +104,7 @@ const texteReponse = (c, v) => c.type === 'select' ? (c.options.find(o => o[0] =
 function assistant(f, valeurs, fini, auRecap = false) {
   const champs = (f.champs || []).filter(c => !(c.type === 'select' && c.options.length < 2));
   if (!champs.length) { fini(valeurs); return; }
-  const etapes = champs.map(c => ({ id: c.id, type: c.type === 'select' ? 'choix' : c.type === 'checkbox' ? 'ouinon' : c.type === 'date' ? 'date' : 'nombre', options: c.options, question: c.question || c.label, aide: c.aide, emoji: emojiPour(c.label), unite: c.unite }));
+  const etapes = champs.map(c => ({ id: c.id, type: c.type === 'select' ? 'choix' : c.type === 'checkbox' ? 'ouinon' : c.type === 'date' ? 'date' : 'nombre', options: c.options, question: c.question || c.label, aide: c.aide, emoji: emojiPour(c.label), unite: c.unite, si: c.si ? (v => v[c.si[0]] === c.si[1]) : undefined }));
   lancerAssistant({ h, remplir, titre: f.question, emoji: catDe(f).icone, etapes, valeurs, commencerAuRecap: auRecap,
     intro: champs.length > 1 ? `Je vous pose ${champs.length} petites questions, puis je calcule la réponse pour votre cas. Vous pourrez revenir en arrière si vous vous trompez.` : null,
     onFini: fini, onAnnule: () => fini(valeurs) });

@@ -71,7 +71,7 @@ export function indemniteLicenciement(p) {
 }
 
 // ---- 4. Prime annuelle (accord de substitution art. 3.2, p.24-25) — employés
-export function primeAnnuelle({ dateEmbauche, annee, brutAnnee = 0, joursMaladie = 0, sommeForfaitaires = 0 }) {
+export function primeAnnuelle({ dateEmbauche, annee, brutAnnee = 0, joursMaladie = 0, sommeForfaitaires = 0, acompteDemande = false, montantAcompte = 0 }) {
   if (!dateEmbauche || !annee) return { lignes: [], erreur: 'Renseigner la date d\'embauche et l\'année.' };
   const [y, m, d] = dateEmbauche.split('-').map(Number);
   const jmax = new Date(Date.UTC(y, m + 6, 0)).getUTCDate(); // dernier jour du mois cible (évite le débordement 31 nov.)
@@ -89,6 +89,11 @@ export function primeAnnuelle({ dateEmbauche, annee, brutAnnee = 0, joursMaladie
   }
   lignes.push(L('accord', 'Acompte début décembre (75 %)', `${r2(montant * 0.75)} €`, { brut: r2(montant * 0.75) }));
   lignes.push(L('accord', 'Solde avec la paie de décembre (25 %)', `${r2(montant * 0.25)} €`, { brut: r2(montant * 0.25) }));
+  if (acompteDemande && montantAcompte > 0) {
+    const reste = r2(montant - montantAcompte);
+    lignes.push(L('accord', 'Acompte déjà perçu sur demande (entre le 1er juin et le 30 novembre)', `${r2(montantAcompte)} €`, { brut: r2(montantAcompte) }));
+    lignes.push(L('accord', 'Reste à percevoir en décembre (prime moins acompte déjà perçu)', reste >= 0 ? `${reste} €` : `${reste} € : l'acompte dépasse la prime calculée, à vérifier`, { brut: reste, note: 'L\'accord dit que l\'acompte déjà versé vient « en déduction des montants à verser au mois de décembre » : il ne précise pas comment la déduction se répartit entre l\'acompte de début décembre et le solde.' }));
+  }
   return { lignes };
 }
 

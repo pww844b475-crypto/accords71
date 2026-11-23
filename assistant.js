@@ -38,6 +38,7 @@ export function lancerAssistant({ h, remplir, titre = 'Quelques questions', emoj
   const libelleReponse = (e, val) => {
     if (e.type === 'choix') return (e.options.find(o => o[0] === val) || [, String(val ?? '')])[1];
     if (e.type === 'ouinon') return val ? 'Oui' : 'Non';
+    if (e.type === 'multi') return (txt(e.options).filter(o => (val || []).includes(o[0])).map(o => o[1]).join(', ')) || 'aucun';
     if (e.type === 'mois') { const [a, m] = String(val || '').split('-'); return a && m ? `${m}/${a}` : 'non renseigné'; }
     if (e.type === 'date') return val ? String(val).split('-').reverse().join('/') : 'non renseignée';
     return String(val ?? 0).replace('.', ',') + (e.unite ? ' ' + e.unite : '');
@@ -61,6 +62,11 @@ export function lancerAssistant({ h, remplir, titre = 'Quelques questions', emoj
     const e = etapes[i]; let zone, ctl;
     const continuer = () => { enregistrer(e, lire(e, ctl)); avancer(i); };
     if (e.type === 'choix') zone = h('div', { class: 'as-choix' }, txt(e.options).map(([val, lab, em]) => h('button', { type: 'button', class: 'as-btn' + (v[e.id] === val ? ' choisi' : ''), onclick: () => { enregistrer(e, val); avancer(i); } }, em ? h('span', { class: 'as-btn-emoji' }, em) : null, h('span', {}, lab))));
+    else if (e.type === 'multi') {
+      const choisis = new Set(v[e.id] || []);
+      const boutons = txt(e.options).map(([val, lab]) => { const b = h('button', { type: 'button', class: 'as-btn as-puce' + (choisis.has(val) ? ' choisi' : ''), onclick: () => { choisis.has(val) ? choisis.delete(val) : choisis.add(val); b.classList.toggle('choisi', choisis.has(val)); } }, h('span', {}, lab)); return b; });
+      zone = h('div', {}, h('div', { class: 'as-puces' }, boutons), h('button', { type: 'button', class: 'as-prim', onclick: () => { enregistrer(e, [...choisis]); avancer(i); } }, 'Continuer →'));
+    }
     else if (e.type === 'ouinon') zone = h('div', { class: 'as-choix as-deux' }, h('button', { type: 'button', class: 'as-btn' + (v[e.id] === true ? ' choisi' : ''), onclick: () => { enregistrer(e, true); avancer(i); } }, h('span', { class: 'as-btn-emoji' }, '👍'), h('span', {}, 'Oui')),
       h('button', { type: 'button', class: 'as-btn' + (v[e.id] === false || v[e.id] == null ? ' choisi' : ''), onclick: () => { enregistrer(e, false); avancer(i); } }, h('span', { class: 'as-btn-emoji' }, '👎'), h('span', {}, 'Non')));
     else {

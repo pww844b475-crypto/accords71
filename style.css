@@ -194,3 +194,6 @@ body.modal-ouvert{overflow:hidden}
 .as-recap li strong{color:#0f8b6b;text-align:right}
 
 .version{text-align:center;opacity:.5;font-size:.8rem;margin:24px 0 8px}
+
+.as-puces{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
+.as-puce{min-height:52px;justify-content:center;text-align:center}
