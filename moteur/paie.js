@@ -191,7 +191,8 @@ export function simulerDecembre(e, { brutCumulNov = 0, moisPayes = 11, acompteEx
   const exc = Math.max(0, acompteExc || 0), acompteTotal = r2(primeEstimee * 0.75);
   const a75Prevu = Math.max(0, r2(acompteTotal - exc));
   const a75 = acompte75Recu ? (acompte75Montant > 0 ? r2(acompte75Montant) : a75Prevu) : 0;
-  const deduits = r2(exc + a75);
+  // Un acompte pas encore reçu sera versé avant la fiche : la fiche de décembre le déduira aussi
+  const deduits = r2(exc + (acompte75Recu ? a75 : a75Prevu));
   const r = simulerPaie({ ...e, primeAnnuelle: primeBrute, autresRetenues: r2((e.autresRetenues || 0) + deduits) }, T);
-  return { r, r0, brutAnnee, cumulNov, moisPayes: n, primeBrute, primeEstimee, netPrime, acompteTotal, acompteExc: exc, acompte75: a75, a75Prevu, acompte75Estime: acompte75Recu && !(acompte75Montant > 0), deduits, resteNet: r2(netPrime - deduits) };
+  return { r, r0, brutAnnee, cumulNov, moisPayes: n, primeBrute, primeEstimee, netPrime, acompteTotal, acompteExc: exc, acompte75: a75, a75Prevu, a75Compte: acompte75Recu ? a75 : a75Prevu, acompte75Estime: acompte75Recu && !(acompte75Montant > 0), deduits, resteNet: r2(netPrime - deduits) };
 }

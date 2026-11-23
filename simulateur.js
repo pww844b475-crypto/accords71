@@ -186,7 +186,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
         ligne('Net estimé de la prime', eur(dec.netPrime)),
         dec.acompteExc ? ligne('− Acompte exceptionnel déjà reçu (net)', eur(-dec.acompteExc)) : null,
         dec.acompte75 ? ligne('− Acompte de début décembre déjà reçu (net)' + (dec.acompte75Estime ? ' : estimé (75 % de la prime estimée début décembre' + (dec.acompteExc ? ', moins l\'acompte exceptionnel' : '') + ')' : ''), eur(-dec.acompte75)) : null,
-        !dec.acompte75 ? ligne('Acompte de début décembre prévu, pas encore reçu (75 % du brut' + (dec.acompteExc ? ' moins l\'acompte exceptionnel' : '') + ')', eur(dec.a75Prevu)) : null,
+        !dec.acompte75 ? ligne('− Acompte de début décembre à recevoir, déduit aussi de la fiche (75 % du brut' + (dec.acompteExc ? ' moins l\'acompte exceptionnel' : '') + ')', eur(-dec.a75Prevu)) : null,
         ligne('Reste à percevoir du 13ᵉ mois sur cette fiche (net)', eur(dec.resteNet), true),
         dec.moisPayes < 11 ? h('p', { class: 'note' }, `Vous n'avez que ${dec.moisPayes} fiche(s) : le brut des mois manquants jusqu'à novembre est estimé à la moyenne de vos mois payés (brut estimé de janvier à novembre : ${eur(dec.cumulNov)}). Le résultat sera plus juste avec la fiche de novembre.`) : null,
         h('p', { class: 'note' }, 'Les acomptes (75 % du BRUT de la prime) sont versés sans cotisations ; la fiche de décembre prélève les cotisations sur toute la prime et déduit les acomptes au net. Le reste est donc faible : relevé sur une fiche de décembre 2025. Estimation : le net de la prime dépend du plafond de la Sécurité sociale et des cotisations du mois.')) : null,
