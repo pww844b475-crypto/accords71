@@ -120,3 +120,6 @@ h3.section{margin:1.4rem 0 .5rem;font-size:1.05rem}
 .simu-table{width:100%;border-collapse:collapse;font-size:.9rem}
 .simu-table td{padding:.3rem .2rem;border-bottom:1px solid var(--bord)}
 .simu-table td.d{text-align:right;white-space:nowrap}
+.simu-resume{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.option{margin:10px 0;padding:8px 0;border-top:1px solid var(--bord)}
+.option-zone{margin:6px 0 4px 38px}

@@ -151,6 +151,12 @@
    "libelle": "Heures supplémentaires (premières)",
    "taux": 25,
    "source": "fiche de paie 2026"
+  },
+  {
+   "id": "hs_50",
+   "libelle": "Heures supplémentaires (suivantes)",
+   "taux": 50,
+   "source": "Code du travail L3121-36 (25 % les 8 premières, 50 % ensuite) ; accord art. 5.2"
   }
  ]
 }

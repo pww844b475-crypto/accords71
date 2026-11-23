@@ -21,7 +21,6 @@ export function simulerPaie(e, T) {
   const tx = tauxParId(T), mj = majParId(T);
   const plafond = T.plafond_mensuel_securite_sociale;
   const pct = (e.pausePct || 0) / 100;
-  const th = e.tauxHoraire || 0;
   const eff = h => r2((h || 0) / (1 + pct));            // heures de présence -> heures de travail effectif
   const lignes = [];
   const add = (code, libelle, base, taux, montant, extra = {}) => { lignes.push({ code, libelle, base, taux, montant: r2(montant), ...extra }); return r2(montant); };
@@ -29,6 +28,8 @@ export function simulerPaie(e, T) {
   // Salaire de base : heures effectives du mois × taux avec pauses (arrondi à 3 décimales comme sur la fiche)
   const presenceMois = r2((e.heuresSemaine || 0) * SEMAINES_PAR_MOIS);
   const hEff = eff(presenceMois);
+  // Taux horaire : donné, ou déduit du salaire de base mensuel de la fiche (salaire de base ÷ heures effectives ÷ (1 + pause))
+  const th = e.tauxHoraire > 0 ? e.tauxHoraire : (e.salaireBase > 0 && hEff > 0 ? r3(e.salaireBase / hEff / (1 + pct)) : 0);
   const tauxAvecPauses = r3(th * (1 + pct));
   const travail = add('travail', 'Salaire du travail effectif', hEff, th, hEff * th);
   const hPause = r2(hEff * pct);                         // heures de pause arrondies comme sur la fiche
@@ -54,6 +55,7 @@ export function simulerPaie(e, T) {
   ligneMaj('hc10', 'Majoration heures complémentaires 10 %', e.hc10, mj.hc_10, true);
   ligneMaj('hc25', 'Majoration heures complémentaires 25 %', e.hc25, mj.hc_25, true);
   ligneMaj('hs25', 'Majoration heures supplémentaires 25 %', e.hs25, mj.hs_25, true);
+  ligneMaj('hs50', 'Majoration heures supplémentaires 50 %', e.hs50, mj.hs_50, true);
   if (e.autresBrut) add('autres', 'Autres éléments de salaire (congés, primes…)', null, null, e.autresBrut);
 
   const brut = r2(lignes.reduce((s, l) => s + l.montant, 0));
@@ -98,6 +100,6 @@ export function simulerPaie(e, T) {
   return {
     lignes, brut, cotisations: cot, totalCotisations: totalCot, netSocial, indemnitesNonSoumises: indemnites,
     ticketsPartSalarie: ticketsSal, autresRetenues: autresRet, netAvantImpot, baseImposable, pas, netAPayer,
-    details: { hEff, tauxAvecPauses, salaireBase, hsExo, baseCsg, plafond },
+    details: { hEff, tauxHoraire: th, tauxAvecPauses, salaireBase, hsExo, baseCsg, plafond },
   };
 }
