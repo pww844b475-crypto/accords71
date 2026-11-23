@@ -1,5 +1,5 @@
 // Écran « Simulateur de fiche de paie ». Rien n'est enregistré ni envoyé : tout se calcule dans le navigateur.
-import { simulerPaie, repartirHeures, repartirTotal, compterJoursHabituels } from './moteur/paie.js';
+import { simulerPaie, simulerDecembre, repartirHeures, repartirTotal, compterJoursHabituels } from './moteur/paie.js';
 import { entretienTenue, fraisTransport, primeAstreinte } from './moteur/calculs.js';
 import { lancerAssistant } from './assistant.js';
 import { pointerConges, feriesDans } from './moteur/calendrier.js';
@@ -142,7 +142,14 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     if (!(e.salaireBase > 0 || e.tauxHoraire > 0) || !(e.heuresSemaine > 0)) {
       remplir(zoneResultat, h('p', { class: 'note' }, 'Renseignez le salaire de base (ou le salaire par heure) et les heures par semaine pour voir le résultat.')); remplir(zoneDetail); return;
     }
-    const r = simulerPaie(e, T);
+    // Décembre : le 13e mois est dans la paie, avec la déduction des acomptes déjà reçus
+    let dec = null, r;
+    if (valeurs.optPrime && mm === 12 && valeurs.anc6 !== false) {
+      const exc = valeurs.acompteExc === false ? 0 : num(valeurs.acompteExcMontant);
+      const recu75 = valeurs.acompte75 === true || (valeurs.acompte75 == null && num(valeurs.acompte75Montant) > 0);
+      dec = simulerDecembre(e, { brutCumulNov: num(valeurs.brutCumulNov), acompteExc: exc, acompte75Recu: recu75, acompte75Montant: num(valeurs.acompte75Montant) }, T);
+      r = dec.r;
+    } else r = simulerPaie(e, T);
     const ligne = (t, v, fort) => h('div', { class: 'simu-ligne' + (fort ? ' fort' : '') }, h('span', {}, t), h('strong', {}, v));
     const [a, m] = (valeurs.mois || '').split('-').map(Number);
     const periode = a && m ? `${MOIS[m - 1]} ${a}` : '';
@@ -157,10 +164,17 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       ligne('Net social', eur(r.netSocial)),
       r.indemnitesNonSoumises ? ligne('+ Indemnités non soumises (tenue, transport)', eur(r.indemnitesNonSoumises)) : null,
       r.ticketsPartSalarie ? ligne('− Titres-restaurant (votre part)', eur(-r.ticketsPartSalarie)) : null,
-      r.autresRetenues ? ligne('− Autres retenues', eur(-r.autresRetenues)) : null,
+      r.autresRetenues ? ligne(dec ? '− Autres retenues et acomptes déjà reçus' : '− Autres retenues', eur(-r.autresRetenues)) : null,
       ligne('Net à payer avant impôt', eur(r.netAvantImpot), true),
       valeurs.pasActif ? ligne(`− Prélèvement à la source (${virg(num(valeurs.pasTaux))} % de ${eur(r.baseImposable)})`, eur(-r.pas)) : null,
       ligne(valeurs.pasActif ? 'Net à payer après impôt' : 'Net à payer (sans prélèvement à la source)', eur(r.netAPayer), true),
+      dec ? h('div', { class: 'carte', style: 'margin:10px 0' }, h('h3', {}, '13ᵉ mois dans cette paie'),
+        ligne('Prime annuelle (1/12 du brut de l\'année, ' + eur(dec.brutAnnee) + ')', eur(dec.primeBrute)),
+        ligne('Net estimé de la prime', eur(dec.netPrime)),
+        dec.acompteExc ? ligne('− Acompte exceptionnel déjà reçu (net)', eur(-dec.acompteExc)) : null,
+        dec.acompte75 ? ligne('− Acompte de début décembre déjà reçu (net)' + (dec.acompte75Estime ? ' : estimé' : ''), eur(-dec.acompte75)) : null,
+        ligne('Reste à percevoir du 13ᵉ mois sur cette fiche (net)', eur(dec.resteNet), true),
+        h('p', { class: 'note' }, 'Les acomptes déjà reçus sont déduits du net de la fiche de décembre. Estimation : le net de la prime dépend du plafond de la Sécurité sociale et des cotisations du mois.')) : null,
       r.cp ? h('p', { class: r.cp.referenceConnue ? 'note' : 'erreur' }, r.cp.referenceConnue
         ? `Congés payés : ${virg(r.cp.jours)} jour(s) à ${eur(r.cp.parJour)} par jour (${r.cp.regle === 'dixieme' ? 'règle du dixième de la période de référence, plus favorable que le maintien' : r.cp.regle === 'maintien' ? 'maintien du salaire, plus favorable que le dixième' : 'indemnité par jour saisie'}) contre ${eur(r.cp.maintienJour)} retirés par jour : solde ${eur(r.cp.solde)}.`
         : 'Congés payés : sans votre rémunération de référence (1er juin au 31 mai) ni l\'indemnité par jour de votre fiche, le calcul retient le maintien du salaire et donne un net trop bas si le dixième est plus favorable.') : null,
@@ -217,6 +231,13 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
     { id: 'region', type: 'choix', emoji: '🏬', court: 'Magasin (titres-restaurant)', si: v => Number(v.tickets) > 0, question: 'Dans quel magasin travaillez-vous ?', aide: 'La part que vous payez pour un titre n\'est pas la même.', options: [['autre', 'Hors Île-de-France', '🏬'], ['idf', 'En Île-de-France', '🗼']] },
     { id: 'optTransport', type: 'ouinon', emoji: '🚗', court: 'Indemnité de transport', question: 'Touchez-vous l\'indemnité de transport ?', aide: 'Elle concerne ceux qui viennent en voiture parce qu\'il n\'y a pas de transport en commun.' },
     { id: 'km', type: 'nombre', unite: 'km', emoji: '🚗', court: 'Distance domicile-travail', si: v => v.optTransport, question: 'Quelle distance faites-vous entre chez vous et le travail ?', aide: 'Distance aller simple, par le chemin le plus court.' },
+    { id: 'optPrime', type: 'ouinon', emoji: '🎁', court: '13ᵉ mois dans la paie', si: v => String(v.mois || '').endsWith('-12'), question: 'Votre paie de décembre contient-elle le 13ᵉ mois (prime annuelle) ?', aide: 'Le 13ᵉ mois se touche en décembre : 75 % en acompte début décembre, le reste avec la fiche de paie de décembre. Je l\'ajoute avec la déduction des acomptes déjà reçus.' },
+    { id: 'anc6', type: 'ouinon', emoji: '📅', court: '6 mois d\'ancienneté à fin novembre', si: v => v.optPrime && String(v.mois || '').endsWith('-12'), question: 'Aviez-vous au moins 6 mois d\'ancienneté à fin novembre ?', aide: 'C\'est la condition pour avoir la prime annuelle.' },
+    { id: 'brutCumulNov', type: 'nombre', unite: '€', emoji: '💶', court: 'Brut de janvier à novembre', si: v => v.optPrime && v.anc6 !== false && String(v.mois || '').endsWith('-12'), question: 'Quel est le total de votre salaire brut de janvier à novembre ?', aide: 'Lisez le cumul du brut sur votre fiche de novembre. Le brut de décembre est ajouté automatiquement.' },
+    { id: 'acompteExc', type: 'ouinon', emoji: '💸', court: 'Acompte demandé entre juin et novembre', si: v => v.optPrime && v.anc6 !== false && String(v.mois || '').endsWith('-12'), question: 'Aviez-vous demandé un acompte du 13ᵉ mois entre juin et novembre ?', aide: 'Un acompte exceptionnel est possible sur demande, entre le 1er juin et le 30 novembre.' },
+    { id: 'acompteExcMontant', type: 'nombre', unite: '€', emoji: '💸', court: 'Montant net de cet acompte', si: v => v.optPrime && v.anc6 !== false && v.acompteExc && String(v.mois || '').endsWith('-12'), question: 'Quel montant net avez-vous reçu ?', aide: 'Le montant arrivé sur votre compte, pas le brut.' },
+    { id: 'acompte75', type: 'ouinon', emoji: '💰', court: 'Acompte de début décembre reçu', si: v => v.optPrime && v.anc6 !== false && String(v.mois || '').endsWith('-12'), question: 'Avez-vous déjà reçu l\'acompte de début décembre (75 %) ?', aide: 'Il arrive début décembre, avant la fiche de paie. S\'il n\'est pas encore arrivé, répondez Non.' },
+    { id: 'acompte75Montant', type: 'nombre', unite: '€', emoji: '💰', optionnel: true, court: 'Montant net de l\'acompte de décembre', si: v => v.optPrime && v.anc6 !== false && v.acompte75 && String(v.mois || '').endsWith('-12'), question: 'Quel montant net avez-vous reçu ?', aide: 'Touchez « Je ne sais pas » : je l\'estime à 75 % de ce qu\'il reste du 13ᵉ mois après l\'acompte exceptionnel.' },
     { id: 'optAutres', type: 'ouinon', emoji: '🎁', court: 'Autres éléments de salaire', question: 'Avez-vous une autre prime ou une régularisation sur cette paie ?', aide: 'Une prime exceptionnelle, un rappel de salaire… Sinon répondez Non.' },
     { id: 'autresBrut', type: 'nombre', signe: true, unite: '€', emoji: '🎁', court: 'Montant de cette prime', si: v => v.optAutres, question: 'De quel montant (en €) ?', aide: 'Tapez un signe moins devant si c\'est une retenue (exemple : -50).' },
     { id: 'optRet', type: 'ouinon', emoji: '✂️', court: 'Autres retenues sur le net', question: 'Y a-t-il d\'autres retenues sur votre paie ?', aide: 'Un acompte déjà versé, une opposition… Sinon répondez Non.' },
@@ -264,6 +285,7 @@ export async function ouvrirSimulateur({ vue, h, remplir, retour }, init = null)
       option('optSpec', 'J\'ai travaillé un dimanche, un jour férié ou de nuit', champ('dimanche', 'Heures le dimanche habituel (+60 %)'), champ('dimanche100', 'Heures de dimanche exceptionnel (+100 %)'), champ('ferie', 'Heures un jour férié (+200 %)'), champ('nuit30', 'Heures de nuit 22 h-5 h (+30 %)'), champ('nuit10', 'Heures de nuit 21-22 h et 5-6 h (+10 %)')),
       option('optAst', 'J\'ai été d\'astreinte ce mois-ci', choix('astMagasin', 'Type de magasin', [['standard', 'Autre magasin'], ['dimanche', 'Ouvert le dimanche après-midi ou jusqu\'à minuit'], ['h24', 'Ouvert 24 h sur 24']], 'standard'), champ('astSemaines', 'Semaines d\'astreinte'), champ('astHeures', 'Heures d\'intervention, trajet compris')),
       option('optCp', 'J\'ai pris des congés payés ce mois-ci', champDate('cpDebut', 'Premier jour des congés'), champDate('cpFin', 'Dernier jour des congés'), champ('cpJoursTrav', 'Jours de travail prévus pendant les congés (si vos jours varient)'), champ('cpFerie', 'Jours fériés fermés par le magasin pendant les congés'), champ('cpJours', 'Jours de congés pointés (si vous les connaissez : remplace le calcul par dates)', { aide: 'Les jours « ABS C.P. » de la fiche.' }), champ('cpRef', 'Total brut de la période de référence (€)', { aide: 'Somme de vos bruts du 1er juin au 31 mai précédents. Le dixième est divisé par 300 par jour.' }), champ('cpInd', 'ou indemnité par jour de la fiche (€)', { aide: 'Plus simple : le taux de la ligne « IND C.P. ACQUIS » de votre fiche. Remplace le calcul ci-dessus.' })),
+      option('optPrime', 'Ma paie de décembre contient le 13ᵉ mois', champ('brutCumulNov', 'Total du salaire brut de janvier à novembre (€)', { aide: 'Le cumul de votre fiche de novembre.' }), champ('acompteExcMontant', 'Acompte exceptionnel déjà reçu, en net (€)', { aide: 'Laissez vide si aucun.' }), champ('acompte75Montant', 'Acompte de début décembre déjà reçu, en net (€)', { aide: 'Laissez vide si pas encore reçu. L\'estimation à 75 % n\'est proposée que par les questions pas à pas.' })),
       option('optAutres', 'J\'ai d\'autres éléments de salaire (congés payés, primes…)', champ('autresBrut', 'Montant en € (+ ou −)', { signe: true, aide: 'Congés payés : écart entre l\'indemnité et l\'absence retirée.' }))),
     h('div', { class: 'carte' }, h('h3', {}, '3. Avantages et retenues'),
       h('div', { class: 'champs' },

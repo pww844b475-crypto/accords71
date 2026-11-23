@@ -51,8 +51,13 @@ export function pointerConges({ debut, fin, joursHab = null, joursSemaine = 5, j
   else if (joursTravaillesSaisis > 0) joursTravailles = Math.round(joursTravaillesSaisis);
   else joursTravailles = Math.round(duree * (joursSemaine || 5) / 7);
   const feries = feriesDans(iso(a), iso(b));
-  const chomes = Math.min(Math.max(0, Math.round(feriesChomes)), feries.length, joursTravailles);
+  const ouvrables = feries.filter(f => f.jour !== 0);                 // un dimanche n'est pas un jour ouvrable : un férié le dimanche ne change pas le décompte
+  const chomes = Math.min(Math.max(0, Math.round(feriesChomes)), ouvrables.length);
   const hebdo = Math.min(6, Math.max(1, Math.round(joursSemaine || 5)));
   const p = congesPointage({ joursHebdo: hebdo, joursAbsence: joursTravailles, joursFeriesChomes: chomes }).lignes[0];
-  return { pointes: p ? p.brut : 0, joursTravailles, feries, feriesChomes: chomes, absTravail: Math.max(0, joursTravailles - chomes), duree, debut: iso(a), fin: iso(b) };
+  // Pour la tenue : un férié fermé qui tombe un de vos jours de travail est payé (compté présent) ; sinon il n'enlève rien aux jours de travail manqués
+  let payesTravailles;
+  if (Array.isArray(joursHab) && joursHab.length) { const set = new Set(joursHab.map(Number)); payesTravailles = Math.min(chomes, ouvrables.filter(f => set.has(f.jour)).length); }
+  else payesTravailles = chomes;
+  return { pointes: p ? p.brut : 0, joursTravailles, feries, feriesChomes: chomes, absTravail: Math.max(0, joursTravailles - payesTravailles), duree, debut: iso(a), fin: iso(b) };
 }
