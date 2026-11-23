@@ -10100,6 +10100,1132 @@
     }
    ],
    "calcul": "fraisTransport"
+  },
+  {
+   "id": "astreinte-prime",
+   "theme": "Astreintes",
+   "categorie": "temps",
+   "question": "Quelle prime d'astreinte par semaine ?",
+   "reponse": "132,35 € bruts par semaine pour tous les salariés qui font des astreintes, quelle que soit leur catégorie. 154,75 € pour les magasins ouverts habituellement le dimanche après-midi et/ou jusqu'à minuit, et 176,10 € pour les magasins ouverts 24 h/24 (accord, art. 5.1.7, p.63). La NAO 2026 revalorise à 160 € bruts par semaine la prime des magasins ouverts le dimanche après-midi et/ou jusqu'à minuit (art. 5, p.7).",
+   "synonymes": [
+    "prime d'astreinte",
+    "astreinte par semaine",
+    "132,35",
+    "154,75",
+    "176,10",
+    "160 euros astreinte",
+    "astreinte dimanche après-midi",
+    "astreinte minuit",
+    "astreinte 24h",
+    "combien astreinte",
+    "paiement astreinte"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.1.7, p.63)",
+     "regles": [
+      "Prime d'astreinte à chaque salarié concerné, quelle que soit sa catégorie : 132,35 € bruts par semaine.",
+      "Magasins ouverts habituellement le dimanche après-midi et/ou jusqu'à minuit : 154,75 € bruts par semaine.",
+      "Magasins ouverts 24 h/24 : 176,10 € bruts par semaine."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.7",
+       "page": 63,
+       "extrait": "à hauteur de 132,35€ bruts par semaine",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.7",
+       "page": 63,
+       "extrait": "154,75€ bruts par semaine",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.7",
+       "page": 63,
+       "extrait": "176,10€ bruts par semaine",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Accord NAO 2026 (art. 5, p.7)",
+     "regles": [
+      "Revalorisation, pour les magasins ouverts habituellement le dimanche après-midi et/ou jusqu'à minuit, de la prime d'astreinte à 160 € bruts par semaine.",
+      "Le texte ne précise pas de date d'application sur cette page : à vérifier sur la fiche de paie."
+     ],
+     "sources": [
+      {
+       "doc": "nao",
+       "article": "art. 5",
+       "page": 7,
+       "extrait": "à hauteur de 160 € bruts par semaine",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.9.2, p.34 ; version du 28 août 2025)",
+     "regles": [
+      "La convention ne fixe pas de montant : chaque entreprise détermine les contreparties (financières, temps de repos…) des astreintes.",
+      "L'accord de substitution fixe ses propres règles d'astreinte : ce sont elles qui s'appliquent d'abord."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.9.2 a",
+       "page": 34,
+       "extrait": "ainsi que les contreparties telles que, par exemple, financières, temps de repos"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.20)",
+     "regles": [
+      "Prime de 132,35 € bruts par semaine ; 154,75 € (dimanche après-midi ou minuit) ; 176,10 € (24 h/24)."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Astreintes",
+       "page": 20,
+       "extrait": "Une prime d’astreinte de 132,35€ bruts/semaine est accordée à chaque salarié concerné."
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "La revalorisation à 160 € de la NAO ne vise que les magasins ouverts le dimanche après-midi et/ou jusqu'à minuit."
+   ],
+   "champs": [
+    {
+     "id": "magasin",
+     "label": "Type de magasin",
+     "type": "select",
+     "options": [
+      [
+       "standard",
+       "Autre magasin"
+      ],
+      [
+       "dimanche",
+       "Ouvert le dimanche après-midi et/ou jusqu'à minuit"
+      ],
+      [
+       "h24",
+       "Ouvert 24 h/24"
+      ]
+     ],
+     "defaut": "standard"
+    },
+    {
+     "id": "semaines",
+     "label": "Nombre de semaines d'astreinte",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 1,
+     "max": 52
+    }
+   ],
+   "calcul": "primeAstreinte"
+  },
+  {
+   "id": "astreinte-intervention",
+   "theme": "Astreintes",
+   "categorie": "temps",
+   "question": "En cas d'intervention pendant l'astreinte, quel paiement ?",
+   "reponse": "Toute intervention physique ouvre droit au remboursement des frais de déplacement. Pour les employés, le temps passé en intervention (trajet + intervention) est rémunéré. Pour l'encadrement, chaque fois que les interventions atteignent 4 heures cumulées (trajet + intervention), une prime forfaitaire égale à un demi taux journalier est versée ; en dessous de 4 h, la durée est reportée (accord, art. 5.1.6.2, p.63).",
+   "synonymes": [
+    "intervention astreinte",
+    "intervention pendant l'astreinte",
+    "temps d'intervention payé",
+    "trajet astreinte",
+    "demi taux journalier",
+    "4 heures d'intervention",
+    "frais de déplacement astreinte",
+    "appel astreinte",
+    "rémunération intervention"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.1.6.2, p.63)",
+     "regles": [
+      "Toute intervention physique ouvre un droit au remboursement des frais de déplacement.",
+      "Employés : le temps passé en intervention (trajet + intervention) est rémunéré.",
+      "Encadrement : à chaque tranche de 4 heures cumulées ou non (trajet + intervention), prime forfaitaire d'un demi taux journalier ; sous 4 h, la durée est reportée avec mention sur le document de contrôle."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.6.2",
+       "page": 63,
+       "extrait": "le temps passé en intervention sera rémunéré (trajet + intervention)",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.6.2",
+       "page": 63,
+       "extrait": "une prime forfaitaire équivalant à un demi taux",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.9.2, p.34 ; version du 28 août 2025)",
+     "regles": [
+      "Interventions entre 21 h et 5 h : majoration pour travail de nuit de l'art. 5.12 en plus des majorations légales d'heures supplémentaires éventuelles ; un repos égal à la durée de l'intervention est accordé, payé ou récupéré sans perte de salaire.",
+      "Ces règles de la convention s'appliquent en complément de l'accord d'entreprise."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.9.2 b",
+       "page": 34,
+       "extrait": "un repos égal à la durée de l'intervention devra être accordé aux salariés concernés"
+      },
+      {
+       "doc": "cc",
+       "article": "art. 5.9.2 b",
+       "page": 34,
+       "extrait": "donneront lieu à majoration pour travail de nuit"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.20)",
+     "regles": [
+      "Toute intervention physique ouvre droit au remboursement des frais de déplacement et le temps passé en intervention est rémunéré (trajet + intervention)."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Astreintes",
+       "page": 20,
+       "extrait": "le temps passé en intervention sera rémunéré (trajet + intervention)"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le texte dit « chaque fois que les interventions atteignent 4 heures cumulées » : le calcul retient une prime par tranche entière de 4 h ; à confirmer avec la paie."
+   ],
+   "champs": [
+    {
+     "id": "statut",
+     "label": "Statut",
+     "type": "select",
+     "options": [
+      [
+       "employe",
+       "Employé"
+      ],
+      [
+       "cadre",
+       "Encadrement (maîtrise, cadre)"
+      ]
+     ],
+     "defaut": "employe"
+    },
+    {
+     "id": "heures",
+     "label": "Durée cumulée des interventions, trajet compris (heures)",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 0
+    }
+   ],
+   "calcul": "interventionAstreinte"
+  },
+  {
+   "id": "astreinte-repos",
+   "theme": "Astreintes",
+   "categorie": "temps",
+   "question": "Quel repos après une intervention d'astreinte ?",
+   "reponse": "La fin de l'intervention fixe le début du repos quotidien ou hebdomadaire, si vous n'aviez pas déjà pris la totalité de ce repos avant l'intervention (accord, art. 5.1.5, p.62). En dehors des interventions, la période d'astreinte compte dans le repos. En cas d'intervention de nuit, vous organisez votre journée du lendemain pour respecter l'amplitude de repos. La convention prévoit en plus un repos égal à la durée de l'intervention.",
+   "synonymes": [
+    "repos après astreinte",
+    "repos astreinte",
+    "repos quotidien astreinte",
+    "intervention de nuit astreinte",
+    "lendemain d'une astreinte",
+    "repos hebdomadaire astreinte",
+    "repos après intervention",
+    "amplitude repos astreinte"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.1.5, p.62 ; art. 5.1.4.1, p.61, p.62)",
+     "regles": [
+      "Hors durée d'intervention, la période d'astreinte est prise en compte pour le repos quotidien et hebdomadaire.",
+      "En cas d'intervention, la fin de l'intervention détermine le début du repos quotidien ou hebdomadaire, sauf si le salarié a déjà bénéficié de la totalité de ce repos avant l'intervention.",
+      "Exception : travaux urgents de sauvetage ou de prévention d'accidents (L3132-4 et D3131-5).",
+      "Intervention de nuit : le salarié organise sa journée du lendemain pour respecter le repos journalier (p.61)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.5",
+       "page": 62,
+       "extrait": "la fin de la période d'intervention détermine le début du repos quotidien ou hebdomadaire"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.4.1",
+       "page": 61,
+       "extrait": "le personnel d'astreinte organisera sa journée de travail du lendemain en conséquence"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.9.2, p.34 ; version du 28 août 2025)",
+     "regles": [
+      "Un repos égal à la durée de l'intervention est accordé (payé, ou récupéré en temps de repos équivalent sans perte de salaire).",
+      "Si les interventions de nuit dépassent 3 heures entre 22 h et 5 h, un repos correspondant est pris avant la reprise du travail."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.9.2 b",
+       "page": 34,
+       "extrait": "un repos égal à la durée de l'intervention devra être accordé aux salariés concernés"
+      },
+      {
+       "doc": "cc",
+       "article": "art. 5.9.2 b",
+       "page": 34,
+       "extrait": "un repos correspondant devra être pris avant la reprise du travail"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.19)",
+     "regles": [
+      "Même règle que l'accord : la fin de l'intervention détermine le début du repos quotidien ou hebdomadaire."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Astreintes",
+       "page": 19,
+       "extrait": "la fin de la période d’intervention détermine le début du repos quotidien ou hebdomadaire"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Repos quotidien d'au moins 11 heures consécutives (L3131-1) ; repos hebdomadaire de 24 heures consécutives plus le repos quotidien (L3132-2)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L3131-1",
+       "page": 56,
+       "extrait": "repos quotidien d'une durée minimale de onze heures consécutives"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "La convention (repos égal à la durée de l'intervention) ajoute une règle que l'accord ne reprend pas : à signaler si l'accord est silencieux sur ce point."
+   ]
+  },
+  {
+   "id": "astreinte-programmation",
+   "theme": "Astreintes",
+   "categorie": "temps",
+   "question": "Combien de temps à l'avance connaît-on ses astreintes ?",
+   "reponse": "Votre programmation individuelle est communiquée un mois à l'avance ; en cas de circonstances exceptionnelles, ce délai peut être réduit à un jour franc (accord, art. 5.1.4.1, p.61). Le nombre d'astreintes tend à ne pas dépasser 15 par an et par salarié, sauf situation organisationnelle spécifique ou habilitation légale. Les astreintes ont lieu pendant la fermeture du magasin et sont assurées par une équipe identifiée. La convention prévoit 15 jours.",
+   "synonymes": [
+    "programmation astreinte",
+    "délai astreinte",
+    "un mois à l'avance astreinte",
+    "15 astreintes par an",
+    "nombre maximum d'astreintes",
+    "équipe d'astreinte",
+    "planning astreinte",
+    "prévenu astreinte",
+    "un jour franc"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.1.3 et 5.1.4.1, p.61)",
+     "regles": [
+      "Les astreintes ont lieu pendant les périodes de fermeture du magasin ; le nombre maximum tend à ne pas dépasser 15 par an et par salarié.",
+      "Une équipe d'astreinte est définie par établissement, avec information des représentants du personnel ; seuls ses membres sont susceptibles d'en faire.",
+      "Programmation individuelle communiquée un mois à l'avance, réductible à un jour franc en circonstances exceptionnelles.",
+      "L'astreinte s'organise dans le cadre de la semaine."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.4.1",
+       "page": 61,
+       "extrait": "un mois à l'avance"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.3",
+       "page": 61,
+       "extrait": "ne pas dépasser 15 par an et par salarié"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.9.2, p.34 ; version du 28 août 2025)",
+     "regles": [
+      "La mise en place d'astreintes n'est possible qu'après avis du CSE.",
+      "Programmation individuelle communiquée 15 jours à l'avance, réductible à 1 jour franc en circonstances exceptionnelles.",
+      "L'accord de substitution (un mois) est plus favorable."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.9.2 d",
+       "page": 34,
+       "extrait": "doit être portée à la connaissance de chaque salarié concerné 15"
+      },
+      {
+       "doc": "cc",
+       "article": "art. 5.9.2 c",
+       "page": 34,
+       "extrait": "qu'après avis du comité social et économique"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.19)",
+     "regles": [
+      "Programmation individuelle portée à la connaissance du salarié un mois à l'avance, réductible à 1 jour franc."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Astreintes",
+       "page": 19,
+       "extrait": "un mois à l’avance"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "L'accord est plus favorable que la convention : un mois contre 15 jours."
+   ]
+  },
+  {
+   "id": "astreinte-rapport",
+   "theme": "Astreintes",
+   "categorie": "temps",
+   "question": "Que dois-je écrire dans mon rapport d'astreinte ?",
+   "reponse": "En cas d'intervention, vous remplissez le rapport d'astreinte de l'entreprise avec : l'heure de l'appel, la clôture de l'appel et son objet, un descriptif détaillé de l'intervention, et les horaires d'intervention (durée, heure de début et de fin). Les cadres au forfait jours indiquent aussi la date et l'heure du premier jour d'activité suivant l'intervention (accord, art. 5.1.6.1, p.62-63). En fin de mois, un récapitulatif vous est remis (heures d'astreinte, durée des interventions, compensations).",
+   "synonymes": [
+    "rapport d'astreinte",
+    "rapport d'intervention",
+    "heure de l'appel",
+    "document récapitulatif astreinte",
+    "état récapitulatif",
+    "descriptif de l'intervention",
+    "horaires d'intervention",
+    "récapitulatif de fin de mois"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.1.6.1, p.62-63 ; art. 5.1.4.2, p.61-62, p.62)",
+     "regles": [
+      "Rapport d'astreinte : heure de l'appel, clôture et objet de l'appel ; descriptif détaillé de l'intervention ; horaires (durée, début, fin) ; pour les cadres au forfait jours, date et heure du premier jour d'activité suivant l'intervention.",
+      "En fin de mois, un document récapitulatif est remis : nombre d'heures d'astreinte, durée des interventions, compensations ; l'employeur le conserve un an à disposition des agents de contrôle."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1.6.1",
+       "page": 62,
+       "extrait": "l'heure de l'appel, la clôture de l'appel et l'objet de l'appel"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.6.1",
+       "page": 63,
+       "extrait": "un descriptif détaillé de l'intervention effectuée"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.1.4.2",
+       "page": 62,
+       "extrait": "le nombre d'heures d'astreintes effectuées dans le mois écoulé"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.20)",
+     "regles": [
+      "Le livret reprend les trois mentions du rapport d'intervention."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Astreintes",
+       "page": 20,
+       "extrait": "un descriptif détaillé de l’intervention effectuée"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cet-beneficiaires",
+   "theme": "Compte épargne temps (CET)",
+   "categorie": "conges",
+   "question": "Qui peut ouvrir un CET ?",
+   "reponse": "Tout salarié en CDI, sans condition d'ancienneté (accord, art. 5.1, p.84). Le compte s'ouvre à la première alimentation (art. 5.2). La convention est plus restrictive (1 an d'ancienneté) mais l'accord d'entreprise s'applique d'abord.",
+   "synonymes": [
+    "qui peut ouvrir un CET",
+    "ouvrir un compte épargne temps",
+    "CET CDI",
+    "CET ancienneté",
+    "bénéficiaire du CET",
+    "CET CDD",
+    "ouverture du CET",
+    "compte épargne temps condition"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.1 et 5.2, p.84)",
+     "regles": [
+      "Tout salarié titulaire d'un CDI peut bénéficier du CET, sans condition d'ancienneté.",
+      "La première alimentation du CET ouvre un compte individuel au nom du salarié."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.1",
+       "page": 84,
+       "extrait": "Tout salarié titulaire d'un contrat à durée indéterminée peut bénéficier du CET",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.2",
+       "page": 84,
+       "extrait": "La première alimentation du CET initie l'ouverture d'un compte individuel",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.17, avenant n° 20, p.306 ; version du 28 août 2025)",
+     "regles": [
+      "Le CET est ouvert aux salariés volontaires en CDI comptant 1 an d'ancienneté à l'ouverture du compte.",
+      "La convention prévoit qu'un accord d'entreprise met en place le CET : l'accord de substitution s'applique d'abord."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.17",
+       "page": 306,
+       "extrait": "comptant 1 an d'ancienneté à l'ouverture du compte"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.22)",
+     "regles": [
+      "Le livret détaille l'utilisation du CET (PEE, PERCO, aidant, CESU, retraite)."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Accord plus favorable que la convention : pas d'ancienneté exigée contre 1 an."
+   ]
+  },
+  {
+   "id": "cet-plafond",
+   "theme": "Compte épargne temps (CET)",
+   "categorie": "conges",
+   "question": "Quel est le plafond du CET ?",
+   "reponse": "40 jours ouvrables pour tous les salariés, sauf à partir de 50 ans où le plafond est supprimé. Les jours transférés d'anciens CET clos ne comptent pas dans les 40 jours des moins de 50 ans (accord, art. 5.3.1, p.84). Un congé payé par le CET ne peut pas dépasser 40 jours ouvrables, sauf pour anticiper un départ en retraite (art. 5.4.1.2, p.86).",
+   "synonymes": [
+    "plafond du CET",
+    "40 jours ouvrables",
+    "plafond CET 50 ans",
+    "CET maximum",
+    "limite du compte épargne temps",
+    "50 ans CET",
+    "jours transférés anciens CET",
+    "combien de jours CET"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.3.1, p.84)",
+     "regles": [
+      "Plafond d'alimentation du CET : 40 jours ouvrables, supprimé pour les salariés de 50 ans et plus.",
+      "Les jours transférés d'anciens CET clos ne sont pas comptés dans les 40 jours applicables aux moins de 50 ans."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.3.1",
+       "page": 84,
+       "extrait": "le plafond d'alimentation sur le CET est de 40 jours ouvrables",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.3.1",
+       "page": 84,
+       "extrait": "pour lesquels ledit plafond est supprimé",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.17, avenant n° 20, p.306 ; version du 28 août 2025)",
+     "regles": [
+      "Dépôts annuels limités à 8 jours ouvrés ou 1/10 de la rémunération mensuelle par année civile.",
+      "La convention prévoit qu'un accord d'entreprise met en place le CET : l'accord de substitution s'applique d'abord."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.17.1",
+       "page": 306,
+       "extrait": "Les dépôts ne peuvent excéder 8 jours ouvrés"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "solde",
+     "label": "Jours déjà sur votre CET",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0
+    },
+    {
+     "id": "age",
+     "label": "Votre âge",
+     "type": "number",
+     "min": 16,
+     "step": "1",
+     "defaut": 40,
+     "max": 70
+    },
+    {
+     "id": "statut",
+     "label": "Statut",
+     "type": "select",
+     "options": [
+      [
+       "employe",
+       "Employé"
+      ],
+      [
+       "cadre",
+       "Maîtrise ou cadre"
+      ]
+     ],
+     "defaut": "employe"
+    },
+    {
+     "id": "cp5e",
+     "label": "Jours de 5e semaine non pris au 31 mai (6 maximum)",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "max": 6
+    },
+    {
+     "id": "anciennete",
+     "label": "Congés d'ancienneté à verser",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0
+    },
+    {
+     "id": "fractionnement",
+     "label": "Jours de fractionnement à verser",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0
+    },
+    {
+     "id": "rtt",
+     "label": "Jours de RTT (maîtrise et cadres)",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "max": 10
+    }
+   ],
+   "calcul": "alimentationCET"
+  },
+  {
+   "id": "cet-alimentation-annuelle",
+   "theme": "Compte épargne temps (CET)",
+   "categorie": "conges",
+   "question": "Que puis-je mettre dans mon CET chaque année ?",
+   "reponse": "Au maximum 12 jours ouvrables par an. Employés et ouvriers : congés payés de la 5e semaine (6 jours maximum) non pris au 31 mai, congés d'ancienneté, jours de fractionnement. Maîtrise et cadres : les mêmes, plus des jours de RTT dans la limite de 10 jours (accord, art. 5.3.2 et 5.3.3, p.84-85). Le CET s'alimente uniquement en jours, à votre initiative.",
+   "synonymes": [
+    "alimenter le CET",
+    "mettre dans le CET",
+    "12 jours ouvrables CET",
+    "5e semaine CET",
+    "RTT CET",
+    "congés ancienneté CET",
+    "fractionnement CET",
+    "versement CET",
+    "combien verser CET",
+    "épargner des jours"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.3.2 et 5.3.3, p.84)",
+     "regles": [
+      "Le CET est alimenté exclusivement en jours, à l'initiative du salarié.",
+      "Employés et ouvriers : maximum 12 jours ouvrables par an : congés payés de la 5e semaine (6 jours) non pris au 31 mai ; congés supplémentaires d'ancienneté ; jours de fractionnement.",
+      "Maîtrise et cadres : mêmes jours, plus jours de RTT dans la limite de 10 jours (art. 5.3.3, p.85)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.3.2",
+       "page": 84,
+       "extrait": "L'alimentation maximale annuelle de 12 jours ouvrables peut comprendre les jours suivants",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.3.3",
+       "page": 85,
+       "extrait": "Les jours de RTT acquis au titre de l'accord sur la réduction du temps de travail en vigueur"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.17, avenant n° 20, p.306 ; version du 28 août 2025)",
+     "regles": [
+      "Alimentation possible par majorations d'heures supplémentaires, de nuit et de dimanche, une partie de la 5e semaine, congés d'ancienneté, primes et indemnités, épargne salariale.",
+      "Dépôts limités à 8 jours ouvrés ou 1/10 de la rémunération mensuelle par année civile.",
+      "La convention prévoit qu'un accord d'entreprise met en place le CET : l'accord de substitution s'applique d'abord."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.17.1",
+       "page": 306,
+       "extrait": "Les dépôts ne peuvent excéder 8 jours ouvrés"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.22)",
+     "regles": [
+      "Le livret ne détaille pas l'alimentation (voir l'accord)."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Accord (12 jours ouvrables) et convention (8 jours ouvrés ou 1/10 de la rémunération mensuelle) ne se calculent pas dans la même unité : à comparer avec prudence."
+   ],
+   "champs": [
+    {
+     "id": "statut",
+     "label": "Statut",
+     "type": "select",
+     "options": [
+      [
+       "employe",
+       "Employé ou ouvrier"
+      ],
+      [
+       "cadre",
+       "Maîtrise ou cadre"
+      ]
+     ],
+     "defaut": "employe"
+    },
+    {
+     "id": "cp5e",
+     "label": "Jours de 5e semaine non pris au 31 mai (6 maximum)",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "max": 6
+    },
+    {
+     "id": "anciennete",
+     "label": "Congés d'ancienneté à verser",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0
+    },
+    {
+     "id": "fractionnement",
+     "label": "Jours de fractionnement à verser",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0
+    },
+    {
+     "id": "rtt",
+     "label": "Jours de RTT (maîtrise et cadres)",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "max": 10
+    },
+    {
+     "id": "age",
+     "label": "Votre âge",
+     "type": "number",
+     "min": 16,
+     "step": "1",
+     "defaut": 40,
+     "max": 70
+    },
+    {
+     "id": "solde",
+     "label": "Jours déjà sur votre CET",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0
+    }
+   ],
+   "calcul": "alimentationCET"
+  },
+  {
+   "id": "cet-quand-alimente",
+   "theme": "Compte épargne temps (CET)",
+   "categorie": "conges",
+   "question": "Quand le CET est-il alimenté ?",
+   "reponse": "Toute alimentation en congés et/ou en jours RTT se fait à l'expiration de la période de référence, soit après le 31 mai (accord, art. 5.3.1, p.84). Les congés de la 5e semaine ne peuvent être versés que s'ils ne sont pas pris au 31 mai de l'année N pour la période de référence N-1.",
+   "synonymes": [
+    "quand alimenter le CET",
+    "31 mai CET",
+    "période de référence CET",
+    "date versement CET",
+    "alimentation du CET quand",
+    "fin de période de référence"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.3.1 et 5.3.2, p.84)",
+     "regles": [
+      "Toute alimentation en congés et/ou en jours RTT se fait à l'expiration de la période de référence.",
+      "5e semaine : jours non pris à la date du 31 mai de l'année N pour la période de référence N-1."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.3.1",
+       "page": 84,
+       "extrait": "Toute alimentation en congés et/ou en jours RTT se fait à l'expiration de la période de référence",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.17, avenant n° 20, p.306 ; version du 28 août 2025)",
+     "regles": [
+      "La décision d'alimenter le compte vaut pour une année civile ; le salarié peut la modifier pour les années suivantes.",
+      "La convention prévoit qu'un accord d'entreprise met en place le CET : l'accord de substitution s'applique d'abord."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.17.1",
+       "page": 306,
+       "extrait": "vaut pour une année civile"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cet-utilisation-absence",
+   "theme": "Compte épargne temps (CET)",
+   "categorie": "conges",
+   "question": "À quoi peut servir mon CET (congés, temps partiel) ?",
+   "reponse": "À rémunérer : des congés de droit (parental d'éducation, solidarité familiale, soutien familial, formation de cadres et d'animateurs) ; des congés soumis à l'accord de l'employeur (création d'entreprise, sabbatique) ; un passage à temps partiel ; un congé de solidarité internationale, un congé de convenance personnelle ; l'anticipation d'un départ en retraite (accord, art. 5.4.1, p.85-86). Un congé payé par le CET dure au plus 40 jours ouvrables, sauf anticipation de retraite.",
+   "synonymes": [
+    "utiliser le CET",
+    "CET congé parental",
+    "CET congé sabbatique",
+    "CET temps partiel",
+    "CET convenance personnelle",
+    "CET départ anticipé retraite",
+    "CET solidarité familiale",
+    "40 jours ouvrables congé CET",
+    "indemnité CET",
+    "prendre un congé avec le CET"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.4.1, p.85)",
+     "regles": [
+      "Le CET peut rémunérer des congés de droit (parental, solidarité familiale, soutien familial, formation de cadres et d'animateurs), des congés soumis à autorisation (création d'entreprise, sabbatique), un passage à temps partiel, un congé de solidarité internationale, un congé pour convenance personnelle et l'anticipation d'un départ en retraite.",
+      "Durée maximum d'un congé rémunéré par le CET : 40 jours ouvrables (sauf anticipation de retraite). Demande écrite 2 mois avant le premier jour ; pour un congé soumis à autorisation, réponse de la direction sous 30 jours, silence valant acceptation (art. 5.4.1.2, p.86).",
+      "Rémunération : versée mensuellement, soumise à cotisations, CSG, CRDS et impôt ; le temps rémunéré compte comme travail effectif pour les congés payés, la prime annuelle, les bonus et l'ancienneté (p.86)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.4.1.2",
+       "page": 86,
+       "extrait": "Un congé rémunéré avec le CET ne peut avoir une durée supérieure à 40 jours ouvrables"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.4.1.4",
+       "page": 86,
+       "extrait": "assimilé à du travail effectif pour le calcul des congés"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.17, avenant n° 20, p.306 ; version du 28 août 2025)",
+     "regles": [
+      "La convention liste aussi des usages possibles du CET : congés sans solde, congés de convenance personnelle, formation, passage à temps partiel, cessation anticipée d'activité après 50 ans, épargne retraite, rachat d'annuités.",
+      "La convention prévoit qu'un accord d'entreprise met en place le CET : l'accord de substitution s'applique d'abord."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.17",
+       "page": 306,
+       "extrait": "indemniser tout ou partie des heures non travaillées lorsque le salarié choisit de passer à temps partiel"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.22)",
+     "regles": [
+      "Le livret détaille les conversions du CET (voir la fiche conversion)."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cet-conversion",
+   "theme": "Compte épargne temps (CET)",
+   "categorie": "epargne",
+   "question": "Puis-je convertir mon CET (PEE, PERCO, CESU, trimestres de retraite) ?",
+   "reponse": "Oui, sauf pour les jours issus de la 5e semaine de congés payés, qui doivent être pris en congés. Vous pouvez demander le versement de congés d'ancienneté, de fractionnement et de RTT sur le PEE (bloqués 5 ans), le PER collectif (bloqués jusqu'à la retraite), le plan de congé de l'aidant familial, en CESU (définitif et irrévocable, soumis à cotisations) ou pour racheter des trimestres de retraite (soumis à cotisations). Demande au CSP Paie (accord, art. 5.4.2 à 5.4.6, p.87-89).",
+   "synonymes": [
+    "convertir CET",
+    "CET PEE",
+    "CET PERCO",
+    "CET PER collectif",
+    "CET CESU",
+    "CET trimestres retraite",
+    "racheter trimestres",
+    "CET aidant familial",
+    "convertir jours en argent",
+    "verser le CET sur le PEE",
+    "CSP Paie CET"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.4.2 à 5.4.6, p.87)",
+     "regles": [
+      "Hors jours de la 5e semaine de congés payés (à prendre en congés), versement possible sur le PEE (droits indisponibles 5 ans sauf déblocage anticipé légal) et sur le PER collectif (indisponibles jusqu'au départ en retraite, sauf déblocage anticipé).",
+      "Versement possible sur le plan de congé de l'aidant familial (tous les jours épargnés).",
+      "Conversion en CESU : définitive et irrévocable, hors 5e semaine ; ordre de priorité : congés conventionnels, puis ancienneté et fractionnement, puis RTT ; sommes soumises à cotisations et impôt, ligne spécifique sur la fiche de paie.",
+      "Achat de trimestres de retraite de base : hors 5e semaine, sommes soumises à cotisations et impôt ; demande officielle de rachat à joindre (p.89).",
+      "Demande adressée au CSP Paie par le formulaire de l'intranet ou sur papier."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.4.2",
+       "page": 87,
+       "extrait": "Une fois versés sur le PEE, ses droits seront indisponibles pendant 5 ans"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.4.5",
+       "page": 88,
+       "extrait": "toute demande de conversion en CESU est définitive et irrévocable"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.4.6",
+       "page": 89,
+       "extrait": "acquérir des trimestres de cotisations du régime de base"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective (art. 5.17, avenant n° 20, p.306 ; version du 28 août 2025)",
+     "regles": [
+      "La convention prévoit aussi l'alimentation d'un PEE, d'un PERCO ou d'un plan d'épargne retraite, et le rachat d'annuités manquantes.",
+      "La convention prévoit qu'un accord d'entreprise met en place le CET : l'accord de substitution s'applique d'abord."
+     ],
+     "sources": [
+      {
+       "doc": "cc",
+       "article": "art. 5.17",
+       "page": 306,
+       "extrait": "permettre le rachat d'annuités manquantes pour la retraite"
+      }
+     ]
+    },
+    {
+     "titre": "Livret CGT (p.22)",
+     "regles": [
+      "Même liste : PEE, PERCO, aidant familial, CESU, trimestres de retraite, hors jours de la 5e semaine."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "CET",
+       "page": 22,
+       "extrait": "Une fois versés sur le PEE, ses droits seront indisponibles pendant 5 ans"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Pour l'épargne salariale, voir aussi les fiches PEE et PERCOL du thème « Intéressement, participation, épargne »."
+   ]
   }
  ],
  "categories": [

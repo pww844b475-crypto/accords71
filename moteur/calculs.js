@@ -530,4 +530,35 @@ export function fraisTransport({ km = 0, jours = 0 }) {
     L('accord', `Total du mois (${j} jour(s) travaillé(s) ou de formation)`, `${fr2(r2(bar * j))} €`, { brut: r2(bar * j), note: 'Sur demande, pour les salariés de plus de 3 mois d\'ancienneté sans transport en commun possible, hors exclusions de l\'art. 3.10.' })] };
 }
 
-export const CALCULS = { ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
+// ---- 46. Prime d'astreinte (accord art. 5.1.7 p.63 ; NAO 2026 partie 1 art. 5 p.7)
+export function primeAstreinte({ magasin = 'standard', semaines = 1 }) {
+  const n = Math.max(0, semaines), acc = { standard: 132.35, dimanche: 154.75, h24: 176.10 }[magasin] ?? 132.35;
+  const l = [L('accord', 'Prime d\'astreinte (accord de substitution)', `${acc.toFixed(2).replace('.', ',')} € bruts par semaine`, { brut: acc }),
+    L('accord', `Total pour ${n} semaine(s)`, `${(Math.round(acc * n * 100) / 100).toFixed(2).replace('.', ',')} € bruts`, { brut: Math.round(acc * n * 100) / 100 })];
+  if (magasin === 'dimanche') l.push(L('nao', 'Prime revalorisée par la NAO 2026', `160,00 € bruts par semaine, soit ${(Math.round(160 * n * 100) / 100).toFixed(2).replace('.', ',')} € pour ${n} semaine(s)`, { brut: 160, note: 'Date d\'application de la revalorisation non précisée dans l\'article : à vérifier sur la fiche de paie.' }));
+  return { lignes: l };
+}
+
+// ---- 47. Intervention pendant une astreinte (accord art. 5.1.6.2 p.63)
+export function interventionAstreinte({ statut = 'employe', heures = 0 }) {
+  const h = Math.max(0, heures), f = x => String(Math.round(x * 100) / 100).replace('.', ',');
+  if (statut === 'employe') return { lignes: [L('accord', 'Temps rémunéré (trajet + intervention)', `${f(h)} h payées comme du travail`, { brut: h, note: 'Toute intervention physique ouvre aussi droit au remboursement des frais de déplacement.' })] };
+  const primes = Math.floor(h / 4 + 1e-9), reste = Math.round((h - primes * 4) * 100) / 100;
+  return { lignes: [L('accord', 'Primes forfaitaires (un demi taux journalier par tranche de 4 h)', `${primes} prime(s)`, { brut: primes }),
+    L('accord', 'Durée reportée (moins de 4 h)', `${f(reste)} h reportées, notées sur le document de contrôle`, { brut: reste })] };
+}
+
+// ---- 48. Alimentation annuelle du CET (accord art. 5.3 p.84-85)
+export function alimentationCET({ statut = 'employe', cp5e = 0, anciennete = 0, fractionnement = 0, rtt = 0, age = 0, solde = 0 }) {
+  const c5 = Math.min(Math.max(0, cp5e), 6), rt = statut === 'employe' ? 0 : Math.min(Math.max(0, rtt), 10);
+  const eligible = c5 + Math.max(0, anciennete) + Math.max(0, fractionnement) + rt;
+  const annuel = Math.min(12, eligible);
+  const sans = age >= 50, reste = sans ? null : Math.max(0, 40 - Math.max(0, solde));
+  const possible = sans ? annuel : Math.min(annuel, reste);
+  const l = [L('accord', 'Jours que vous pouvez verser cette année (maximum 12 jours ouvrables)', `${possible} jour(s) ouvrable(s)`, { brut: possible, note: `Jours éligibles : ${eligible} (5e semaine ${c5} sur 6 maximum${statut === 'employe' ? '' : `, RTT ${rt} sur 10 maximum`}).` }),
+    L('accord', 'Plafond du compte', sans ? 'Supprimé à partir de 50 ans' : `40 jours ouvrables, reste ${reste} jour(s)`, { brut: sans ? null : reste })];
+  if (statut === 'employe' && rtt > 0) l.push(L('accord', 'RTT', 'Les RTT ne sont prévus que pour la maîtrise et les cadres', { brut: 0 }));
+  return { lignes: l };
+}
+
+export const CALCULS = { primeAstreinte, interventionAstreinte, alimentationCET, ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
