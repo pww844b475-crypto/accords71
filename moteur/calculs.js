@@ -561,4 +561,30 @@ export function alimentationCET({ statut = 'employe', cp5e = 0, anciennete = 0, 
   return { lignes: l };
 }
 
-export const CALCULS = { primeAstreinte, interventionAstreinte, alimentationCET, ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
+// ---- 49. Heures de délégation d'un titulaire du CSE d'établissement (accord titre 7 art. 1 p.133 ; Code du travail R2314-1)
+const DELEG_ACCORD = [[1, 49, 15], [50, 74, 23], [75, 99, 24], [100, 199, 26], [200, 1499, 27], [1500, 1749, 31]];
+const DELEG_LEGAL = [[11, 49, 10], [50, 74, 18], [75, 99, 19], [100, 199, 21], [200, 499, 22], [500, 1499, 24], [1500, 1749, 26]];
+export function heuresDelegation({ effectif = 0 }) {
+  const n = Math.floor(effectif), cherche = t => (t.find(([a, b]) => n >= a && n <= b) || [])[2];
+  const acc = cherche(DELEG_ACCORD), leg = cherche(DELEG_LEGAL);
+  if (!(n >= 1) || acc == null) return { lignes: [], erreur: n > 1749 ? 'Au-delà de 1 749 salariés, le tableau de l\'accord ne donne pas de valeur : information à compléter.' : 'Indiquer l\'effectif de l\'établissement.' };
+  const l = [L('accord', 'Heures de délégation par mois et par titulaire (accord)', `${acc} heures`, { brut: acc })];
+  l.push(leg != null ? L('code', 'Tableau légal du Code du travail (R2314-1)', `${leg} heures`, { brut: leg, note: acc > leg ? `L'accord donne ${acc - leg} heure(s) de plus par mois.` : undefined }) : L('code', 'Tableau légal', 'Pas de CSE obligatoire en dessous de 11 salariés', { brut: null }));
+  return { lignes: l };
+}
+
+// ---- 50. Temps compté pour une réunion nationale (accord droit syndical titre 1 art. 3.4 p.9)
+export function tempsReunionNationale({ type = 'csec', heures = 0 }) {
+  const forfait = type === 'negociation' ? 4 : 7, h = Math.max(0, heures);
+  const compte = Math.max(forfait, h);
+  return { lignes: [L('accord', `Temps compté pour la journée (${type === 'negociation' ? 'négociation' : 'CSE central ou commission'})`, `${compte} heures`, { brut: compte, note: h > forfait ? `La réunion a dépassé le forfait de ${forfait} h : le temps réel est rémunéré comme du travail effectif.` : `Forfait de ${forfait} heures pour la journée, quels que soient le nombre de réunions, les pauses et la base du contrat.` })] };
+}
+
+// ---- 51. Crédit d'heures spécifique de l'organisation syndicale (accord droit syndical titre 3 art. 1.2 p.15-16)
+export function creditHeuresOS({ organisation = 'CGT', heuresPrises = 0 }) {
+  const c = { CGT: 90, CFDT: 80, FO: 63, UNSA: 49, SNEC: 21 }[organisation] ?? 0, reste = c - Math.max(0, heuresPrises);
+  return { lignes: [L('accord', `Crédit d'heures annuel de l'organisation (${organisation})`, `${c} heures par an`, { brut: c }),
+    L('accord', 'Heures restantes cette année', `${reste} heures`, { brut: reste, note: reste < 0 ? 'Le crédit ne peut pas être dépassé.' : 'Les heures passées aux réunions de négociation à l\'initiative de la direction ne sont pas imputées sur ce crédit.' })] };
+}
+
+export const CALCULS = { heuresDelegation, tempsReunionNationale, creditHeuresOS, primeAstreinte, interventionAstreinte, alimentationCET, ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };

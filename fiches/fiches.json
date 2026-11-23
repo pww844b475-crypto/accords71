@@ -11581,6 +11581,1613 @@
    "notes": [
     "Pour un autre type de congé sans solde (convenance personnelle sans CET, par exemple), aucun texte lu ne donne un droit : demander l'accord écrit de la direction. Information à compléter : durée minimale d'ancienneté et durée du congé sabbatique (fixées par décret, non lues)."
    ]
+  },
+  {
+   "id": "agression-accompagnement",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "sante",
+   "question": "Que prévoit l'entreprise après une agression au travail ?",
+   "reponse": "Après une agression grave, la direction vous propose un entretien avec votre supérieur pour étudier un aménagement temporaire de vos conditions de travail : autre rayon, autres horaires ou mutation. Vous pouvez venir accompagné d'un salarié du magasin ou d'un représentant du personnel national ou de votre région. Le temps passé aux démarches (dépôt de plainte, visite médicale de constatation, entretiens) compte comme du temps de travail, et l'accompagnement juridique est pris en charge par la direction (accord, art. 6.1.3, p.118).",
+   "synonymes": [
+    "agression",
+    "agression au travail",
+    "victime d'agression",
+    "incivilité",
+    "violence au travail",
+    "client agressif",
+    "insulte client",
+    "plainte agression",
+    "accompagnement juridique",
+    "aménagement après agression",
+    "menace client",
+    "agressé",
+    "agressée",
+    "m'a agressé",
+    "on m'a agressé",
+    "j'ai été agressé",
+    "client m'a agressé",
+    "mon client m'a agressé",
+    "violence client"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 6.1.3, p.118)",
+     "regles": [
+      "La direction propose à la victime d'une agression grave un entretien avec son supérieur pour étudier un aménagement temporaire de ses conditions et/ou horaires de travail ou une mutation.",
+      "La victime peut être accompagnée d'un salarié du magasin ou d'un représentant du personnel national ou de son choix de sa région.",
+      "Le temps passé aux démarches administratives ou juridiques (plainte, visite médicale de constatation, entretiens) est du temps de travail ; l'accompagnement juridique est pris en charge par la direction."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 6.1.3",
+       "page": 118,
+       "extrait": "le temps passé par le salarié pour effectuer ces démarches sera considéré comme du temps de travail"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 6.1.3",
+       "page": 118,
+       "extrait": "L'accompagnement juridique sera pris en charge par la Direction."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.24)",
+     "regles": [
+      "Le livret reprend les mêmes mesures d'accompagnement des victimes d'agression."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Accompagnement des victimes d'agression",
+       "page": 24,
+       "extrait": "L’accompagnement juridique sera pris en charge par la Direction."
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : obligations légales de l'employeur après une agression (accident du travail éventuel) non consultées."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Si l'agression entraîne des blessures ou un choc psychologique, pensez aussi à la déclaration d'accident du travail : voir les fiches « accident du travail »."
+   ]
+  },
+  {
+   "id": "braquage-accompagnement",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "sante",
+   "question": "Quel accompagnement après un braquage ?",
+   "reponse": "Un suivi psychologique vous est proposé, assuré par un service spécialisé choisi par l'entreprise. Un organisme extérieur apporte un soutien aux salariés touchés : aide collective (débriefing, groupes de parole) et/ou entretiens individuels. En cas de violences physiques ou de menaces graves, la direction vous assiste dans la procédure pénale et prend en charge les frais. Le CSE d'établissement est réuni en réunion extraordinaire dans les jours qui suivent (accord, art. 6.1.4, p.118).",
+   "synonymes": [
+    "braquage",
+    "après un braquage",
+    "soutien psychologique braquage",
+    "suivi psychologique",
+    "débriefing braquage",
+    "procédure pénale braquage",
+    "frais de procédure",
+    "magasin braqué",
+    "CSE extraordinaire braquage",
+    "braqué",
+    "braqués",
+    "on a été braqués",
+    "braquages",
+    "j'ai été braqué"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 6.1.4, p.118)",
+     "regles": [
+      "Suivi psychologique proposé en cas de braquage, par un service spécialisé choisi par l'entreprise ; un organisme extérieur apporte aide collective (débriefing, groupes de parole) et/ou individuelle.",
+      "Violences physiques ou menaces graves : la direction assiste le salarié dans sa procédure pénale et prend en charge les frais de procédure.",
+      "Le CSE d'établissement est réuni en réunion extraordinaire dans les jours suivants ; attention particulière aux magasins braqués deux fois dans l'année."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 6.1.4",
+       "page": 118,
+       "extrait": "il est proposé au salarié un suivi psychologique"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 6.1.4",
+       "page": 118,
+       "extrait": "le CSE d'Établissement, sera réuni au cours d'une réunion extraordinaire"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.24)",
+     "regles": [
+      "Même suivi psychologique et même prise en charge des frais de procédure pénale."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Braquage",
+       "page": 24,
+       "extrait": "il est proposé au salarié un suivi psychologique"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cellule-ecoute",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "sante",
+   "question": "Existe-t-il une cellule d'écoute psychologique ?",
+   "reponse": "Oui : la cellule d'écoute psychologique STIMULUS est ouverte aux salariés de Covicar 71. Le numéro indiqué dans le livret CGT est le 0800 30 50 23. Des professionnels répondent, de façon confidentielle et anonyme, sur votre situation professionnelle comme personnelle. Une assistante sociale fait aussi partie de la cellule (accord, art. 6.1.5, p.119).",
+   "synonymes": [
+    "cellule d'écoute",
+    "écoute psychologique",
+    "numéro vert",
+    "STIMULUS",
+    "psychologue",
+    "aide psychologique",
+    "souffrance au travail",
+    "assistante sociale",
+    "numéro d'écoute",
+    "anonyme et confidentiel",
+    "parler à un psychologue",
+    "parler à quelqu'un",
+    "besoin d'aide psychologique",
+    "mal-être"
+   ],
+   "etiquettes": [
+    "Vérifier le chiffre sur l'image"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 6.1.5, p.119)",
+     "regles": [
+      "Cellule d'écoute psychologique STIMULUS à destination des salariés de Covicar 71, par numéro d'appel ou plateforme.",
+      "Conseils de professionnels, dans le respect de la confidentialité et de l'anonymat, sur la situation professionnelle ou personnelle.",
+      "La cellule est dotée d'une assistante sociale ; une communication est faite chaque année."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 6.1.5",
+       "page": 119,
+       "extrait": "une cellule d'écoute psychologique STIMULUS"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.24)",
+     "regles": [
+      "Numéro indiqué dans le livret : 0800 30 50 23 (relevé sur l'image de la page)."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Cellule d'écoute",
+       "page": 24,
+       "extrait": "La cellule d’écoute psychologique est également dotée d’une assistante sociale",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le numéro vient du livret CGT, pas de l'accord : vérifier qu'il est toujours valable avant de le donner à un collègue."
+   ]
+  },
+  {
+   "id": "handicap-amenagements",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "sante",
+   "question": "Quels aménagements pour un salarié en situation de handicap ?",
+   "reponse": "Chaque magasin désigne, sur la base du volontariat, un « référent handicap et diversité » pour orienter, informer et accompagner les salariés concernés. Avant l'arrivée d'un salarié handicapé, le responsable prépare le poste et vérifie l'accessibilité du magasin. Le salarié peut demander deux demi-journées pour les démarches de reconnaissance et deux demi-journées par an pour des rendez-vous médicaux liés à son handicap. Le statut de travailleur handicapé n'est communiqué aux équipes que s'il l'accepte par écrit (accord, titre 6 chap. 3, p.122-131).",
+   "synonymes": [
+    "handicap",
+    "travailleur handicapé",
+    "RQTH",
+    "référent handicap",
+    "aménagement de poste",
+    "poste adapté",
+    "handicap au travail",
+    "inaptitude",
+    "visite de pré-reprise",
+    "confidentialité handicap",
+    "reconnaissance travailleur handicapé",
+    "accessibilité magasin"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (titre 6, chap. 3, p.123)",
+     "regles": [
+      "Un référent handicap et diversité par magasin, chaque fois que c'est possible, sur la base du volontariat ; il oriente, informe et accompagne les personnes en situation de handicap (art. 6.3, p.123-124).",
+      "Avant l'arrivée d'une personne handicapée : démarches pour préparer le poste, information de l'équipe avec l'accord du salarié, adaptation du poste si besoin avec le médecin du travail ; accessibilité du magasin (p.124 et 127).",
+      "Deux demi-journées pour les démarches de reconnaissance du statut et deux demi-journées par an pour des rendez-vous médicaux liés au handicap, fixées en accord avec l'employeur, sur justificatifs (art. 6.1, p.131).",
+      "Le salarié déclare par écrit s'il accepte que son statut soit connu des équipes, dans le respect du secret médical (art. 6.2, p.131).",
+      "Un salarié en arrêt de plus de 30 jours peut demander une visite médicale de pré-reprise auprès du médecin du travail (p.129)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 6.3.1",
+       "page": 123,
+       "extrait": "un salarié par magasin est nommé en qualité de Référent Handicap et Diversité"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 6.1",
+       "page": 131,
+       "extrait": "deux demi-journées d'absence pour les démarches administratives ou médicales"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 6.2",
+       "page": 131,
+       "extrait": "déclarera par écrit s'il accepte ou non que son statut de travailleur handicapé soit porté à la connaissance des équipes"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 6.4.2",
+       "page": 129,
+       "extrait": "le salarié en arrêt de travail de plus de 30 jours a la possibilité de solliciter une visite médicale de pré-reprise"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "titre": "Livret CGT (p.25)",
+     "regles": [
+      "Même droit aux deux demi-journées d'absence pour les travailleurs en situation de handicap."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Mesures en faveur du handicap",
+       "page": 25,
+       "extrait": "2 demi-journées d’absence pour les démarches administratives ou"
+      }
+     ]
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Voir aussi la fiche « demi-journées handicap » du thème absences."
+   ]
+  },
+  {
+   "id": "entretien-prealable-assistance",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "sante",
+   "question": "Je suis convoqué à un entretien disciplinaire ou de licenciement : qui peut m'assister ?",
+   "reponse": "Vous pouvez vous faire assister par une personne de votre choix appartenant au personnel de l'entreprise : un collègue ou un représentant du personnel. S'il n'y a pas de représentants du personnel dans l'entreprise, vous pouvez aussi choisir un conseiller du salarié, sur une liste tenue par l'administration (L1232-4, L1332-2). Pour un licenciement, l'entretien a lieu au moins 5 jours ouvrables après la convocation (L1232-2) ; pour une sanction, elle ne peut venir que 2 jours ouvrables à 1 mois après l'entretien (L1332-2).",
+   "synonymes": [
+    "entretien préalable",
+    "entretien disciplinaire",
+    "convocation entretien",
+    "qui peut m'assister",
+    "me faire assister",
+    "conseiller du salarié",
+    "sanction disciplinaire",
+    "convoqué licenciement",
+    "mise à pied",
+    "avertissement",
+    "entretien préalable licenciement",
+    "assistance entretien"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Livret CGT (p.32)",
+     "regles": [
+      "La convocation doit rappeler que le salarié peut se faire assister par une personne de son choix appartenant au personnel de l'entreprise : n'importe quel collègue peut accompagner.",
+      "Les représentants du personnel sont formés pour défendre les salariés.",
+      "Sanctions possibles : avertissement, mise à pied disciplinaire, licenciement pour faute ; une sanction pécuniaire est interdite."
+     ],
+     "sources": [
+      {
+       "doc": "livret",
+       "article": "Convocation à un entretien",
+       "page": 32,
+       "extrait": "une personne de son choix appartenant au personnel de l'entreprise"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Lors de son audition, le salarié peut se faire assister par une personne de son choix appartenant au personnel de l'entreprise ; sans représentants du personnel, il peut aussi choisir un conseiller du salarié (L1232-4).",
+      "Licenciement : convocation par lettre recommandée ou remise en main propre contre décharge ; l'entretien a lieu au moins cinq jours ouvrables après (L1232-2).",
+      "Sanction : l'employeur indique le motif et recueille les explications ; la sanction ne peut intervenir moins de deux jours ouvrables ni plus d'un mois après l'entretien, motivée et notifiée (L1332-2)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L1232-4",
+       "page": 64,
+       "extrait": "le salarié peut se faire assister par une personne de son choix appartenant au personnel de l'entreprise"
+      },
+      {
+       "doc": "ct",
+       "article": "L1232-2",
+       "page": 65,
+       "extrait": "L'entretien préalable ne peut avoir lieu moins de cinq jours ouvrables après"
+      },
+      {
+       "doc": "ct",
+       "article": "L1332-2",
+       "page": 66,
+       "extrait": "La sanction ne peut intervenir moins de deux jours ouvrables, ni plus d'un mois après le jour fixé pour l'entretien"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Un avertissement (ou sanction sans effet sur la présence, la fonction, la carrière ou la rémunération) peut être donné sans entretien (L1332-2). Ne signez rien sur place et demandez à être accompagné."
+   ]
+  },
+  {
+   "id": "heures-delegation-titulaire",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Combien d'heures de délégation par mois pour un élu titulaire ?",
+   "reponse": "Selon l'accord, un titulaire du CSE d'établissement a, par mois : 15 heures dans un établissement de 1 à 49 salariés, 23 h de 50 à 74, 24 h de 75 à 99, 26 h de 100 à 199, 27 h de 200 à 1 499 et 31 h de 1 500 à 1 749 (accord, titre 7 art. 1, p.133). C'est plus que le tableau du Code du travail (10 h jusqu'à 49 salariés, 18 h de 50 à 74, 19 h de 75 à 99, 21 h de 100 à 199, 22 h de 200 à 499, 24 h de 500 à 1 499).",
+   "synonymes": [
+    "heures de délégation",
+    "heures de délégation titulaire",
+    "crédit d'heures",
+    "crédit d'heures élu",
+    "combien d'heures élu CSE",
+    "délégation CSE",
+    "heures élu titulaire",
+    "heures de délégation par mois",
+    "tableau heures de délégation"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (titre 7, art. 1, p.133)",
+     "regles": [
+      "Les titulaires du CSE d'établissement ont un crédit mensuel d'heures conforme à l'article R2314-1 du Code du travail, avec des aménagements : 1 à 49 salariés : 15 h ; 50 à 74 : 23 h ; 75 à 99 : 24 h ; 100 à 199 : 26 h ; 200 à 1 499 : 27 h ; 1 500 à 1 749 : 31 h."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "titre 7, art. 1",
+       "page": 133,
+       "extrait": "sous réserve des aménagements suivants",
+       "verifie_image": true
+      },
+      {
+       "doc": "subst",
+       "article": "titre 7, art. 1",
+       "page": 133,
+       "extrait": "Les membres titulaires de la délégation du personnel des CSE d'établissement bénéficient d'un crédit mensuel d'heures",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Tableau légal (R2314-1) : 11 à 49 salariés : 10 h ; 50 à 74 : 18 h ; 75 à 99 : 19 h ; 100 à 199 : 21 h ; 200 à 499 : 22 h ; 500 à 1 499 : 24 h ; 1 500 à 1 749 : 26 h.",
+      "Le crédit ne peut pas être inférieur à 10 heures par mois sous 50 salariés et 16 heures au-delà (L2315-7)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "R2314-1",
+       "page": 67,
+       "extrait": "A défaut de stipulations dans l'accord prévu à l'article L. 2314-7"
+      },
+      {
+       "doc": "ct",
+       "article": "L2315-7",
+       "page": 68,
+       "extrait": "ne peut être inférieur à dix heures par mois dans les entreprises de moins de cinquante salariés"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "L'accord est plus favorable que la loi pour chaque tranche : jusqu'à 5 heures de plus par mois."
+   ],
+   "champs": [
+    {
+     "id": "effectif",
+     "label": "Effectif de l'établissement",
+     "type": "number",
+     "min": 1,
+     "step": "1",
+     "defaut": 100,
+     "max": 1749,
+     "question": "Combien de salariés compte votre établissement (magasin) ?",
+     "aide": "L'effectif détermine le nombre d'heures de délégation. Demandez-le au CSE ou à la direction si vous ne le savez pas."
+    }
+   ],
+   "calcul": "heuresDelegation"
+  },
+  {
+   "id": "cse-reunions",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Combien de fois le CSE d'établissement se réunit-il ?",
+   "reponse": "Une réunion du CSE d'établissement se tient tous les mois. Les titulaires et les suppléants participent aux réunions (accord, titre 7 art. 2, p.133).",
+   "synonymes": [
+    "réunion CSE",
+    "fréquence réunion CSE",
+    "CSE tous les mois",
+    "suppléants CSE",
+    "réunion du CSE d'établissement",
+    "CSEE",
+    "combien de réunions CSE",
+    "réunion mensuelle"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (titre 7, art. 2, p.133)",
+     "regles": [
+      "Les membres titulaires et suppléants participent aux réunions du CSE d'établissement.",
+      "Une réunion du CSE d'établissement se tient tous les mois."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "titre 7, art. 2",
+       "page": 133,
+       "extrait": "Une réunion du CSEE se tient tous les mois.",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : la fréquence minimale légale des réunions du CSE n'a pas été consultée."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "droit-syndical-accord",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Accord sur le droit syndical et le fonctionnement du CSE central : que dit-il ?",
+   "reponse": "Cet accord s'applique aux organisations syndicales représentatives au niveau de Covicar 71 et à leurs mandatés nationaux. Il fixe : 24 heures par mois pour le délégué syndical central, un crédit de 300 heures par an pour les organisations, un budget de 6 000 € par an, les frais de déplacement et une avance sur frais, le matériel des délégués centraux, le fonctionnement du CSE central, les subventions des CSE d'établissement et les entretiens de début et de fin de mandat. Il court du 1er juin 2025 au 31 décembre 2027.",
+   "synonymes": [
+    "accord droit syndical",
+    "droit syndical",
+    "CSE central",
+    "CSEC",
+    "délégué syndical central",
+    "DSC",
+    "accord du 1er juin 2025",
+    "moyens syndicaux",
+    "représentants syndicaux"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 1 art. 1, titre 6, p.7)",
+     "regles": [
+      "Les dispositions s'appliquent aux seules organisations syndicales représentatives nationalement au niveau de la société, et aux salariés qui exercent un mandat national, syndical ou électif.",
+      "L'accord remplace tous les accords, usages et politiques de la société sur le même objet (titre 6 art. 3, p.19).",
+      "Pour le détail : voir les fiches sur le crédit d'heures, le budget, les frais, le CSE central et les subventions."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 1",
+       "page": 7,
+       "extrait": "applicables aux seules organisations syndicales représentatives nationalement",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 6 art. 3",
+       "page": 19,
+       "extrait": "remplace et annule toutes les dispositions"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : le Code du travail sur le droit syndical et le CSE central n'est pas repris dans cette fiche."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "L'accord est signé : sa durée est écrite « 2 ans », mais ses dates (1er juin 2025 au 31 décembre 2027) couvrent plus de deux ans : écart à vérifier."
+   ]
+  },
+  {
+   "id": "dsc-credit-heures",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Quel est le crédit d'heures d'un délégué syndical central ?",
+   "reponse": "24 heures par mois pour l'exercice de ses fonctions, en plus des heures dont il dispose à un autre titre, par exemple comme délégué syndical d'établissement (accord, titre 1 art. 2.1, p.7). Par dérogation à la loi, une organisation syndicale représentative peut désigner un délégué syndical central dès 500 salariés (en équivalent temps plein) au lieu de 2 000.",
+   "synonymes": [
+    "délégué syndical central",
+    "DSC",
+    "24 heures par mois",
+    "crédit d'heures DSC",
+    "seuil 500 salariés",
+    "désigner un délégué syndical central",
+    "heures du délégué syndical central"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 1 art. 2.1, p.7)",
+     "regles": [
+      "Le délégué syndical central dispose de 24 heures par mois, qui s'ajoutent à celles dont il peut disposer à un autre titre que celui de délégué syndical d'établissement.",
+      "Le seuil pour désigner un délégué syndical central est ramené de 2 000 à au moins 500 salariés (en équivalent temps plein)."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 2.1",
+       "page": 7,
+       "extrait": "le délégué syndical central dispose de vingt-quatre heures par mois pour l'exercice de ses fonctions",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 2.1",
+       "page": 7,
+       "extrait": "ramené au sein de la société Covicar 71 de 2 000 à au moins 500 salariés",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail (articles consultés sur code.travail.gouv.fr)",
+     "regles": [
+      "Le délégué syndical central dispose de 24 heures par mois, qui s'ajoutent aux heures dont il dispose à un autre titre (L2143-15)."
+     ],
+     "sources": [
+      {
+       "doc": "ct",
+       "article": "L2143-15",
+       "page": 69,
+       "extrait": "dispose de vingt-quatre heures par mois pour l'exercice de ses fonctions"
+      }
+     ]
+    }
+   ],
+   "notes": [
+    "Le crédit de 24 heures est celui de la loi : l'accord confirme et abaisse seulement le seuil de désignation."
+   ]
+  },
+  {
+   "id": "os-credit-heures",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Quel est le crédit d'heures spécifique de mon organisation syndicale ?",
+   "reponse": "Un crédit global de 300 heures par an est réparti selon les élections du 9 juin 2023 : CGT 90 heures, CFDT 80, FO 63, UNSA 49, SNEC 21 (accord, titre 3 art. 1.2, p.15-16). Le délégué syndical central le répartit entre les délégués syndicaux et les représentants syndicaux au CSE et au CSE central de son organisation. Ces heures sont payées comme du temps de travail, ne s'ajoutent pas au crédit légal de chaque délégué, ne peuvent pas être dépassées, et les réunions de négociation à l'initiative de la direction n'y sont pas imputées.",
+   "synonymes": [
+    "crédit d'heures spécifique",
+    "300 heures",
+    "90 heures CGT",
+    "heures organisation syndicale",
+    "crédit d'heures syndical",
+    "heures du syndicat",
+    "répartition des heures",
+    "suivi du crédit d'heures",
+    "heures CGT"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 3 art. 1.2, p.15)",
+     "regles": [
+      "Crédit d'heures spécifique et global de 300 heures par an pour l'ensemble des organisations syndicales représentatives.",
+      "Répartition selon les élections arrêtées au 9 juin 2023 : CGT 90 h, CFDT 80 h, FO 63 h, UNSA 49 h, SNEC 21 h.",
+      "Réparti par le DSC entre les délégués syndicaux, les représentants syndicaux au CSE et au CSE central de la même organisation ; payé comme du temps de travail effectif ; distinct du crédit légal de chaque délégué syndical ; ne peut pas être dépassé.",
+      "Les réunions de négociation à l'initiative de la direction ne s'imputent pas sur ce crédit.",
+      "Le DSC adresse chaque mois, dans la première semaine, le document de suivi annuel (annexe 2) à la direction (p.16)."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 3 art. 1.2",
+       "page": 15,
+       "extrait": "un crédit d'heures spécifique et global de 300 heures par an",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 3 art. 1.2",
+       "page": 16,
+       "extrait": "300h x 29,74% = 90 heures arrondi au",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 3 art. 1.2",
+       "page": 16,
+       "extrait": "Ce crédit d'heures spécifique ne pourra être dépassé",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "organisation",
+     "label": "Organisation",
+     "type": "select",
+     "options": [
+      [
+       "CGT",
+       "CGT"
+      ],
+      [
+       "CFDT",
+       "CFDT"
+      ],
+      [
+       "FO",
+       "FO"
+      ],
+      [
+       "UNSA",
+       "UNSA"
+      ],
+      [
+       "SNEC",
+       "SNEC"
+      ]
+     ],
+     "question": "De quelle organisation syndicale s'agit-il ?"
+    },
+    {
+     "id": "heuresPrises",
+     "label": "Heures déjà utilisées cette année",
+     "type": "number",
+     "min": 0,
+     "step": "0.5",
+     "defaut": 0,
+     "question": "Combien d'heures de ce crédit avez-vous déjà utilisées cette année ?",
+     "aide": "Tapez 0 si aucune. Le calcul vous dit ce qu'il reste."
+    }
+   ],
+   "calcul": "creditHeuresOS"
+  },
+  {
+   "id": "delegation-declaration",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Comment déclarer mes heures de délégation ?",
+   "reponse": "Chaque mois, vous complétez le document de suivi des heures de délégation (annexe 1) en indiquant les heures réellement prises, et vous le remettez à votre supérieur. Il concerne les délégués syndicaux centraux et d'établissement et les membres du CSE d'établissement et du CSE central. Ce document n'est pas un moyen de contrôler l'activité syndicale : il sert à gérer et garantir le paiement des heures. La direction peut le remplacer par un outil dématérialisé présenté en instance (accord, titre 1 art. 2.2, p.7-8).",
+   "synonymes": [
+    "déclarer heures de délégation",
+    "document de suivi",
+    "suivi des heures de délégation",
+    "bon de délégation",
+    "feuille de délégation",
+    "remettre au supérieur",
+    "heures de délégation paiement",
+    "annexe 1",
+    "outil dématérialisé délégation"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 1 art. 2.2, p.7)",
+     "regles": [
+      "Les salariés ayant un mandat de DSC, DS, membre du CSE d'établissement, du CSE central, RS au CSE et RS au CSEC remplissent chaque mois un document de suivi avec les heures réellement prises et le remettent à leur supérieur.",
+      "Ce document ne constitue pas un moyen de contrôle de l'activité syndicale : il permet à la direction de gérer les heures et d'en garantir le paiement.",
+      "La direction peut le remplacer par un outil de suivi dématérialisé, présenté en instance (p.8).",
+      "Pour le crédit spécifique annuel, le DSC adresse le suivi chaque mois, dans la première semaine (titre 3, p.16)."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 2.2",
+       "page": 7,
+       "extrait": "Chaque mois l'intéressé complète son document de suivi en précisant les heures réellement prises",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 2.2",
+       "page": 8,
+       "extrait": "remplacer le suivi actuel des heures de délégation par un autre outil de suivi"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "frais-deplacement-national",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Comment sont remboursés mes frais de déplacement pour une réunion nationale ?",
+   "reponse": "La direction de votre magasin rembourse vos frais de transport, de repas et de séjour selon la « procédure voyages et déplacements » en vigueur pour tous les salariés. Pour les trajets de plus de 400 km aller, l'avion en classe économique peut être remboursé sur justificatif. Les billets d'avion ou de train sont réservés et payés par la direction du magasin. Quand le repas est nécessaire, la direction l'organise et le paie : les repas pris en dehors ne sont pas remboursés (accord, titre 1 art. 3.1, p.8).",
+   "synonymes": [
+    "frais de déplacement",
+    "remboursement déplacement",
+    "réunion nationale",
+    "avion 400 km",
+    "billet de train",
+    "frais de séjour",
+    "repas réunion",
+    "procédure voyages et déplacements",
+    "frais de transport syndical",
+    "hôtel réunion"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 1 art. 3.1, p.8)",
+     "regles": [
+      "Remboursement par la direction du magasin des frais de transport, de repas et de séjour selon la procédure voyages et déplacements en vigueur, sous réserve du respect de ses conditions de réservation.",
+      "Trajets de plus de 400 km aller : remboursement de l'avion en classe économique sur justificatif ; billets d'avion ou de train réservés et payés par la direction du magasin.",
+      "Si le repas est nécessaire au regard des horaires, la direction l'organise et le paie ; pas de remboursement des repas pris en dehors de ce cadre."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.1",
+       "page": 8,
+       "extrait": "Pour les trajets de plus de 400 kilomètres aller",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "avance-carte-affaires",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Ai-je droit à une avance permanente sur frais ou à une carte affaires ?",
+   "reponse": "Une avance permanente sur frais peut être attribuée à ceux qui se déplacent aux réunions nationales à l'initiative de la direction : 700 € pour les délégués syndicaux centraux, 600 € pour les membres du CSE central (titulaires, suppléants, représentants syndicaux). En cas de plusieurs mandats, c'est le montant le plus avantageux. Vous devez donner votre accord écrit et signer une attestation sur l'honneur ; les frais restent à justifier. Les délégués syndicaux centraux peuvent aussi demander une carte bancaire de la société (accord, titre 1 art. 3.2 et 3.3, p.8-9).",
+   "synonymes": [
+    "avance permanente",
+    "avance sur frais",
+    "700 euros",
+    "600 euros",
+    "carte affaires",
+    "carte bancaire société",
+    "avance DSC",
+    "avance CSE central",
+    "attestation sur l'honneur avance"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 1 art. 3.2 et 3.3, p.8)",
+     "regles": [
+      "Avance permanente sur frais : 700 € pour les délégués syndicaux centraux ; 600 € pour les membres du CSE central (titulaires, suppléants et représentants syndicaux) ; en cas de multi-mandats, le montant le plus avantageux.",
+      "Les frais restent à justifier et sont remboursés selon la procédure voyages ; réservations par l'outil de réservation.",
+      "L'avance est déduite du bulletin de paie du mois suivant la perte du mandat, ou du solde de tout compte ; accord écrit et attestation sur l'honneur du salarié.",
+      "Carte bancaire de la société pour les DSC qui en font la demande, selon la procédure voyage (art. 3.3, p.9)."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.2",
+       "page": 8,
+       "extrait": "DSC: 700 euros"
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.2",
+       "page": 8,
+       "extrait": "Membres du CSE Central (Titulaires, Suppléants et Représentants syndicaux) : 600 euros"
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.3",
+       "page": 9,
+       "extrait": "ceux qui en font la demande pourront se voir attribuer une carte bancaire de la société"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "temps-reunion-nationale",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Comment est décompté le temps passé en réunion nationale ?",
+   "reponse": "Une réunion nationale organisée par la direction est comptée au forfait : 7 heures pour la journée pour le CSE central et les commissions obligatoires, 4 heures pour la journée pour les réunions de négociation, quel que soit le nombre ou la durée des réunions, les pauses et repas, et la base de votre contrat. Si la réunion dépasse le forfait, le temps réellement passé est rémunéré comme du temps de travail effectif (accord, titre 1 art. 3.4, p.9).",
+   "synonymes": [
+    "réunion nationale",
+    "forfait 7 heures",
+    "forfait 4 heures",
+    "temps de réunion",
+    "CSE central journée",
+    "réunion de négociation",
+    "commission obligatoire",
+    "décompte du temps réunion",
+    "temps passé en réunion"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 1 art. 3.4, p.9)",
+     "regles": [
+      "Réunions du CSE central et commissions obligatoires : forfait de 7 heures pour la journée, indépendamment du nombre ou de la durée des réunions.",
+      "Réunions de négociation : forfait de 4 heures pour la journée, indépendamment du nombre de réunions.",
+      "Le forfait s'applique si la réunion ne le dépasse pas ; sinon le temps passé est rémunéré en temps de travail effectif. Il vaut quels que soient les pauses, les repas et la base contrat."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.4",
+       "page": 9,
+       "extrait": "régime forfaitaire suivant, à savoir 7 heures pour la journée",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.4",
+       "page": 9,
+       "extrait": "à savoir 4 heures pour la journée, indépendamment du nombre de",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "type",
+     "label": "Type de réunion",
+     "type": "select",
+     "options": [
+      [
+       "csec",
+       "CSE central ou commission obligatoire"
+      ],
+      [
+       "negociation",
+       "Négociation"
+      ]
+     ],
+     "question": "Quel type de réunion nationale ?"
+    },
+    {
+     "id": "heures",
+     "label": "Durée réelle de la réunion sur la journée (heures)",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 0,
+     "question": "Combien d'heures a duré la réunion sur la journée ?",
+     "aide": "Si elle dure moins que le forfait, on compte le forfait. Tapez 0 si vous ne savez pas."
+    }
+   ],
+   "calcul": "tempsReunionNationale"
+  },
+  {
+   "id": "dsc-moyens-materiels",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Quels moyens matériels pour un délégué syndical central ?",
+   "reponse": "Chaque organisation syndicale représentative reçoit un budget de 1 000 € maximum par délégué syndical central, sur justificatifs, pour acheter : un ordinateur (garantie extensible de 3 ans, pack office), une imprimante multifonctions avec wifi et une cartouche de rechange, un disque dur externe et une clé USB. La facture est envoyée à la direction des ressources humaines dans un délai d'un mois. En cas de perte de mandat, le matériel passe au nouveau délégué de la même organisation ; la perte ou le vol n'est pas remplacé par la direction (accord, titre 1 art. 3.5, p.9-10).",
+   "synonymes": [
+    "matériel informatique",
+    "ordinateur DSC",
+    "1 000 euros",
+    "imprimante délégué",
+    "budget matériel",
+    "clé USB disque dur",
+    "moyens matériels",
+    "matériel syndical",
+    "ordinateur délégué syndical"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 1 art. 3.5, p.9)",
+     "regles": [
+      "Budget de 1 000 euros maximum par DSC, sur justificatifs : ordinateur (garantie extensible 3 ans, pack office), imprimante multifonctions wifi et cartouche de rechange, disque dur externe et clé USB.",
+      "Le DSC envoie sa facture à la direction des ressources humaines dans un délai d'un mois.",
+      "En cas de perte de mandat, l'ancien DSC remet l'ordinateur et l'imprimante au nouveau DSC de son organisation ; en cas de perte ou de vol, la direction ne prend pas en charge le renouvellement."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.5",
+       "page": 9,
+       "extrait": "est de 1 000 euros maximum par DSC",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 1 art. 3.5",
+       "page": 10,
+       "extrait": "la Direction ne prendra pas en charge le renouvellement dudit"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "os-budget",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Quel budget l'organisation syndicale reçoit-elle ?",
+   "reponse": "Une dotation forfaitaire de 6 000 € par an est répartie selon les élections du 9 juin 2023 : CGT 1 785 €, CFDT 1 588 €, FO 1 241 €, UNSA 968 €, SNEC 420 €. Elle est versée aux fédérations nationales ou aux syndicats nationaux, et sert aux dépenses que l'accord ne prévoit pas. La répartition est maintenue pendant toute la durée de l'accord (accord droit syndical, titre 3 art. 1.1, p.15).",
+   "synonymes": [
+    "budget syndical",
+    "dotation forfaitaire",
+    "6 000 euros",
+    "budget concertation sociale",
+    "1 785 euros",
+    "budget CGT",
+    "dotation organisation syndicale",
+    "budget de contribution"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 3 art. 1.1, p.15)",
+     "regles": [
+      "Budget forfaitaire de 6 000 € par an, versé aux fédérations nationales ou syndicats nationaux, pour des dépenses non prévues par l'accord.",
+      "Répartition (élections au 9 juin 2023) : CGT 1 785 € ; CFDT 1 588 € ; FO 1 241 € ; UNSA 968 € ; SNEC 420 € ; maintenue pour toute la durée de l'accord."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 3 art. 1.1",
+       "page": 15,
+       "extrait": "le montant total annuel de la dotation de 6 000 € est réparti comme suit",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 3 art. 1.1",
+       "page": 15,
+       "extrait": "Pour l'OS ayant obtenu 29,74% (CGT) : 1 785 euros arrondi au supérieur.",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cse-central-fonctionnement",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Comment fonctionne le CSE central (réunions, convocation, ordre du jour) ?",
+   "reponse": "Le CSE central se réunit au moins une fois par semestre, sur convocation de l'employeur, et en réunion extraordinaire à la demande de l'employeur ou de la majorité de ses membres. La convocation et l'ordre du jour sont envoyés au moins 8 jours calendaires avant. L'ordre du jour est établi ensemble par le président et le secrétaire ; les consultations obligatoires y sont inscrites de plein droit. Les documents sont envoyés par voie numérique avec accusé de réception, et les membres sont tenus à la discrétion sur les informations confidentielles (accord, titre 2 art. 3.1 et 3.2, p.11-12).",
+   "synonymes": [
+    "CSE central réunion",
+    "convocation CSE central",
+    "ordre du jour CSE central",
+    "8 jours calendaires",
+    "réunion extraordinaire CSE central",
+    "visioconférence CSE central",
+    "fonctionnement du CSE central",
+    "discrétion CSE central",
+    "procès-verbal CSE central"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 2 art. 3.1 et 3.2, p.12)",
+     "regles": [
+      "Réunion ordinaire au moins une fois par semestre sur convocation de l'employeur ; réunion extraordinaire à la demande de l'employeur ou de la majorité des membres ; visioconférence possible avec l'accord du secrétaire.",
+      "Convocation avec l'ordre du jour au moins 8 jours calendaires avant la réunion.",
+      "Ordre du jour établi conjointement par le président et le secrétaire ; consultations obligatoires inscrites de plein droit.",
+      "Documents envoyés en principe par voie numérique avec accusé de réception aux titulaires, suppléants et représentants syndicaux ; discrétion sur les informations confidentielles ; l'ordre du jour et le procès-verbal sont envoyés au président de chaque CSE d'établissement."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 3.1",
+       "page": 12,
+       "extrait": "au moins une fois par semestre sur convocation de l'employeur"
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 3.2",
+       "page": 12,
+       "extrait": "au moins 8 jours calendaires avant la tenue de celle-ci"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cse-central-composition",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Quelle est la composition du CSE central ?",
+   "reponse": "12 titulaires et 12 suppléants élus au jour de l'adoption du règlement du CSE central du 30 avril 2025. Il est présidé par l'employeur ou son représentant, qui peut être assisté de deux collaborateurs à voix consultative. Le CSE central désigne parmi ses titulaires un secrétaire et un secrétaire adjoint. Le nombre de représentants syndicaux dépend du protocole préélectoral du 22 novembre 2024 (accord droit syndical, titre 2 art. 2, p.11).",
+   "synonymes": [
+    "composition CSE central",
+    "12 titulaires",
+    "12 suppléants",
+    "secrétaire CSE central",
+    "bureau du CSE central",
+    "président CSE central",
+    "représentants syndicaux CSE central",
+    "combien de membres CSE central"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 2 art. 2, p.11)",
+     "regles": [
+      "Délégation du personnel : 12 titulaires et 12 suppléants au jour de l'adoption du règlement du CSE central du 30 avril 2025.",
+      "Présidence par l'employeur ou son représentant, assisté éventuellement de deux collaborateurs à voix consultative.",
+      "Bureau : un secrétaire et un secrétaire adjoint, désignés parmi les titulaires à la première réunion.",
+      "Nombre de représentants syndicaux fixé par le protocole préélectoral du 22 novembre 2024."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 2.2",
+       "page": 11,
+       "extrait": "est composée de 12 titulaires et de 12 suppléants"
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 2.3",
+       "page": 11,
+       "extrait": "un secrétaire et un secrétaire adjoint"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cse-central-consultations",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Quand le CSE central ou les CSE d'établissement sont-ils consultés ?",
+   "reponse": "Le CSE central est seul consulté sur un projet d'entreprise sans mesure d'adaptation propre à un établissement. Il est consulté avec les CSE d'établissement quand le projet prévoit des mesures d'adaptation spécifiques, et successivement quand ces mesures ne sont pas encore définies. Chaque année, le CSE central est seul consulté sur les orientations stratégiques, la situation économique et financière, la politique sociale, les conditions de travail et l'emploi, et il peut seul désigner un expert ; les CSE d'établissement en sont ensuite informés (accord, titre 2 art. 3.3 et 3.4, p.12-13).",
+   "synonymes": [
+    "consultation CSE central",
+    "consulté CSE",
+    "consultations ponctuelles",
+    "consultations récurrentes",
+    "orientations stratégiques",
+    "expert CSE central",
+    "projet d'entreprise consultation",
+    "CSE central seul",
+    "consultations successives",
+    "consultation conjointe"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 2 art. 3.3 et 3.4, p.12)",
+     "regles": [
+      "Consultation du CSE central seul : projet d'entreprise sans mesure d'adaptation spécifique à un établissement.",
+      "Consultation conjointe du CSE central et des CSE d'établissement concernés : projet avec mesures d'adaptation spécifiques.",
+      "Consultations successives : mesures d'adaptation pas encore définies ; le CSE central d'abord, puis les CSE d'établissement concernés quand les mesures sont connues.",
+      "Consultations annuelles : le CSE central seul, sur les orientations stratégiques, la situation économique et financière, la politique sociale, les conditions de travail et l'emploi ; il peut seul désigner un expert ; les CSE d'établissement sont ensuite informés."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 3.3.1",
+       "page": 12,
+       "extrait": "Le CSE Central est seul consulté sur les projets dédiés au niveau de l'entreprise"
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 3.4",
+       "page": 13,
+       "extrait": "Il peut seul désigner un expert."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : délai de consultation du Code du travail (R2312-6) cité par l'accord, non consulté."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "cse-central-reunion-preparatoire",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Peut-on se réunir avant une réunion du CSE central ?",
+   "reponse": "Oui : à l'initiative du secrétaire et/ou de chaque représentant syndical au CSE central, une réunion préparatoire peut se tenir la veille de la réunion ou le matin même, avant les CSE centraux ordinaires et extraordinaires. Dans le cas de la veille, elle est prise en compte à hauteur de 4 heures par demi-journée. Chaque organisation syndicale transmet la liste des participants à la direction dès le lendemain (accord, titre 2 art. 4.1, p.13-14).",
+   "synonymes": [
+    "réunion préparatoire",
+    "préparatoire CSE central",
+    "veille CSE central",
+    "4 heures demi-journée",
+    "réunion avant CSE central",
+    "préparer le CSE central",
+    "liste des participants"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 2 art. 4.1, p.14)",
+     "regles": [
+      "Réunion préparatoire possible avant les CSE centraux ordinaires et extraordinaires, à l'initiative du secrétaire et/ou de chaque représentant syndical.",
+      "Elle se tient la veille ou le matin même ; prise en compte à hauteur de 4 heures par demi-journée de réunion préparatoire dans le cas de la veille.",
+      "La liste des participants est transmise par chaque organisation syndicale à la direction dès le lendemain."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 4.1",
+       "page": 14,
+       "extrait": "à hauteur de 4h00 par demie-journée de réunion préparatoire"
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 2 art. 4.1",
+       "page": 14,
+       "extrait": "soit la veille précédant le jour prévu de la réunion"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le texte fixe les 4 heures « dans le premier cas de figure » (la veille) et ne dit pas comment est compté le temps du matin même : écart à vérifier."
+   ]
+  },
+  {
+   "id": "cse-subventions",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Quelles subventions les CSE d'établissement reçoivent-ils ?",
+   "reponse": "La contribution de l'employeur au budget de fonctionnement des CSE d'établissement est maintenue à 0,22 % de la masse salariale brute. La contribution aux activités sociales et culturelles est de 1,10 % de la masse salariale brute. Elles sont calculées sur la masse salariale de chaque établissement et versées chaque mois, à raison d'un douzième (accord droit syndical, titre 4, p.17).",
+   "synonymes": [
+    "subvention CSE",
+    "budget de fonctionnement CSE",
+    "0,22 %",
+    "1,10 %",
+    "activités sociales et culturelles",
+    "ASC",
+    "masse salariale brute",
+    "budget du CSE",
+    "douzième"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 4, p.17)",
+     "regles": [
+      "Budget de fonctionnement des CSE d'établissement : 0,22 % de la masse salariale brute.",
+      "Activités sociales et culturelles : 1,10 % de la masse salariale brute.",
+      "Calculées sur la masse salariale de chaque CSE d'établissement et versées mensuellement, à hauteur d'un douzième."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 4",
+       "page": 17,
+       "extrait": "maintenue à 0,22% de la masse salariale brute",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 4",
+       "page": 17,
+       "extrait": "est fixée à 1,10% de la masse salariale brute",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : taux légaux de subvention de fonctionnement non consultés."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "entretien-mandat",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Ai-je droit à un entretien de début et de fin de mandat ?",
+   "reponse": "Le délégué syndical central et le délégué syndical d'établissement peuvent, sur demande, bénéficier d'un entretien individuel de début et de fin de mandat. Il sert à concilier le mandat avec l'activité professionnelle et la carrière, à valoriser les compétences acquises et à évoquer les difficultés. Il n'est jamais fait pour contrôler le mandat et reste distinct de l'entretien annuel de performance (accord droit syndical, titre 5, p.18).",
+   "synonymes": [
+    "entretien de début de mandat",
+    "entretien de fin de mandat",
+    "entretien mandat",
+    "valorisation du parcours syndical",
+    "carrière et mandat",
+    "entretien délégué syndical"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 5, p.18)",
+     "regles": [
+      "Le DSC et le DS d'établissement peuvent, sur demande, bénéficier d'un entretien individuel de début et de fin de mandat.",
+      "Objectifs : concilier l'activité professionnelle et le mandat, valoriser les compétences acquises, évoquer les difficultés ; jamais de contrôle du mandat ; distinct des entretiens de performance annuels."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 5",
+       "page": 18,
+       "extrait": "peuvent bénéficier, sur demande, d’un entretien individuel de début et de fin de mandat"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le texte vise le DSC et le DS d'établissement ; il ne cite pas les autres élus."
+   ]
+  },
+  {
+   "id": "accord-droit-syndical-duree",
+   "theme": "Santé, sécurité, discipline, représentants du personnel",
+   "categorie": "rep",
+   "question": "Combien de temps l'accord droit syndical dure-t-il ?",
+   "reponse": "Du 1er juin 2025 au 31 décembre 2027, sans renouvellement tacite : il expire à cette date sans autre formalité. Il peut être révisé à tout moment par une des parties signataires, par un avenant (accord droit syndical, titre 6 art. 3 et 4, p.19). Le texte parle d'une durée de « 2 ans », alors que ces dates font plus de deux ans : écart à vérifier.",
+   "synonymes": [
+    "durée accord droit syndical",
+    "fin de l'accord",
+    "31 décembre 2027",
+    "renouvellement tacite",
+    "révision de l'accord",
+    "avenant droit syndical",
+    "2 ans accord syndical",
+    "expire accord",
+    "durée de l'accord droit syndical",
+    "combien de temps dure l'accord droit syndical",
+    "fin de l'accord syndical",
+    "date de fin accord syndical"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord droit syndical et CSE central (titre 6 art. 3 et 4, p.19)",
+     "regles": [
+      "Durée déterminée de 2 ans couvrant la période du 1er juin 2025 au 31 décembre 2027 ; expiration le 31 décembre 2027 sans autres formalités, sans reconduction tacite.",
+      "Le présent accord remplace et annule les accords, usages ou politiques portant sur le même objet.",
+      "Révision possible à tout moment par une des parties signataires, par avenant."
+     ],
+     "sources": [
+      {
+       "doc": "syndical",
+       "article": "titre 6 art. 3",
+       "page": 19,
+       "extrait": "conclu pour une durée déterminée de 2 ans couvrant la période",
+       "verifie_image": true
+      },
+      {
+       "doc": "syndical",
+       "article": "titre 6 art. 3",
+       "page": 19,
+       "extrait": "ne sera pas tacitement renouvelé"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Du 1er juin 2025 au 31 décembre 2027, il y a 2 ans et 7 mois : la mention « 2 ans » ne colle pas aux dates. Les dates écrites expressément font foi pour la fin de l'accord."
+   ]
   }
  ],
  "categories": [
@@ -11639,6 +13246,13 @@
    "icone": "📈",
    "couleur": "#1b7f9e",
    "description": "Intéressement, participation, PEE, PERCOL"
+  },
+  {
+   "id": "rep",
+   "nom": "Représentants du personnel",
+   "icone": "🤝",
+   "couleur": "#7a3b1d",
+   "description": "Heures de délégation, CSE, droit syndical, entretien disciplinaire"
   }
  ],
  "frequentes": [
