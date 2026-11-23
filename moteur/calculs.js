@@ -720,4 +720,75 @@ export function bonusRemplacement({ cibleAbsent = 0, cibleRemplacant = 0, salair
   return { lignes: l };
 }
 
-export const CALCULS = { periodeAccueil, augmentationPromotion, echelonC, echelon20ans, salaireMinimumEmploye, minimumEncadrement, augmentationGarantie04, augmentationGarantie1pct, bonusRemplacement, heuresDelegation, tempsReunionNationale, creditHeuresOS, primeAstreinte, interventionAstreinte, alimentationCET, ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };
+// ---- 53. Intéressement : grilles 2025 et grilles de repli (accord du 30 juin 2025, art. 5.5 p.8-11 et art. 5.6 p.12-13). Valeurs relevées sur les images des pages.
+export const GRILLES_2025 = { ...GRILLES_2026, demarque: [[0.40, 150], [0.35, 125], [0.30, 100], [0.25, 80], [0.20, 60], [0.15, 50], [0.10, 40], [0.05, 30], [-0.05, 20], [-0.15, 10]] };
+export const GRILLES_REPLI = {
+  ca: [[110, 100], [109, 90], [108, 80], [107, 70], [106, 60], [105, 50], [104, 40], [103, 35], [102, 30], [101, 25], [100, 20]],
+  mdc: [[40, 100], [39, 90], [38, 80], [37, 70], [36, 60], [35, 50], [34, 40], [33, 30]],
+  demarque: [[0.60, 150], [0.50, 100], [0.40, 80], [0.30, 60], [0.20, 50], [0.15, 40], [0.10, 30], [0.05, 20], [0, 10]],
+  nps: [[61, 150], [58, 100], [55, 75], [52, 50], [49, 25], [45, 0]],
+};
+export function interessementAccord({ grille = '2025', caX = 0, mdcX = 0, demarqueEcart = 0, nps = 0, presenceMois = 12, ratioTempsPartiel = 1 }) {
+  const G = grille === 'repli' ? GRILLES_REPLI : GRILLES_2025;
+  const c1a = palier(caX, G.ca), c1b = palier(mdcX, G.mdc), c1 = Math.max(c1a, c1b), c2 = palier(demarqueEcart, G.demarque), c3 = palier(nps, G.nps);
+  const total = c1 + c2 + c3, prorata = r2(total * (presenceMois / 12) * ratioTempsPartiel);
+  return { lignes: [
+    L('accord', 'Critère 1 (meilleur des deux indicateurs)', `${c1} € (CA : ${c1a} € ; MDC : ${c1b} €)`, { brut: c1 }),
+    L('accord', 'Critère 2 : démarque', `${c2} €`, { brut: c2 }),
+    L('accord', 'Critère 3 : NPS', `${c3} €`, { brut: c3 }),
+    L('accord', `Total des grilles (${grille === 'repli' ? 'grilles de repli' : 'grilles 2025'}), avant seuil, prorata et plafond`, `${total} € sur 400 € au maximum`, { brut: total }),
+    L('accord', 'Estimation au prorata de la présence et du temps de travail', eur2(prorata), { brut: prorata, fort: true, note: 'Estimation : seul le total des grilles est proratisé. Le seuil de déclenchement (0,2 % de résultat opérationnel) et le plafond légal ne sont pas vérifiés ici.' }),
+  ] };
+}
+
+const fdate = d => `${String(d.getUTCDate()).padStart(2, '0')}/${String(d.getUTCMonth() + 1).padStart(2, '0')}/${d.getUTCFullYear()}`;
+const lireDate = s => { const [y, m, d] = String(s).split('-').map(Number); return y ? new Date(Date.UTC(y, m - 1, d)) : null; };
+
+export function blocageEpargne({ dateVersement = '' }) {
+  const d = lireDate(dateVersement);
+  if (!d) return { lignes: [], erreur: 'Renseigner la date de versement.' };
+  const fin = new Date(Date.UTC(d.getUTCFullYear() + 5, 5, 1));
+  return { lignes: [
+    L('accord', 'Départ du délai de 5 ans', `1er juin ${d.getUTCFullYear()} (1er jour du 6e mois de l'année d'acquisition)`, { brut: Date.UTC(d.getUTCFullYear(), 5, 1) }),
+    L('accord', 'Argent disponible à partir du', fdate(fin), { fort: true, brut: fin.getTime(), note: 'Sauf cas de déblocage anticipé prévus par le règlement (mariage, naissance, rupture du contrat, résidence principale…). Pour l\'intéressement ou la participation, c\'est l\'année où les sommes sont placées.' }),
+  ] };
+}
+
+export function delaiChoixEpargne({ dateNotification = '' }) {
+  const d = lireDate(dateNotification);
+  if (!d) return { lignes: [], erreur: 'Renseigner la date de la notification.' };
+  const info = new Date(d.getTime() + 4 * 864e5), limite = new Date(info.getTime() + 15 * 864e5);
+  return { lignes: [
+    L('accord', 'Vous êtes présumé informé le', `${fdate(info)} (4 jours calendaires après la notification)`, { brut: info.getTime() }),
+    L('accord', 'Dernier jour pour choisir (versement ou placement)', fdate(limite), { fort: true, brut: limite.getTime(), note: 'Sans choix avant cette date, la somme est placée par défaut : voir la fiche « Je ne fais aucun choix ».' }),
+  ] };
+}
+
+export function datePaiementInteressement({ cloture = '' }) {
+  const d = lireDate(cloture);
+  if (!d) return { lignes: [], erreur: 'Renseigner la date de clôture de l\'exercice.' };
+  const limite = new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth() + 6, 0));
+  return { lignes: [L('accord', 'Date limite de versement', fdate(limite), { fort: true, brut: limite.getTime(), note: 'Dernier jour du 5e mois suivant la clôture. Au-delà : intérêts de retard à la charge de l\'entreprise.' })] };
+}
+
+export function plafondVersementVolontaire({ remuneration = 0 }) {
+  if (!(remuneration > 0)) return { lignes: [], erreur: 'Renseigner la rémunération annuelle brute.' };
+  return { lignes: [L('accord', 'Maximum de vos versements volontaires par an (tous plans)', eur2(r2(remuneration / 4)), { fort: true, brut: r2(remuneration / 4), note: 'Un quart de la rémunération annuelle brute. L\'intéressement et la participation placés ne comptent pas dans ce plafond.' })] };
+}
+
+// ---- 54. Budgets 2026 par magasin (avenant intéressement 2026, annexe 2, p.6 : copie pour signature, non signée)
+export const BUDGETS_2026 = {
+  'Albi': [-2.32, 29225.3], 'Amilly': [-2.41, 16857.9], 'Avignon - Cap Sud': [-2.75, 20073.6], 'La Ricamarie': [-3.58, 32006.6], 'Laloubère': [-2.45, 22829.3],
+  'Lanester': [-2.70, 26860.8], 'Lons-le-Saunier': [-3.74, 25446.5], 'St Martin des Champs': [-2.38, 24504.7], 'Vals-près-le-Puy': [-2.81, 36510.5], 'Villefranche-sur-Saône': [-2.06, 61573.2],
+};
+export function budgetMagasin2026({ magasin = 'Albi' }) {
+  const b = BUDGETS_2026[magasin];
+  if (!b) return { lignes: [], erreur: 'Choisir un magasin.' };
+  const fk = x => x.toLocaleString('fr-FR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  return { lignes: [
+    L('accord', `Budget 2026 du taux de démarque totale, ${magasin}`, `${String(b[0]).replace('.', ',')} %`, { brut: b[0] }),
+    L('accord', 'Budget 2026 du chiffre d\'affaires HT hors essence, drive inclus', `${fk(b[1])} k€`, { brut: b[1], note: 'Objectif de CA : le budget « majoré de 3 % » (avenant, art. 1) : ' + fk(b[1] * 1.03) + ' k€. Attention : la grille parle de « réalisé ÷ budget » avec 103 % pour le maximum : si la majoration de 3 % compte deux fois, c\'est à vérifier auprès de la direction.' }),
+  ] };
+}
+
+export const CALCULS = { budgetMagasin2026, interessementAccord, blocageEpargne, delaiChoixEpargne, datePaiementInteressement, plafondVersementVolontaire, periodeAccueil, augmentationPromotion, echelonC, echelon20ans, salaireMinimumEmploye, minimumEncadrement, augmentationGarantie04, augmentationGarantie1pct, bonusRemplacement, heuresDelegation, tempsReunionNationale, creditHeuresOS, primeAstreinte, interventionAstreinte, alimentationCET, ticketsRestaurant, entretienTenue, fraisTransport, pauses, primeFermeture, travailleurDeNuit, reposNuit, dimanche, ferieTravaille, participationRepartition, heuresSup, annualisation, heuresComplementaires, modulationTempsPartiel, allocationRetraite, periodeEssai, congesAcquis, fractionnement, congeAnciennete, indemniteConges, grossesse, maternite, paternite, congeParentalAnciennete, delaiProtection, capitalDeces, demenagement, enfantMalade, retraiteProgressive, primeEtArret, journeeSolidarite, congesPointage, preavis, indemniteLicenciement, primeAnnuelle, interessement2026, abondement, majorationNuit, arretMaladie, evenementFamilial, remiseAchats };

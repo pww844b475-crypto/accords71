@@ -705,12 +705,12 @@
     },
     {
      "id": "demarqueEcart",
-     "label": "Démarque : réalisé − prévisionnel (points de %)",
+     "label": "Démarque : réalisé − budget (points de %, positif = meilleur que le budget)",
      "type": "number",
      "step": "0.01",
      "defaut": 0,
-     "question": "De combien la démarque est-elle meilleure ou moins bonne que prévu (en points) ?",
-     "aide": "La démarque, ce sont les pertes du magasin (vols, casse…). Mettez un nombre négatif (ex. -0,2) si les pertes sont plus faibles que prévu, positif si elles sont plus fortes."
+     "question": "De combien la démarque du magasin est-elle meilleure ou moins bonne que son budget (en points) ?",
+     "aide": "Les budgets de démarque sont négatifs (ex. -2,32 % à Albi). Faites réalisé moins budget : +0,32 si le réalisé est -2,00 % (meilleur que prévu), -0,10 s'il est moins bon. Plus l'écart est positif, plus la prime est haute."
     },
     {
      "id": "nps",
@@ -809,7 +809,12 @@
    ],
    "notes": [
     "Sans avenant signé, ce sont les grilles de repli de l'accord qui s'appliquent (onglet « Écarts à vérifier »). La copie de l'avenant reçue n'est pas signée.",
-    "Le montant affiché est un total de grilles : le seuil déclencheur, le plafond individuel et la formule de répartition ne sont pas calculés."
+    "Le montant affiché est un total de grilles : le seuil déclencheur, le plafond individuel et la formule de répartition ne sont pas calculés.",
+    "Sens de l'écart de démarque : l'avenant écrit « taux réalisé − taux prévisionnel » avec des seuils positifs pour les gros montants ; les budgets étant négatifs, un écart positif veut dire une démarque meilleure que le budget. À confirmer avec la direction.",
+    "Sens de l'écart de démarque : l'avenant écrit « taux réalisé − taux prévisionnel » avec des seuils positifs pour les gros montants ; les budgets étant négatifs, un écart positif veut dire une démarque meilleure que le budget. À confirmer avec la direction.",
+    "Sens de l'écart de démarque : l'avenant écrit « taux réalisé − taux prévisionnel » avec des seuils positifs pour les gros montants ; les budgets étant négatifs, un écart positif veut dire une démarque meilleure que le budget. À confirmer avec la direction.",
+    "Sens de l'écart de démarque : l'avenant écrit « taux réalisé − taux prévisionnel » avec des seuils positifs pour les gros montants ; les budgets étant négatifs, un écart positif veut dire une démarque meilleure que le budget. À confirmer avec la direction.",
+    "Sens de l'écart de démarque : l'avenant écrit « taux réalisé − taux prévisionnel » avec des seuils positifs pour les gros montants ; les budgets étant négatifs, un écart positif veut dire une démarque meilleure que le budget. À confirmer avec la direction."
    ],
    "reponse": "Les grilles 2026 donnent jusqu'à 100 € (critère 1), 150 € (démarque) et 150 € (NPS), au prorata de la présence, si le seuil de déclenchement est atteint. L'avenant reçu n'est pas signé.",
    "categorie": "epargne"
@@ -14496,6 +14501,3161 @@
        "article": "art. 4-2",
        "page": 6,
        "extrait": "La prime de vacances est réglée avec la paie du mois de juin."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-calcul",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Combien vais-je toucher d'intéressement au titre de 2025 ?",
+   "reponse": "Trois critères : chiffre d'affaires (jusqu'à 100 €), démarque (jusqu'à 150 €) et satisfaction clients NPS (jusqu'à 150 €), soit 400 € au maximum pour un temps complet présent toute l'année, si le seuil de déclenchement est atteint. Si l'avenant 2026 n'est pas signé à temps, les grilles de repli de l'accord s'appliquent (art. 5.4 à 5.6, p.7-13).",
+   "synonymes": [
+    "combien d'intéressement",
+    "calcul intéressement",
+    "montant intéressement",
+    "intéressement 2025",
+    "grilles intéressement",
+    "400 euros",
+    "prime intéressement",
+    "simulation intéressement",
+    "grilles de repli"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.4 à 5.6, p.7)",
+     "regles": [
+      "Seuil : aucun intéressement si le résultat opérationnel courant est inférieur à 0,2 % du CA HT hors essence.",
+      "Critère 1 chiffre d'affaires : le meilleur de deux indicateurs (réalisé ÷ budget, ou poids du CA MDC), 100 € au maximum.",
+      "Critère 2 démarque : 150 € au maximum. Critère 3 NPS : 150 € au maximum.",
+      "Grilles 2025 : art. 5.5 (p.8-11). À défaut d'avenant signé avant le 1er jour du 7e mois, grilles de repli de l'art. 5.6 (p.12-13).",
+      "Montant individuel : proportionnel à la durée de présence (art. 7)."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.5.1",
+       "page": 7,
+       "extrait": "la prime la plus élevée entre celle obtenue",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.5.2",
+       "page": 10,
+       "extrait": "Inférieur à -0,15%",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.6",
+       "page": 12,
+       "extrait": "Ils seront révisés par voie de signature d'un avenant",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Grilles 2025 et grilles de repli relevées sur les images des pages 8 à 13.",
+    "Le calcul donne un total de grilles proratisé ; il ne vérifie ni le seuil de déclenchement ni le plafond légal.",
+    "Sens de l'écart de démarque : voir la fiche 2026 (budgets négatifs : écart positif = meilleur que le budget)."
+   ],
+   "champs": [
+    {
+     "id": "grille",
+     "label": "Grilles",
+     "type": "select",
+     "options": [
+      [
+       "2025",
+       "Grilles 2025 (accord)"
+      ],
+      [
+       "repli",
+       "Grilles de repli (sans avenant signé)"
+      ]
+     ],
+     "question": "Quelles grilles voulez-vous utiliser ?",
+     "aide": "2025 : les grilles de l'accord pour l'année 2025. Repli : les grilles qui s'appliquent si aucun avenant n'est signé à temps pour 2026."
+    },
+    {
+     "id": "caX",
+     "label": "CA HT HE Drive inclus : réalisé ÷ budget (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "Le magasin a fait combien de % de son objectif de chiffre d'affaires (drive compris) ?",
+     "aide": "Exemple : tapez 102 si le magasin a fait 102 % de son objectif. Ce chiffre est donné par la direction du magasin."
+    },
+    {
+     "id": "mdcX",
+     "label": "Poids CA MDC ÷ CA TTC PGC (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "Quel est le poids du CA MDC par rapport au CA TTC PGC (en %) ?",
+     "aide": "Chiffre indiqué par la direction du magasin (voir l'avenant d'intéressement)."
+    },
+    {
+     "id": "demarqueEcart",
+     "label": "Démarque : réalisé − budget (points de %)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0,
+     "question": "De combien la démarque est-elle meilleure ou moins bonne que prévu (en points) ?",
+     "aide": "Positif = meilleure que le budget. Exemple : +0,25. La grille 2025 descend jusqu'à -0,15 point."
+    },
+    {
+     "id": "nps",
+     "label": "Net Promoter Score",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "question": "Quel est le score de recommandation des clients du magasin (NPS) ?",
+     "aide": "Chiffre donné par la direction du magasin."
+    },
+    {
+     "id": "presenceMois",
+     "label": "Présence dans l'exercice (mois, 0 à 12)",
+     "type": "number",
+     "min": 0,
+     "step": "0.5",
+     "defaut": 12,
+     "question": "Combien de mois avez-vous été présent dans l'année (0 à 12) ?",
+     "max": 12
+    },
+    {
+     "id": "ratioTempsPartiel",
+     "label": "Temps partiel : heures effectuées ÷ durée conventionnelle (1 = temps plein)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 1,
+     "question": "Par rapport à un temps plein, quelle part du temps faites-vous ?",
+     "aide": "Exemple : tapez 0,5 pour un mi-temps, 1 pour un temps plein."
+    }
+   ],
+   "calcul": "interessementAccord"
+  },
+  {
+   "id": "interessement25-beneficiaires",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Qui a droit à l'intéressement ? Quelle ancienneté faut-il ?",
+   "reponse": "Tous les salariés de Covicar 71 qui ont au moins 3 mois d'ancienneté dans le groupe Carrefour à la clôture de l'exercice (ou à leur départ). Ces 3 mois peuvent être continus ou non, tous contrats confondus (CDD compris), et les périodes de suspension du contrat ne sont pas déduites (accord, art. 3, p.3-4).",
+   "synonymes": [
+    "qui a droit à l'intéressement",
+    "ancienneté intéressement",
+    "3 mois d'ancienneté",
+    "bénéficiaires intéressement",
+    "CDD intéressement",
+    "nouvel embauché intéressement",
+    "droit à l'intéressement",
+    "condition intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 3, p.3)",
+     "regles": [
+      "Bénéficiaires : l'ensemble des salariés de l'entreprise.",
+      "Ancienneté minimale de 3 mois dans le groupe Carrefour, appréciée à la fin de l'exercice ou à la date de départ.",
+      "Durée totale continue ou non, acquise au cours d'un ou plusieurs contrats ; tous les contrats (CDD ou CDI) de la période de calcul et des 12 mois qui la précèdent sont pris en compte.",
+      "Les périodes de suspension du contrat ne sont pas déduites.",
+      "La rupture du contrat, quelle qu'en soit la cause, n'enlève pas le droit pour la période antérieure."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 3",
+       "page": 3,
+       "extrait": "trois mois dans le groupe Carrefour"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 3",
+       "page": 4,
+       "extrait": "puissent être déduites"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 3",
+       "page": 4,
+       "extrait": "ne peut avoir d'incidence sur le droit à intéressement"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-seuil",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Quand l'intéressement est-il versé ou non (seuil de déclenchement) ?",
+   "reponse": "Aucun intéressement n'est versé si le résultat opérationnel courant (somme des ROC magasin), avant calcul de l'intéressement, est inférieur à 0,2 % du chiffre d'affaires HT hors essence de l'ensemble des magasins. Le seuil est apprécié au niveau de l'entreprise, pas du magasin (accord, art. 5.2, p.6).",
+   "synonymes": [
+    "seuil déclencheur",
+    "seuil de déclenchement",
+    "0,2 %",
+    "résultat opérationnel courant",
+    "ROC",
+    "intéressement nul",
+    "pas d'intéressement",
+    "aucun intéressement",
+    "condition de versement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.2, p.6)",
+     "regles": [
+      "Aucun intéressement ne peut être distribué si le ROC (somme ROC magasin) avant calcul de l'intéressement est inférieur à 0,2 % du CA HT hors essence.",
+      "Si le seuil n'est pas atteint, le calcul n'est pas déclenché pour l'exercice : aucun intéressement collectif n'est versé.",
+      "L'intéressement est par nature aléatoire : il varie d'un exercice à l'autre et peut être nul (art. 4)."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.2",
+       "page": 6,
+       "extrait": "aucun intéressement ne pourra être distribué",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 4",
+       "page": 4,
+       "extrait": "peut être nul"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-maximum",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Quel est le montant maximum d'intéressement ?",
+   "reponse": "400 € pour un salarié à temps complet, pour chacune des années 2025, 2026 et 2027, quel que soit son statut. Les montants de 2026 et 2027 peuvent être révisés par avenant, mais pas à la baisse (accord, art. 5.3, p.6). Le montant individuel dépend ensuite de la présence et du temps de travail.",
+   "synonymes": [
+    "montant maximum intéressement",
+    "plafond intéressement",
+    "400 €",
+    "maximum intéressement",
+    "combien au maximum",
+    "intéressement maximal",
+    "plafond légal intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.3 et 6, p.6 et 14-15, p.6)",
+     "regles": [
+      "400 € pour un salarié à temps complet : 2025, 2026 et 2027, sans référence au statut.",
+      "2026 et 2027 : révision possible par avenant, mais pas à la baisse.",
+      "Plafonds légaux : collectif 20 % des salaires bruts de l'entreprise ; individuel 3/4 du plafond annuel de la Sécurité sociale, au prorata de la présence (art. 6)."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.3",
+       "page": 6,
+       "extrait": "il pourra atteindre un maximum de",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.3",
+       "page": 6,
+       "extrait": "Ces montants ne pourront pas être revus à la baisse",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 6.2",
+       "page": 15,
+       "extrait": "trois quarts du plafond annuel moyen de la sécurité sociale"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-magasin",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "L'intéressement dépend-il de mon magasin ou de toute l'entreprise ?",
+   "reponse": "Des deux. Le chiffre d'affaires et la démarque se mesurent magasin par magasin (chaque magasin est une unité de travail). Le Net Promoter Score et le seuil de déclenchement se mesurent au niveau de toute l'entreprise (accord, art. 5.1, p.5).",
+   "synonymes": [
+    "intéressement magasin",
+    "unité de travail",
+    "critère magasin",
+    "NPS national",
+    "mon magasin intéressement",
+    "dépend de mon magasin",
+    "résultats du magasin",
+    "critères nationaux"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.1, p.5)",
+     "regles": [
+      "Chaque magasin constitue une unité de travail ; la liste des magasins est en annexe 1.",
+      "L'atteinte des objectifs s'apprécie par magasin, sauf le critère NPS et le seuil de déclenchement, appréciés au niveau de l'entreprise."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.1",
+       "page": 5,
+       "extrait": "chaque magasin constitue une unité de travail",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.1",
+       "page": 5,
+       "extrait": "à l'exception du critère NPS qui s'apprécie au niveau de l'Entreprise",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-temps-partiel",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Je travaille à temps partiel : comment est calculé mon intéressement ?",
+   "reponse": "Votre part est proportionnelle à vos heures contractuelles, augmentées de vos heures complémentaires de l'exercice, par rapport à la durée conventionnelle du travail. Par exemple, un salarié qui fait la moitié d'un temps plein touche environ la moitié (accord, art. 7, p.17).",
+   "synonymes": [
+    "temps partiel intéressement",
+    "prorata intéressement",
+    "heures complémentaires intéressement",
+    "mi-temps intéressement",
+    "intéressement 24 heures",
+    "proratisé",
+    "durée conventionnelle"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 7, p.17)",
+     "regles": [
+      "Salariés à temps partiel : part proportionnelle aux heures contractuelles plus les heures complémentaires réalisées sur l'exercice, rapportées à la durée conventionnelle du travail."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 7",
+       "page": 17,
+       "extrait": "au prorata des heures contractuelles augmentées des heures complémentaires",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "La durée conventionnelle de référence n'est pas chiffrée dans l'accord : à confirmer avec la direction."
+   ],
+   "champs": [
+    {
+     "id": "presenceMois",
+     "label": "Présence dans l'exercice (mois, 0 à 12)",
+     "type": "number",
+     "min": 0,
+     "step": "0.5",
+     "defaut": 12,
+     "question": "Combien de mois avez-vous été présent dans l'année (0 à 12) ?",
+     "max": 12
+    },
+    {
+     "id": "ratioTempsPartiel",
+     "label": "Temps partiel : part d'un temps plein",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0.7,
+     "question": "Par rapport à un temps plein, quelle part du temps faites-vous ?",
+     "aide": "Exemple : 0,5 pour un mi-temps ; 24 h sur 36 h = 0,67."
+    },
+    {
+     "id": "caX",
+     "label": "CA (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 103,
+     "question": "Le magasin a fait combien de % de son objectif de chiffre d'affaires ?"
+    },
+    {
+     "id": "demarqueEcart",
+     "label": "Démarque (points)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0.4,
+     "question": "Écart de démarque par rapport au budget (en points, positif = meilleur) ?"
+    },
+    {
+     "id": "nps",
+     "label": "NPS",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 51,
+     "question": "Quel est le NPS de l'entreprise ?"
+    }
+   ],
+   "calcul": "interessementAccord"
+  },
+  {
+   "id": "interessement25-absences",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Quelles absences réduisent mon intéressement ?",
+   "reponse": "L'intéressement est réparti selon votre durée de présence. Comptent comme de la présence : congés payés, jours RTT, maternité, adoption, paternité et accueil de l'enfant, deuil, jours de CET, accident du travail ou maladie professionnelle (hors accident de trajet), formation du plan de développement des compétences, activité partielle et absences des élus pour leur mandat. Toute autre absence, dont la maladie, est déduite (accord, art. 7, p.16).",
+   "synonymes": [
+    "absence intéressement",
+    "maladie intéressement",
+    "arrêt maladie intéressement",
+    "est-ce que mon arrêt maladie réduit mon intéressement",
+    "arrêt maladie réduit intéressement",
+    "mon arrêt maladie réduit mon intéressement",
+    "présence intéressement",
+    "délégation intéressement",
+    "mandat intéressement",
+    "congés payés intéressement",
+    "maternité intéressement",
+    "accident de trajet intéressement",
+    "déduit de l'intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 7, p.16)",
+     "regles": [
+      "Présence = travail effectif et périodes assimilées : congés payés, RTT, maternité/adoption/paternité/accueil de l'enfant, deuil, CET, AT/MP (hors accident de trajet), formation du plan de développement des compétences, activité partielle, quarantaine.",
+      "Assimilées aussi : absences des représentants du personnel pour leurs mandats, congés de formation de ces représentants, fonctions de conseiller prud'homme.",
+      "Toute absence pour un autre motif est déduite du temps de présence."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 7",
+       "page": 16,
+       "extrait": "toute absence pour un autre motif sera déduite du temps de présence",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 7",
+       "page": 16,
+       "extrait": "les absences des représentants du personnel pour l'exercice de leur(s) mandat(s)"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-mutation",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Je change de magasin en cours d'année : que devient mon intéressement ?",
+   "reponse": "Vos droits sont calculés au prorata du temps passé dans l'entreprise. Si votre magasin est cédé ou fermé et que vous êtes muté dans un autre magasin Covicar 71, la prime combine la moyenne des primes du périmètre (au prorata du temps passé dans l'ancien magasin) et la prime du magasin d'accueil (au prorata du temps passé dedans) (accord, art. 5.1 et 7, p.6 et 17).",
+   "synonymes": [
+    "mutation intéressement",
+    "changement de magasin",
+    "muté intéressement",
+    "transfert magasin intéressement",
+    "magasin d'accueil",
+    "moyenne des primes"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.1 et 7, p.6)",
+     "regles": [
+      "Personnel d'un établissement cédé ou fermé muté dans un autre magasin Covicar 71 (avec l'ancienneté requise) : en partie la moyenne des primes du périmètre, en partie la prime du magasin d'accueil, chacune au prorata du temps.",
+      "Mutation en cours d'année : droits déterminés au prorata du temps de présence dans l'entreprise (art. 7, p.17)."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.1",
+       "page": 6,
+       "extrait": "du magasin d'accueil au prorata temporis"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 7",
+       "page": 17,
+       "extrait": "En cas de mutation d'un salarié au cours de l'année considérée"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Pour une mutation entre deux magasins ouverts, le texte parle de « prorata du temps de présence dans l'entreprise » sans préciser comment les deux primes magasin se combinent : à vérifier."
+   ]
+  },
+  {
+   "id": "interessement25-rachat-cession",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Mon magasin est racheté, cédé ou fermé : comment est calculé l'intéressement ?",
+   "reponse": "Magasin racheté, créé ou intégré en cours d'année : sa prime est la moyenne des primes des autres magasins, puis les règles normales les années suivantes. Magasin cédé ou fermé : la formule la plus favorable entre cette moyenne et la formule propre au magasin. Pour un magasin exploité moins d'un exercice complet, critères chiffre d'affaires et démarque : montant théorique moyen des autres magasins (accord, art. 5.1 et 5.7.1, p.5 et 13).",
+   "synonymes": [
+    "magasin racheté",
+    "magasin fermé",
+    "magasin cédé",
+    "fermeture magasin intéressement",
+    "cession magasin",
+    "nouveau magasin intéressement",
+    "création magasin",
+    "intégration magasin"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.1 et 5.7.1, p.5)",
+     "regles": [
+      "Rachat, création ou intégration en cours d'année : moyenne des primes obtenues dans les autres magasins du périmètre ; ensuite règles propres au magasin.",
+      "Cession ou fermeture en cours d'année : formule la plus favorable entre la moyenne des autres magasins et la formule du magasin.",
+      "Magasin exploité moins d'un exercice complet (critères CA et démarque) : montant théorique égal à la moyenne des autres magasins."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.1",
+       "page": 5,
+       "extrait": "selon la moyenne des primes obtenues au sein des autres magasins"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.1",
+       "page": 5,
+       "extrait": "selon la formule la plus favorable entre la moyenne des primes"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.7.1",
+       "page": 13,
+       "extrait": "montant individuel d'intéressement théorique moyen des autres magasins"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-evenement",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Événement exceptionnel ou travaux dans mon magasin : l'intéressement est-il protégé ?",
+   "reponse": "Oui dans certains cas : si un événement extérieur, imprévisible et inévitable ferme plus de 25 % de la surface de vente et fait chuter le CA de plus de 20 % le mois même ou de plus de 10 % sur les 3 mois suivants, la période est exclue du calcul (moins de 6 mois), ou la moyenne des autres magasins s'applique (6 mois ou plus). Même logique pour des travaux d'accès qui durent plus d'un mois (accord, art. 5.7.2 et 5.7.3, p.14).",
+   "synonymes": [
+    "événement exceptionnel",
+    "travaux magasin",
+    "incendie magasin",
+    "inondation magasin",
+    "intempéries",
+    "baisse du chiffre d'affaires",
+    "fermeture partielle",
+    "travaux parking",
+    "difficultés d'accès",
+    "magasin en travaux"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.7.2 et 5.7.3, p.14)",
+     "regles": [
+      "Événement exceptionnel (extérieur, imprévisible, inévitable) : fermeture totale ou partielle de plus de 25 % de la surface de vente, avec remise en état, et CA en baisse de plus de 20 % le mois de survenance ou de plus de 10 % sur les 3 mois suivants.",
+      "Moins de 6 mois : la période est exclue du calcul des deux grilles du critère CA. 6 mois ou plus : pour CA et démarque, montant théorique moyen des autres magasins.",
+      "Les aléas climatiques ne sont pas en soi exceptionnels, mais les travaux consécutifs à des intempéries peuvent l'être.",
+      "Travaux imprévus gênant l'accès plus d'un mois (même seuils de baisse de CA) : moins de 6 mois, période exclue ; plus de 6 mois, montant le plus favorable entre le magasin et la moyenne des autres."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.7.2",
+       "page": 14,
+       "extrait": "contraction du CA supérieure à 20 % sur le mois de survenance",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.7.2",
+       "page": 14,
+       "extrait": "les travaux consécutifs à des intempéries pourront être considérés comme un événement exceptionnel"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-paiement",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Quand l'intéressement est-il payé ?",
+   "reponse": "Au plus tard le dernier jour du 5e mois suivant la clôture de l'exercice (donc au plus tard le 31 mai pour un exercice clos le 31 décembre). Au-delà, l'entreprise doit des intérêts de retard, versés avec la somme (accord, art. 8, p.17).",
+   "synonymes": [
+    "quand intéressement payé",
+    "date de versement intéressement",
+    "versement intéressement",
+    "intérêts de retard",
+    "31 mai",
+    "retard intéressement",
+    "paiement de l'intéressement",
+    "mois de mai intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 8, p.17)",
+     "regles": [
+      "Le calcul ne se fait qu'après clôture et approbation des comptes.",
+      "Versement ou placement au plus tard le dernier jour du 5e mois suivant la clôture de l'exercice.",
+      "Au-delà : intérêt de retard (1,33 fois le TMOP) à la charge de l'entreprise, versé avec le principal."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 8",
+       "page": 17,
+       "extrait": "au plus tard le dernier jour du 5ème mois suivant la clôture de l'exercice",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 8",
+       "page": 17,
+       "extrait": "produira un intérêt de retard"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "cloture",
+     "label": "Clôture de l'exercice",
+     "type": "date",
+     "question": "Quelle est la date de clôture de l'exercice ?",
+     "aide": "Pour l'année civile : le 31 décembre."
+    }
+   ],
+   "calcul": "datePaiementInteressement"
+  },
+  {
+   "id": "interessement25-placement",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Puis-je placer mon intéressement sur le PEE ou le PERCOL, et que se passe-t-il si je ne choisis pas ?",
+   "reponse": "Oui : vous pouvez tout toucher, tout placer ou partager. Vous êtes présumé informé 4 jours calendaires après la notification, puis vous avez 15 jours pour choisir. Sans réponse, la somme est placée par défaut dans le fonds désigné par le règlement du plan, sinon le plus sécuritaire. Vous pouvez ensuite changer de fonds sans frais (accord, art. 9, p.17-18).",
+   "synonymes": [
+    "placer intéressement",
+    "intéressement PEE",
+    "intéressement PERCOL",
+    "choix intéressement",
+    "aucun choix intéressement",
+    "15 jours pour choisir",
+    "verser ou placer",
+    "placement par défaut",
+    "fonds le plus sécuritaire"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 9, p.17)",
+     "regles": [
+      "Lors de chaque répartition : versement immédiat de tout ou partie, et/ou placement sur le PEE et le PERCOL.",
+      "Présumé informé 4 jours calendaires après la notification ; 15 jours pour choisir à partir de là.",
+      "Sans choix : placement par défaut dans le FCPE désigné par le règlement du plan, sinon le plus sécuritaire.",
+      "Arbitrage ensuite sans frais auprès du teneur de compte."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 9",
+       "page": 17,
+       "extrait": "tout ou partie de l'intéressement sur le plan d'épargne d'entreprise et du PERCOL",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 9",
+       "page": 18,
+       "extrait": "Il est présumé être informé à l'issue d'un délai de 4 jours calendaires",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 9",
+       "page": 18,
+       "extrait": "A défaut de choix exprimé par le Bénéficiaire dans un délai de quinze jours"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Écart entre textes : le règlement du PEE place par défaut sur le fonds « Natixis ES Monétaire », alors que celui du PERCOL place par défaut en gestion pilotée « équilibré horizon retraite ». Pour l'intéressement, c'est le règlement du plan qui désigne le fonds : à confirmer lequel s'applique sans choix.",
+    "L'accord parle du « PEG » à l'art. 11 : c'est une coquille pour PEE."
+   ],
+   "champs": [
+    {
+     "id": "dateNotification",
+     "label": "Date de la notification",
+     "type": "date",
+     "question": "Quelle est la date de la notification de votre intéressement ?",
+     "aide": "Le jour où vous avez été prévenu du montant (mail, courrier ou espace en ligne)."
+    }
+   ],
+   "calcul": "delaiChoixEpargne"
+  },
+  {
+   "id": "interessement25-fiscalite",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Mon intéressement est-il soumis à cotisations et à l'impôt ?",
+   "reponse": "Il n'a pas le caractère de salaire : pas de cotisations de Sécurité sociale classiques. Mais il supporte la CSG, la CRDS et le forfait social. Et si vous le touchez au lieu de le placer, il est soumis à l'impôt sur le revenu ; placé sur un plan d'épargne salariale, il n'est pas imposé à l'entrée, dans la limite légale (accord, art. 4, p.5 ; règlement PEE, art. 2, p.4).",
+   "synonymes": [
+    "impôt intéressement",
+    "fiscalité intéressement",
+    "CSG intéressement",
+    "CRDS intéressement",
+    "forfait social",
+    "imposable intéressement",
+    "net intéressement",
+    "prélèvements intéressement",
+    "exonéré intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 4, p.5)",
+     "regles": [
+      "Les primes n'ont pas le caractère de rémunération au sens de l'art. L. 242-1 du Code de la sécurité sociale.",
+      "Elles sont soumises à la CSG, à la CRDS et au forfait social, et à l'impôt sur le revenu si elles ne sont pas investies sur un plan d'épargne salariale."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 4",
+       "page": 5,
+       "extrait": "elles n'auront pas le caractère de rémunération ou d'élément de salaire",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 4",
+       "page": 5,
+       "extrait": "elles seront cependant assujetties à la CSG et à la CRDS et au forfait social",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 2, p.4)",
+     "regles": [
+      "Les primes d'intéressement versées au Plan sont exonérées d'impôt sur le revenu dans la limite du plafond légal (3/4 du plafond annuel de la Sécurité sociale)."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 2",
+       "page": 4,
+       "extrait": "sont exonérées de l'impôt sur le revenu dans la limite du plafond légal"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-depart",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "J'ai quitté l'entreprise : comment recevoir mon intéressement ?",
+   "reponse": "Votre droit pour la période où vous étiez salarié reste acquis, quelle que soit la cause de la rupture. Communiquez votre adresse à l'employeur et signalez vos changements. Si vous êtes injoignable, les sommes sont tenues à votre disposition dans les conditions de la loi. Vous recevez aussi un état récapitulatif de votre épargne salariale (accord, art. 3 et 10, p.4 et 18).",
+   "synonymes": [
+    "j'ai démissionné comment toucher mon intéressement",
+    "démissionné intéressement",
+    "comment toucher mon intéressement après mon départ",
+    "quitté l'entreprise intéressement",
+    "démission intéressement",
+    "licenciement intéressement",
+    "ancien salarié intéressement",
+    "adresse intéressement",
+    "départ intéressement",
+    "état récapitulatif",
+    "intéressement après départ"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 3 et 10, p.18)",
+     "regles": [
+      "La rupture du contrat, quelle qu'en soit la cause, n'a pas d'incidence sur le droit pour la période antérieure.",
+      "Le salarié qui part fait connaître son adresse à l'employeur ; à défaut, la dernière adresse connue est utilisée.",
+      "S'il est injoignable, les sommes sont tenues à sa disposition par l'entreprise dans les conditions prévues par la loi.",
+      "Il reçoit un état récapitulatif de ses sommes d'épargne salariale."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 10",
+       "page": 18,
+       "extrait": "le Bénéficiaire devra faire connaître à l'Employeur l'adresse",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 10",
+       "page": 18,
+       "extrait": "Tout salarié bénéficiaire quittant l'Entreprise reçoit un état récapitulatif"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-information",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Quelle information dois-je recevoir sur mon intéressement ?",
+   "reponse": "À l'embauche, une note d'information reprenant l'accord et un livret d'épargne salariale. À chaque répartition, une fiche distincte du bulletin de paie : montant global, montant moyen, vos droits, retenues de CSG-CRDS, délai de blocage si placé et placement par défaut. Le CSE central suit l'application de l'accord et reçoit chaque année les bases de calcul avant le versement (accord, art. 11 et 12, p.19).",
+   "synonymes": [
+    "information intéressement",
+    "fiche intéressement",
+    "note d'information",
+    "livret d'épargne salariale",
+    "CSE central intéressement",
+    "suivi de l'accord",
+    "détail intéressement",
+    "bulletin de paie intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 11 et 12, p.19)",
+     "regles": [
+      "Note d'information remise à l'ensemble du personnel et à tout nouvel embauché ; livret d'épargne salariale à la conclusion du contrat.",
+      "À chaque répartition : fiche distincte du bulletin de paie (montant global, moyen, droits, CSG/CRDS, délais et cas de déblocage si placé, placement par défaut).",
+      "Suivi par le CSE central, qui reçoit chaque année les bases de calcul avant le versement."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 11",
+       "page": 19,
+       "extrait": "une note d'information sur le dispositif d'intéressement"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 11",
+       "page": 19,
+       "extrait": "reçoit une fiche distincte du bulletin de paie"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 12",
+       "page": 19,
+       "extrait": "sera suivie par le Comité Social et Économique Central"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-revision",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Les critères et grilles peuvent-ils changer ?",
+   "reponse": "Oui : les grilles de 2025 sont revues pour 2026 et 2027 par avenant, signé avant le 1er jour du 7e mois de l'exercice. Sans avenant, les grilles de repli de l'accord s'appliquent. L'accord ne peut être révisé que par tous ses signataires, dans les 6 premiers mois pour s'appliquer à l'exercice en cours. Les 400 € ne peuvent pas baisser (accord, art. 5.6 et 15, p.12 et 20).",
+   "synonymes": [
+    "révision intéressement",
+    "avenant intéressement",
+    "grilles changent",
+    "modifier les critères",
+    "revoir les grilles",
+    "7ème mois",
+    "premier juillet intéressement",
+    "dénonciation intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 5.6 et 15, p.12)",
+     "regles": [
+      "Grilles 2025 revues et ajustées pour 2026 et 2027 selon les orientations de l'entreprise et la conjoncture, par avenant avant le 1er jour du 7e mois de l'exercice.",
+      "Sans avenant : grilles de repli (p.12-13).",
+      "Révision ou dénonciation : par l'ensemble des signataires, dans les 6 premiers mois pour l'exercice en cours (art. 15, p.20)."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 5.6",
+       "page": 12,
+       "extrait": "Ils seront révisés par voie de signature d'un avenant",
+       "verifie_image": true
+      },
+      {
+       "doc": "interess",
+       "article": "art. 15",
+       "page": 20,
+       "extrait": "ne pourra être révisé ou dénoncé que par l'ensemble des signataires"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement25-duree",
+   "theme": "Intéressement (accord du 30 juin 2025)",
+   "categorie": "epargne",
+   "question": "Combien de temps l'accord d'intéressement dure-t-il ?",
+   "reponse": "3 ans, à compter du 1er janvier 2025 : exercices 2025, 2026 et 2027, sans reconduction tacite. Il ne continue pas tout seul : il faudra renégocier pour 2028 (accord, art. 2, p.3).",
+   "synonymes": [
+    "durée accord intéressement",
+    "fin de l'accord",
+    "2027",
+    "reconduction tacite",
+    "3 ans intéressement",
+    "accord intéressement jusqu'à quand",
+    "échéance intéressement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Accord d'intéressement du 30 juin 2025 (art. 2, p.3)",
+     "regles": [
+      "Durée déterminée de 3 ans à compter du 1er janvier 2025 : exercices 2025, 2026 et 2027.",
+      "Pas de tacite reconduction à l'échéance."
+     ],
+     "sources": [
+      {
+       "doc": "interess",
+       "article": "art. 2",
+       "page": 3,
+       "extrait": "sans possibilité de tacite reconduction à échéance",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement-2026-criteres",
+   "theme": "Intéressement 2026 (avenant)",
+   "categorie": "epargne",
+   "question": "Intéressement 2026 : quels sont les 3 critères ?",
+   "reponse": "Les mêmes trois critères que l'accord : chiffre d'affaires (meilleur de deux indicateurs : réalisé ÷ budget drive inclus, ou poids du CA MDC), démarque totale du magasin, et Net Promoter Score. L'avenant ne révise que les grilles et les budgets 2026. L'avenant reçu est une copie « pour signature » (avenant, préambule, p.2).",
+   "synonymes": [
+    "critères intéressement 2026",
+    "3 critères",
+    "avenant 2026",
+    "trois critères intéressement",
+    "critère chiffre d'affaires",
+    "critère démarque",
+    "NPS",
+    "grille 2026"
+   ],
+   "etiquettes": [
+    "Version projet non signée"
+   ],
+   "niveaux": [
+    {
+     "titre": "Avenant d'intéressement 2026, copie pour signature non signée (préambule, p.2)",
+     "regles": [
+      "Trois critères : chiffre d'affaires (meilleur des deux indicateurs), taux de démarque total magasin, Net Promoter Score.",
+      "Les discussions des 9 et 25 juin 2026 ont porté exclusivement sur la révision des grilles."
+     ],
+     "sources": [
+      {
+       "doc": "avenant",
+       "article": "préambule",
+       "page": 2,
+       "extrait": "le critère « Taux de démarque total magasin »"
+      },
+      {
+       "doc": "avenant",
+       "article": "préambule",
+       "page": 2,
+       "extrait": "ont donc exclusivement porté sur la révision de ces grilles"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "interessement-2026-ca",
+   "theme": "Intéressement 2026 (avenant)",
+   "categorie": "epargne",
+   "question": "Critère chiffre d'affaires 2026 : quel montant selon l'atteinte de l'objectif ?",
+   "reponse": "On retient le meilleur des deux indicateurs. Réalisé ÷ budget du CA drive inclus : 100 € à 103 % et plus, 80 € de 102 à 103 %, 60 € de 101 à 102 %, 40 € de 100 à 101 %, 20 € de 99 à 100 %, 10 € de 98 à 99 %, 0 € en dessous. Poids du CA MDC sur le CA TTC PGC : 100 € à 35 % et plus, puis 10 € de moins par point jusqu'à 10 € entre 26 et 27 %, 0 € en dessous (avenant, art. 1, p.3-4).",
+   "synonymes": [
+    "critère chiffre d'affaires 2026",
+    "grille CA 2026",
+    "CA HT HE",
+    "poids MDC",
+    "réalisé budget",
+    "103 %",
+    "35 %",
+    "MDC PGC",
+    "objectif de CA"
+   ],
+   "etiquettes": [
+    "Version projet non signée",
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Avenant d'intéressement 2026, copie pour signature non signée (art. 1 point 1, p.3)",
+     "regles": [
+      "Indicateur 1 : réalisé ÷ budget 2026 du CA HT hors essence drive inclus : de 0 € (moins de 98 %) à 100 € (103 % et plus).",
+      "Indicateur 2 : poids du CA MDC sur le CA TTC PGC : de 0 € (moins de 26 %) à 100 € (35 % et plus).",
+      "Le critère retient la prime la plus élevée des deux (accord, art. 5.5.1, p.7)."
+     ],
+     "sources": [
+      {
+       "doc": "avenant",
+       "article": "art. 1.1",
+       "page": 3,
+       "extrait": "L'objectif 2026 de CA est constitué par le budget 2026 arrêté au niveau France"
+      },
+      {
+       "doc": "avenant",
+       "article": "art. 1.1",
+       "page": 4,
+       "extrait": "CA MDC PGC / CA TTC PGC (PLS inclus)"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Grilles de l'avenant reconnues dans le texte numérique du document ; elles sont identiques à celles de l'accord pour 2025.",
+    "Voir la fiche « Budget 2026 de mon magasin » pour la question de la majoration de 3 %."
+   ],
+   "champs": [
+    {
+     "id": "caX",
+     "label": "CA HT HE Drive inclus : réalisé ÷ budget (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 100,
+     "question": "Le magasin a fait combien de % de son objectif de chiffre d'affaires (drive compris) ?",
+     "aide": "Exemple : tapez 102 si le magasin a fait 102 % de son objectif. Ce chiffre est donné par la direction du magasin."
+    },
+    {
+     "id": "mdcX",
+     "label": "Poids CA MDC ÷ CA TTC PGC (%)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 30,
+     "question": "Quel est le poids du CA MDC par rapport au CA TTC PGC (en %) ?",
+     "aide": "Chiffre indiqué par la direction du magasin (voir l'avenant d'intéressement)."
+    }
+   ],
+   "calcul": "interessement2026"
+  },
+  {
+   "id": "interessement-2026-demarque",
+   "theme": "Intéressement 2026 (avenant)",
+   "categorie": "epargne",
+   "question": "Critère démarque totale 2026 : quel montant selon l'atteinte de l'objectif ?",
+   "reponse": "Selon l'écart « taux de démarque réalisé − taux prévisionnel » : 150 € à +0,40 point et plus, 125 € à +0,35, 100 € à +0,30, 80 € à +0,25, 60 € à +0,20, 50 € à +0,15, 40 € à +0,10, 30 € à +0,05, 20 € à 0,00, et 0 € si l'écart est négatif (avenant, art. 1 point 2, p.5).",
+   "synonymes": [
+    "critère démarque 2026",
+    "grille démarque",
+    "taux de démarque",
+    "démarque totale",
+    "150 euros démarque",
+    "vols casse",
+    "budget démarque",
+    "écart de démarque"
+   ],
+   "etiquettes": [
+    "Version projet non signée",
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Avenant d'intéressement 2026, copie pour signature non signée (art. 1 point 2, p.5)",
+     "regles": [
+      "Objectif 2026 : le budget de démarque de chaque magasin (annexe 2).",
+      "Grille sur l'écart (taux réalisé − taux prévisionnel) : de 0 € (écart négatif) à 150 € (+0,40 point ou plus).",
+      "Dans l'accord, la démarque exclut les sinistres déclarés aux assurances et déduit la décote (art. 5.5.2, p.9)."
+     ],
+     "sources": [
+      {
+       "doc": "avenant",
+       "article": "art. 1.2",
+       "page": 5,
+       "extrait": "L'objectif 2026 est constitué par le budget 2026 arrêté au niveau France pour chaque magasin"
+      },
+      {
+       "doc": "avenant",
+       "article": "art. 1.2",
+       "page": 5,
+       "extrait": "L'amélioration de la démarque totale en fonction du budget"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Sens de l'écart : les budgets sont négatifs (ex. -2,32 %) ; un écart positif signifie une démarque meilleure que le budget. À confirmer avec la direction."
+   ],
+   "champs": [
+    {
+     "id": "demarqueEcart",
+     "label": "Démarque : réalisé − budget (points de %)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 0.1,
+     "question": "De combien la démarque est-elle meilleure ou moins bonne que le budget (en points) ?",
+     "aide": "Positif = meilleure que le budget. Exemple : -2,00 % réalisé pour un budget de -2,32 % = +0,32."
+    }
+   ],
+   "calcul": "interessement2026"
+  },
+  {
+   "id": "interessement-2026-nps",
+   "theme": "Intéressement 2026 (avenant)",
+   "categorie": "epargne",
+   "question": "Critère Net Promoter Score 2026 : quel montant selon le score ?",
+   "reponse": "NPS de 51 et plus : 150 € ; 48 : 100 € ; 45 : 75 € ; 42 : 50 € ; 39 : 25 € ; 36 : 0 € (avenant, art. 1 point 3, p.5). Le NPS est la moyenne annuelle nationale des scores mensuels : % de clients promoteurs (notes 9-10) moins % de détracteurs (notes 0-6) ; les neutres (7-8) ne comptent pas (accord, art. 5.5.3, p.10-11).",
+   "synonymes": [
+    "NPS 2026",
+    "net promoter score",
+    "score de recommandation",
+    "promoteurs détracteurs",
+    "51 NPS",
+    "critère NPS",
+    "satisfaction client intéressement",
+    "note clients"
+   ],
+   "etiquettes": [
+    "Version projet non signée"
+   ],
+   "niveaux": [
+    {
+     "titre": "Avenant d'intéressement 2026, copie pour signature non signée (art. 1 point 3, p.5)",
+     "regles": [
+      "Grille 2026 : NPS ≥ 51 : 150 € ; ≥ 48 : 100 € ; ≥ 45 : 75 € ; ≥ 42 : 50 € ; ≥ 39 : 25 € ; ≥ 36 : 0 €.",
+      "NPS = % de promoteurs − % de détracteurs ; moyenne annuelle nationale des résultats mensuels des magasins Covicar 71 (accord, art. 5.5.3)."
+     ],
+     "sources": [
+      {
+       "doc": "avenant",
+       "article": "art. 1.3",
+       "page": 5,
+       "extrait": "Révision de la grille intégrée à l'article « 5.5.3 : Critère 3 : Le Net Promoter Score"
+      },
+      {
+       "doc": "interess",
+       "article": "art. 5.5.3",
+       "page": 11,
+       "extrait": "NPS = % de promoteurs -% de détracteurs"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "nps",
+     "label": "Net Promoter Score",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 45,
+     "question": "Quel est le score de recommandation des clients du magasin (NPS) ?",
+     "aide": "Chiffre donné par la direction du magasin."
+    }
+   ],
+   "calcul": "interessement2026"
+  },
+  {
+   "id": "interessement-2026-budget",
+   "theme": "Intéressement 2026 (avenant)",
+   "categorie": "epargne",
+   "question": "Quel est le budget 2026 de mon magasin (chiffre d'affaires et démarque) ?",
+   "reponse": "L'annexe 2 de l'avenant donne, pour 10 magasins, le budget 2026 du taux de démarque totale et du CA HT hors essence drive inclus. Exemples : Albi -2,32 % et 29 225,3 k€ ; Villefranche-sur-Saône -2,06 % et 61 573,2 k€. Choisissez votre magasin ci-dessous (avenant, art. 2, p.6).",
+   "synonymes": [
+    "budget 2026 magasin",
+    "annexe 2",
+    "budget démarque",
+    "budget chiffre d'affaires",
+    "Albi",
+    "Amilly",
+    "Avignon",
+    "Lanester",
+    "Villefranche",
+    "Vals",
+    "Lons le Saunier",
+    "La Ricamarie",
+    "Laloubère",
+    "magasins concernés"
+   ],
+   "etiquettes": [
+    "Version projet non signée",
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Avenant d'intéressement 2026, copie pour signature non signée (art. 2 et annexe 2, p.6)",
+     "regles": [
+      "Annexe 2 révisée pour 2026 : taux de démarque totale et CA HT HE drive inclus (en k€) pour 10 magasins.",
+      "Objectif de CA = budget 2026 « majoré de 3 % » (art. 1)."
+     ],
+     "sources": [
+      {
+       "doc": "avenant",
+       "article": "art. 2",
+       "page": 6,
+       "extrait": "Budgets pour le CA HT HE drive inclus (1er indicateur du critère 1) et pour le taux de démarque totale"
+      },
+      {
+       "doc": "avenant",
+       "article": "art. 2",
+       "page": 6,
+       "extrait": "se substituent intégralement, pour l'exercice 2026"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "La grille CA parle de « réalisé ÷ budget » avec 103 % pour le maximum, et l'objectif est « le budget majoré de 3 % » : il faut confirmer si la majoration est déjà dans le pourcentage de la grille."
+   ],
+   "champs": [
+    {
+     "id": "magasin",
+     "label": "Magasin",
+     "type": "select",
+     "options": [
+      [
+       "Albi",
+       "Albi"
+      ],
+      [
+       "Amilly",
+       "Amilly"
+      ],
+      [
+       "Avignon - Cap Sud",
+       "Avignon - Cap Sud"
+      ],
+      [
+       "La Ricamarie",
+       "La Ricamarie"
+      ],
+      [
+       "Laloubère",
+       "Laloubère"
+      ],
+      [
+       "Lanester",
+       "Lanester"
+      ],
+      [
+       "Lons-le-Saunier",
+       "Lons-le-Saunier"
+      ],
+      [
+       "St Martin des Champs",
+       "St Martin des Champs"
+      ],
+      [
+       "Vals-près-le-Puy",
+       "Vals-près-le-Puy"
+      ],
+      [
+       "Villefranche-sur-Saône",
+       "Villefranche-sur-Saône"
+      ]
+     ],
+     "question": "Dans quel magasin travaillez-vous ?"
+    }
+   ],
+   "calcul": "budgetMagasin2026"
+  },
+  {
+   "id": "interessement-2026-duree",
+   "theme": "Intéressement 2026 (avenant)",
+   "categorie": "epargne",
+   "question": "Combien de temps l'avenant s'applique-t-il et comment est-il rendu valable ?",
+   "reponse": "Il s'applique à l'exercice 2026 uniquement et prend fin automatiquement le 31 décembre 2026, sans reconduction tacite. Il n'est valable que s'il est signé par tous les signataires de l'accord initial, dans la même forme. Le reste de l'accord du 30 juin 2025 continue de s'appliquer (avenant, art. 3, p.6).",
+   "synonymes": [
+    "durée avenant intéressement",
+    "avenant signé",
+    "validité avenant",
+    "31 décembre 2026",
+    "fin de l'avenant",
+    "signature avenant",
+    "avenant non signé",
+    "tous les signataires"
+   ],
+   "etiquettes": [
+    "Version projet non signée"
+   ],
+   "niveaux": [
+    {
+     "titre": "Avenant d'intéressement 2026, copie pour signature non signée (art. 3, p.6)",
+     "regles": [
+      "Validité subordonnée à la signature de l'ensemble des signataires de l'accord, dans la même forme (art. D. 3313-5 du Code du travail).",
+      "Durée : exercice 2026, fin automatique au 31 décembre 2026, sans reconduction tacite.",
+      "Les dispositions de l'accord non revues continuent de s'appliquer."
+     ],
+     "sources": [
+      {
+       "doc": "avenant",
+       "article": "art. 3.2",
+       "page": 6,
+       "extrait": "sera subordonnée à sa signature par l'ensemble de ses signataires"
+      },
+      {
+       "doc": "avenant",
+       "article": "art. 3.3",
+       "page": 6,
+       "extrait": "Il prendra fin automatiquement le 31 décembre 2026"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "La copie reçue est « pour signature » : sans avenant signé avant le 1er jour du 7e mois de l'exercice, ce sont les grilles de repli de l'accord qui s'appliquent (accord, art. 5.6)."
+   ]
+  },
+  {
+   "id": "epargne-beneficiaires",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Qui peut ouvrir un PEE ou un PERCOL ? Quelle ancienneté ?",
+   "reponse": "Tous les salariés de Covicar 71 avec au moins 3 mois d'ancienneté, appréciée à la date du premier versement. Tous les contrats de l'exercice et des 12 mois précédents comptent, suspensions non déduites. Pas de demande d'adhésion : le premier placement vaut adhésion au PEE (PEE art. 1, p.3 ; PERCOL, préambule, p.3).",
+   "synonymes": [
+    "ouvrir un PEE",
+    "ouvrir un PERCOL",
+    "ancienneté PEE",
+    "3 mois PEE",
+    "adhésion PEE",
+    "qui peut épargner",
+    "premier versement",
+    "stagiaire PEE",
+    "PEE condition"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 1, p.3)",
+     "regles": [
+      "Tous les salariés avec au moins 3 mois d'ancienneté, appréciée à la date du premier versement.",
+      "Tous les contrats exécutés pendant l'exercice du versement et les 12 mois précédents sont pris en compte ; suspensions non déduites ; stage de plus de 2 mois repris à l'embauche.",
+      "Aucune demande d'adhésion : le premier placement vaut adhésion."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 1",
+       "page": 3,
+       "extrait": "au moins 3 mois d'ancienneté dans l'Entreprise",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 1",
+       "page": 3,
+       "extrait": "le premier placement valant adhésion"
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (préambule, p.3)",
+     "regles": [
+      "Mêmes conditions : 3 mois d'ancienneté, appréciée à la date du premier versement dans le Plan, avec les contrats de l'exercice et des 12 mois précédents."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "préambule",
+       "page": 3,
+       "extrait": "Un délai de 3 mois d'ancienneté dans l'Entreprise est toutefois exigé"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-pee-minimum",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Quelle somme minimum verser sur le PEE ?",
+   "reponse": "Au moins 15 euros par an. Aucune périodicité n'est imposée : vous versez quand vous voulez (PEE art. 2, p.3-4).",
+   "synonymes": [
+    "minimum PEE",
+    "15 euros",
+    "versement minimum",
+    "combien verser PEE",
+    "verser sur le PEE",
+    "versement volontaire PEE",
+    "périodicité"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 2, p.3)",
+     "regles": [
+      "Le montant annuel des versements de l'épargnant ne doit pas être inférieur à 15 euros.",
+      "Aucune périodicité n'est imposée aux versements."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 2",
+       "page": 3,
+       "extrait": "ne soit pas inférieur à 15 euros",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 2",
+       "page": 4,
+       "extrait": "Aucune périodicité n'est imposée aux versements"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-abondement-participation",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "L'abondement s'applique-t-il à la participation ?",
+   "reponse": "Non d'après les règlements : le PEE et le PERCOL abondent « l'intéressement et/ou les versements volontaires ». La participation n'est pas citée parmi les sommes abondées. Elle peut être placée sur le plan, mais sans les 220 % à 16,8 % de la grille (PEE art. 2, p.4-5 ; PERCOL art. 2, p.4).",
+   "synonymes": [
+    "abondement participation",
+    "participation abondée",
+    "abondement sur la participation",
+    "entreprise ajoute participation",
+    "participation PEE abondement",
+    "sommes abondées"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 2, p.5)",
+     "regles": [
+      "Tranches d'abondement (intéressement et/ou versement volontaire) : la participation n'est pas mentionnée comme somme abondée.",
+      "L'entreprise place la participation sur le plan (versement distinct de l'abondement)."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 2",
+       "page": 5,
+       "extrait": "(intéressement et ou versement volontaire)"
+      },
+      {
+       "doc": "pee",
+       "article": "art. 2",
+       "page": 4,
+       "extrait": "de tout ou partie des sommes attribuées au titre de la participation"
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 2, p.4)",
+     "regles": [
+      "Même grille d'abondement : « intéressement et/ou versement volontaire »."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 2",
+       "page": 4,
+       "extrait": "(intéressement et ou versement volontaire)"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le texte dit ce qui est abondé (intéressement et versements volontaires) ; il ne dit pas expressément que la participation ne l'est pas. À confirmer par écrit auprès de la direction."
+   ]
+  },
+  {
+   "id": "epargne-plafond-versements",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Combien puis-je verser par an au maximum sur le PEE ?",
+   "reponse": "Un quart de votre rémunération annuelle brute, pour l'ensemble des plans d'épargne salariale (PEE + PERCOL). La participation et l'intéressement placés ne comptent pas dans ce plafond. Si vous n'avez pas été rémunéré dans l'année, c'est un quart du plafond annuel de la Sécurité sociale (PEE art. 2, p.4).",
+   "synonymes": [
+    "plafond de versement PEE",
+    "plafond versement PEE",
+    "maximum PEE",
+    "quart de la rémunération",
+    "verser au maximum",
+    "limite versement volontaire",
+    "25 % salaire",
+    "combien verser maximum"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 2, p.4)",
+     "regles": [
+      "Total des versements volontaires de l'année, tous plans d'épargne salariale confondus : au plus le quart de la rémunération annuelle brute.",
+      "Salarié sans rémunération dans l'année (contrat suspendu) : le quart du plafond annuel de la Sécurité sociale.",
+      "La participation et l'intéressement versés dans les FCPE n'entrent pas dans ce plafond."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 2",
+       "page": 4,
+       "extrait": "ne peut excéder le quart de sa rémunération annuelle brute",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "remuneration",
+     "label": "Rémunération annuelle brute (€)",
+     "type": "number",
+     "min": 0,
+     "step": "0.01",
+     "defaut": 20000,
+     "question": "Quelle est votre rémunération annuelle brute (en €) ?",
+     "aide": "Le cumul brut de votre dernière fiche de paie, ou une estimation."
+    }
+   ],
+   "calcul": "plafondVersementVolontaire"
+  },
+  {
+   "id": "epargne-fonds-pee",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Dans quels fonds puis-je investir sur le PEE ?",
+   "reponse": "Quatre fonds (FCPE) : Natixis ES Monétaire, Avenir Diversifié, Avenir Actions Monde et Impact ISR Rendement Solidaire, gérés par Vega Investment Solutions. Aucune commission de souscription n'est prélevée à l'investissement initial (PEE art. 4, p.6 ; annexe 1 non relue).",
+   "synonymes": [
+    "fonds PEE",
+    "FCPE",
+    "Natixis ES Monétaire",
+    "Avenir Diversifié",
+    "Avenir Actions Monde",
+    "Impact ISR",
+    "quel fonds choisir",
+    "supports d'investissement",
+    "commission de souscription"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 4, p.6)",
+     "regles": [
+      "Versements investis, au choix de l'épargnant, en parts de quatre FCPE : Natixis ES Monétaire, Avenir Diversifié, Avenir Actions Monde, Impact ISR Rendement Solidaire.",
+      "FCPE gérés par Vega Investment Solutions. Aucune commission de souscription lors de l'investissement.",
+      "Aide à la décision via les supports du teneur de compte."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 4",
+       "page": 6,
+       "extrait": "NATIXIS ES MONETAIRE",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 4",
+       "page": 6,
+       "extrait": "Aucune commission de souscription ne sera prélevée"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Le détail des fonds (risque, frais de gestion) figure en annexe 1 du règlement : non relu ici."
+   ]
+  },
+  {
+   "id": "epargne-aucun-choix",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Je ne fais aucun choix pour mon intéressement ou ma participation : où va l'argent ?",
+   "reponse": "Sur le PEE, la somme est investie dans le fonds Natixis ES Monétaire. Dans le PERCOL, sans décision expresse, les versements vont en gestion pilotée, profil « équilibré horizon retraite ». Pour l'intéressement, l'accord renvoie au fonds désigné par le règlement du plan, sinon le plus sécuritaire : les textes ne disent pas clairement quel plan reçoit la somme (PEE art. 4, p.6 ; PERCOL art. 3, p.5).",
+   "synonymes": [
+    "aucun choix",
+    "pas de réponse",
+    "placement par défaut",
+    "où va l'argent",
+    "monétaire par défaut",
+    "gestion pilotée par défaut",
+    "sans choix intéressement",
+    "défaut intéressement",
+    "réputé informé"
+   ],
+   "etiquettes": [
+    "Écart à vérifier"
+   ],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 4, p.6)",
+     "regles": [
+      "À défaut de réponse sur le choix de placement ou de versement, les sommes sont investies en parts du FCPE Natixis ES Monétaire."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 4",
+       "page": 6,
+       "extrait": "seront investies en parts du FCPE"
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 3, p.5)",
+     "regles": [
+      "Sans décision expresse du titulaire, les versements sont affectés en gestion pilotée, profil « équilibré horizon retraite »."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 3",
+       "page": 5,
+       "extrait": "A défaut de décision expresse du titulaire, les versements sont affectés en gestion pilotée"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Écart entre textes : l'accord d'intéressement dit « PEE et PERCOL » sans trancher. À confirmer auprès de la direction ou du teneur de compte."
+   ]
+  },
+  {
+   "id": "epargne-changer-fonds",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Puis-je changer de fonds sur le PEE ?",
+   "reponse": "Oui, à tout moment, pour tout ou partie de vos avoirs, entre les fonds du PEE. L'opération se fait en liquidités et ne change pas la durée de blocage restante (PEE art. 5, p.7). Une modification par an est prise en charge par l'entreprise (annexe 2 non relue).",
+   "synonymes": [
+    "changer de fonds",
+    "arbitrage PEE",
+    "modifier mon placement",
+    "transférer entre fonds",
+    "changement de support",
+    "arbitrer",
+    "bouger mon épargne"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 5, p.7)",
+     "regles": [
+      "Les épargnants peuvent modifier leur choix de placement à tout moment, pour tout ou partie de leurs avoirs, entre les FCPE du plan.",
+      "L'opération s'effectue en liquidités et est sans incidence sur la durée d'indisponibilité restante.",
+      "Une commission de souscription peut être perçue sur le fonds receveur."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 5",
+       "page": 7,
+       "extrait": "à tout moment, pour tout ou partie de leurs avoirs"
+      },
+      {
+       "doc": "pee",
+       "article": "art. 5",
+       "page": 7,
+       "extrait": "sans incidence sur la durée d'indisponibilité"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "La prise en charge d'un arbitrage par an par l'entreprise figure en annexe 2 du règlement : non relue."
+   ]
+  },
+  {
+   "id": "epargne-frais",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Qui paie les frais de tenue de compte ?",
+   "reponse": "L'entreprise tant que vous êtes salarié : frais de tenue de compte et de conseils de surveillance des fonds. Ils cessent d'être à sa charge après votre départ, et peuvent alors être prélevés sur vos avoirs si l'entreprise en informe le teneur de compte Natixis Interépargne. Au PERCOL, les anciens salariés paient eux-mêmes les frais (PEE art. 3 et 6, p.6-7).",
+   "synonymes": [
+    "frais de tenue de compte",
+    "frais PEE",
+    "frais d'épargne salariale",
+    "qui paie les frais",
+    "frais après départ",
+    "frais PERCOL",
+    "prélevés sur mes avoirs",
+    "coût du PEE"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 3 et 6, p.7)",
+     "regles": [
+      "Aide de l'entreprise : prise en charge des frais de tenue de compte et des conseils de surveillance des FCPE.",
+      "Ces frais cessent d'être à la charge de l'entreprise après le départ de l'épargnant.",
+      "Dès que l'entreprise en a informé Natixis Interépargne, ils sont prélevés sur les avoirs de l'épargnant."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 6",
+       "page": 7,
+       "extrait": "Les frais afférents à la tenue des comptes sont pris en charge par l'Entreprise",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 6",
+       "page": 7,
+       "extrait": "Ces frais cessent d'être à la charge de l'Entreprise après le départ"
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (préambule, p.3)",
+     "regles": [
+      "Anciens salariés versant sur le PERCOL : pas d'abondement et frais de gestion à leur charge exclusive."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "préambule",
+       "page": 3,
+       "extrait": "Ces versements ne bénéficient pas de l'abondement de l'Entreprise"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-blocage-pee",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Pendant combien de temps l'argent du PEE est-il bloqué ?",
+   "reponse": "5 ans à compter du premier jour du 6e mois de l'année d'acquisition des parts, donc au 1er juin de l'année du versement + 5 ans. Ensuite vous pouvez garder l'argent ou en récupérer tout ou partie. Des cas de déblocage anticipé existent (PEE art. 7.1, p.7).",
+   "synonymes": [
+    "blocage PEE",
+    "5 ans",
+    "argent bloqué",
+    "indisponibilité",
+    "quand récupérer PEE",
+    "durée de blocage",
+    "disponible quand",
+    "1er juin"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 7.1, p.7)",
+     "regles": [
+      "Les sommes ne sont exigibles ou négociables qu'à l'expiration d'un délai de 5 ans à compter du premier jour du 6e mois de l'année d'acquisition des parts.",
+      "Au-delà, possibilité de conserver les sommes ou d'obtenir tout ou partie de ses avoirs."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 7.1",
+       "page": 7,
+       "extrait": "à l'expiration du délai de 5 ans à compter du premier jour du 6ème mois",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [],
+   "champs": [
+    {
+     "id": "dateVersement",
+     "label": "Date de versement",
+     "type": "date",
+     "question": "À quelle date l'argent a-t-il été placé sur le PEE ?",
+     "aide": "Pour l'intéressement ou la participation, la date où la somme a été placée sur le plan."
+    }
+   ],
+   "calcul": "blocageEpargne"
+  },
+  {
+   "id": "epargne-deblocage-pee",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Dans quels cas puis-je débloquer mon PEE avant 5 ans ?",
+   "reponse": "Mariage ou PACS ; naissance ou adoption (à partir du 3e enfant) ; divorce ou séparation avec enfant ; violences conjugales ; invalidité ; décès ; rupture du contrat de travail ; création ou reprise d'entreprise ; achat ou agrandissement de la résidence principale ; rénovation énergétique ; surendettement ; proche aidant ; achat d'un véhicule électrique ou d'un vélo à assistance électrique (PEE art. 7.2, p.7-9).",
+   "synonymes": [
+    "débloquer PEE",
+    "déblocage anticipé",
+    "retirer mon PEE",
+    "cas de déblocage",
+    "mariage PACS PEE",
+    "naissance PEE",
+    "achat résidence principale",
+    "rupture contrat PEE",
+    "véhicule électrique PEE",
+    "surendettement",
+    "proche aidant PEE",
+    "rénovation énergétique"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 7.2, p.7)",
+     "regles": [
+      "Liste des cas : mariage/PACS ; naissance ou adoption quand le foyer compte déjà 2 enfants ; divorce/séparation avec résidence d'un enfant ; violences conjugales ; invalidité ; décès ; rupture du contrat de travail ; création/reprise d'entreprise ; résidence principale ; rénovation énergétique ; surendettement ; proche aidant ; véhicule électrique ou vélo à assistance électrique.",
+      "Tout autre cas fixé par la réglementation ultérieure."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 7.2",
+       "page": 8,
+       "extrait": "Mariage de l'intéressé ou conclusion d'un pacte civil de solidarité",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 7.2",
+       "page": 8,
+       "extrait": "Rupture du contrat de travail"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-delai-deblocage",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Dans quel délai demander le déblocage anticipé du PEE ?",
+   "reponse": "Dans les 6 mois après l'événement. Pas de délai (à tout moment) en cas de rupture du contrat de travail, décès, invalidité, violences conjugales, surendettement ou proche aidant. Le déblocage se fait en un seul versement, sur tout ou partie des droits au choix (PEE art. 7.2, p.9).",
+   "synonymes": [
+    "délai déblocage",
+    "6 mois déblocage",
+    "demande de déblocage",
+    "versement unique PEE",
+    "à tout moment PEE",
+    "demander le déblocage"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 7.2, p.9)",
+     "regles": [
+      "Demande dans un délai de 6 mois à compter de l'événement.",
+      "Pas de délai pour la rupture du contrat, le décès, l'invalidité, les violences conjugales, le surendettement et l'activité de proche aidant.",
+      "Levée de l'indisponibilité en un versement unique, sur tout ou partie des droits."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 7.2",
+       "page": 9,
+       "extrait": "dans un délai de six mois à compter de la survenance du fait générateur",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 7.2",
+       "page": 9,
+       "extrait": "sous forme d'un versement unique"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-fiscalite-pee",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Mon PEE est-il imposé quand je le récupère ?",
+   "reponse": "Vos versements ne sont pas remboursés avec impôt : seule la plus-value (gain) est soumise à la CSG, à la CRDS et aux prélèvements sociaux. L'intéressement placé sur le PEE est exonéré d'impôt sur le revenu dans la limite légale (PEE art. 2 et 7.3, p.4 et 9).",
+   "synonymes": [
+    "impôt PEE",
+    "fiscalité PEE",
+    "plus-value PEE",
+    "CSG PEE",
+    "prélèvements sociaux PEE",
+    "imposable PEE",
+    "récupérer mon PEE impôt",
+    "gain PEE"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 7.3, p.9)",
+     "regles": [
+      "À la délivrance, la plus-value (différence entre le rachat et les sommes versées) est soumise à la CSG, à la CRDS et aux prélèvements sociaux en vigueur.",
+      "Intéressement versé sur le plan : exonéré d'impôt sur le revenu dans la limite du plafond légal (art. 2, p.4)."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 7.3",
+       "page": 9,
+       "extrait": "est soumise à la CSG et à la CRDS au titre des revenus du capital",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 2",
+       "page": 4,
+       "extrait": "sont exonérées de l'impôt sur le revenu dans la limite du plafond légal"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-depart-pee",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Je quitte l'entreprise : que devient mon PEE ?",
+   "reponse": "Vous recevez un état récapitulatif de toute votre épargne salariale. Vous pouvez la laisser, ou la transférer vers le plan de votre nouvel employeur en prévenant Natixis Interépargne (le transfert clôture votre compte). La rupture du contrat est aussi un cas de déblocage à tout moment (PEE art. 12, p.11 ; art. 7.2, p.8-9).",
+   "synonymes": [
+    "quitter l'entreprise PEE",
+    "démission PEE",
+    "départ PEE",
+    "transfert PEE nouvel employeur",
+    "état récapitulatif",
+    "licenciement PEE",
+    "que devient mon épargne",
+    "changer d'employeur PEE"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 12, p.11)",
+     "regles": [
+      "État récapitulatif remis à tout épargnant qui quitte l'entreprise.",
+      "Transfert possible vers le plan du nouvel employeur, sur demande à l'organisme du nouveau plan et à Natixis Interépargne ; le transfert clôture le compte.",
+      "Rupture du contrat de travail : cas de déblocage (art. 7.2)."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 12",
+       "page": 11,
+       "extrait": "Tout Épargnant quittant l'Entreprise reçoit un état récapitulatif",
+       "verifie_image": true
+      },
+      {
+       "doc": "pee",
+       "article": "art. 12",
+       "page": 11,
+       "extrait": "peut obtenir le transfert des sommes qu'il détient vers un plan"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-retraites-pee",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Les anciens salariés partis à la retraite peuvent-ils continuer à verser sur le PEE ?",
+   "reponse": "Oui, s'ils ont fait au moins un versement avant leur départ en retraite ou préretraite et qu'il reste des sommes investies au moment du départ (PEE art. 1, p.3). Pour le PERCOL, les anciens salariés peuvent continuer à verser s'ils n'ont pas de plan retraite collectif chez le nouvel employeur, sans abondement et à leurs frais.",
+   "synonymes": [
+    "retraité PEE",
+    "versements après retraite",
+    "préretraite PEE",
+    "ancien salarié verser",
+    "continuer à verser",
+    "retraite PERCOL versement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 1, p.3)",
+     "regles": [
+      "Les anciens salariés partis à la retraite ou en préretraite peuvent continuer à verser, à condition d'avoir versé au moins une fois avant leur départ et que des sommes y demeurent investies."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 1",
+       "page": 3,
+       "extrait": "pourront continuer à effectuer des versements au Plan"
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (préambule, p.3)",
+     "regles": [
+      "Anciens salariés : versements possibles s'ils n'ont pas accès à un plan d'épargne retraite collectif chez le nouvel employeur ; sans abondement ; frais à leur charge."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "préambule",
+       "page": 3,
+       "extrait": "sous réserve qu'ils n'aient pas accès à un plan d'épargne retraite d'entreprise collectif"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-deces-pee",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Que devient mon PEE si le décès survient ?",
+   "reponse": "Le décès de l'épargnant est un cas de déblocage. Ses ayants droit doivent demander la liquidation dans les 6 mois suivant le décès : au-delà, les plus-values ne bénéficient plus de l'exonération d'impôt sur le revenu (PEE art. 7.2 et 7.3, p.8-9). Au PERCOL, le décès du titulaire avant l'échéance clôture le plan (art. 5.3, p.7).",
+   "synonymes": [
+    "décès PEE",
+    "ayants droit",
+    "héritiers PEE",
+    "mort épargnant",
+    "liquidation décès",
+    "PERCOL décès",
+    "succession épargne salariale"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 7.3, p.9)",
+     "regles": [
+      "En cas de décès, les ayants droit demandent la liquidation dans un délai de 6 mois suivant le décès ; au-delà, les plus-values perdent l'exonération d'impôt sur le revenu."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 7.3",
+       "page": 9,
+       "extrait": "dans un délai de six mois suivant le décès",
+       "verifie_image": true
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 5.3, p.7)",
+     "regles": [
+      "Le décès du titulaire avant l'échéance entraîne la clôture du Plan."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 5.3",
+       "page": 7,
+       "extrait": "entraîne la clôture du Plan"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-percol-quoi",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Qu'est-ce que le PERCOL et comment l'alimenter ?",
+   "reponse": "Le plan d'épargne pour la retraite collectif : de l'épargne bloquée jusqu'à la retraite, avec l'aide de l'entreprise. Il est alimenté par vos versements volontaires, l'intéressement, la participation, l'abondement, les droits du CET (si l'accord le prévoit) et des transferts d'autres plans retraite. La grille d'abondement est commune avec le PEE (PERCOL préambule, p.3 ; art. 2, p.3-5).",
+   "synonymes": [
+    "PERCOL",
+    "plan épargne retraite collectif",
+    "épargne retraite",
+    "alimenter PERCOL",
+    "verser sur le PERCOL",
+    "retraite entreprise",
+    "PERCOL c'est quoi",
+    "PER collectif"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (préambule et art. 2, p.3)",
+     "regles": [
+      "Le PERCOL permet de se constituer, avec l'aide de l'entreprise, un portefeuille en vue de la retraite.",
+      "Alimentation : versements volontaires, intéressement, participation, abondement, droits du CET, transferts d'autres plans retraite, autres sources légales."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "préambule",
+       "page": 3,
+       "extrait": "en vue de leur retraite"
+      },
+      {
+       "doc": "percol",
+       "article": "art. 2",
+       "page": 3,
+       "extrait": "Versements volontaires des titulaires"
+      },
+      {
+       "doc": "percol",
+       "article": "art. 2",
+       "page": 5,
+       "extrait": "Transferts des sommes en provenance des contrats ou plans"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-percol-fiscal",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "PERCOL : mes versements volontaires sont-ils déductibles du revenu ?",
+   "reponse": "Oui : ils sont déductibles de l'assiette de l'impôt sur le revenu, dans les plafonds légaux, sauf si vous y renoncez de manière expresse et irrévocable, au plus tard au moment du versement, auprès du gestionnaire (PERCOL art. 2, p.3).",
+   "synonymes": [
+    "PERCOL déductible",
+    "déduction impôt PERCOL",
+    "réduction impôt retraite",
+    "renoncer déduction",
+    "versements déductibles",
+    "impôt sur le revenu PERCOL"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 2, p.3)",
+     "regles": [
+      "Versements volontaires déductibles de l'assiette de l'impôt sur le revenu, dans les plafonds légaux (art. 154 bis et 163 quatervicies du CGI).",
+      "Renonciation expresse et irrévocable possible, au plus tard au moment du versement."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 2",
+       "page": 3,
+       "extrait": "sont déductibles de l'assiette de l'impôt sur le revenu"
+      },
+      {
+       "doc": "percol",
+       "article": "art. 2",
+       "page": 3,
+       "extrait": "sauf renonciation expresse et irrévocable du titulaire"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Les plafonds légaux de déduction ne sont pas chiffrés dans le règlement : à vérifier sur votre avis d'imposition."
+   ]
+  },
+  {
+   "id": "epargne-percol-gestion",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "PERCOL : gestion pilotée ou gestion libre ?",
+   "reponse": "Gestion pilotée : l'allocation réduit progressivement le risque à l'approche de la retraite (profil « équilibré horizon retraite ») ; c'est le mode par défaut. Gestion libre : vous choisissez vos fonds dans la liste de l'annexe 2. Pendant le blocage, vous pouvez passer de l'une à l'autre, mais pas changer de compartiment au sein de la gestion pilotée, sauf en modifiant votre date de départ à la retraite (PERCOL art. 3, p.5).",
+   "synonymes": [
+    "gestion pilotée",
+    "gestion libre",
+    "équilibré horizon retraite",
+    "Avenir Retraite",
+    "sécurisation",
+    "date de départ retraite",
+    "changer gestion PERCOL",
+    "profil d'investissement"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 3, p.5)",
+     "regles": [
+      "Gestion pilotée : allocation qui réduit progressivement les risques ; profil « équilibré horizon retraite » ; défaut en l'absence de décision expresse.",
+      "Gestion libre : tout ou partie des versements dans les FCPE de l'annexe 2.",
+      "Pendant le blocage, transfert possible entre gestion libre et gestion pilotée ; pas de changement de compartiment dans la gestion pilotée sauf modification de la date de départ."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 3",
+       "page": 5,
+       "extrait": "équilibré horizon retraite"
+      },
+      {
+       "doc": "percol",
+       "article": "art. 3",
+       "page": 5,
+       "extrait": "Le titulaire peut également décider d'affecter tout ou partie de ses versements en gestion libre"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Les actifs de la gestion pilotée (annexe 1) et les fonds de la gestion libre (annexe 2) n'ont pas été relus ici."
+   ]
+  },
+  {
+   "id": "epargne-percol-recuperer",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "PERCOL : quand puis-je récupérer mon argent ?",
+   "reponse": "À partir de la liquidation de votre pension dans un régime obligatoire d'assurance vieillesse, ou à l'âge légal de la retraite. Au choix : rente viagère (choix irrévocable) ou capital, versé en une fois ou de manière fractionnée. Les sommes issues de versements obligatoires transférés ne sortent qu'en rente viagère (PERCOL art. 5.1, p.6).",
+   "synonymes": [
+    "récupérer PERCOL",
+    "retraite PERCOL",
+    "rente viagère",
+    "capital PERCOL",
+    "liquidation de la pension",
+    "sortie en capital",
+    "fractionné",
+    "quand toucher PERCOL",
+    "âge de la retraite"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 5.1, p.6)",
+     "regles": [
+      "Sommes indisponibles jusqu'à l'échéance : au plus tôt la liquidation de la pension dans un régime obligatoire d'assurance vieillesse, ou l'âge légal de la retraite.",
+      "Délivrance au choix en rente viagère ou en capital (en une fois ou fractionné) ; le choix de la rente est irrévocable.",
+      "Versements obligatoires transférés d'autres plans : rente viagère uniquement."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 5.1",
+       "page": 6,
+       "extrait": "date de liquidation de la pension du titulaire dans un régime obligatoire d'assurance vieillesse",
+       "verifie_image": true
+      },
+      {
+       "doc": "percol",
+       "article": "art. 5.1",
+       "page": 6,
+       "extrait": "ce choix est irrévocable"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-percol-deblocage",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "PERCOL : puis-je débloquer avant la retraite ?",
+   "reponse": "Oui dans les cas suivants : décès du conjoint ou du partenaire de PACS ; invalidité du titulaire, de ses enfants, de son conjoint ou partenaire ; surendettement ; fin des droits à l'assurance chômage ; cessation d'activité non salariée après liquidation judiciaire ; achat de la résidence principale (sauf versements obligatoires) ; titulaire de moins de 18 ans. Le déblocage se fait en un seul versement (PERCOL art. 5.2, p.7).",
+   "synonymes": [
+    "débloquer PERCOL",
+    "déblocage anticipé PERCOL",
+    "résidence principale PERCOL",
+    "chômage PERCOL",
+    "invalidité PERCOL",
+    "avant la retraite",
+    "retirer PERCOL",
+    "achat maison PERCOL"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 5.2, p.7)",
+     "regles": [
+      "Déblocage anticipé : décès du conjoint ou partenaire ; invalidité ; surendettement ; fin des droits à l'assurance chômage ; cessation d'activité non salariée après liquidation judiciaire ; résidence principale (hors versements obligatoires) ; titulaire de moins de 18 ans.",
+      "Levée de l'indisponibilité en un versement unique."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 5.2",
+       "page": 7,
+       "extrait": "Le décès du conjoint du titulaire ou de son partenaire"
+      },
+      {
+       "doc": "percol",
+       "article": "art. 5.2",
+       "page": 7,
+       "extrait": "L'expiration des droits à l'assurance chômage du titulaire"
+      },
+      {
+       "doc": "percol",
+       "article": "art. 5.2",
+       "page": 7,
+       "extrait": "La levée de l'indisponibilité intervient sous forme d'un versement unique"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-percol-depart-deces",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "PERCOL : que devient mon plan si je pars ou en cas de décès ?",
+   "reponse": "Décès du titulaire avant l'échéance : le plan est clos. Départ de l'entreprise : état récapitulatif remis et transfert possible vers le plan du nouvel employeur (qui clôt le compte). Après votre départ, vous pouvez continuer à verser si vous n'avez pas de plan retraite collectif ailleurs, sans abondement et à vos frais (PERCOL art. 5.3, p.7 ; art. 9, p.9 ; préambule, p.3).",
+   "synonymes": [
+    "PERCOL départ",
+    "PERCOL décès",
+    "quitter entreprise PERCOL",
+    "transfert PERCOL",
+    "état récapitulatif PERCOL",
+    "nouvel employeur PERCOL"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 5.3 et 9, p.9)",
+     "regles": [
+      "Décès du titulaire avant l'échéance : clôture du plan.",
+      "Départ : état récapitulatif ; transfert possible vers le plan du nouvel employeur, qui clôt le compte.",
+      "Anciens salariés : versements possibles sans abondement et à leurs frais, s'ils n'ont pas de plan retraite collectif chez le nouvel employeur."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 5.3",
+       "page": 7,
+       "extrait": "entraîne la clôture du Plan"
+      },
+      {
+       "doc": "percol",
+       "article": "art. 9",
+       "page": 9,
+       "extrait": "A la suite de son départ, l'Épargnant peut obtenir le transfert"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-duree-plans",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "PEE et PERCOL : combien de temps ces plans durent-ils ?",
+   "reponse": "Durée indéterminée. Chaque plan peut être dénoncé à tout moment avec un préavis de 3 mois par l'une ou l'autre des parties signataires. La dénonciation ne change rien au blocage des sommes déjà épargnées, qui restent gérées selon les règles du plan (PEE art. 9, p.10 ; PERCOL art. 6, p.7-8).",
+   "synonymes": [
+    "durée PEE",
+    "durée PERCOL",
+    "dénonciation PEE",
+    "fin du PEE",
+    "préavis 3 mois",
+    "plan indéterminé",
+    "supprimer le PEE",
+    "arrêt du PEE"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 9, p.10)",
+     "regles": [
+      "Le Plan est conclu pour une durée indéterminée.",
+      "Dénonciation à tout moment avec un préavis de 3 mois ; sans conséquence sur l'indisponibilité des sommes épargnées."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 9",
+       "page": 10,
+       "extrait": "Le Plan est conclu pour une durée indéterminée"
+      },
+      {
+       "doc": "pee",
+       "article": "art. 9",
+       "page": 10,
+       "extrait": "avec un préavis de trois mois"
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 6, p.7)",
+     "regles": [
+      "Durée indéterminée ; dénonciation à tout moment avec préavis de 3 mois."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 6",
+       "page": 7,
+       "extrait": "Le Plan est conclu pour une durée indéterminée"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": []
+  },
+  {
+   "id": "epargne-gestionnaires",
+   "theme": "Épargne salariale (PEE et PERCOL)",
+   "categorie": "epargne",
+   "question": "Qui gère et garde mon épargne salariale ?",
+   "reponse": "Natixis Interépargne tient votre compte et conserve vos parts. Les fonds sont gérés par Vega Investment Solutions et le dépositaire est CACEIS Bank. L'entreprise paie la tenue de compte des salariés en poste (PEE art. 4 et 6, p.6-7 ; PERCOL art. 4, p.6).",
+   "synonymes": [
+    "Natixis Interépargne",
+    "Vega Investment",
+    "CACEIS",
+    "teneur de compte",
+    "gestionnaire PEE",
+    "qui gère mon épargne",
+    "dépositaire",
+    "contacter Natixis"
+   ],
+   "etiquettes": [],
+   "niveaux": [
+    {
+     "titre": "Règlement du PEE du 9 octobre 2025 (art. 4 et 6, p.7)",
+     "regles": [
+      "Teneur de compte conservateur des parts : Natixis Interépargne ; dépositaire : CACEIS Bank ; fonds gérés par Vega Investment Solutions."
+     ],
+     "sources": [
+      {
+       "doc": "pee",
+       "article": "art. 6",
+       "page": 7,
+       "extrait": "NATIXIS INTEREPARGNE"
+      },
+      {
+       "doc": "pee",
+       "article": "art. 4",
+       "page": 6,
+       "extrait": "gérés par la société VEGA INVESTMENT SOLUTIONS"
+      }
+     ]
+    },
+    {
+     "titre": "Règlement du PERCOL du 9 octobre 2025 (art. 4, p.6)",
+     "regles": [
+      "Natixis Interépargne gère le plan et tient les comptes ; fonds gérés par Vega Investment Solutions ; dépositaire CACEIS Bank."
+     ],
+     "sources": [
+      {
+       "doc": "percol",
+       "article": "art. 4",
+       "page": 6,
+       "extrait": "NATIXIS INTEREPARGNE est le gestionnaire du Plan"
       }
      ]
     },
