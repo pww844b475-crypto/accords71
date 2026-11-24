@@ -17800,9 +17800,11 @@
     }
    ],
    "notes": [
-    "Ce que les documents ne permettent pas de vérifier : le calcul exact des indemnités journalières de la Sécurité sociale (pourcentage du salaire, plafond, jours de carence de la Sécurité sociale elle-même, délais de paiement). C'est à lire sur ameli.fr ou sur l'attestation de paiement de la caisse.",
-    "Pour savoir d'où vient l'écart dans un cas précis, il faut comparer la fiche de paie du mois d'arrêt, l'attestation de la caisse et le net habituel : un cas précis peut venir de ces éléments ou d'une erreur de calcul à signaler.",
-    "Le complément est calculé sur le net que vous auriez eu : si les heures étaient variables (heures de délégation, heures complémentaires), la base de 3 mois peut être plus basse que votre mois habituel."
+    "Règles de la Sécurité sociale (source : service-public.gouv.fr, page « Arrêt maladie : indemnités journalières versées au salarié », vérifiée le 01/06/2026, lue le 24/11/2026) : l'indemnité journalière est de 50 % du salaire journalier de base, c'est-à-dire le total des 3 derniers salaires bruts divisé par 91,25. Le salaire pris en compte est plafonné à 1,4 SMIC (2 613,82 € par mois en 2026) : l'indemnité ne dépasse pas 42,97 € bruts par jour.",
+    "Toujours selon cette page : 3 jours de carence de la Sécurité sociale (arrêt au 1er juillet : indemnités à partir du 4 juillet), indemnités dues pour chaque jour calendaire (week-ends compris), versées tous les 14 jours, et soumises à la CSG et à la CRDS à des taux particuliers. L'imposition à l'impôt sur le revenu n'a pas été lue.",
+    "Conséquence à vérifier cas par cas : la Sécurité sociale ne paie ni les 3 premiers jours, ni plus de 50 % du brut, alors que le complément de l'accord ne commence qu'après 2 jours de carence. Le ou les jours entre les deux, et la façon dont la paie compte les indemnités (brutes ou après CSG-CRDS) peuvent créer un écart : à comparer sur la fiche de paie et l'attestation de paiement de la caisse.",
+    "Pour savoir d'où vient l'écart dans un cas précis, il faut la fiche de paie du mois d'arrêt, l'attestation de paiement de la caisse et le net habituel. Une erreur de calcul de la paie reste possible et serait à signaler.",
+    "Le complément est calculé sur le net que vous auriez eu : si les heures étaient variables (délégation, heures complémentaires), la base de 3 mois peut être plus basse que votre mois habituel."
    ]
   }
  ],
