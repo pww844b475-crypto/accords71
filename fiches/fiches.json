@@ -6055,6 +6055,16 @@
    ],
    "champs": [
     {
+     "id": "contratHebdo",
+     "label": "Horaire du contrat (heures par semaine)",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 36,
+     "question": "Combien d'heures par semaine votre contrat prévoit-il ?",
+     "aide": "36 pour un temps plein. Sous 26 h, il n'y a pas d'annualisation."
+    },
+    {
      "id": "presenceSemaine",
      "label": "Heures de temps de présence de la semaine",
      "type": "number",

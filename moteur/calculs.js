@@ -423,8 +423,20 @@ export function heuresSup({ heuresEffectives = 0, heuresPresence = 0, tauxHorair
 }
 
 // ---- 29. Annualisation, temps complet (accord art. 5.1.4 à 5.1.5 p.67-68)
-export function annualisation({ presenceSemaine = 0 }) {
-  const p = presenceSemaine, ecart = r2(p - 36);
+export function annualisation({ presenceSemaine = 0, contratHebdo = 36 }) {
+  const p = presenceSemaine;
+  if (contratHebdo < 36) {
+    if (contratHebdo < 26) return { lignes: [
+      L('accord', `Contrat de ${String(contratHebdo).replace('.', ',')} h par semaine`, 'Pas d\'annualisation en dessous de 26 h', { brut: null, fort: true, note: 'Pour un temps partiel, la modulation n\'existe qu\'à partir de 26 h de contrat (accord, art. 5.2, p.82). Les heures faites en plus de votre contrat sont des heures complémentaires : voir la fiche « Heures complémentaires ».' }),
+    ] };
+    const [haut, bas] = [contratHebdo + 4, contratHebdo - 4];
+    const pos = p > haut ? `Au-dessus de la limite haute de ${haut} h` : p < bas ? `En dessous de la limite basse de ${bas} h` : `Dans la plage de ${bas} h à ${haut} h`;
+    return { lignes: [
+      L('accord', `Contrat de ${String(contratHebdo).replace('.', ',')} h : modulation de plus ou moins 4 h`, `de ${bas} h à ${haut} h`, { brut: bas, note: 'Seulement si vous aviez choisi l\'annualisation lors du passage aux 35 h (accord, art. 5.2, p.82). Sinon, pas de modulation.' }),
+      L('accord', 'Position cette semaine', pos),
+    ] };
+  }
+  const ecart = r2(p - 36);
   const pos = p > 39 ? 'Au-dessus de la limite haute de 39 h : les heures au-delà sont des heures supplémentaires' : p < 33 ? 'En dessous de la limite basse de 33 h' : 'Dans la plage de 33 h à 39 h';
   return { lignes: [
     L('accord', 'Écart avec la moyenne de 36 h de présence (compteur de modulation)', `${ecart > 0 ? '+' : ''}${ecart} h`, { brut: ecart, note: 'Les heures entre 36 h et 39 h ne sont ni supplémentaires ni majorées : elles se compensent sur l\'année.' }),
