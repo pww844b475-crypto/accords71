@@ -17808,6 +17808,93 @@
     "Pour savoir d'où vient l'écart dans un cas précis, il faut la fiche de paie du mois d'arrêt, l'attestation de paiement de la caisse et le net habituel. Une erreur de calcul de la paie reste possible et serait à signaler.",
     "Le complément est calculé sur le net que vous auriez eu : si les heures étaient variables (délégation, heures complémentaires), la base de 3 mois peut être plus basse que votre mois habituel."
    ]
+  },
+  {
+   "id": "solidarite-suivi",
+   "theme": "Nuit, dimanche, jours fériés, solidarité",
+   "categorie": "temps",
+   "question": "Où en suis-je de ma journée de solidarité ?",
+   "reponse": "Les heures de solidarité ne sont pas affichées sur la fiche de paie : on ne peut que les estimer. Indiquez l'horaire de votre contrat et le nombre de semaines, depuis le 1er juin, où vous avez fait au moins 1 heure de plus que votre contrat (vos plannings le montrent). Le calcul donne la journée due (7 h 12 à 36 h, 4 h 48 à 24 h), ce qui est déjà imputé et ce qui reste. Attention : la règle « 1 heure par semaine prise sur les heures en plus » est celle du logiciel de paie, elle n'est pas écrite dans l'accord.",
+   "synonymes": [
+    "où en suis-je de ma journée de solidarité",
+    "solde journée de solidarité",
+    "journée de solidarité terminée",
+    "heures de solidarité restantes",
+    "combien d'heures de solidarité il me reste",
+    "suivi journée de solidarité",
+    "solidarité 1 heure par semaine",
+    "solidarité terminée",
+    "reste à faire solidarité"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 5.9, p.59)",
+     "regles": [
+      "Temps complet : durée annuelle de présence augmentée de 7 heures ; temps partiel : au prorata de l'horaire contractuel ; période de référence du 1er juin au 31 mai.",
+      "Si le total n'a pas pu être atteint à la fin de la période, le solde est reporté sur l'exercice suivant.",
+      "L'accord ne fixe aucun rythme par semaine : l'imputation d'une heure par semaine est une pratique du logiciel de paie, à confirmer."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 5.9",
+       "page": 59,
+       "extrait": "la durée annuelle de présence sera augmentée de 7 heures"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 5.9",
+       "page": 59,
+       "extrait": "le soide négatif correspondant à la valeur de la journée de solidarité sera reporté sur l'exercice suivant"
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : convention non consultée sur ce point (seul le plafond de 7 heures du forfait annuel en heures est cité dans la fiche « journée de solidarité »)."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : voir la fiche « Combien d'heures dois-je faire pour la journée de solidarité ? » pour les articles L3133-7 à L3133-11."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Ce calcul n'est pas une preuve : il aide à savoir où on en est. Pour le vérifier, il faut l'accord écrit de la direction sur la règle d'imputation, et les fiches de paie ne montrent pas ces heures.",
+    "Les plannings de chaque personne (importés dans « Estimation de ma fiche de paie ») pourront servir à compter les semaines avec heures en plus."
+   ],
+   "champs": [
+    {
+     "id": "contratHebdo",
+     "label": "Horaire du contrat (heures par semaine)",
+     "type": "number",
+     "min": 0,
+     "step": "0.25",
+     "defaut": 24,
+     "question": "Combien d'heures par semaine votre contrat prévoit-il ?",
+     "aide": "C'est la base de votre contrat : 24, 30, 36…"
+    },
+    {
+     "id": "semainesEnPlus",
+     "label": "Semaines avec au moins 1 h en plus",
+     "type": "number",
+     "min": 0,
+     "step": "1",
+     "defaut": 0,
+     "question": "Depuis le 1er juin, dans combien de semaines avez-vous fait au moins 1 heure de plus que votre contrat ?",
+     "aide": "Comptez-les sur vos plannings. Une semaine avec moins d'une heure en plus compte pour une semaine entière : l'estimation est à une heure près."
+    }
+   ],
+   "calcul": "suiviSolidarite"
   }
  ],
  "categories": [
