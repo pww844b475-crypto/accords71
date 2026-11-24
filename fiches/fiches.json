@@ -17697,6 +17697,113 @@
     }
    ],
    "notes": []
+  },
+  {
+   "id": "maladie-pourquoi-perte",
+   "theme": "Maladie, accident, prévoyance, mutuelle",
+   "categorie": "sante",
+   "question": "Pourquoi je touche moins qu'à 100 % en arrêt maladie, même avec le complément de l'employeur ?",
+   "reponse": "L'accord promet le maintien du net, mais seulement dans certaines limites. D'abord, les 2 premiers jours de maladie ne sont pas complétés (carence), sauf hospitalisation, accident du travail ou arrêt de plus de 23 jours. Ensuite, la base de calcul est la rémunération des 3 derniers mois sans les primes exceptionnelles ni les gratifications, et le complément ne couvre que les journées complètes d'absence. Les titres-restaurant et l'indemnité de tenue ne sont pas versés pour les jours d'absence. Enfin, une fois la durée du complément écoulée (180, 360 ou 540 jours), la prévoyance ne verse plus que 27,5 % du salaire de référence en complément de la Sécurité sociale.",
+   "synonymes": [
+    "perte de salaire arrêt maladie",
+    "je perds de l'argent en arrêt maladie",
+    "pourquoi je touche moins en maladie",
+    "complément pas à 100 %",
+    "maintien de salaire pas complet",
+    "indemnités journalières complément salaire perte",
+    "je ne suis pas payé à 100 % en arrêt",
+    "manque d'argent arrêt maladie",
+    "IJSS plus complément",
+    "pourquoi je perds de l'argent en arrêt maladie",
+    "net moins élevé arrêt maladie"
+   ],
+   "etiquettes": [
+    "Pratique à confirmer"
+   ],
+   "niveaux": [
+    {
+     "titre": "Accord de substitution (art. 3.11.1 et 3.11.2, p.37-38 ; art. 3.1.1, p.28 ; art. 3.3.3, p.33) et livret CGT (p.31)",
+     "regles": [
+      "Carence de 2 jours : pas de complément les 2 premiers jours de maladie, sauf hospitalisation, accident du travail, ou arrêt de plus de 23 jours (la retenue est alors redressée).",
+      "Condition : l'absence doit être régulièrement prise en charge par la Sécurité sociale ; sans prise en charge, pas de complément.",
+      "Base : rémunération effective des 3 derniers mois, hors primes exceptionnelles et gratifications, limitée au plafond de la Sécurité sociale pour les employés et ouvriers ; complément versé pour les journées complètes d'absence.",
+      "Titres-restaurant : pas pour les jours d'absence. Indemnité de tenue : au prorata des jours travaillés.",
+      "Après la durée du complément (180 jours de 1 à 10 ans, 360 de 10 à 25 ans, 540 au-delà), la prévoyance verse 27,5 % du salaire de référence en complément du régime obligatoire (livret CGT, à confirmer avec le contrat)."
+     ],
+     "sources": [
+      {
+       "doc": "subst",
+       "article": "art. 3.11.1",
+       "page": 37,
+       "extrait": "un délai de carence de 2 jours calculé à partir du premier jour d'arrêt de travail"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.11.1",
+       "page": 37,
+       "extrait": "Dans le cas où l'absence entraîne un arrêt de travail de plus de 23 jours"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.11.1",
+       "page": 37,
+       "extrait": "soit régulièrement prise en charge par la Sécurité Sociale"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.11.2",
+       "page": 37,
+       "extrait": "de la rémunération effective des trois derniers mois (hors primes exceptionnelles et gratifications)"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.11.2",
+       "page": 37,
+       "extrait": "pour toutes les journées complètes d'absence"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.1.1",
+       "page": 28,
+       "extrait": "ne peuvent bénéficier de l'octroi de titres restaurant pour les jours concernés"
+      },
+      {
+       "doc": "subst",
+       "article": "art. 3.3.3",
+       "page": 33,
+       "extrait": "Le montant de l'indemnité est fixé à 6 euros par mois de travail"
+      },
+      {
+       "doc": "livret",
+       "article": "Garantie en cas d'arrêt de travail",
+       "page": 31,
+       "extrait": "indemnité journalière, en complément de celle servie par le Régime Obligatoire, égale à 27,5 % du salaire de référence (tranches 1 et 2)",
+       "ocr_corrige": true,
+       "note_ocr": "Chiffre lu sur l'image de la page (page scannée du livret)."
+      }
+     ]
+    },
+    {
+     "titre": "Convention collective",
+     "regles": [
+      "Information à compléter : la convention prévoit une carence de 7 jours et un complément à 100 % pendant 30 jours puis 90 % pendant 15 jours (annexe I), voir la fiche « Je suis en arrêt maladie »."
+     ],
+     "sources": []
+    },
+    {
+     "niveau": "code",
+     "titre": "Code du travail",
+     "regles": [
+      "Information à compléter : Code du travail non consulté sur ce point."
+     ],
+     "sources": []
+    }
+   ],
+   "notes": [
+    "Ce que les documents ne permettent pas de vérifier : le calcul exact des indemnités journalières de la Sécurité sociale (pourcentage du salaire, plafond, jours de carence de la Sécurité sociale elle-même, délais de paiement). C'est à lire sur ameli.fr ou sur l'attestation de paiement de la caisse.",
+    "Pour savoir d'où vient l'écart dans un cas précis, il faut comparer la fiche de paie du mois d'arrêt, l'attestation de la caisse et le net habituel : un cas précis peut venir de ces éléments ou d'une erreur de calcul à signaler.",
+    "Le complément est calculé sur le net que vous auriez eu : si les heures étaient variables (heures de délégation, heures complémentaires), la base de 3 mois peut être plus basse que votre mois habituel."
+   ]
   }
  ],
  "categories": [
