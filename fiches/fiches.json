@@ -5944,7 +5944,7 @@
    "theme": "Heures supplémentaires, annualisation, temps partiel",
    "categorie": "temps",
    "question": "Qu'est-ce que l'annualisation et quelles sont les limites hebdomadaires ?",
-   "reponse": "Le temps de travail des employés à temps complet en CDI (niveaux 1 à 4) est organisé sur l'année, du 1er juin au 31 mai, sur une moyenne de 36 heures de temps de présence par semaine. La semaine varie entre 33 h et 39 h. La durée annuelle de référence est de 1 656 h 10 en année normale et 1 663 h 23 en année bissextile (journée de solidarité incluse). Les heures entre 36 h et 39 h ne sont pas des heures supplémentaires ; celles au-delà de 39 h, ou au-delà de la durée annuelle, le sont.",
+   "reponse": "Le temps de travail des employés à temps complet en CDI (niveaux 1 à 4) est organisé sur l'année, du 1er juin au 31 mai, sur une moyenne de 36 heures de temps de présence par semaine. La semaine varie entre 33 h et 39 h. La durée annuelle de référence est de 1 656 h 10 en année normale et 1 663 h 23 en année bissextile (journée de solidarité incluse). Les heures entre 36 h et 39 h ne sont pas des heures supplémentaires ; celles au-delà de 39 h, ou au-delà de la durée annuelle, le sont. Ce régime ne concerne pas les salariés à temps partiel : pour eux, la modulation n'existe qu'à partir de 26 h de contrat (voir la fiche « Modulation du temps partiel »). Un contrat de 24 h n'est donc pas annualisé.",
    "synonymes": [
     "annualisation",
     "modulation",
@@ -5960,7 +5960,11 @@
     "limite haute",
     "limite basse",
     "compteur annualisation",
-    "employés niveaux 1 à 4"
+    "employés niveaux 1 à 4",
+    "annualisation 24 heures",
+    "temps partiel annualisé",
+    "24h annualisation",
+    "qui est annualisé"
    ],
    "etiquettes": [
     "Information à compléter"
@@ -6518,7 +6522,7 @@
    "theme": "Heures supplémentaires, annualisation, temps partiel",
    "categorie": "temps",
    "question": "Modulation du temps partiel : quelles limites ?",
-   "reponse": "Les horaires peuvent varier de plus ou moins 4 heures par semaine pour les salariés à temps partiel dont le contrat est de 26 h minimum et qui ont choisi l'annualisation. Tableau : contrat de 26 h, de 22 h à 30 h ; 28 h, de 24 h à 32 h ; 30 h, de 26 h à 34 h. Pas de modulation sous 26 h. La rémunération mensuelle est lissée sur l'horaire contractuel (accord, art. 5.2, chapitre temps partiel).",
+   "reponse": "Les horaires peuvent varier de plus ou moins 4 heures par semaine pour les salariés à temps partiel dont le contrat est de 26 h minimum et qui ont choisi l'annualisation. Tableau : contrat de 26 h, de 22 h à 30 h ; 28 h, de 24 h à 32 h ; 30 h, de 26 h à 34 h. Pas de modulation sous 26 h. La rémunération mensuelle est lissée sur l'horaire contractuel (accord, art. 5.2, chapitre temps partiel). Conséquence : un salarié à 24 h n'est pas concerné (c'est la règle de l'accord : 26 h minimum, et non 28 h), ses heures en plus sont des heures complémentaires. Deux conditions s'ajoutent à 26 h minimum : avoir choisi l'annualisation lors du passage aux 35 h.",
    "synonymes": [
     "modulation temps partiel",
     "plus ou moins 4 heures",
@@ -6527,7 +6531,12 @@
     "limites hautes et basses",
     "tableau modulation",
     "temps partiel annualisé",
-    "horaire variable temps partiel"
+    "horaire variable temps partiel",
+    "24 heures annualisation",
+    "salarié à 24h modulation",
+    "un salarié à 24 heures peut-il être annualisé",
+    "modulation 28 heures",
+    "à partir de combien d'heures module-t-on"
    ],
    "etiquettes": [
     "Information à compléter"
@@ -6597,7 +6606,9 @@
      "sources": []
     }
    ],
-   "notes": [],
+   "notes": [
+    "Seuil : l'accord écrit « contrat de travail de 26h minimum » (art. 5.2, p.82). Le tableau donne 26 h, 28 h et 30 h ; 28 h n'est pas le minimum."
+   ],
    "champs": [
     {
      "id": "horaire",
