@@ -2,11 +2,15 @@
 // Fonctions pures : elles travaillent sur la liste des morceaux de texte du PDF (texte + position), rien n'est enregistré.
 const JOURS = ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa', 'Di'];
 const RE_NUM = /^\d+\.\d\d$/;
-const RE_PLAGE = /^(\d\d)\.(\d\d) ?-(\d\d)\.(\d\d) ([A-Z0-9]+)$/;
-const CODES_CONNUS = new Set(['REPO', 'JNTR', 'DELC', 'DIMTE', 'D100', 'MALA']);
-export const SENS_CODES = { REPO: 'repos', JNTR: 'journée non travaillée', DELC: 'délégation (heures dans la journée)', DIMTE: 'heures travaillées le dimanche', D100: 'dimanche majoré à 100 %', MALA: 'maladie (à confirmer)' };
+const RE_NUMS = /^-?\d+\.\d\d$/;                                     // colonnes de gauche : l'écart de la semaine peut être négatif
+const RE_PLAGE = /^[a-z]?(\d\d)\.(\d\d) ?-(\d\d)\.(\d\d) ([A-Z0-9]+)$/;      // « 08.00 -16.00 SERVI » (une lettre parasite peut précéder)
+const RE_DETAIL_PLAGE = /^(\d{1,2})\.(\d\d)-(\d{1,2})\.(\d\d)$/;               // « 14.00-17.00 » ou « 9.00-12.00 »
+const CODES_CONNUS = new Set(['REPO', 'JNTR', 'DELC', 'DIMTE', 'D100', 'MALA', 'FOSE', 'ECART', 'HD', 'TREST', 'DIMHA', 'JFCP', 'CONG']);
+const IGNORES = /^(?:[a-z]|e?Temptation|\d)$/;                          // petits morceaux parasites du PDF
+export const SENS_CODES = { REPO: 'repos', JNTR: 'journée non travaillée', DELC: 'délégation (heures dans la journée)', DIMTE: 'heures travaillées le dimanche', D100: 'dimanche majoré à 100 %', MALA: 'maladie (à confirmer)', FOSE: 'plage avec horaire (formation, à confirmer)', ECART: 'heures en plus du contrat ce jour-là', HD: 'total des heures en plus de la semaine (affiché le dimanche)', TREST: 'nombre de titres-restaurant du mois (dernier jour du mois)', DIMHA: 'dimanche habituel (à confirmer)', JFCP: 'jour férié chômé payé', CONG: 'congé payé' };
 const minutes = (h, m) => +h * 60 + +m;
 const hhmm = s => { const [h, m] = s.split('.'); return minutes(h, m); };      // « 5.45 » = 5 h 45
+const hhmmSigne = s => (s.startsWith('-') ? -1 : 1) * hhmm(s.replace('-', ''));  // « -0.36 » = - 36 min
 
 /** Découpe les morceaux de texte en mots avec une position, et regroupe les mots par ligne (y croissant vers le bas). */
 function lignes(items, tol = 2.5) {
@@ -44,8 +48,9 @@ export function lirePlanning(items) {
   const debuts = [];
   for (const r of rows) {
     const g = r.w.filter(w => w.x < gaucheMax);
-    const nums = g.filter(w => RE_NUM.test(w.t));
-    if (nums.length >= 3 && g.length >= 5) debuts.push({ y: r.y, nums: nums.slice(0, 3).map(w => w.t), nom: g.filter(w => !RE_NUM.test(w.t)).map(w => w.t).join(' ') });
+    const nums = g.filter(w => RE_NUMS.test(w.t));
+    if (nums.length >= 3 && g.length >= 5) debuts.push({ y: r.y, nums: nums.slice(0, 3).map(w => w.t), nom: g.filter(w => !RE_NUMS.test(w.t)).map(w => w.t).join(' ') });
+    else if (nums.length === 2 && g.length >= 5) debuts.push({ y: r.y, nums: [...nums.map(w => w.t), '0.00'], nom: g.filter(w => !RE_NUMS.test(w.t)).map(w => w.t).join(' ') });
   }
   const pied = rows.find(r => { const t = r.w.map(w => w.t).join(' '); return /Proposition de planning/.test(t) || (/ACCUEIL.*ENCAISS.*NOUVELT/.test(t) && !/\d\d\.\d\d/.test(t)); });   // pied de page : légende des postes
   const dernierY = pied ? pied.y - 1000 : (rows.length ? rows[rows.length - 1].y + 1 : 0);
@@ -56,6 +61,7 @@ export function lirePlanning(items) {
     const jours = JOURS.map(() => ({ total: null, plages: [], codes: [] }));
     for (const r of bloc) for (const w of r.w) {
       if (w.x < gaucheMax) continue;
+      if (Math.abs(r.y - d.y) < 3 && w.x < centres[0] - 40) continue;                          // colonne « Solde modulation » à gauche du lundi
       const c = col(w.x + 1);
       if (c != null && RE_NUM.test(w.t) && Math.abs(r.y - d.y) <= 20 && r.y > d.y - 1 && jours[c].total == null) jours[c].total = hhmm(w.t);
     }
@@ -69,11 +75,12 @@ export function lirePlanning(items) {
         else {
           const code = ligne.match(/^([A-Z][A-Z0-9]{1,5})(?: \(([^)]*)\))?$/);
           if (code) { jours[c].codes.push({ code: code[1], detail: code[2] || '' }); if (!CODES_CONNUS.has(code[1])) inconnus.push(code[1]); }
-          else if (!RE_NUM.test(ligne)) inconnus.push(ligne);
+          else if (!RE_NUM.test(ligne) && !IGNORES.test(ligne)) inconnus.push(ligne);
         }
       }
     }
-    personnes.push({ nom: d.nom, theorie: +d.nums[0], realisees: +d.nums[1], ecart: +d.nums[2], jours });
+    // les heures du tableau sont écrites en heures.minutes (« 30.30 » = 30 h 30)
+    personnes.push({ nom: d.nom, theorie: hhmm(d.nums[0]) / 60, realisees: hhmm(d.nums[1]) / 60, ecart: hhmmSigne(d.nums[2]) / 60, jours });
   });
   return { debut, section: mSection ? mSection[1].trim() : '', personnes, inconnus: [...new Set(inconnus)] };
 }
@@ -81,15 +88,27 @@ export function lirePlanning(items) {
 /** Minutes de délégation (DELC) d'un jour : « DELC (14.00-17.00) ». */
 export function minutesDelegation(jour) {
   let t = 0;
-  for (const c of jour.codes) { const m = c.code === 'DELC' && c.detail.match(/^(\d\d)\.(\d\d)-(\d\d)\.(\d\d)$/); if (m) t += minutes(m[3], m[4]) - minutes(m[1], m[2]); }
+  for (const c of jour.codes) { const m = c.code === 'DELC' && c.detail.match(RE_DETAIL_PLAGE); if (m) t += minutes(m[3], m[4]) - minutes(m[1], m[2]); }
   return t;
 }
+/** Minutes d'une plage donnée par un code (« FOSE (9.00-17.00) »), hors délégation. */
+const minutesCodesPlage = jour => jour.codes.reduce((t, c) => { const m = c.code === 'FOSE' && c.detail.match(RE_DETAIL_PLAGE); return t + (m ? minutes(m[3], m[4]) - minutes(m[1], m[2]) : 0); }, 0);
+/** Minutes « ECART » d'un jour (heures en plus du contrat : « ECART (2.30) »). */
+const minutesEcart = jour => jour.codes.reduce((t, c) => {
+  if (c.code !== 'ECART') return t;
+  const pl = c.detail.match(RE_DETAIL_PLAGE);
+  return t + (pl ? minutes(pl[3], pl[4]) - minutes(pl[1], pl[2]) : RE_NUM.test(c.detail) ? hhmm(c.detail) : 0);
+}, 0);
+const semaineAvecConge = p => p.jours.some(j => j.codes.some(c => c.code === 'CONG'));   // le code CONG n'est écrit qu'une fois pour toute la période de congé
+const JUSTIFIES = new Set(['JFCP', 'CONG']);              // journées payées par un code (férié, congé) : le total du jour n'a pas de plage
 const minutesPlages = jour => jour.plages.reduce((s, p) => s + p.fin - p.debut, 0);
 /** Vérifie qu'une personne est lue sans erreur : plages + délégation = total de chaque jour, et somme = heures réalisées. */
 export function controlerPersonne(p) {
   const problemes = []; let somme = 0;
   p.jours.forEach((j, i) => {
-    const m = minutesPlages(j) + minutesDelegation(j);
+    let m = minutesPlages(j) + minutesDelegation(j) + minutesCodesPlage(j);
+    if (j.total != null && m < j.total) m += Math.min(minutesEcart(j), j.total - m);          // heures en plus hors plage (ex. délégation un jour de repos)
+    if (j.total != null && m < j.total && (j.codes.some(c => JUSTIFIES.has(c.code)) || (semaineAvecConge(p) && m === 0))) m = j.total;   // férié ou congé payé : total du jour sans plage
     somme += m;
     if (j.total != null && j.total !== m) problemes.push(`${JOURS[i]} : total ${Math.floor(j.total / 60)} h ${String(j.total % 60).padStart(2, '0')} ≠ plages ${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`);
   });
@@ -113,7 +132,7 @@ const couvre = (plages, a, b) => {                       // les plages (fusionn�
  */
 export function resumerMois(semaines, annee, mois) {
   const r = { semaines: [], heuresSemaine: 0, heuresEnPlus: [], delegationMin: 0, dimanche100: 0, dimancheTotal: 0, joursPresence: 0, joursRepos: 0, joursNonTravailles: 0,
-    tickets: 0, fermetures: 0, nuit10: 0, nuit30: 0, absences: {}, codesInconnus: [], semainesIgnorees: [] };
+    tickets: 0, ticketsTREST: null, fermetures: 0, nuit10: 0, nuit30: 0, absences: {}, codesInconnus: [], semainesIgnorees: [] };
   const theories = [];
   for (const s of semaines) {
     const dimanche = ajouteJours(s.debut, 6), duMois = dimanche.getFullYear() === annee && dimanche.getMonth() + 1 === mois;
@@ -135,13 +154,15 @@ export function resumerMois(semaines, annee, mois) {
         }
       }
       if (!dansLeMois) return;
-      const travaille = j.plages.length > 0 || delMin > 0;
+      const travaille = j.plages.length > 0 || delMin > 0 || minutesCodesPlage(j) > 0;
       if (travaille) r.joursPresence++;
       if (j.codes.some(c => c.code === 'REPO')) r.joursRepos++;
       if (j.codes.some(c => c.code === 'JNTR')) r.joursNonTravailles++;
-      for (const c of j.codes) if (c.code === 'MALA') r.absences.MALA = (r.absences.MALA || 0) + 1;
+      for (const c of j.codes) if (c.code === 'MALA' || c.code === 'JFCP') r.absences[c.code] = (r.absences[c.code] || 0) + 1;
+      if (semaineAvecConge(p) && j.total > 0 && !j.plages.length && !delMin && !j.codes.some(c => c.code === 'JFCP')) r.absences.CONG = (r.absences.CONG || 0) + 1;
+      for (const c of j.codes) if (c.code === 'TREST' && RE_NUM.test(c.detail)) r.ticketsTREST = (r.ticketsTREST || 0) + Math.round(+c.detail);
       const intervalles = j.plages.map(p => [p.debut, p.fin]);
-      for (const c of j.codes) { const m = c.code === 'DELC' && c.detail.match(/^(\d\d)\.(\d\d)-(\d\d)\.(\d\d)$/); if (m) intervalles.push([minutes(m[1], m[2]), minutes(m[3], m[4])]); }
+      for (const c of j.codes) { const m = (c.code === 'DELC' || c.code === 'FOSE') && c.detail.match(RE_DETAIL_PLAGE); if (m) intervalles.push([minutes(m[1], m[2]), minutes(m[3], m[4])]); }
       if (couvre(intervalles, 12 * 60, 13 * 60 + 30)) r.tickets++;
       if (couvre(intervalles, 18 * 60 + 30, 20 * 60)) r.tickets++;
       if (j.plages.some(p => p.fin > 19 * 60 + 30)) r.fermetures++;
