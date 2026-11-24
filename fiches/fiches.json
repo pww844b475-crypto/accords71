@@ -1652,7 +1652,9 @@
    ],
    "notes": [
     "Le texte ne définit pas « horaire hebdomadaire conventionnel » : la pratique de paie (7 h 12 pour 36 h ; 4 h 48 pour 24 h) correspond à une référence de 35 h. Avec 36 h de référence, 24 h donnerait 4 h 40.",
-    "L'accord dit aussi « 7 heures » pour le temps complet."
+    "L'accord dit aussi « 7 heures » pour le temps complet.",
+    "Comment les 7 heures sont-elles réparties dans l'année ? Le Code du travail (art. L3133-11, consulté le 22/11/2026) laisse l'accord d'entreprise fixer les modalités : travail d'un férié chômé autre que le 1er mai, d'un jour de repos, ou « toute autre modalité permettant le travail de sept heures précédemment non travaillées ». La journée peut aussi être fractionnée en heures (page « La journée de solidarité » de code.travail.gouv.fr, mise à jour le 16/04/2025, lue le 24/11/2026). Ni l'accord (art. 5.9), ni le livret, ni la convention n'imposent un rythme par semaine : une limite d'une heure par semaine, si elle existe dans le logiciel de paie, est une pratique à confirmer, qui ne figure pas dans les documents.",
+    "Attention : les heures de la journée de solidarité (jusqu'à 7 h) ne sont pas payées en plus (art. L3133-8), mais ne comptent pas comme heures complémentaires ni supplémentaires et ne donnent pas droit à repos compensateur (art. L3133-9, lu sur code.travail.gouv.fr le 24/11/2026). Demander qu'une heure faite en plus soit comptée comme heure de solidarité ferait donc perdre le paiement (et la majoration) de cette heure."
    ],
    "categorie": "temps"
   },
