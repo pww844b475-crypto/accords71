@@ -15,17 +15,19 @@ export const majParId = t => Object.fromEntries(t.majorations.map(x => [x.id, x.
  * (le premier dixième du contrat à 10 %, le reste à 25 %) ; au-delà de 35 h = heures supplémentaires
  * (25 % les 8 premières, 50 % ensuite). Contrat de 35 h ou plus : tout est supplémentaire.
  */
-export function repartirHeures(heuresSemaine, semaines) {
+export function repartirHeures(heuresSemaine, semaines, sansMajoration = []) {
   const C = heuresSemaine || 0, plafondHC = Math.max(0, 35 - C);
   const t = { total: 0, hc10: 0, hc25: 0, hs25: 0, hs50: 0 };
-  for (const x of semaines || []) {
-    const e = Math.max(0, +x || 0); if (!e) continue;
-    t.total += e;
+  (semaines || []).forEach((x, i) => {
+    const total = Math.max(0, +x || 0); if (!total) return;
+    t.total += total;
+    const e = Math.max(0, total - Math.min(total, Math.max(0, +sansMajoration[i] || 0)));       // heures payées à 100 % sans majoration (ex. semaine avec un férié chômé)
+    if (!e) return;
     const hc = Math.min(e, plafondHC), hs = e - hc;
     const h10 = Math.min(hc, C / 10);
     t.hc10 += h10; t.hc25 += hc - h10;
     t.hs25 += Math.min(hs, 8); t.hs50 += Math.max(0, hs - 8);
-  }
+  });
   for (const k of Object.keys(t)) t[k] = r2(t[k]);
   return t;
 }
@@ -69,13 +71,13 @@ export function simulerPaie(e, T) {
   const salaireBase = r2(travail + pauseBase);
   if (pct > 0) add('pause', 'Forfait pause', hPause, th, pauseBase);
 
-  let brutHcHs = 0;
+  let brutHcHs = 0, exoHcHs = 0;                   // exoHcHs : base de l'exonération = heures et majorations HC/HS, sans la pause et sans les heures non majorées
   const ligneMaj = (code, libelle, hPresence, coef, estHcHs) => {
     const h = eff(hPresence); if (!(h > 0)) return;
     const p = r2(h * pct), tm = r3(th * coef);   // taux majoré arrondi à 3 décimales comme sur la fiche
     let m = add(code, libelle, h, tm, h * tm);
     if (pct > 0) m += add(code + '_pause', libelle + ' : pause', p, tm, p * tm);
-    if (estHcHs) brutHcHs += m;
+    if (estHcHs) { brutHcHs += m; exoHcHs += r2(h * tm); }
   };
   ligneMaj('dim', 'Majoration dimanche', e.dimanche, mj.dimanche, false);
   ligneMaj('dim100', 'Majoration dimanche exceptionnel 100 %', e.dimanche100, mj.dimanche_100, false);
@@ -83,10 +85,11 @@ export function simulerPaie(e, T) {
   ligneMaj('nuit30', 'Majoration nuit 22 h-5 h', e.nuit30, mj.nuit_22_5, false);
   ligneMaj('nuit10', 'Majoration nuit 21 h-22 h / 5 h-6 h', e.nuit10, mj.nuit_21_22, false);
   // Heures en plus du contrat réparties semaine par semaine (entrée e.semainesEnPlus) : remplacent la saisie manuelle
-  if (Array.isArray(e.semainesEnPlus) || e.totalEnPlus > 0) { const rep = Array.isArray(e.semainesEnPlus) && e.semainesEnPlus.some(x => x > 0) ? repartirHeures(e.heuresSemaine, e.semainesEnPlus) : repartirTotal(e.heuresSemaine, e.totalEnPlus); e = { ...e, hcBase: rep.total, hc10: rep.hc10, hc25: rep.hc25, hs25: rep.hs25, hs50: rep.hs50 }; }
+  if (Array.isArray(e.semainesEnPlus) || e.totalEnPlus > 0) { const rep = Array.isArray(e.semainesEnPlus) && e.semainesEnPlus.some(x => x > 0) ? repartirHeures(e.heuresSemaine, e.semainesEnPlus, e.semainesSansMajoration) : repartirTotal(e.heuresSemaine, e.totalEnPlus); e = { ...e, hcBase: rep.total, hc10: rep.hc10, hc25: rep.hc25, hs25: rep.hs25, hs50: rep.hs50 }; }
   // Heures au-delà du contrat : base à 100 % puis majorations
   const hcb = eff(e.hcBase);
-  if (hcb > 0) { let m = add('hcbase', 'Heures au-delà du contrat (100 %)', hcb, th, hcb * th); if (pct > 0) m += add('hcbase_pause', 'Heures au-delà du contrat : pause', r2(hcb * pct), th, r2(hcb * pct) * th); brutHcHs += m; }
+  const sansTotal = Array.isArray(e.semainesSansMajoration) && Array.isArray(e.semainesEnPlus) ? e.semainesEnPlus.reduce((t, x, i) => t + Math.min(Math.max(0, +x || 0), Math.max(0, +e.semainesSansMajoration[i] || 0)), 0) : 0;
+  if (hcb > 0) { let m = add('hcbase', 'Heures au-delà du contrat (100 %)', hcb, th, hcb * th); if (pct > 0) m += add('hcbase_pause', 'Heures au-delà du contrat : pause', r2(hcb * pct), th, r2(hcb * pct) * th); brutHcHs += m; exoHcHs += Math.max(0, hcb - eff(sansTotal)) * th; }
   ligneMaj('hc10', 'Majoration heures complémentaires 10 %', e.hc10, mj.hc_10, true);
   ligneMaj('hc25', 'Majoration heures complémentaires 25 %', e.hc25, mj.hc_25, true);
   ligneMaj('hs25', 'Majoration heures supplémentaires 25 %', e.hs25, mj.hs_25, true);
@@ -111,21 +114,23 @@ export function simulerPaie(e, T) {
   const brut = r2(lignes.reduce((s, l) => s + l.montant, 0));
 
   // Exonération des heures supplémentaires / complémentaires
-  const hsExo = e.hsExoMontant != null && e.hsExoMontant !== '' ? r2(+e.hsExoMontant) : (e.hsExoAuto ? r2(brutHcHs) : 0);
+  const hsExo = e.hsExoMontant != null && e.hsExoMontant !== '' ? r2(+e.hsExoMontant) : (e.hsExoAuto ? r2(exoHcHs) : 0);
   const redHs = r2(hsExo * tx.reduction_hs.taux / 100);
 
   // Cotisations salariales
   const cot = [];
   const c = (code, libelle, base, taux, montant) => { cot.push({ code, libelle, base: r2(base), taux, montant: r2(montant) }); return r2(montant); };
   const prevSal = c('prev', 'Prévoyance incapacité invalidité décès', brut, tx.prevoyance_sal.taux, brut * tx.prevoyance_sal.taux / 100);
-  const santeSal = c('sante', 'Complémentaire santé obligatoire (forfait)', 0, null, tx.sante_forfait_sal.montant);
+  // Forfait santé : le montant peut changer à une date (relevé sur les fiches : 15,15 € jusqu'en octobre 2026, 18,56 € depuis novembre 2026)
+  const montantA = t => { let m = t.montant; for (const ch of t.changements || []) if (e.mois && String(e.mois) >= ch.depuis) m = ch.montant; return m; };
+  const santeSal = c('sante', 'Complémentaire santé obligatoire (forfait)', 0, null, montantA(tx.sante_forfait_sal));
   const baseT1 = Math.min(brut, plafond);
   const vp = c('vp', 'Sécurité sociale plafonnée', baseT1, tx.vieillesse_plaf.taux, baseT1 * tx.vieillesse_plaf.taux / 100);
   const vd = c('vd', 'Sécurité sociale déplafonnée', brut, tx.vieillesse_deplaf.taux, brut * tx.vieillesse_deplaf.taux / 100);
   const rc = c('rc', 'Retraite complémentaire tranche 1', baseT1, tx.retraite_compl_t1.taux, baseT1 * tx.retraite_compl_t1.taux / 100)
     + c('ceg', 'CEG tranche 1 (affichée avec la retraite complémentaire)', baseT1, tx.ceg_t1.taux, baseT1 * tx.ceg_t1.taux / 100);
   const ab = tx.abattement_csg.taux / 100;
-  const prevEmp = r2(brut * tx.prevoyance_emp.taux / 100), santeEmp = tx.sante_forfait_emp.montant;
+  const prevEmp = r2(brut * tx.prevoyance_emp.taux / 100), santeEmp = montantA(tx.sante_forfait_emp);
   const baseCsg = r2(ab * (brut - hsExo) + prevEmp + santeEmp);
   const csgD = c('csgd', "CSG déductible de l'impôt", baseCsg, tx.csg_deductible.taux, baseCsg * tx.csg_deductible.taux / 100);
   const csgN = c('csgn', 'CSG/CRDS non déductibles', baseCsg, tx.csg_crds_non_deductible.taux, baseCsg * tx.csg_crds_non_deductible.taux / 100);

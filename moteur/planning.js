@@ -131,14 +131,22 @@ const couvre = (plages, a, b) => {                       // les plages (fusionn�
  * fermetures et heures de nuit sont comptés jour par jour dans le mois.
  */
 export function resumerMois(semaines, annee, mois) {
-  const r = { semaines: [], heuresSemaine: 0, heuresEnPlus: [], delegationMin: 0, dimanche100: 0, dimancheTotal: 0, joursPresence: 0, joursRepos: 0, joursNonTravailles: 0,
+  const r = { semaines: [], heuresSemaine: 0, heuresEnPlus: [], heuresSansMajoration: [], delegationMin: 0, dimanche100: 0, dimancheTotal: 0, joursPresence: 0, joursRepos: 0, joursNonTravailles: 0,
     tickets: 0, ticketsTREST: null, fermetures: 0, nuit10: 0, nuit30: 0, absences: {}, codesInconnus: [], semainesIgnorees: [] };
   const theories = [];
   for (const s of semaines) {
     const dimanche = ajouteJours(s.debut, 6), duMois = dimanche.getFullYear() === annee && dimanche.getMonth() + 1 === mois;
     const p = s.personne;
     r.semaines.push({ debut: s.debut, rattacheeAuMois: duMois, theorie: p.theorie, realisees: p.realisees, ecart: p.ecart });
-    if (duMois) { theories.push(p.theorie); r.heuresEnPlus.push(Math.max(0, +(p.realisees - p.theorie).toFixed(2))); }
+    if (duMois) {
+      theories.push(p.theorie);
+      const enPlus = Math.max(0, +(p.realisees - p.theorie).toFixed(2));
+      r.heuresEnPlus.push(enPlus);
+      // Semaine avec un férié chômé payé un jour de la semaine (lundi-samedi) : le férié est compté dans les heures réalisées mais n'est pas travaillé ;
+      // les heures en plus sont payées à 100 % sans majoration pour cette part (relevé sur la fiche de novembre 2026 : semaine du 11 novembre)
+      const ferieH = p.jours.slice(0, 6).reduce((t, j) => t + (j.codes.some(c => c.code === 'JFCP') && j.total > 0 ? j.total / 60 : 0), 0);
+      r.heuresSansMajoration.push(+Math.min(enPlus, ferieH).toFixed(2));
+    }
     else r.semainesIgnorees.push(s.debut);
     p.jours.forEach((j, i) => {
       const d = ajouteJours(s.debut, i);

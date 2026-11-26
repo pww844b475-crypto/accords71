@@ -29,14 +29,30 @@
    "libelle": "Complémentaire santé obligatoire, forfait (part salarié, €/mois)",
    "montant": 15.15,
    "statut": "constate",
-   "source": "fiches de paie 2026"
+   "source": "fiches de paie 2026",
+   "changements": [
+    {
+     "depuis": "2026-11",
+     "montant": 18.56,
+     "statut": "constate",
+     "source": "fiche de paie de novembre 2026"
+    }
+   ]
   },
   {
    "id": "sante_forfait_emp",
    "libelle": "Complémentaire santé obligatoire, forfait (part employeur, €/mois)",
    "montant": 15.15,
    "statut": "constate",
-   "source": "fiches de paie 2026"
+   "source": "fiches de paie 2026",
+   "changements": [
+    {
+     "depuis": "2026-11",
+     "montant": 18.56,
+     "statut": "constate",
+     "source": "fiche de paie de novembre 2026"
+    }
+   ]
   },
   {
    "id": "vieillesse_plaf",

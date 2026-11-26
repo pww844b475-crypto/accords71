@@ -40,6 +40,7 @@ export function versValeurs(resume, annee, mois, semainesDuMois) {
     const rang = resume.semaines.filter(x => x.rattacheeAuMois).findIndex(x => x.debut === iso);
     const h = idx >= 0 && rang >= 0 ? resume.heuresEnPlus[rang] || 0 : 0;
     v['sem' + i] = h || ''; total += h;
+    v['sm' + i] = idx >= 0 && rang >= 0 ? (resume.heuresSansMajoration?.[rang] || 0) : 0;      // part sans majoration (semaine avec férié)
   });
   v.optPlus = total > 0; v.precis = total > 0; v.hPlus = total > 0 ? Math.round(total * 100) / 100 : 0;
   v.dimanche100 = Math.round(resume.dimanche100 / 60 * 100) / 100;
